@@ -1,0 +1,382 @@
+﻿@model ReseauPsy.ViewModel.Therapist.ClientListTherapistViewModel
+@using ReseauPsy.Resources
+@{
+    ViewBag.Title = "ClientList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<section id="page-client-list-therapist">
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-8">
+                <h1>@Resource.ClientListTherapist_H1</h1>
+            </div>
+            <div class="col-md-4 text-end">
+                @Html.ActionLink(Global.New, "DetailClient", "therapist", new object { }, new { @class = "btn btn-primary btn-excel" })
+            </div>
+        </div>
+
+        <div class="row">
+
+            @* status *@
+            <div class="col-md-6 col-lg-4 col-xl-2">
+                <div>@Global.Status</div>
+                <select id="js-client-list-therapist-status-ddl" class="form-select">
+                    <option value="active">@Global.Active</option>
+                    <option value="inactive">@Global.Inactive</option>
+                </select>
+            </div>
+
+            @* Client type *@
+            <div class="col-md-6 col-lg-4 col-xl-2">
+                <div>@Resource.ClientListTherapist_Label_ClientType</div>
+                <select id="js-client-list-therapist-client-type-ddl" class="form-select">
+                    <option value="null">@Global.All</option>
+                    <option value="internal">@Resource.ClientListTherapist_Option_InternalClient</option>
+                    <option value="external">@Resource.ClientListTherapist_Option_ExternalClient</option>
+                </select>
+            </div>
+
+            @* Apply button *@
+            <div class="col-md-6 col-lg-4 col-xl-2">
+                <br />
+                <div id="js-client-list-therapist-apply-filter" class="btn btn-primary btn-filter">
+                    @Global.Apply
+                </div>
+            </div>
+
+        </div>
+
+
+        @* No result alert *@
+        <div id="js-client-list-therapist-no-result" class="row @(Model.Clients.Count < 1 ? "" : "d-none")">
+            <div class="col-12">
+                <div class="alert alert-info">
+                    @Global.NoResult
+                </div>
+            </div>
+        </div>
+
+
+        @* Table *@
+        <div id="js-client-list-therapist-table" class="table-responsive mt-4 @(Model.Clients.Count >= 1 ? "" : "d-none")">
+
+
+            <table style="min-width:400px;">
+                <thead>
+                    <tr>
+                        <th style="width:140px;">@Global.Client</th>
+                        <th style="width:140px;">@Resource.ClientListTherapist_Label_ClientType</th>
+                        <th style="width:120px;" class="text-end">@Global.Action</th>
+                    </tr>
+                </thead>
+
+                <tbody id="js-client-list-therapist-table-body">
+                    @foreach (var client in Model.Clients)
+                    {
+                        <tr>
+                            <td style="max-width: 140px;">@client.ClientName</td>
+                            <td style="max-width: 140px;">
+                                @(client.IsExternalClient.Value ?
+                                        Resource.ClientListTherapist_Option_ExternalClient :
+                                        Resource.ClientListTherapist_Option_InternalClient)
+                            </td>
+                            <td style="max-width: 190px;" class="text-end">
+                                @Html.ActionLink(Global.Edit,
+                                    "DetailClient",
+                                    "therapist",
+                                    new { clientId = client.ClientId },
+                                    new { @class = "btn btn-primary" })
+                                <div class="btn btn-danger js-client-list-therapist-delete-client-modal-button"
+                                     data-client-id="@client.ClientId">
+                                    <i class='fas fa-trash-alt'></i>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+
+        </div>
+
+        @* Pager *@
+        <div class="row">
+            <div class="col-sm-12">
+                <ul id="js-pager-ul" class="pager">
+                    @for (int i = 1; i < Model.NbPage + 1 && i < 4; i++)
+                    {
+                        <li>
+                            <span class="js-association-pager @(i == 1 ? " active" : "" )" data-page-number="@i">
+                                @i
+                            </span>
+                        </li>
+                    }
+                    @if (Model.NbPage > 1)
+                    {
+                        <li>
+                            <i class="fas fa-angle-right js-association-pager" data-page-number="2"></i>
+                        </li>
+                    }
+                    @if (Model.NbPage > 3)
+                    {
+                        <li>
+                            <i class="fas fa-angle-double-right js-association-pager" data-page-number="@Model.NbPage"></i>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+
+        <!-- Delete Modal -->
+        <div id="deleteClientModal" class="modal fade" role="dialog">
+            <div class="modal-dialog modal-lg">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">@Resource.ClientListTherapist_ModalDelete_Title</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal">
+                            <i class="far fa-times-circle"></i>
+                        </button>
+                    </div>
+
+
+                    <div class="modal-body">
+                        <div>@Resource.ClientListTherapist_ModalDelete_Text</div>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="js-client-list-therapist-close-delete-modal" type="button" class="btn btn-secondary">@Global.Cancel</button>
+                        <button id="js-client-list-therapist-delete-client" type="button" class="btn btn-primary">@Global.Delete</button>
+                        <input type="hidden" id="js-client-list-therapist-client-id" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Modal Restore -->
+        <div id="restoreClientModal" class="modal fade" role="dialog">
+            <div class="modal-dialog modal-lg">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">@Resource.ClientListTherapist_ModalRestore_Title</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal">
+                            <i class="far fa-times-circle"></i>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div>@Resource.ClientListTherapist_ModalRestore_Text</div>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="js-client-list-therapist-close-restore-modal" type="button" class="btn btn-secondary">@Global.Cancel</button>
+                        <button id="js-client-list-therapist-restore-client" type="button" class="btn btn-primary">@Global.Restore</button>
+                        <input type="hidden" id="js-client-list-therapist-restore-modal-client-id" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+@section scripts
+{
+    <script>
+
+        $(document).ready(function () {
+
+            if ('@TempData["Message"]' != "") {
+                toastr["success"]
+                    ('@TempData["Message"]',
+                        "@Global.Success");
+            }
+        })
+
+        //Apply filter button
+        $("#js-client-list-therapist-apply-filter").on("click", function () {
+            ClientListApplyFilter(1)
+        })
+
+        //Click sur le pager
+        $(document).on("click", ".js-association-pager", function () {
+            var page = $(this).data("page-number");
+            ClientListApplyFilter(page);
+        })
+
+        //Fonction pour appliquer les filtres de la page
+        function ClientListApplyFilter(pageNumber) {
+            var clientType = $("#js-client-list-therapist-client-type-ddl").val();
+            var isActive = ($("#js-client-list-therapist-status-ddl").val() == "active") ? true : false;
+            var isExternal = null;
+
+            if (clientType == "internal")
+                isExternal = false;
+            else if (clientType == "external")
+                isExternal = true;
+
+            $.ajax({
+                type: "POST",
+                url: "/fr/therapist/ClientListApplyFilter/",
+                data: `{"pageNumber":"${pageNumber}",
+                        "isExternalClient":"${isExternal}",
+                        "isActive":"${isActive}"}`,
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+
+                    var table = $("#js-client-list-therapist-table")
+                    var noResult = $("#js-client-list-therapist-no-result")
+
+
+                    if (data.clients.length < 1) {
+                        table.addClass("d-none")
+                        noResult.removeClass("d-none")
+                    }
+                    else {
+                        table.removeClass("d-none")
+                        noResult.addClass("d-none")
+
+                        var tableBody = $("#js-client-list-therapist-table-body")
+                        var cellsStyle = rebuildTableWithStyle(tableBody);
+                        tableBody.empty();
+
+                        var modifyHref = window.location.pathname.replace("clientlist", "detailclient?clientid=");
+
+                        for (var i = 0; i < data.clients.length; i++) {
+
+                            var clientType = (data.clients[i]["IsExternalClient"] == true) ?
+                                "@Resource.ClientListTherapist_Option_ExternalClient" :
+                                "@Resource.ClientListTherapist_Option_InternalClient";
+
+                            var button;
+
+                            if (isActive) {
+                                button =
+                                    `<a href='${modifyHref}${data.clients[i]["ClientId"]}' class='btn btn-primary'>@Global.Edit</a>
+                                    <div class="btn btn-danger js-client-list-therapist-delete-client-modal-button"
+                                        data-client-id="${data.clients[i]["ClientId"]}">
+                                        <i class='fas fa-trash-alt'></i>
+                                    </div>`
+                            }
+                            else {
+                                button =
+                                    `<div class='btn btn-primary js-client-list-therapist-restore-client-modal-button'
+                                        data-client-id="${data.clients[i]["ClientId"]}">
+                                        @Global.Restore
+                                    </div>`
+                            }
+
+                            markup =
+                                `<tr>
+                                    <td ${cellsStyle[0]}>
+                                        ${data.clients[i]["ClientName"]}
+                                    </td>
+                                    <td ${cellsStyle[1]}>
+                                        ${clientType}
+                                    </td>
+                                    <td ${cellsStyle[2]}>
+                                        ${button}
+                                    </td>
+                                </tr>`;
+
+                            tableBody.append(markup);
+                        }
+                    }
+
+                    //Change pager class
+                    pager($("#js-pager-ul"), data.nbPage, pageNumber, @Model.NbPagerPageShown, true, true)
+                },
+                error: function () {
+                    toastr["error"]
+                        ("@Global.GenericError",
+                            "@Global.Error");
+                }
+            });
+
+        }
+
+        //Open delete modal
+        $(document).on("click", ".js-client-list-therapist-delete-client-modal-button", function () {
+            var clientId = $(this).data("client-id")
+            $("#js-client-list-therapist-client-id").val(clientId)
+            OpenModal($("#deleteClientModal"))
+        })
+
+        //Close delete modal
+        $("#js-client-list-therapist-close-delete-modal").on("click", function () {
+            closeModal($("#deleteClientModal"))
+        })
+
+        //Delete client
+        $("#js-client-list-therapist-delete-client").on("click", function () {
+            var clientId = $("#js-client-list-therapist-client-id").val()
+
+            $.ajax({
+                type: "POST",
+                url: "/fr/therapist/DeleteClient/",
+                data: `{"clientId":"${clientId}"}`,
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    ClientListApplyFilter(1)
+                },
+                error: function () {
+                    toastr["error"]
+                        ("@Global.GenericError",
+                            "@Global.Error");
+                }
+            });
+
+
+            closeModal($("#deleteClientModal"))
+        })
+
+
+        //Open restore modal
+        $(document).on("click", ".js-client-list-therapist-restore-client-modal-button", function () {
+            var clientId = $(this).data("client-id")
+
+            console.log("clientId: " + clientId)
+            $("#js-client-list-therapist-restore-modal-client-id").val(clientId)
+            OpenModal($("#restoreClientModal"))
+        })
+
+        //Close restore modal
+        $("#js-client-list-therapist-close-restore-modal").on("click", function () {
+            closeModal($("#restoreClientModal"))
+        })
+
+        //Restore client
+        $("#js-client-list-therapist-restore-client").on("click", function () {
+            var clientId = $("#js-client-list-therapist-restore-modal-client-id").val()
+
+            console.log("clientId: " + clientId)
+            $.ajax({
+                type: "POST",
+                url: "/fr/therapist/RestoreClient/",
+                data: `{"clientId":"${clientId}"}`,
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    ClientListApplyFilter(1)
+                },
+                error: function () {
+                    toastr["error"]
+                        ("@Global.GenericError",
+                            "@Global.Error");
+                }
+            });
+
+
+            closeModal($("#restoreClientModal"))
+        })
+
+    </script>
+
+}
+

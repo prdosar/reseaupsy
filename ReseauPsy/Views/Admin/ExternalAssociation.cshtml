@@ -1,0 +1,490 @@
+﻿@model ReseauPsy.ViewModel.Admin.ExternnalAssociationListViewModel
+@using ReseauPsy.Resources
+@using System.Globalization
+@{
+    ViewBag.Title = Resource.ExternalAssociation_Title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+
+    @* Page Title *@
+    <h1>@Resource.ExternalAssociation_H1</h1>
+
+    <form action="/@CultureInfo.CurrentCulture.TwoLetterISOLanguageName/admin/DownloadExcelAssociationClient" id="js-external-association-export-excel-form" method="post">
+
+        <div class="row">
+
+            @* Status *@
+            <div class="col-md-6 col-lg-4 col-xl-2">
+                <div>@Global.Status</div>
+                <select id="js-external-association-status" class="form-select">
+                    <option value="null">@Global.All</option>
+                    @foreach (var status in Model.Status)
+                    {
+                        <option value="@status.Id">@status.Name</option>
+                    }
+                </select>
+                <input type="hidden" id="js-external-association-status-hidden" name="statusId" value="null" />
+            </div>
+
+
+            @* Start date *@
+            <div class="col-md-6 col-lg-4 col-xl-2">
+                <div>@Global.StartDate</div>
+                <input id="js-external-association-start-date" autocomplete="off" class="form-control js-date-picker" type="text" />
+                <input type="hidden" name="startDate" id="js-external-association-start-date-hidden" />
+            </div>
+
+
+            @* End date *@
+            <div class="col-md-6 col-lg-4 col-xl-2">
+                <div>@Global.EndDate</div>
+                <input id="js-external-association-end-date" autocomplete="off" class="form-control js-date-picker" type="text" />
+                <input type="hidden" name="endDate" id="js-external-association-end-date-hidden" />
+            </div>
+
+
+            @* External association *@
+            <div class="col-md-6 col-lg-4 col-xl-2">
+                <div>@Global.Association</div>
+                <select id="js-external-association-association" class="form-select">
+                    <option value="null">@Global.All</option>
+                    @foreach (var externalAssociation in Model.ExternalAssociations)
+                    {
+                        <option value="@externalAssociation.Id">@externalAssociation.Name</option>
+                    }
+                </select>
+                <input type="hidden" id="js-external-association-name-hidden" name="associationId" value="null" />
+            </div>
+
+            @* Apply button *@
+            <div class="col-md-6 col-lg-4 col-xl-2">
+                <br />
+                <div id="js-external-association-apply-filter" class="btn btn-primary btn-filter">
+                    @Global.Apply
+                </div>
+            </div>
+
+        </div>
+
+
+        @* No result alert *@
+        <div id="js-external-association-no-result" class="row @(Model.Clients.Count < 1 ? "" : "d-none")">
+            <div class="col-12">
+                <div class="alert alert-info">
+                    @Global.NoResult
+                </div>
+            </div>
+        </div>
+
+        @* Client table *@
+        <div id="js-external-association-table" class="table-responsive mt-4 @(Model.Clients.Count < 1 ? "d-none" : "")">
+
+            <table style="min-width:500px;">
+                <thead>
+                    <tr>
+                        <th style="width:140px;">
+                            @Global.Association
+                        </th>
+                        <th style="width:140px;">
+                            @Global.Client
+                        </th>
+                        <th style="width:120px;">
+                            @Global.SentDate
+                        </th>
+                        <th style="width:120px;">
+                            @Global.StatusChangedDate
+                        </th>
+                        <th style="width:120px;">
+                            @Global.Status
+                        </th>
+                        <th style="width:120px;" class="text-end">
+                            @Global.Action
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="js-association-client-table">
+                    @foreach (var client in Model.Clients)
+                    {
+                        <tr>
+                            <td style="max-width: 140px;">@client.AssociationName</td>
+                            <td style="max-width: 140px;">@client.ClientName</td>
+                            <td style="max-width: 120px;">@client.SentToAssociationDate.ToString("dd MMM yyyy")</td>
+                            <td style="max-width: 120px;" class="js-status-changed-date">@client.StatusChangedDate.ToString("dd MMM yyyy")</td>
+                            <td style="max-width: 120px;" class="js-status-cell" data-status-id="@client.StatusId">@client.Status</td>
+                            <td style="max-width: 120px;" class="js-table-button text-end" data-external-association-client-sent-id="@client.ExternalAssociationClientSentId">
+                                <div class="btn btn-primary js-change-status">
+                                    @Resource.ExternalAssociation_ChangeStatus
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+
+        @* Pager *@
+        <div class="row">
+            <div class="col-sm-6">
+                <ul id="js-pager-ul" class="pager">
+                    @for (int i = 1; i < Model.NbPage + 1 && i < 4; i++)
+                    {
+                        <li>
+                            <span class="js-association-pager @(i == 1 ? "active" : "")" data-page-number="@i">
+                                @i
+                            </span>
+                        </li>
+                    }
+                    @if (Model.NbPage > 1)
+                    {
+                        <li>
+                            <i class="fas fa-angle-right js-association-pager" data-page-number="2"></i>
+                        </li>
+                    }
+                    @if (Model.NbPage > 3)
+                    {
+                        <li>
+                            <i class="fas fa-angle-double-right js-association-pager" data-page-number="@Model.NbPage"></i>
+                        </li>
+                    }
+                </ul>
+            </div>
+
+            <div class="col-12 col-sm-6 text-center text-sm-end mb-4 mb-sm-0 mt-2 mt-sm-3">
+
+
+                @* Excel Export *@
+                <div id="js-external-association-export-excel" class="btn btn-primary btn-excel">@Global.ExportToExcel</div>
+
+            </div>
+
+        </div>
+
+
+    </form>
+
+
+
+    @* Total table *@
+    <div class="row">
+        <div class="col-12 col-sm-8 col-md-6 col-xl-4">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Status</th>
+                        <th class="text-end">Totaux</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>@Global.NotDefined</td>
+                        <td id="js-not-defined-count" class="text-end">@Model.CountNotDefined</td>
+                    </tr>
+                    <tr>
+                        <td>@Global.TookInCharge</td>
+                        <td id="js-took-charge-count" class="text-end">@Model.CountTookInCharge</td>
+                    </tr>
+                    <tr>
+                        <td>@Global.NotTookInCharge</td>
+                        <td id="js-not-took-charge-count" class="text-end">@Model.CountNotTakeInCharge</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script>
+
+        //------------------------------------ Apply filter -------------------------------------
+        $("#js-external-association-apply-filter").on("click", function () {
+            LoadClient(1);
+        })
+
+        $(document).on("click", ".js-association-pager", function () {
+            var page = $(this).data("page-number");
+            LoadClient(page);
+        })
+
+        function LoadClient(pageNumber) {
+            var statusValue = $("#js-external-association-status").val();
+            var externalAssociationValue = $("#js-external-association-association").val();
+            var startDateInput = $("#js-external-association-start-date");
+            var endDateInput = $("#js-external-association-end-date");
+            var isFrench = "@CultureInfo.CurrentCulture.Name" == "fr-CA";
+
+
+
+
+            startDateInput.removeClass("input-validation-error")
+            endDateInput.removeClass("input-validation-error")
+
+            if (!isStartDateValid(startDateInput)) {
+                startDateInput.addClass("input-validation-error")
+                return false
+            }
+            if (!isEndDateValid(startDateInput, endDateInput)) {
+                endDateInput.addClass("input-validation-error")
+                return false
+            }
+
+
+
+            var startDate = toInternationnalDate(startDateInput.val());
+            var endDate = toInternationnalDate(endDateInput.val());
+
+            $.ajax({
+                type: "POST",
+                url: "/fr/admin/ApplyExternalAssociationClientFilter/",
+                data: `{"isFrench":"${isFrench}",
+                        "startDate":"${startDate}",
+                        "endDate":"${endDate}",
+                        "statusId":"${statusValue}",
+                        "associationId":"${externalAssociationValue}",
+                        "pageNumber":"${pageNumber}"}`,
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+
+                    var tableBody = $("#js-association-client-table")
+                    var cellsStyle = rebuildTableWithStyle(tableBody);
+
+                    var table = $("#js-external-association-table")
+                    var noResult = $("#js-external-association-no-result")
+
+                    if (data.clients.length < 1) {
+                        table.addClass("d-none")
+                        noResult.removeClass("d-none")
+                    }
+                    else {
+                        table.removeClass("d-none")
+                        noResult.addClass("d-none")
+                        tableBody.empty();
+
+                        for (var i = 0; i < data.clients.length; i++) {
+                            markup =
+                                `<tr>
+                                    <td ${cellsStyle[0]}>
+                                        ${data.clients[i]["AssociationName"]}
+                                    </td>
+                                    <td ${cellsStyle[1]}>
+                                        ${data.clients[i]["ClientName"]}
+                                    </td>
+                                    <td ${cellsStyle[2]}>
+                                        ${UnixToLongDate(data.clients[i]["SentToAssociationDate"], "@CultureInfo.CurrentCulture.Name")}
+                                    </td>
+                                    <td ${cellsStyle[3]}>
+                                        ${UnixToLongDate(data.clients[i]["StatusChangedDate"], "@CultureInfo.CurrentCulture.Name")}
+                                    </td>
+                                    <td ${cellsStyle[4]} data-status-id="${data.clients[i]["StatusId"]}">
+                                        ${data.clients[i]["Status"]}
+                                    </td>
+                                    <td style="max-width: 120px;" class="js-table-button text-end" data-external-association-client-sent-id="${data.clients[i]["ExternalAssociationClientSentId"]}">
+                                        <div class="btn btn-primary js-change-status">
+                                            @Resource.ExternalAssociation_ChangeStatus
+                                        </div>
+                                    </td>
+                                </tr>`
+
+                            tableBody.append(markup)
+                        }
+                    }
+
+                    //Change count table
+                    $("#js-not-defined-count").text(data.CountNotDefined)
+                    $("#js-took-charge-count").text(data.CountTookInCharge)
+                    $("#js-not-took-charge-count").text(data.CountNotTakeInCharge)
+
+                    //Change pager class
+                    pager($("#js-pager-ul"), data.nbPage, pageNumber, @Model.NbPagerPageShown, true, true)
+
+                    //Affecte les hiddenfields
+                    $("#js-external-association-status-hidden").val(statusValue)
+                    $("#js-external-association-start-date-hidden").val(startDate)
+                    $("#js-external-association-end-date-hidden").val(endDate)
+                    $("#js-external-association-name-hidden").val(externalAssociationValue)
+
+                },
+                error: function () {
+                    toastr["error"]
+                        ("@Global.GenericError",
+                            "@Global.Error");
+                }
+            })
+        }
+
+        //---------------------------- Remove error class ---------------------------------
+        $("#js-external-association-start-date").on("change", function () {
+
+            $(this).removeClass("input-validation-error")
+            if (!isFrenchDateValidOrEmpty($(this).val())) {
+                $(this).addClass("input-validation-error")
+            }
+        })
+
+        $("#js-external-association-start-date").on("change", function () {
+            $(this).removeClass("input-validation-error")
+            if (!isFrenchDateValidOrEmpty($(this).val())) {
+                $(this).addClass("input-validation-error")
+            }
+        })
+
+        //-------------------------------------- Change status -----------------------------------------
+        //Set change status mode
+        $(document).on("click", ".js-change-status", function () {
+            var buttonCell = $(this).closest(".js-table-button");
+            var statusCell = $(this).closest("tr").find(".js-status-cell");
+            var actualStatus = statusCell.text();
+            var actualStatusId = statusCell.data("status-id");
+
+            console.log("test1")
+
+            var newButtons =
+                `<div class="btn btn-green js-apply-change-status" data-old-value="${actualStatusId}">
+                    <i class='fa-solid fa-floppy-disk'></i>
+                </div>
+                <div class="btn btn-secondary js-cancel-change-status" data-previous-status="${actualStatus}">
+                    @Global.Cancel
+                </div>`
+
+            //Set the buttons
+            buttonCell.empty();
+            buttonCell.append(newButtons);
+
+            //Set the ddl statuts
+            var status = @Html.Raw(Json.Encode(Model.Status));
+            var statusDdlOption = "";
+
+            for (var i = 0; i < status.length; i++) {
+                statusDdlOption += `<option value="${status[i]["Id"]}">${status[i]["Name"]}</option>`
+            }
+            var statusDdl = `<select class="form-select js-status-ddl">${statusDdlOption}</select>`
+
+            console.log(statusCell)
+
+            statusCell.empty();
+            statusCell.append(statusDdl);
+
+            statusCell.children("select").val(actualStatusId);
+        });
+
+
+        //Cancel change status
+        $(document).on("click", ".js-cancel-change-status", function () {
+            var buttonCell = $(this).closest(".js-table-button");
+            var statusCell = $(this).closest("tr").find(".js-status-cell");
+            var previousStatus = $(this).data("previous-status");
+
+            var newButtons =
+                `<div class="btn btn-primary js-change-status">
+                    @Resource.ExternalAssociation_ChangeStatus
+                </div>`
+
+            //Set the buttons
+            buttonCell.empty();
+            buttonCell.append(newButtons);
+
+            //Set the previous status
+            statusCell.empty();
+            statusCell.append(previousStatus);
+        })
+
+
+        //Apply new status
+        $(document).on("click", ".js-apply-change-status", function () {
+            var buttonCell = $(this).closest(".js-table-button");
+            var statusCell = $(this).closest("tr").find(".js-status-cell");
+            var selectedStatus = $(this).closest("tr").find(":selected").text();
+            var selectedStatusId = $(this).closest("tr").find(":selected").val();
+            var changedStatusDateCell = $(this).closest("tr").find(".js-status-changed-date");
+
+            var externalAssociationClientSentId = buttonCell.data("external-association-client-sent-id");
+
+
+            var newButtons =
+                `<div class="btn btn-primary js-change-status">@Resource.ExternalAssociation_ChangeStatus</div>`
+
+            //Change the status via ajax
+            $.ajax({
+                type: "POST",
+                url: "/fr/admin/ChangeClientStatus/",
+                data: `{"externalAssociationClientSentId":"${externalAssociationClientSentId}",
+                        "statusId":"${selectedStatusId}"}`,
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    statusCell.data("status-id", selectedStatusId);
+
+                    var oldValue = $(".js-apply-change-status").data("old-value");
+
+                    //Set the buttons
+                    buttonCell.empty();
+                    buttonCell.append(newButtons);
+
+                    //Change the status
+                    statusCell.empty();
+                    statusCell.append(selectedStatus);
+
+                    //Change the status changed date
+                    var isFrench = "@CultureInfo.CurrentCulture.Name" == "fr-CA";
+
+                    moment.locale('en')
+                    if (isFrench) {
+                        moment.locale('fr')
+                    }
+
+                    var todayDate = moment(DateTimeToday(), 'YYYY-MM-DD').format("DD MMM YYYY")
+                    changedStatusDateCell.text(todayDate)
+
+                    //Affecte le tableau des totaux en base
+                    if (oldValue == 1) {
+                        var count = parseInt($("#js-not-defined-count").text())
+                        $("#js-not-defined-count").text(count - 1)
+                    }
+                    else if (oldValue == 2) {
+                        var count = parseInt($("#js-took-charge-count").text())
+                        $("#js-took-charge-count").text(count - 1)
+                    }
+                    else if (oldValue == 3) {
+                        var count = parseInt($("#js-not-took-charge-count").text())
+                        $("#js-not-took-charge-count").text(count - 1)
+                    }
+
+                    if (selectedStatusId == 1) {
+                        var count = parseInt($("#js-not-defined-count").text())
+                        $("#js-not-defined-count").text(count + 1)
+                    }
+                    else if (selectedStatusId == 2) {
+                        var count = parseInt($("#js-took-charge-count").text())
+                        $("#js-took-charge-count").text(count + 1)
+                    }
+                    else if (selectedStatusId == 3) {
+                        var count = parseInt($("#js-not-took-charge-count").text())
+                        $("#js-not-took-charge-count").text(count + 1)
+                    }
+                },
+                error: function () {
+                    toastr["error"]
+                        ("@Global.GenericError",
+                            "@Global.Error");
+                }
+            })
+        })
+
+        //-------------------------- Other ----------------------------
+
+        //Change the language of the datepicker
+        if ("@(CultureInfo.CurrentCulture.Name)" != "fr-CA") {
+            $.datepicker.setDefaults($.datepicker.regional[""]);
+        }
+
+        //Export Excel
+        $("#js-external-association-export-excel").on("click", function () {
+            $("#js-external-association-export-excel-form").submit();
+        })
+
+    </script>
+}
+

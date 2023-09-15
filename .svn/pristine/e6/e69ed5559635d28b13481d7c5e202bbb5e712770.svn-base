@@ -1,0 +1,90 @@
+﻿@model ReseauPsy.ViewModel.Therapist.DashboardTherapistViewModel
+@using ReseauPsy.Resources
+@{
+    ViewBag.Title = Resource.TherapistDashBoard_Title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container">
+    <section id="page-therapist-dashboard">
+
+        <h1>@Resource.TherapistDashBoard_H1</h1>
+
+
+        <div class="row">
+
+            @* Appointment requests *@
+            <div class="col-12 col-md-4">
+                <div class="white-card">
+                    <h3>Demandes</h3>
+                    <div class="big-number">@Model.AppointmentRequestCount</div>
+                    <div class="card-info">Demandes à traiter</div>
+                    <a href="@Url.Action("TherapistClientRequest","Therapist")" class="btn btn-primary">@Global.View</a>
+                </div>
+            </div>
+
+            @* Claimable appointment *@
+            <div class="col-12 col-md-4">
+                <div class="white-card">
+                    <h3>Réclamations</h3>
+                    <div class="big-number">@Model.ClaimableAppointmentCount</div>
+                    <div class="card-info">Rendez-vous à réclamer</div>
+                    <a href="@Url.Action("ClaimForm","Therapist")" class="btn btn-primary">@Global.View</a>
+                </div>
+            </div>
+
+            @* Appointment request *@
+            <div class="col-12 col-md-4">
+                <div class="white-card">
+                    <h3>Présences</h3>
+                    <div class="big-number">@Model.ConfirmPresenceCount</div>
+                    <div class="card-info">Présence(s) à confirmer</div>
+                    <a href="@Url.Action("ConfirmPresence","Therapist")" class="btn btn-primary">@Global.View</a>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="row">
+
+            <div class="col-12">
+                <div class="white-card">
+                    <div class="row align-items-center justify-content-center">
+                        <div class="col-12 col-md-6">
+                            <div class="row align-items-center">
+                                <div class="d-none d-md-block col-md-4">
+                                    <img src="/_assets/img/icons/next-rendez-vous.svg" class="icon100" />
+                                </div>
+                                <div class="col-12 col-md-8">
+                                    <h3>Prochains rendez-vous</h3>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-12 col-md-6 next-detail">
+
+                            @if (Model.IncomingAppointments.Count > 0)
+                            {
+                                foreach (var appointment in Model.IncomingAppointments)
+                                {
+                                    <div class="client-detail">@appointment.AppointmentDate.ToString("dd MMM HH:mm") - <strong>@appointment.ClientName</strong></div>
+                                }
+                            }
+                            else
+                            {
+                                <div>Vous n'avez aucun rendez-vous à venir</div>
+                            }
+                            <a href="@Url.Action("Appointment","Therapist")" class="btn btn-primary">@Resource.TherapistDashBoard_SeeAll</a>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </section>
+</div>

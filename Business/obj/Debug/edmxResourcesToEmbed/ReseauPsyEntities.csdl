@@ -1,0 +1,2301 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ReseauPsyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Accreditation">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Accreditation1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="AccreditationEN" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="TherapistInfo" Relationship="ReseauPsyModel.FK__Therapist__Accre__76B698BF" FromRole="Accreditation" ToRole="TherapistInfo" />
+    <NavigationProperty Name="TherapistInfo1" Relationship="ReseauPsyModel.FK__Therapist__Accre__77AABCF8" FromRole="Accreditation" ToRole="TherapistInfo" />
+  </EntityType>
+  <EntityType Name="Admin">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="AspNetUsersId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK__Admins__AspNetUs__7D0E9093" FromRole="Admins" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="AppointmentStatu">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="StatusEN" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="ClientAppointments" Relationship="ReseauPsyModel.FK__ClientApp__Appoi__24285DB4" FromRole="AppointmentStatu" ToRole="ClientAppointments" />
+  </EntityType>
+  <EntityType Name="AreasOfPractice">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AreaOfPractice" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="TherapistAreaOfPractices" Relationship="Self.FK__Therapist__AreaO__0B91BA14" FromRole="AreasOfPractice" ToRole="TherapistAreaOfPractice" />
+    <Property Name="AreaOfPracticeEN" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="AspNetRole">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="AspNetUserClaim">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="AspNetUserLogin">
+    <Key>
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="ProviderKey" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="AspNetUser">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+    <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+    <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Admins" Relationship="Self.FK__Admins__AspNetUs__7D0E9093" FromRole="AspNetUsers" ToRole="Admins" />
+    <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+    <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+    <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+    <NavigationProperty Name="ResetPasswords" Relationship="ReseauPsyModel.FK__ResetPass__Aspne__38B96646" FromRole="AspNetUser" ToRole="ResetPassword" />
+    <NavigationProperty Name="Therapists" Relationship="ReseauPsyModel.FK__Therapist__AspNe__7755B73D" FromRole="AspNetUser" ToRole="Therapist" />
+  </EntityType>
+  <EntityType Name="ClientConsultationType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ClientId" Type="Int32" Nullable="false" />
+    <Property Name="ConsultationTypeId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ConsultationType" Relationship="Self.FK__ClientCon__Consu__04E4BC85" FromRole="ClientConsultationTypes" ToRole="ConsultationTypes" />
+    <NavigationProperty Name="Clients" Relationship="ReseauPsyModel.FK__ClientCon__Clien__03F0984C" FromRole="ClientConsultationType" ToRole="Clients" />
+  </EntityType>
+  <EntityType Name="ClientsAgeRange">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ClientAgeRange" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="TherapistClientAgeRanges" Relationship="Self.FK__Therapist__Clien__114A936A" FromRole="ClientsAgeRange" ToRole="TherapistClientAgeRange" />
+    <Property Name="ClientAgeRangeEN" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Clients" Relationship="ReseauPsyModel.FK__Client__ClientAg__00200768" FromRole="ClientsAgeRange" ToRole="Clients" />
+  </EntityType>
+  <EntityType Name="ClientType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ClientType1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="TherapistClientTypes" Relationship="Self.FK__Therapist__Clien__1332DBDC" FromRole="ClientTypes" ToRole="TherapistClientType" />
+    <Property Name="ClientTypeEN" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="ConsultationReason">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ConsultationReason1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ConsultationReasonEN" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Clients" Relationship="ReseauPsyModel.FK__Client__Consulta__75A278F5" FromRole="ConsultationReason" ToRole="Clients" />
+  </EntityType>
+  <EntityType Name="ConsultationType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ConsultationType1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="ClientConsultationTypes" Relationship="Self.FK__ClientCon__Consu__04E4BC85" FromRole="ConsultationTypes" ToRole="ClientConsultationTypes" />
+    <NavigationProperty Name="TherapistConsultationTypes" Relationship="Self.FK__Therapist__Consu__151B244E" FromRole="ConsultationTypes" ToRole="TherapistConsultationType" />
+    <Property Name="ConsultationTypeEN" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="ClientAppointments" Relationship="ReseauPsyModel.FK__ClientApp__Consu__42ACE4D4" FromRole="ConsultationType" ToRole="ClientAppointments" />
+  </EntityType>
+  <EntityType Name="DayOfTheWeek_PeriodOfTheDay">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DaysOfTheWeekId" Type="Int32" Nullable="false" />
+    <Property Name="PeriodsOfTheDayId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="DaysOfTheWeek" Relationship="Self.FK__DayOfTheW__DaysO__00AA174D" FromRole="DayOfTheWeek_PeriodOfTheDay" ToRole="DaysOfTheWeek" />
+    <NavigationProperty Name="PeriodsOfTheDay" Relationship="Self.FK__DayOfTheW__Perio__7FB5F314" FromRole="DayOfTheWeek_PeriodOfTheDay" ToRole="PeriodsOfTheDay" />
+    <NavigationProperty Name="TherapistAvailabilities" Relationship="Self.FK__Therapist__DayOf__056ECC6A" FromRole="DayOfTheWeek_PeriodOfTheDay" ToRole="TherapistAvailability" />
+    <NavigationProperty Name="ClientAvailabilities" Relationship="ReseauPsyModel.FK__ClientAva__DayOf__0FEC5ADD" FromRole="DayOfTheWeek_PeriodOfTheDay" ToRole="ClientAvailability" />
+  </EntityType>
+  <EntityType Name="DaysOfTheWeek">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DayOfTheWeek" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="DayOfTheWeek_PeriodOfTheDay" Relationship="Self.FK__DayOfTheW__DaysO__00AA174D" FromRole="DaysOfTheWeek" ToRole="DayOfTheWeek_PeriodOfTheDay" />
+    <Property Name="DayOfTheWeekEN" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="ExternalAssociationClientSentStatu">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="ExternalAssociationClientsSents" Relationship="Self.FK__ExternalA__Exter__65370702" FromRole="ExternalAssociationClientSentStatus" ToRole="ExternalAssociationClientsSent" />
+    <Property Name="StatusEN" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="ExternalAssociationClientsSent">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ExternalAssociationId" Type="Int32" Nullable="false" />
+    <Property Name="ClientId" Type="Int32" Nullable="false" />
+    <Property Name="ExternalAssociationClientSentStatusId" Type="Int32" Nullable="false" />
+    <Property Name="SentToAssociationDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="StatusChangedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="ExternalAssociationClientSentStatu" Relationship="Self.FK__ExternalA__Exter__65370702" FromRole="ExternalAssociationClientsSent" ToRole="ExternalAssociationClientSentStatus" />
+    <NavigationProperty Name="ExternalAssociation" Relationship="Self.FK__ExternalA__Exter__607251E5" FromRole="ExternalAssociationClientsSent" ToRole="ExternalAssociations" />
+    <NavigationProperty Name="Clients" Relationship="ReseauPsyModel.FK__ExternalA__Clien__6166761E" FromRole="ExternalAssociationClientsSent" ToRole="Clients" />
+  </EntityType>
+  <EntityType Name="ExternalAssociation">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="ExternalAssociationClientsSents" Relationship="Self.FK__ExternalA__Exter__607251E5" FromRole="ExternalAssociations" ToRole="ExternalAssociationClientsSent" />
+    <Property Name="LanguageId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Languages" Relationship="ReseauPsyModel.FK__ExternalA__Langu__0F824689" FromRole="ExternalAssociation" ToRole="Language" />
+    <NavigationProperty Name="Clients" Relationship="ReseauPsyModel.FK__Client__External__05D8E0BE" FromRole="ExternalAssociation" ToRole="Clients" />
+  </EntityType>
+  <EntityType Name="Gender">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Gender1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="GenderEN" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="TherapistInfo" Relationship="ReseauPsyModel.FK__Therapist__Gende__74CE504D" FromRole="Gender" ToRole="TherapistInfo" />
+    <NavigationProperty Name="ClientInfo" Relationship="ReseauPsyModel.FK__ClientInf__Gende__000AF8CF" FromRole="Gender" ToRole="ClientInfo" />
+  </EntityType>
+  <EntityType Name="Language">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Language1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="TherapistLanguages" Relationship="Self.FK__Therapist__Langu__17036CC0" FromRole="Languages" ToRole="TherapistLanguage" />
+    <Property Name="LanguageEN" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="ClientLanguages" Relationship="ReseauPsyModel.FK__ClientLan__Langu__536D5C82" FromRole="Language" ToRole="ClientLanguage" />
+    <NavigationProperty Name="ExternalAssociations" Relationship="ReseauPsyModel.FK__ExternalA__Langu__0F824689" FromRole="Language" ToRole="ExternalAssociation" />
+    <NavigationProperty Name="Clients" Relationship="ReseauPsyModel.FK__Clients__Languag__2B2A60FE" FromRole="Language" ToRole="Clients" />
+  </EntityType>
+  <EntityType Name="NatureAct">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NatureAct1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="NatureActEN" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="ClientAppointments" Relationship="ReseauPsyModel.FK__ClientApp__Natur__41B8C09B" FromRole="NatureAct" ToRole="ClientAppointments" />
+  </EntityType>
+  <EntityType Name="OfferedService_OfferedServiceType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OfferedServiceId" Type="Int32" Nullable="false" />
+    <Property Name="OfferedServiceTypeId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="OfferedServiceType" Relationship="Self.FK__OfferedSe__Offer__753864A1" FromRole="OfferedService_OfferedServiceType" ToRole="OfferedServiceTypes" />
+    <NavigationProperty Name="OfferedService" Relationship="Self.FK__OfferedSe__Offer__762C88DA" FromRole="OfferedService_OfferedServiceType" ToRole="OfferedServices" />
+    <NavigationProperty Name="TherapistOfferedServices" Relationship="Self.FK__Therapist__Offer__79FD19BE" FromRole="OfferedService_OfferedServiceType" ToRole="TherapistOfferedService" />
+  </EntityType>
+  <EntityType Name="OfferedService">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OfferedService1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="OfferedService_OfferedServiceType" Relationship="Self.FK__OfferedSe__Offer__762C88DA" FromRole="OfferedServices" ToRole="OfferedService_OfferedServiceType" />
+    <Property Name="OfferedServiceEN" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="OfferedServiceType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ServiceType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="OfferedService_OfferedServiceType" Relationship="Self.FK__OfferedSe__Offer__753864A1" FromRole="OfferedServiceTypes" ToRole="OfferedService_OfferedServiceType" />
+    <Property Name="ServiceTypeEN" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="PeriodsOfTheDay">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PeriodOfTheDay" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="DayOfTheWeek_PeriodOfTheDay" Relationship="Self.FK__DayOfTheW__Perio__7FB5F314" FromRole="PeriodsOfTheDay" ToRole="DayOfTheWeek_PeriodOfTheDay" />
+    <Property Name="PeriodOfTheDayEN" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="ProfessionalTitle">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProfessionalTitle1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="TherapistProfessionalTitles" Relationship="Self.FK__Therapist__Profe__1AD3FDA4" FromRole="ProfessionalTitles" ToRole="TherapistProfessionalTitle" />
+    <Property Name="ProfessionalTitleEN" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Secteur" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SecteurEN" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="ClientAppointments" Relationship="ReseauPsyModel.FK__ClientApp__Profe__47C69FAC" FromRole="ProfessionalTitle" ToRole="ClientAppointments" />
+  </EntityType>
+  <EntityType Name="ReasonsDeleteClientAppointment">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Reason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ReasonEN" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="ClientAppointments" Relationship="ReseauPsyModel.FK__ClientApp__Reaso__4A4E069C" FromRole="ReasonsDeleteClientAppointment" ToRole="ClientAppointments" />
+  </EntityType>
+  <EntityType Name="ReasonsDeleteClientRequest">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Reason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ReasonEN" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Clients" Relationship="ReseauPsyModel.FK__Client__ReasonDe__06CD04F7" FromRole="ReasonsDeleteClientRequest" ToRole="Clients" />
+  </EntityType>
+  <EntityType Name="Region">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Region1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="TherapistInfo" Relationship="ReseauPsyModel.FK__Therapist__Regio__75C27486" FromRole="Region" ToRole="TherapistInfo" />
+    <NavigationProperty Name="ClientInfo" Relationship="ReseauPsyModel.FK__ClientInf__Regio__4C8B54C9" FromRole="Region" ToRole="ClientInfo" />
+  </EntityType>
+  <EntityType Name="SpecificSkill">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SpecificSkill1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="TherapistSpecificSkills" Relationship="Self.FK__Therapist__Speci__1CBC4616" FromRole="SpecificSkills" ToRole="TherapistSpecificSkill" />
+    <Property Name="SpecificSkillEN" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="TheoreticalOrientation">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TheoreticalOrientation1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="TherapistTheoreticalOrientations" Relationship="Self.FK__Therapist__Theor__1EA48E88" FromRole="TheoreticalOrientations" ToRole="TherapistTheoreticalOrientation" />
+    <Property Name="TheoreticalOrientationEN" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="TherapistAreaOfPractice">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TherapistId" Type="Int32" Nullable="false" />
+    <Property Name="AreaOfPracticeId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="AreasOfPractice" Relationship="Self.FK__Therapist__AreaO__0B91BA14" FromRole="TherapistAreaOfPractice" ToRole="AreasOfPractice" />
+    <NavigationProperty Name="Therapist" Relationship="ReseauPsyModel.FK__Therapist__Thera__0A9D95DB" FromRole="TherapistAreaOfPractice" ToRole="Therapist" />
+  </EntityType>
+  <EntityType Name="TherapistAssociationAndProfessionalOrder">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TherapistId" Type="Int32" Nullable="false" />
+    <Property Name="AssociationName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="AssociationNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Therapist" Relationship="ReseauPsyModel.FK__Therapist__Thera__0C85DE4D" FromRole="TherapistAssociationAndProfessionalOrder" ToRole="Therapist" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DeleteDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="TherapistAvailability">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TherapistId" Type="Int32" Nullable="false" />
+    <Property Name="DayOfTheWeek_PeriodOfTheDay_Id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="DayOfTheWeek_PeriodOfTheDay" Relationship="Self.FK__Therapist__DayOf__056ECC6A" FromRole="TherapistAvailability" ToRole="DayOfTheWeek_PeriodOfTheDay" />
+    <NavigationProperty Name="Therapist" Relationship="ReseauPsyModel.FK__Therapist__Thera__0D7A0286" FromRole="TherapistAvailability" ToRole="Therapist" />
+  </EntityType>
+  <EntityType Name="TherapistClientAgeRange">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TherapistId" Type="Int32" Nullable="false" />
+    <Property Name="ClientAgeRangeId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ClientsAgeRange" Relationship="Self.FK__Therapist__Clien__114A936A" FromRole="TherapistClientAgeRange" ToRole="ClientsAgeRange" />
+    <NavigationProperty Name="Therapist" Relationship="ReseauPsyModel.FK__Therapist__Thera__10566F31" FromRole="TherapistClientAgeRange" ToRole="Therapist" />
+  </EntityType>
+  <EntityType Name="TherapistClientType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TherapistId" Type="Int32" Nullable="false" />
+    <Property Name="ClientTypeId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ClientType" Relationship="Self.FK__Therapist__Clien__1332DBDC" FromRole="TherapistClientType" ToRole="ClientTypes" />
+    <NavigationProperty Name="Therapist" Relationship="ReseauPsyModel.FK__Therapist__Thera__123EB7A3" FromRole="TherapistClientType" ToRole="Therapist" />
+  </EntityType>
+  <EntityType Name="TherapistConsultationType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TherapistId" Type="Int32" Nullable="false" />
+    <Property Name="ConsultationTypeId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ConsultationType" Relationship="Self.FK__Therapist__Consu__151B244E" FromRole="TherapistConsultationType" ToRole="ConsultationTypes" />
+    <NavigationProperty Name="Therapist" Relationship="ReseauPsyModel.FK__Therapist__Thera__14270015" FromRole="TherapistConsultationType" ToRole="Therapist" />
+  </EntityType>
+  <EntityType Name="TherapistLanguage">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TherapistId" Type="Int32" Nullable="false" />
+    <Property Name="LanguageId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Language" Relationship="Self.FK__Therapist__Langu__17036CC0" FromRole="TherapistLanguage" ToRole="Languages" />
+    <NavigationProperty Name="Therapist" Relationship="ReseauPsyModel.FK__Therapist__Thera__160F4887" FromRole="TherapistLanguage" ToRole="Therapist" />
+  </EntityType>
+  <EntityType Name="TherapistOfferedService">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TherapistId" Type="Int32" Nullable="false" />
+    <Property Name="OfferedService_OfferedServiceTypeId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="OfferedService_OfferedServiceType" Relationship="Self.FK__Therapist__Offer__79FD19BE" FromRole="TherapistOfferedService" ToRole="OfferedService_OfferedServiceType" />
+    <NavigationProperty Name="Therapist" Relationship="ReseauPsyModel.FK__Therapist__Thera__17F790F9" FromRole="TherapistOfferedService" ToRole="Therapist" />
+  </EntityType>
+  <EntityType Name="TherapistProfessionalTitle">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TherapistId" Type="Int32" Nullable="false" />
+    <Property Name="ProfessionalTitleId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ProfessionalTitle" Relationship="Self.FK__Therapist__Profe__1AD3FDA4" FromRole="TherapistProfessionalTitle" ToRole="ProfessionalTitles" />
+    <NavigationProperty Name="Therapist" Relationship="ReseauPsyModel.FK__Therapist__Thera__19DFD96B" FromRole="TherapistProfessionalTitle" ToRole="Therapist" />
+  </EntityType>
+  <EntityType Name="TherapistSpecificSkill">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TherapistId" Type="Int32" Nullable="false" />
+    <Property Name="SpecificSkillId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="SpecificSkill" Relationship="Self.FK__Therapist__Speci__1CBC4616" FromRole="TherapistSpecificSkill" ToRole="SpecificSkills" />
+    <NavigationProperty Name="Therapist" Relationship="ReseauPsyModel.FK__Therapist__Thera__1BC821DD" FromRole="TherapistSpecificSkill" ToRole="Therapist" />
+  </EntityType>
+  <EntityType Name="TherapistTheoreticalOrientation">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TherapistId" Type="Int32" Nullable="false" />
+    <Property Name="TheoreticalOrientationId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="TheoreticalOrientation" Relationship="Self.FK__Therapist__Theor__1EA48E88" FromRole="TherapistTheoreticalOrientation" ToRole="TheoreticalOrientations" />
+    <NavigationProperty Name="Therapist" Relationship="ReseauPsyModel.FK__Therapist__Thera__1DB06A4F" FromRole="TherapistTheoreticalOrientation" ToRole="Therapist" />
+  </EntityType>
+  <Association Name="FK__Admins__AspNetUs__7D0E9093">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
+    <End Role="Admins" Type="Self.Admin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Admins">
+        <PropertyRef Name="AspNetUsersId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Therapist__AreaO__0B91BA14">
+    <End Role="AreasOfPractice" Type="Self.AreasOfPractice" Multiplicity="1" />
+    <End Role="TherapistAreaOfPractice" Type="Self.TherapistAreaOfPractice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AreasOfPractice">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TherapistAreaOfPractice">
+        <PropertyRef Name="AreaOfPracticeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserClaims" Type="Self.AspNetUserClaim" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserClaims">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserLogins" Type="Self.AspNetUserLogin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserLogins">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ClientCon__Consu__04E4BC85">
+    <End Role="ConsultationTypes" Type="Self.ConsultationType" Multiplicity="1" />
+    <End Role="ClientConsultationTypes" Type="Self.ClientConsultationType" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ConsultationTypes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ClientConsultationTypes">
+        <PropertyRef Name="ConsultationTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Therapist__Clien__114A936A">
+    <End Role="ClientsAgeRange" Type="Self.ClientsAgeRange" Multiplicity="1" />
+    <End Role="TherapistClientAgeRange" Type="Self.TherapistClientAgeRange" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ClientsAgeRange">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TherapistClientAgeRange">
+        <PropertyRef Name="ClientAgeRangeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Therapist__Clien__1332DBDC">
+    <End Role="ClientTypes" Type="Self.ClientType" Multiplicity="1" />
+    <End Role="TherapistClientType" Type="Self.TherapistClientType" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ClientTypes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TherapistClientType">
+        <PropertyRef Name="ClientTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Therapist__Consu__151B244E">
+    <End Role="ConsultationTypes" Type="Self.ConsultationType" Multiplicity="1" />
+    <End Role="TherapistConsultationType" Type="Self.TherapistConsultationType" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ConsultationTypes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TherapistConsultationType">
+        <PropertyRef Name="ConsultationTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DayOfTheW__DaysO__00AA174D">
+    <End Role="DaysOfTheWeek" Type="Self.DaysOfTheWeek" Multiplicity="1" />
+    <End Role="DayOfTheWeek_PeriodOfTheDay" Type="Self.DayOfTheWeek_PeriodOfTheDay" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DaysOfTheWeek">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="DayOfTheWeek_PeriodOfTheDay">
+        <PropertyRef Name="DaysOfTheWeekId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DayOfTheW__Perio__7FB5F314">
+    <End Role="PeriodsOfTheDay" Type="Self.PeriodsOfTheDay" Multiplicity="1" />
+    <End Role="DayOfTheWeek_PeriodOfTheDay" Type="Self.DayOfTheWeek_PeriodOfTheDay" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PeriodsOfTheDay">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="DayOfTheWeek_PeriodOfTheDay">
+        <PropertyRef Name="PeriodsOfTheDayId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Therapist__DayOf__056ECC6A">
+    <End Role="DayOfTheWeek_PeriodOfTheDay" Type="Self.DayOfTheWeek_PeriodOfTheDay" Multiplicity="1" />
+    <End Role="TherapistAvailability" Type="Self.TherapistAvailability" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DayOfTheWeek_PeriodOfTheDay">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TherapistAvailability">
+        <PropertyRef Name="DayOfTheWeek_PeriodOfTheDay_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ExternalA__Exter__65370702">
+    <End Role="ExternalAssociationClientSentStatus" Type="Self.ExternalAssociationClientSentStatu" Multiplicity="1" />
+    <End Role="ExternalAssociationClientsSent" Type="Self.ExternalAssociationClientsSent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ExternalAssociationClientSentStatus">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ExternalAssociationClientsSent">
+        <PropertyRef Name="ExternalAssociationClientSentStatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ExternalA__Exter__607251E5">
+    <End Role="ExternalAssociations" Type="Self.ExternalAssociation" Multiplicity="1" />
+    <End Role="ExternalAssociationClientsSent" Type="Self.ExternalAssociationClientsSent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ExternalAssociations">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ExternalAssociationClientsSent">
+        <PropertyRef Name="ExternalAssociationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Therapist__Langu__17036CC0">
+    <End Role="Languages" Type="Self.Language" Multiplicity="1" />
+    <End Role="TherapistLanguage" Type="Self.TherapistLanguage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Languages">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TherapistLanguage">
+        <PropertyRef Name="LanguageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OfferedSe__Offer__753864A1">
+    <End Role="OfferedServiceTypes" Type="Self.OfferedServiceType" Multiplicity="1" />
+    <End Role="OfferedService_OfferedServiceType" Type="Self.OfferedService_OfferedServiceType" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OfferedServiceTypes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OfferedService_OfferedServiceType">
+        <PropertyRef Name="OfferedServiceTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OfferedSe__Offer__762C88DA">
+    <End Role="OfferedServices" Type="Self.OfferedService" Multiplicity="1" />
+    <End Role="OfferedService_OfferedServiceType" Type="Self.OfferedService_OfferedServiceType" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OfferedServices">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OfferedService_OfferedServiceType">
+        <PropertyRef Name="OfferedServiceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Therapist__Offer__79FD19BE">
+    <End Role="OfferedService_OfferedServiceType" Type="Self.OfferedService_OfferedServiceType" Multiplicity="1" />
+    <End Role="TherapistOfferedService" Type="Self.TherapistOfferedService" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OfferedService_OfferedServiceType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TherapistOfferedService">
+        <PropertyRef Name="OfferedService_OfferedServiceTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Therapist__Profe__1AD3FDA4">
+    <End Role="ProfessionalTitles" Type="Self.ProfessionalTitle" Multiplicity="1" />
+    <End Role="TherapistProfessionalTitle" Type="Self.TherapistProfessionalTitle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProfessionalTitles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TherapistProfessionalTitle">
+        <PropertyRef Name="ProfessionalTitleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Therapist__Speci__1CBC4616">
+    <End Role="SpecificSkills" Type="Self.SpecificSkill" Multiplicity="1" />
+    <End Role="TherapistSpecificSkill" Type="Self.TherapistSpecificSkill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SpecificSkills">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TherapistSpecificSkill">
+        <PropertyRef Name="SpecificSkillId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Therapist__Theor__1EA48E88">
+    <End Role="TheoreticalOrientations" Type="Self.TheoreticalOrientation" Multiplicity="1" />
+    <End Role="TherapistTheoreticalOrientation" Type="Self.TherapistTheoreticalOrientation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TheoreticalOrientations">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TherapistTheoreticalOrientation">
+        <PropertyRef Name="TheoreticalOrientationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AspNetUserRoles">
+    <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="ReseauPsyEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Accreditations" EntityType="Self.Accreditation" />
+    <EntitySet Name="Admins" EntityType="Self.Admin" />
+    <EntitySet Name="AppointmentStatus" EntityType="Self.AppointmentStatu" />
+    <EntitySet Name="AreasOfPractices" EntityType="Self.AreasOfPractice" />
+    <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRole" />
+    <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaim" />
+    <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
+    <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
+    <EntitySet Name="ClientConsultationTypes" EntityType="Self.ClientConsultationType" />
+    <EntitySet Name="ClientsAgeRanges" EntityType="Self.ClientsAgeRange" />
+    <EntitySet Name="ClientTypes" EntityType="Self.ClientType" />
+    <EntitySet Name="ConsultationReasons" EntityType="Self.ConsultationReason" />
+    <EntitySet Name="ConsultationTypes" EntityType="Self.ConsultationType" />
+    <EntitySet Name="DayOfTheWeek_PeriodOfTheDay" EntityType="Self.DayOfTheWeek_PeriodOfTheDay" />
+    <EntitySet Name="DaysOfTheWeeks" EntityType="Self.DaysOfTheWeek" />
+    <EntitySet Name="ExternalAssociationClientSentStatus" EntityType="Self.ExternalAssociationClientSentStatu" />
+    <EntitySet Name="ExternalAssociationClientsSents" EntityType="Self.ExternalAssociationClientsSent" />
+    <EntitySet Name="ExternalAssociations" EntityType="Self.ExternalAssociation" />
+    <EntitySet Name="Genders" EntityType="Self.Gender" />
+    <EntitySet Name="Languages" EntityType="Self.Language" />
+    <EntitySet Name="NatureActs" EntityType="Self.NatureAct" />
+    <EntitySet Name="OfferedService_OfferedServiceType" EntityType="Self.OfferedService_OfferedServiceType" />
+    <EntitySet Name="OfferedServices" EntityType="Self.OfferedService" />
+    <EntitySet Name="OfferedServiceTypes" EntityType="Self.OfferedServiceType" />
+    <EntitySet Name="PeriodsOfTheDays" EntityType="Self.PeriodsOfTheDay" />
+    <EntitySet Name="ProfessionalTitles" EntityType="Self.ProfessionalTitle" />
+    <EntitySet Name="ReasonsDeleteClientAppointments" EntityType="Self.ReasonsDeleteClientAppointment" />
+    <EntitySet Name="ReasonsDeleteClientRequests" EntityType="Self.ReasonsDeleteClientRequest" />
+    <EntitySet Name="Regions" EntityType="Self.Region" />
+    <EntitySet Name="SpecificSkills" EntityType="Self.SpecificSkill" />
+    <EntitySet Name="TheoreticalOrientations" EntityType="Self.TheoreticalOrientation" />
+    <EntitySet Name="TherapistAreaOfPractices" EntityType="Self.TherapistAreaOfPractice" />
+    <EntitySet Name="TherapistAssociationAndProfessionalOrders" EntityType="Self.TherapistAssociationAndProfessionalOrder" />
+    <EntitySet Name="TherapistAvailabilities" EntityType="Self.TherapistAvailability" />
+    <EntitySet Name="TherapistClientAgeRanges" EntityType="Self.TherapistClientAgeRange" />
+    <EntitySet Name="TherapistClientTypes" EntityType="Self.TherapistClientType" />
+    <EntitySet Name="TherapistConsultationTypes" EntityType="Self.TherapistConsultationType" />
+    <EntitySet Name="TherapistLanguages" EntityType="Self.TherapistLanguage" />
+    <EntitySet Name="TherapistOfferedServices" EntityType="Self.TherapistOfferedService" />
+    <EntitySet Name="TherapistProfessionalTitles" EntityType="Self.TherapistProfessionalTitle" />
+    <EntitySet Name="TherapistSpecificSkills" EntityType="Self.TherapistSpecificSkill" />
+    <EntitySet Name="TherapistTheoreticalOrientations" EntityType="Self.TherapistTheoreticalOrientation" />
+    <AssociationSet Name="FK__Admins__AspNetUs__7D0E9093" Association="Self.FK__Admins__AspNetUs__7D0E9093">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Admins" EntitySet="Admins" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Therapist__AreaO__0B91BA14" Association="Self.FK__Therapist__AreaO__0B91BA14">
+      <End Role="AreasOfPractice" EntitySet="AreasOfPractices" />
+      <End Role="TherapistAreaOfPractice" EntitySet="TherapistAreaOfPractices" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ClientCon__Consu__04E4BC85" Association="Self.FK__ClientCon__Consu__04E4BC85">
+      <End Role="ConsultationTypes" EntitySet="ConsultationTypes" />
+      <End Role="ClientConsultationTypes" EntitySet="ClientConsultationTypes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Therapist__Clien__114A936A" Association="Self.FK__Therapist__Clien__114A936A">
+      <End Role="ClientsAgeRange" EntitySet="ClientsAgeRanges" />
+      <End Role="TherapistClientAgeRange" EntitySet="TherapistClientAgeRanges" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Therapist__Clien__1332DBDC" Association="Self.FK__Therapist__Clien__1332DBDC">
+      <End Role="ClientTypes" EntitySet="ClientTypes" />
+      <End Role="TherapistClientType" EntitySet="TherapistClientTypes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Therapist__Consu__151B244E" Association="Self.FK__Therapist__Consu__151B244E">
+      <End Role="ConsultationTypes" EntitySet="ConsultationTypes" />
+      <End Role="TherapistConsultationType" EntitySet="TherapistConsultationTypes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DayOfTheW__DaysO__00AA174D" Association="Self.FK__DayOfTheW__DaysO__00AA174D">
+      <End Role="DaysOfTheWeek" EntitySet="DaysOfTheWeeks" />
+      <End Role="DayOfTheWeek_PeriodOfTheDay" EntitySet="DayOfTheWeek_PeriodOfTheDay" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DayOfTheW__Perio__7FB5F314" Association="Self.FK__DayOfTheW__Perio__7FB5F314">
+      <End Role="PeriodsOfTheDay" EntitySet="PeriodsOfTheDays" />
+      <End Role="DayOfTheWeek_PeriodOfTheDay" EntitySet="DayOfTheWeek_PeriodOfTheDay" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Therapist__DayOf__056ECC6A" Association="Self.FK__Therapist__DayOf__056ECC6A">
+      <End Role="DayOfTheWeek_PeriodOfTheDay" EntitySet="DayOfTheWeek_PeriodOfTheDay" />
+      <End Role="TherapistAvailability" EntitySet="TherapistAvailabilities" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ExternalA__Exter__65370702" Association="Self.FK__ExternalA__Exter__65370702">
+      <End Role="ExternalAssociationClientSentStatus" EntitySet="ExternalAssociationClientSentStatus" />
+      <End Role="ExternalAssociationClientsSent" EntitySet="ExternalAssociationClientsSents" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ExternalA__Exter__607251E5" Association="Self.FK__ExternalA__Exter__607251E5">
+      <End Role="ExternalAssociations" EntitySet="ExternalAssociations" />
+      <End Role="ExternalAssociationClientsSent" EntitySet="ExternalAssociationClientsSents" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Therapist__Langu__17036CC0" Association="Self.FK__Therapist__Langu__17036CC0">
+      <End Role="Languages" EntitySet="Languages" />
+      <End Role="TherapistLanguage" EntitySet="TherapistLanguages" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OfferedSe__Offer__753864A1" Association="Self.FK__OfferedSe__Offer__753864A1">
+      <End Role="OfferedServiceTypes" EntitySet="OfferedServiceTypes" />
+      <End Role="OfferedService_OfferedServiceType" EntitySet="OfferedService_OfferedServiceType" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OfferedSe__Offer__762C88DA" Association="Self.FK__OfferedSe__Offer__762C88DA">
+      <End Role="OfferedServices" EntitySet="OfferedServices" />
+      <End Role="OfferedService_OfferedServiceType" EntitySet="OfferedService_OfferedServiceType" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Therapist__Offer__79FD19BE" Association="Self.FK__Therapist__Offer__79FD19BE">
+      <End Role="OfferedService_OfferedServiceType" EntitySet="OfferedService_OfferedServiceType" />
+      <End Role="TherapistOfferedService" EntitySet="TherapistOfferedServices" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Therapist__Profe__1AD3FDA4" Association="Self.FK__Therapist__Profe__1AD3FDA4">
+      <End Role="ProfessionalTitles" EntitySet="ProfessionalTitles" />
+      <End Role="TherapistProfessionalTitle" EntitySet="TherapistProfessionalTitles" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Therapist__Speci__1CBC4616" Association="Self.FK__Therapist__Speci__1CBC4616">
+      <End Role="SpecificSkills" EntitySet="SpecificSkills" />
+      <End Role="TherapistSpecificSkill" EntitySet="TherapistSpecificSkills" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Therapist__Theor__1EA48E88" Association="Self.FK__Therapist__Theor__1EA48E88">
+      <End Role="TheoreticalOrientations" EntitySet="TheoreticalOrientations" />
+      <End Role="TherapistTheoreticalOrientation" EntitySet="TherapistTheoreticalOrientations" />
+    </AssociationSet>
+    <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
+      <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+    </AssociationSet>
+    <EntitySet Name="ClientAvailabilities" EntityType="ReseauPsyModel.ClientAvailability" />
+    <AssociationSet Name="FK__ClientAva__DayOf__0FEC5ADD" Association="ReseauPsyModel.FK__ClientAva__DayOf__0FEC5ADD">
+      <End Role="DayOfTheWeek_PeriodOfTheDay" EntitySet="DayOfTheWeek_PeriodOfTheDay" />
+      <End Role="ClientAvailability" EntitySet="ClientAvailabilities" />
+    </AssociationSet>
+    <FunctionImport Name="GetListTherapistForClientRequestPage" ReturnType="Collection(ReseauPsyModel.GetListTherapistForClientRequestPage_Result)">
+      <Parameter Name="TherapistRequestStartDate" Mode="In" Type="DateTime" />
+      <Parameter Name="TherapistRequestEndDate" Mode="In" Type="DateTime" />
+      <Parameter Name="RegionId" Mode="In" Type="Int32" />
+      <Parameter Name="ConsultationTypeId" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="GetListClientRequestWaitingForTherapist" ReturnType="Collection(ReseauPsyModel.GetListClientRequestWaitingForTherapist_Result)">
+      <Parameter Name="therapistId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetClientSentToExternalAssociation" ReturnType="Collection(ReseauPsyModel.GetClientSentToExternalAssociation_Result)">
+      <Parameter Name="IsFrench" Mode="In" Type="Boolean" />
+      <Parameter Name="ChangedStatusStartDate" Mode="In" Type="DateTime" />
+      <Parameter Name="ChangedStatusEndDate" Mode="In" Type="DateTime" />
+      <Parameter Name="ExternalAssociationClientSentStatusId" Mode="In" Type="Int32" />
+      <Parameter Name="ExternalAssociationId" Mode="In" Type="Int32" />
+      <Parameter Name="PageNumber" Mode="In" Type="Int32" />
+      <Parameter Name="ResultPerPage" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetClientSentToExternalAssociationCount" ReturnType="Collection(ReseauPsyModel.GetClientSentToExternalAssociationCount_Result)">
+      <Parameter Name="ChangedStatusStartDate" Mode="In" Type="DateTime" />
+      <Parameter Name="ChangedStatusEndDate" Mode="In" Type="DateTime" />
+      <Parameter Name="ExternalAssociationClientSentStatusId" Mode="In" Type="Int32" />
+      <Parameter Name="ExternalAssociationId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetListAdmin" ReturnType="Collection(ReseauPsyModel.GetListAdmin_Result)">
+      <Parameter Name="IsDeleted" Mode="In" Type="Boolean" />
+      <Parameter Name="PageNumber" Mode="In" Type="Int32" />
+      <Parameter Name="ResultPerPage" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetListAdminCount" ReturnType="Collection(Int32)">
+      <Parameter Name="IsDeleted" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="GetTherapistListForAdmin" ReturnType="Collection(ReseauPsyModel.GetTherapistListForAdmin_Result)">
+      <Parameter Name="TherapistIsDeleted" Mode="In" Type="Boolean" />
+      <Parameter Name="TherapistRequestStartDate" Mode="In" Type="DateTime" />
+      <Parameter Name="TherapistRequestEndDate" Mode="In" Type="DateTime" />
+      <Parameter Name="IsAvailable" Mode="In" Type="Boolean" />
+      <Parameter Name="GenderId" Mode="In" Type="Int32" />
+      <Parameter Name="ClientTypeId" Mode="In" Type="Int32" />
+      <Parameter Name="ConsultationTypeId" Mode="In" Type="Int32" />
+      <Parameter Name="ClientAgeRangeId" Mode="In" Type="Int32" />
+      <Parameter Name="RegionId" Mode="In" Type="Int32" />
+      <Parameter Name="ProfessionalTitleId" Mode="In" Type="Int32" />
+      <Parameter Name="LanguageId" Mode="In" Type="Int32" />
+      <Parameter Name="OfferedService_OfferedServiceType" Mode="In" Type="String" />
+      <Parameter Name="DayOfTheWeek_PeriodOfTheDay" Mode="In" Type="String" />
+      <Parameter Name="PageNumber" Mode="In" Type="Int32" />
+      <Parameter Name="ResultPerPage" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetTherapistListForAdminCount" ReturnType="Collection(Int32)">
+      <Parameter Name="TherapistIsDeleted" Mode="In" Type="Boolean" />
+      <Parameter Name="TherapistRequestStartDate" Mode="In" Type="DateTime" />
+      <Parameter Name="TherapistRequestEndDate" Mode="In" Type="DateTime" />
+      <Parameter Name="IsAvailable" Mode="In" Type="Boolean" />
+      <Parameter Name="GenderId" Mode="In" Type="Int32" />
+      <Parameter Name="ClientTypeId" Mode="In" Type="Int32" />
+      <Parameter Name="ConsultationTypeId" Mode="In" Type="Int32" />
+      <Parameter Name="ClientAgeRangeId" Mode="In" Type="Int32" />
+      <Parameter Name="RegionId" Mode="In" Type="Int32" />
+      <Parameter Name="ProfessionalTitleId" Mode="In" Type="Int32" />
+      <Parameter Name="LanguageId" Mode="In" Type="Int32" />
+      <Parameter Name="OfferedService_OfferedServiceType" Mode="In" Type="String" />
+      <Parameter Name="DayOfTheWeek_PeriodOfTheDay" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="GetListClientForClientRequestPage" ReturnType="Collection(ReseauPsyModel.GetListClientForClientRequestPage_Result)">
+      <Parameter Name="RequestToDo" Mode="In" Type="Boolean" />
+      <Parameter Name="IsFrench" Mode="In" Type="Boolean" />
+      <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+      <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+      <Parameter Name="PageNumber" Mode="In" Type="Int32" />
+      <Parameter Name="ResultPerPage" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetListClientForClientRequestPageCount" ReturnType="Collection(Int32)">
+      <Parameter Name="RequestToDo" Mode="In" Type="Boolean" />
+      <Parameter Name="IsFrench" Mode="In" Type="Boolean" />
+      <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+      <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <EntitySet Name="ClientAppointmentRepetitions" EntityType="ReseauPsyModel.ClientAppointmentRepetition" />
+    <FunctionImport Name="GetListAppointmentForAdmin" ReturnType="Collection(ReseauPsyModel.GetListAppointmentForAdmin_Result)">
+      <Parameter Name="isFrench" Mode="In" Type="Boolean" />
+      <Parameter Name="startDate" Mode="In" Type="DateTime" />
+      <Parameter Name="endDate" Mode="In" Type="DateTime" />
+      <Parameter Name="appointmentStatusId" Mode="In" Type="Int32" />
+      <Parameter Name="therapistId" Mode="In" Type="Int32" />
+      <Parameter Name="appointmentReclamationStatus" Mode="In" Type="String" />
+      <Parameter Name="PageNumber" Mode="In" Type="Int32" />
+      <Parameter Name="ResultPerPage" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetListAppointmentForAdminCount" ReturnType="Collection(ReseauPsyModel.GetListAppointmentForAdminCount_Result)">
+      <Parameter Name="startDate" Mode="In" Type="DateTime" />
+      <Parameter Name="endDate" Mode="In" Type="DateTime" />
+      <Parameter Name="appointmentStatusId" Mode="In" Type="Int32" />
+      <Parameter Name="therapistId" Mode="In" Type="Int32" />
+      <Parameter Name="appointmentReclamationStatus" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="GetListClientToConfirmPresence" ReturnType="Collection(ReseauPsyModel.GetListClientToConfirmPresence_Result)">
+      <Parameter Name="TherapistId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetListTherapistBillSentCount" ReturnType="Collection(Int32)">
+      <Parameter Name="TherapistId" Mode="In" Type="Int32" />
+      <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+      <Parameter Name="EndTime" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="GetListTherapistBillSent" ReturnType="Collection(ReseauPsyModel.GetListTherapistBillSent_Result)">
+      <Parameter Name="TherapistId" Mode="In" Type="Int32" />
+      <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+      <Parameter Name="EndTime" Mode="In" Type="DateTime" />
+      <Parameter Name="PageNumber" Mode="In" Type="Int32" />
+      <Parameter Name="ResultPerPage" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <EntitySet Name="Taxes" EntityType="ReseauPsyModel.Tax" />
+    <EntitySet Name="ClientPaymentInfos" EntityType="ReseauPsyModel.ClientPaymentInfo" />
+    <EntitySet Name="ResetPasswords" EntityType="ReseauPsyModel.ResetPassword" />
+    <AssociationSet Name="FK__ResetPass__Aspne__38B96646" Association="ReseauPsyModel.FK__ResetPass__Aspne__38B96646">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="ResetPassword" EntitySet="ResetPasswords" />
+    </AssociationSet>
+    <FunctionImport Name="GetListIncommingAppointmentTherapist" ReturnType="Collection(ReseauPsyModel.GetListIncommingAppointmentTherapist_Result)">
+      <Parameter Name="AppointmentCount" Mode="In" Type="Int32" />
+      <Parameter Name="therapistId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetListClientReceiptCount" ReturnType="Collection(Int32)">
+      <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+      <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+      <Parameter Name="ClientName" Mode="In" Type="String" />
+      <Parameter Name="TherapistId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetListTherapistBillForAdmin" ReturnType="Collection(ReseauPsyModel.GetListTherapistBillForAdmin_Result)">
+      <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+      <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+      <Parameter Name="IsPayed" Mode="In" Type="Boolean" />
+      <Parameter Name="TherapistId" Mode="In" Type="Int32" />
+      <Parameter Name="PageNumber" Mode="In" Type="Int32" />
+      <Parameter Name="ResultPerPage" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetListTherapistBillForAdminCount" ReturnType="Collection(Int32)">
+      <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+      <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+      <Parameter Name="IsPayed" Mode="In" Type="Boolean" />
+      <Parameter Name="TherapistId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetListTherapistBillPaymentForAdminExcel" ReturnType="Collection(ReseauPsyModel.GetListTherapistBillPaymentForAdminExcel_Result)">
+      <Parameter Name="startDate" Mode="In" Type="DateTime" />
+      <Parameter Name="endDate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="GetListTherapistBillSentForAdminExcel" ReturnType="Collection(ReseauPsyModel.GetListTherapistBillSentForAdminExcel_Result)">
+      <Parameter Name="startDate" Mode="In" Type="DateTime" />
+      <Parameter Name="endDate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="VerifiyIfTherapistInscriptionCompleted" ReturnType="Collection(ReseauPsyModel.VerifiyIfTherapistInscriptionCompleted_Result)">
+      <Parameter Name="TherapistId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetCancelationCountByCancelationReason" ReturnType="Collection(ReseauPsyModel.GetCancelationCountByCancelationReason_Result)">
+      <Parameter Name="IsFrench" Mode="In" Type="Boolean" />
+      <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+      <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="GetTherapistClosingRates" ReturnType="Collection(ReseauPsyModel.GetTherapistClosingRates_Result)">
+      <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+      <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="GetInfosAdminDashboard" ReturnType="Collection(ReseauPsyModel.GetInfosAdminDashboard_Result)" />
+    <EntitySet Name="ClientLanguages" EntityType="ReseauPsyModel.ClientLanguage" />
+    <AssociationSet Name="FK__ClientLan__Langu__536D5C82" Association="ReseauPsyModel.FK__ClientLan__Langu__536D5C82">
+      <End Role="Language" EntitySet="Languages" />
+      <End Role="ClientLanguage" EntitySet="ClientLanguages" />
+    </AssociationSet>
+    <FunctionImport Name="GetListClientAppointmentNotPayed" ReturnType="Collection(ReseauPsyModel.GetListClientAppointmentNotPayed_Result)">
+      <Parameter Name="TherapistId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <EntitySet Name="Therapists" EntityType="ReseauPsyModel.Therapist" />
+    <AssociationSet Name="FK__Therapist__AspNe__7755B73D" Association="ReseauPsyModel.FK__Therapist__AspNe__7755B73D">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="Therapist" EntitySet="Therapists" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Therapist__Thera__0A9D95DB" Association="ReseauPsyModel.FK__Therapist__Thera__0A9D95DB">
+      <End Role="Therapist" EntitySet="Therapists" />
+      <End Role="TherapistAreaOfPractice" EntitySet="TherapistAreaOfPractices" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Therapist__Thera__0C85DE4D" Association="ReseauPsyModel.FK__Therapist__Thera__0C85DE4D">
+      <End Role="Therapist" EntitySet="Therapists" />
+      <End Role="TherapistAssociationAndProfessionalOrder" EntitySet="TherapistAssociationAndProfessionalOrders" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Therapist__Thera__0D7A0286" Association="ReseauPsyModel.FK__Therapist__Thera__0D7A0286">
+      <End Role="Therapist" EntitySet="Therapists" />
+      <End Role="TherapistAvailability" EntitySet="TherapistAvailabilities" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Therapist__Thera__10566F31" Association="ReseauPsyModel.FK__Therapist__Thera__10566F31">
+      <End Role="Therapist" EntitySet="Therapists" />
+      <End Role="TherapistClientAgeRange" EntitySet="TherapistClientAgeRanges" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Therapist__Thera__123EB7A3" Association="ReseauPsyModel.FK__Therapist__Thera__123EB7A3">
+      <End Role="Therapist" EntitySet="Therapists" />
+      <End Role="TherapistClientType" EntitySet="TherapistClientTypes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Therapist__Thera__14270015" Association="ReseauPsyModel.FK__Therapist__Thera__14270015">
+      <End Role="Therapist" EntitySet="Therapists" />
+      <End Role="TherapistConsultationType" EntitySet="TherapistConsultationTypes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Therapist__Thera__160F4887" Association="ReseauPsyModel.FK__Therapist__Thera__160F4887">
+      <End Role="Therapist" EntitySet="Therapists" />
+      <End Role="TherapistLanguage" EntitySet="TherapistLanguages" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Therapist__Thera__17F790F9" Association="ReseauPsyModel.FK__Therapist__Thera__17F790F9">
+      <End Role="Therapist" EntitySet="Therapists" />
+      <End Role="TherapistOfferedService" EntitySet="TherapistOfferedServices" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Therapist__Thera__19DFD96B" Association="ReseauPsyModel.FK__Therapist__Thera__19DFD96B">
+      <End Role="Therapist" EntitySet="Therapists" />
+      <End Role="TherapistProfessionalTitle" EntitySet="TherapistProfessionalTitles" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Therapist__Thera__1BC821DD" Association="ReseauPsyModel.FK__Therapist__Thera__1BC821DD">
+      <End Role="Therapist" EntitySet="Therapists" />
+      <End Role="TherapistSpecificSkill" EntitySet="TherapistSpecificSkills" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Therapist__Thera__1DB06A4F" Association="ReseauPsyModel.FK__Therapist__Thera__1DB06A4F">
+      <End Role="Therapist" EntitySet="Therapists" />
+      <End Role="TherapistTheoreticalOrientation" EntitySet="TherapistTheoreticalOrientations" />
+    </AssociationSet>
+    <EntitySet Name="TherapistInfo" EntityType="ReseauPsyModel.TherapistInfo" />
+    <AssociationSet Name="FK__Therapist__Accre__76B698BF" Association="ReseauPsyModel.FK__Therapist__Accre__76B698BF">
+      <End Role="Accreditation" EntitySet="Accreditations" />
+      <End Role="TherapistInfo" EntitySet="TherapistInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Therapist__Accre__77AABCF8" Association="ReseauPsyModel.FK__Therapist__Accre__77AABCF8">
+      <End Role="Accreditation" EntitySet="Accreditations" />
+      <End Role="TherapistInfo" EntitySet="TherapistInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Therapist__Gende__74CE504D" Association="ReseauPsyModel.FK__Therapist__Gende__74CE504D">
+      <End Role="Gender" EntitySet="Genders" />
+      <End Role="TherapistInfo" EntitySet="TherapistInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Therapist__Regio__75C27486" Association="ReseauPsyModel.FK__Therapist__Regio__75C27486">
+      <End Role="Region" EntitySet="Regions" />
+      <End Role="TherapistInfo" EntitySet="TherapistInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Therapist__Thera__7F4BDEC0" Association="ReseauPsyModel.FK__Therapist__Thera__7F4BDEC0">
+      <End Role="Therapist" EntitySet="Therapists" />
+      <End Role="TherapistInfo" EntitySet="TherapistInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ExternalA__Langu__0F824689" Association="ReseauPsyModel.FK__ExternalA__Langu__0F824689">
+      <End Role="Language" EntitySet="Languages" />
+      <End Role="ExternalAssociation" EntitySet="ExternalAssociations" />
+    </AssociationSet>
+    <EntitySet Name="ReseauPsyInfo" EntityType="ReseauPsyModel.ReseauPsyInfo" />
+    <EntitySet Name="ClientInfo" EntityType="ReseauPsyModel.ClientInfo" />
+    <AssociationSet Name="FK__ClientInf__Regio__4C8B54C9" Association="ReseauPsyModel.FK__ClientInf__Regio__4C8B54C9">
+      <End Role="Region" EntitySet="Regions" />
+      <End Role="ClientInfo" EntitySet="ClientInfo" />
+    </AssociationSet>
+    <FunctionImport Name="GetClientListForAdminClientListPage" ReturnType="Collection(ReseauPsyModel.GetClientListForAdminClientListPage_Result)">
+      <Parameter Name="TherapistId" Mode="In" Type="Int32" />
+      <Parameter Name="PageNumber" Mode="In" Type="Int32" />
+      <Parameter Name="ResultPerPage" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetClientListForAdminClientListPageCount" ReturnType="Collection(Int32)">
+      <Parameter Name="TherapistId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetClientListForTherapistClientListPage" ReturnType="Collection(ReseauPsyModel.GetClientListForTherapistClientListPage_Result)">
+      <Parameter Name="PageNumber" Mode="In" Type="Int32" />
+      <Parameter Name="ResultPerPage" Mode="In" Type="Int32" />
+      <Parameter Name="TherapistId" Mode="In" Type="Int32" />
+      <Parameter Name="isActive" Mode="In" Type="Boolean" />
+      <Parameter Name="IsExternalClient" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="GetClientListForTherapistClientListPageCount" ReturnType="Collection(Int32)">
+      <Parameter Name="TherapistId" Mode="In" Type="Int32" />
+      <Parameter Name="isActive" Mode="In" Type="Boolean" />
+      <Parameter Name="IsExternalClient" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <AssociationSet Name="FK__ClientInf__Gende__000AF8CF" Association="ReseauPsyModel.FK__ClientInf__Gende__000AF8CF">
+      <End Role="Gender" EntitySet="Genders" />
+      <End Role="ClientInfo" EntitySet="ClientInfo" />
+    </AssociationSet>
+    <EntitySet Name="ExternalClientFee" EntityType="ReseauPsyModel.ExternalClientFee" />
+    <FunctionImport Name="GetListClientsForTherapistAppointment" ReturnType="Collection(ReseauPsyModel.GetListClientsForTherapistAppointment_Result)">
+      <Parameter Name="TherapistId" Mode="In" Type="Int32" />
+      <Parameter Name="IsFrench" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <EntitySet Name="Clients" EntityType="ReseauPsyModel.Clients" />
+    <EntitySet Name="TherapistClientRequest" EntityType="ReseauPsyModel.TherapistClientRequest" />
+    <AssociationSet Name="FK__ClientAva__Clien__01142BA1" Association="ReseauPsyModel.FK__ClientAva__Clien__01142BA1">
+      <End Role="Clients" EntitySet="Clients" />
+      <End Role="ClientAvailability" EntitySet="ClientAvailabilities" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ClientCon__Clien__03F0984C" Association="ReseauPsyModel.FK__ClientCon__Clien__03F0984C">
+      <End Role="Clients" EntitySet="Clients" />
+      <End Role="ClientConsultationType" EntitySet="ClientConsultationTypes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ClientInf__Clien__4B973090" Association="ReseauPsyModel.FK__ClientInf__Clien__4B973090">
+      <End Role="Clients" EntitySet="Clients" />
+      <End Role="ClientInfo" EntitySet="ClientInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ClientLan__Clien__51851410" Association="ReseauPsyModel.FK__ClientLan__Clien__51851410">
+      <End Role="Clients" EntitySet="Clients" />
+      <End Role="ClientLanguage" EntitySet="ClientLanguages" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Client__ClientAg__00200768" Association="ReseauPsyModel.FK__Client__ClientAg__00200768">
+      <End Role="ClientsAgeRange" EntitySet="ClientsAgeRanges" />
+      <End Role="Clients" EntitySet="Clients" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Client__Consulta__75A278F5" Association="ReseauPsyModel.FK__Client__Consulta__75A278F5">
+      <End Role="ConsultationReason" EntitySet="ConsultationReasons" />
+      <End Role="Clients" EntitySet="Clients" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Client__External__05D8E0BE" Association="ReseauPsyModel.FK__Client__External__05D8E0BE">
+      <End Role="ExternalAssociation" EntitySet="ExternalAssociations" />
+      <End Role="Clients" EntitySet="Clients" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Client__ReasonDe__06CD04F7" Association="ReseauPsyModel.FK__Client__ReasonDe__06CD04F7">
+      <End Role="ReasonsDeleteClientRequest" EntitySet="ReasonsDeleteClientRequests" />
+      <End Role="Clients" EntitySet="Clients" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Clients__Languag__2B2A60FE" Association="ReseauPsyModel.FK__Clients__Languag__2B2A60FE">
+      <End Role="Language" EntitySet="Languages" />
+      <End Role="Clients" EntitySet="Clients" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Clients__Therapi__0F4D3C5F" Association="ReseauPsyModel.FK__Clients__Therapi__0F4D3C5F">
+      <End Role="Therapist" EntitySet="Therapists" />
+      <End Role="Clients" EntitySet="Clients" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ExternalA__Clien__6166761E" Association="ReseauPsyModel.FK__ExternalA__Clien__6166761E">
+      <End Role="Clients" EntitySet="Clients" />
+      <End Role="ExternalAssociationClientsSent" EntitySet="ExternalAssociationClientsSents" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Therapist__Clien__719CDDE7" Association="ReseauPsyModel.FK__Therapist__Clien__719CDDE7">
+      <End Role="Clients" EntitySet="Clients" />
+      <End Role="TherapistClientRequest" EntitySet="TherapistClientRequest" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Therapist__Thera__72910220" Association="ReseauPsyModel.FK__Therapist__Thera__72910220">
+      <End Role="Therapist" EntitySet="Therapists" />
+      <End Role="TherapistClientRequest" EntitySet="TherapistClientRequest" />
+    </AssociationSet>
+    <FunctionImport Name="GetListClientReceipt" ReturnType="Collection(ReseauPsyModel.GetListClientReceipt_Result)">
+      <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+      <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+      <Parameter Name="ClientName" Mode="In" Type="String" />
+      <Parameter Name="TherapistId" Mode="In" Type="Int32" />
+      <Parameter Name="PageNumber" Mode="In" Type="Int32" />
+      <Parameter Name="ResultPerPage" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetListClientNameSuggestion" ReturnType="Collection(ReseauPsyModel.GetListClientNameSuggestion_Result)">
+      <Parameter Name="textEntered" Mode="In" Type="String" />
+      <Parameter Name="therapistId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetClientReceiptsForExcel" ReturnType="Collection(ReseauPsyModel.GetClientReceiptsForExcel_Result)">
+      <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+      <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+      <Parameter Name="ClientName" Mode="In" Type="String" />
+      <Parameter Name="TherapistId" Mode="In" Type="Int32" />
+      <Parameter Name="IsFrench" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <EntitySet Name="TherapistBill" EntityType="ReseauPsyModel.TherapistBill" />
+    <AssociationSet Name="FK__Therapist__Thera__208CD6FA" Association="ReseauPsyModel.FK__Therapist__Thera__208CD6FA">
+      <End Role="Therapist" EntitySet="Therapists" />
+      <End Role="TherapistBill" EntitySet="TherapistBill" />
+    </AssociationSet>
+    <EntitySet Name="ClientAppointments" EntityType="ReseauPsyModel.ClientAppointments" />
+    <AssociationSet Name="FK__ClientApp__Appoi__24285DB4" Association="ReseauPsyModel.FK__ClientApp__Appoi__24285DB4">
+      <End Role="AppointmentStatu" EntitySet="AppointmentStatus" />
+      <End Role="ClientAppointments" EntitySet="ClientAppointments" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ClientApp__Repet__75F77EB0" Association="ReseauPsyModel.FK__ClientApp__Repet__75F77EB0">
+      <End Role="ClientAppointmentRepetition" EntitySet="ClientAppointmentRepetitions" />
+      <End Role="ClientAppointments" EntitySet="ClientAppointments" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ClientApp__Clien__14E61A24" Association="ReseauPsyModel.FK__ClientApp__Clien__14E61A24">
+      <End Role="Clients" EntitySet="Clients" />
+      <End Role="ClientAppointments" EntitySet="ClientAppointments" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ClientApp__Consu__42ACE4D4" Association="ReseauPsyModel.FK__ClientApp__Consu__42ACE4D4">
+      <End Role="ConsultationType" EntitySet="ConsultationTypes" />
+      <End Role="ClientAppointments" EntitySet="ClientAppointments" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ClientApp__Natur__41B8C09B" Association="ReseauPsyModel.FK__ClientApp__Natur__41B8C09B">
+      <End Role="NatureAct" EntitySet="NatureActs" />
+      <End Role="ClientAppointments" EntitySet="ClientAppointments" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ClientApp__Profe__47C69FAC" Association="ReseauPsyModel.FK__ClientApp__Profe__47C69FAC">
+      <End Role="ProfessionalTitle" EntitySet="ProfessionalTitles" />
+      <End Role="ClientAppointments" EntitySet="ClientAppointments" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ClientApp__Reaso__4A4E069C" Association="ReseauPsyModel.FK__ClientApp__Reaso__4A4E069C">
+      <End Role="ReasonsDeleteClientAppointment" EntitySet="ReasonsDeleteClientAppointments" />
+      <End Role="ClientAppointments" EntitySet="ClientAppointments" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ClientApp__Thera__40C49C62" Association="ReseauPsyModel.FK__ClientApp__Thera__40C49C62">
+      <End Role="Therapist" EntitySet="Therapists" />
+      <End Role="ClientAppointments" EntitySet="ClientAppointments" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ClientPay__Clien__2F2FFC0C" Association="ReseauPsyModel.FK__ClientPay__Clien__2F2FFC0C">
+      <End Role="ClientAppointments" EntitySet="ClientAppointments" />
+      <End Role="ClientPaymentInfo" EntitySet="ClientPaymentInfos" />
+    </AssociationSet>
+    <FunctionImport Name="GetListClaimableAppointmentForTherapistClaimForm" ReturnType="Collection(ReseauPsyModel.GetListClaimableAppointmentForTherapistClaimForm_Result)">
+      <Parameter Name="IsFrench" Mode="In" Type="Boolean" />
+      <Parameter Name="TherapistId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <EntitySet Name="TherapistPayInformations" EntityType="ReseauPsyModel.TherapistPayInformations" />
+    <AssociationSet Name="FK__ClientApp__Thera__55DFB4D9" Association="ReseauPsyModel.FK__ClientApp__Thera__55DFB4D9">
+      <End Role="TherapistPayInformations" EntitySet="TherapistPayInformations" />
+      <End Role="ClientAppointments" EntitySet="ClientAppointments" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Therapist__Thera__10AB74EC" Association="ReseauPsyModel.FK__Therapist__Thera__10AB74EC">
+      <End Role="Therapist" EntitySet="Therapists" />
+      <End Role="TherapistPayInformations" EntitySet="TherapistPayInformations" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="ClientAvailability">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ClientId" Type="Int32" Nullable="false" />
+    <Property Name="DayOfTheWeek_PeriodOfTheDay_Id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="DayOfTheWeek_PeriodOfTheDay" Relationship="ReseauPsyModel.FK__ClientAva__DayOf__0FEC5ADD" FromRole="ClientAvailability" ToRole="DayOfTheWeek_PeriodOfTheDay" />
+    <NavigationProperty Name="Clients" Relationship="ReseauPsyModel.FK__ClientAva__Clien__01142BA1" FromRole="ClientAvailability" ToRole="Clients" />
+  </EntityType>
+  <Association Name="FK__ClientAva__DayOf__0FEC5ADD">
+    <End Type="ReseauPsyModel.DayOfTheWeek_PeriodOfTheDay" Role="DayOfTheWeek_PeriodOfTheDay" Multiplicity="1" />
+    <End Type="ReseauPsyModel.ClientAvailability" Role="ClientAvailability" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DayOfTheWeek_PeriodOfTheDay">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ClientAvailability">
+        <PropertyRef Name="DayOfTheWeek_PeriodOfTheDay_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="GetListTherapistForClientRequestPage_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" />
+    <Property Type="String" Name="TherapistAvailabilities" Nullable="true" />
+    <Property Type="String" Name="NbRequest" Nullable="false" MaxLength="25" />
+    <Property Type="Int32" Name="IsMatch" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="GetListClientRequestWaitingForTherapist_Result">
+    <Property Type="Int32" Name="RequestId" Nullable="false" />
+    <Property Type="Int32" Name="ClientId" Nullable="true" />
+    <Property Type="DateTime" Name="RequestSentDate" Nullable="false" Precision="23" />
+    <Property Type="String" Name="Region" Nullable="true" />
+    <Property Type="String" Name="ConsultationReason" Nullable="true" />
+    <Property Type="String" Name="Message" Nullable="true" />
+    <Property Type="String" Name="AdditionalMessageFromAdmin" Nullable="true" />
+    <Property Type="String" Name="ClientName" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="GetClientSentToExternalAssociation_Result">
+    <Property Type="Int32" Name="ExternalAssociationClientSentId" Nullable="false" />
+    <Property Type="String" Name="AssociationName" Nullable="true" />
+    <Property Type="DateTime" Name="SentToAssociationDate" Nullable="false" Precision="23" />
+    <Property Type="DateTime" Name="StatusChangedDate" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="StatusId" Nullable="true" />
+    <Property Type="String" Name="ClientName" Nullable="false" />
+    <Property Type="String" Name="Status" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="GetClientSentToExternalAssociationCount_Result">
+    <Property Type="Int32" Name="TotalResult" Nullable="true" />
+    <Property Type="Int32" Name="NotDefinedCount" Nullable="true" />
+    <Property Type="Int32" Name="TookInChargeCount" Nullable="true" />
+    <Property Type="Int32" Name="NotTookInChargeCount" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="GetListAdmin_Result">
+    <Property Type="Int32" Name="AdminId" Nullable="false" />
+    <Property Type="String" Name="AdminName" Nullable="false" />
+    <Property Type="String" Name="AdminEmail" Nullable="true" MaxLength="256" />
+    <Property Type="String" Name="Name" Nullable="true" MaxLength="256" />
+  </ComplexType>
+  <ComplexType Name="GetTherapistListForAdmin_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="FirstName" Nullable="false" />
+    <Property Type="String" Name="LastName" Nullable="false" />
+    <Property Type="Int32" Name="MaxWeeklyRequest" Nullable="true" />
+    <Property Type="String" Name="Region" Nullable="true" />
+    <Property Type="String" Name="Accreditation" Nullable="true" />
+    <Property Type="Int32" Name="CurrentWeeklyRequestSent" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="GetListClientForClientRequestPage_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="FirstName" Nullable="false" />
+    <Property Type="String" Name="LastName" Nullable="false" />
+    <Property Type="DateTime" Name="RequestDate" Nullable="false" Precision="23" />
+    <Property Type="String" Name="Region" Nullable="true" />
+    <Property Type="String" Name="Email" Nullable="false" />
+    <Property Type="String" Name="PhoneNumber" Nullable="false" />
+    <Property Type="String" Name="City" Nullable="false" />
+    <Property Type="String" Name="PostalCode" Nullable="false" />
+    <Property Type="String" Name="Message" Nullable="false" />
+    <Property Type="String" Name="DeletedAdditionalNotes" Nullable="true" />
+    <Property Type="Int32" Name="RegionId" Nullable="false" />
+    <Property Type="String" Name="consultationReason" Nullable="true" />
+    <Property Type="String" Name="DeleteReason" Nullable="true" />
+    <Property Type="String" Name="RequestStatus" Nullable="true" MaxLength="51" />
+    <Property Type="String" Name="LastTherapistMessage" Nullable="true" />
+    <Property Type="Int32" Name="RefusedCount" Nullable="true" />
+  </ComplexType>
+  <EntityType Name="ClientAppointmentRepetition">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ReferenceDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="ClientAppointments" Relationship="ReseauPsyModel.FK__ClientApp__Repet__75F77EB0" FromRole="ClientAppointmentRepetition" ToRole="ClientAppointments" />
+  </EntityType>
+  <ComplexType Name="GetListAppointmentForAdmin_Result">
+    <Property Type="String" Name="TherapistName" Nullable="false" />
+    <Property Type="DateTime" Name="StartDateTime" Nullable="false" Precision="23" />
+    <Property Type="String" Name="ClientName" Nullable="false" />
+    <Property Type="String" Name="AppointmentStatus" Nullable="true" />
+    <Property Type="String" Name="AppointmentReclamationStatus" Nullable="true" MaxLength="44" />
+  </ComplexType>
+  <ComplexType Name="GetListAppointmentForAdminCount_Result">
+    <Property Type="Int32" Name="TotalResult" Nullable="true" />
+    <Property Type="Int32" Name="TotalNotClaimed" Nullable="true" />
+    <Property Type="Int32" Name="TotalClaimed" Nullable="true" />
+    <Property Type="Int32" Name="TotalPayed" Nullable="true" />
+    <Property Type="Int32" Name="TotalForthcoming" Nullable="true" />
+    <Property Type="Int32" Name="TotalCompleted" Nullable="true" />
+    <Property Type="Int32" Name="TotalCanceledWithCharge" Nullable="true" />
+    <Property Type="Int32" Name="TotalCanceledWithoutCharge" Nullable="true" />
+    <Property Type="Int32" Name="TotalPresenceToConfirm" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="GetListClientToConfirmPresence_Result">
+    <Property Type="Int32" Name="AppointmentId" Nullable="false" />
+    <Property Type="String" Name="ClientName" Nullable="false" />
+    <Property Type="DateTime" Name="AppointmentDateTime" Nullable="false" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="GetListTherapistBillSent_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="DateTime" Name="DateSend" Nullable="false" />
+    <Property Type="Int32" Name="BillNumber" Nullable="false" />
+    <Property Type="Decimal" Name="Subtotal" Nullable="false" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="TpsAmount" Nullable="false" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="TvqAmount" Nullable="false" Precision="18" Scale="2" />
+    <Property Type="String" Name="PaymentStatus" Nullable="false" MaxLength="38" />
+  </ComplexType>
+  <EntityType Name="Tax">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TpsDecimal" Type="Decimal" Nullable="false" Precision="6" Scale="5" />
+    <Property Name="TvqDecimal" Type="Decimal" Nullable="false" Precision="6" Scale="5" />
+    <Property Name="ChangedDate" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="ClientPaymentInfo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ClientAppointmentId" Type="Int32" Nullable="false" />
+    <Property Name="OrderId" Type="Int32" Nullable="false" />
+    <Property Name="UniqueRef" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ResponseCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ResponseText" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ApprovalCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="TransactionDateTime" Type="DateTime" Precision="3" />
+    <Property Name="AvsResponse" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CvvResponse" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DidSucceed" Type="Boolean" Nullable="false" />
+    <Property Name="ResponseBody" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="ClientAppointments" Relationship="ReseauPsyModel.FK__ClientPay__Clien__2F2FFC0C" FromRole="ClientPaymentInfo" ToRole="ClientAppointments" />
+  </EntityType>
+  <EntityType Name="ResetPassword">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AspnetId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ResetUrl" Type="Guid" Nullable="false" />
+    <Property Name="RequestDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="LinkExpirationDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="IsUsed" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="AspNetUser" Relationship="ReseauPsyModel.FK__ResetPass__Aspne__38B96646" FromRole="ResetPassword" ToRole="AspNetUser" />
+  </EntityType>
+  <Association Name="FK__ResetPass__Aspne__38B96646">
+    <End Type="ReseauPsyModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+    <End Type="ReseauPsyModel.ResetPassword" Role="ResetPassword" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ResetPassword">
+        <PropertyRef Name="AspnetId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="GetListIncommingAppointmentTherapist_Result">
+    <Property Type="String" Name="ClientName" Nullable="false" />
+    <Property Type="DateTime" Name="AppointmentDate" Nullable="false" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="GetListTherapistBillForAdmin_Result">
+    <Property Type="Int32" Name="TherapistBillId" Nullable="false" />
+    <Property Type="String" Name="TherapistName" Nullable="false" />
+    <Property Type="DateTime" Name="BillSentDate" Nullable="false" />
+    <Property Type="String" Name="BillNumber" Nullable="false" MaxLength="19" />
+    <Property Type="DateTime" Name="PaymentDate" Nullable="true" />
+    <Property Type="Decimal" Name="BillTotalAmount" Nullable="true" Precision="20" Scale="2" />
+    <Property Type="Boolean" Name="IsPayed" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="GetListTherapistBillPaymentForAdminExcel_Result">
+    <Property Type="Int32" Name="BillId" Nullable="false" />
+    <Property Type="String" Name="TherapistName" Nullable="false" />
+    <Property Type="Int32" Name="BillNumber" Nullable="false" />
+    <Property Type="Decimal" Name="SubTotal" Nullable="false" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="TpsAmount" Nullable="false" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="TvqAmount" Nullable="false" Precision="18" Scale="2" />
+    <Property Type="String" Name="TpsNumber" Nullable="true" />
+    <Property Type="String" Name="TvqNumber" Nullable="true" />
+    <Property Type="DateTime" Name="BillSendDate" Nullable="false" />
+    <Property Type="DateTime" Name="PaymentDate" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="GetListTherapistBillSentForAdminExcel_Result">
+    <Property Type="Int32" Name="BillId" Nullable="false" />
+    <Property Type="String" Name="TherapistName" Nullable="false" />
+    <Property Type="Int32" Name="BillNumber" Nullable="false" />
+    <Property Type="Decimal" Name="SubTotal" Nullable="false" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="TpsAmount" Nullable="false" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="TvqAmount" Nullable="false" Precision="18" Scale="2" />
+    <Property Type="String" Name="TpsNumber" Nullable="true" />
+    <Property Type="String" Name="TvqNumber" Nullable="true" />
+    <Property Type="DateTime" Name="BillSendDate" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="VerifiyIfTherapistInscriptionCompleted_Result">
+    <Property Type="Boolean" Name="IsInscriptionCompleted" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="GetCancelationCountByCancelationReason_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Int32" Name="NbCancelation" Nullable="true" />
+    <Property Type="String" Name="Reason" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="GetTherapistClosingRates_Result">
+    <Property Type="Int32" Name="TherapistId" Nullable="false" />
+    <Property Type="String" Name="TherapistName" Nullable="false" />
+    <Property Type="Int32" Name="TotalSent" Nullable="true" />
+    <Property Type="Int32" Name="Accepted" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="GetInfosAdminDashboard_Result">
+    <Property Type="Int32" Name="RequestToDo" Nullable="true" />
+    <Property Type="Int32" Name="CurrentAppointmentCount" Nullable="true" />
+    <Property Type="Int32" Name="BillToPayCount" Nullable="true" />
+  </ComplexType>
+  <EntityType Name="ClientLanguage">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ClientId" Type="Int32" Nullable="false" />
+    <Property Name="LanguageId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Language" Relationship="ReseauPsyModel.FK__ClientLan__Langu__536D5C82" FromRole="ClientLanguage" ToRole="Language" />
+    <NavigationProperty Name="Clients" Relationship="ReseauPsyModel.FK__ClientLan__Clien__51851410" FromRole="ClientLanguage" ToRole="Clients" />
+  </EntityType>
+  <Association Name="FK__ClientLan__Langu__536D5C82">
+    <End Type="ReseauPsyModel.Language" Role="Language" Multiplicity="1" />
+    <End Type="ReseauPsyModel.ClientLanguage" Role="ClientLanguage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Language">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ClientLanguage">
+        <PropertyRef Name="LanguageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="GetListClientAppointmentNotPayed_Result">
+    <Property Type="Int32" Name="AppointmentId" Nullable="false" />
+    <Property Type="DateTime" Name="AppointmentDate" Nullable="false" Precision="23" />
+    <Property Type="String" Name="ClientName" Nullable="false" />
+    <Property Type="Decimal" Name="TotalDollarAmount" Nullable="false" Precision="18" Scale="2" />
+    <Property Type="String" Name="PhoneNumber" Nullable="true" />
+    <Property Type="String" Name="Email" Nullable="true" />
+  </ComplexType>
+  <EntityType Name="Therapist">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="HiringDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="MaxWeeklyRequest" Type="Int32" />
+    <Property Name="AdminNotes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="AspNetUserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="ReseauPsyModel.FK__Therapist__AspNe__7755B73D" FromRole="Therapist" ToRole="AspNetUser" />
+    <NavigationProperty Name="TherapistAreaOfPractices" Relationship="ReseauPsyModel.FK__Therapist__Thera__0A9D95DB" FromRole="Therapist" ToRole="TherapistAreaOfPractice" />
+    <NavigationProperty Name="TherapistAssociationAndProfessionalOrders" Relationship="ReseauPsyModel.FK__Therapist__Thera__0C85DE4D" FromRole="Therapist" ToRole="TherapistAssociationAndProfessionalOrder" />
+    <NavigationProperty Name="TherapistAvailabilities" Relationship="ReseauPsyModel.FK__Therapist__Thera__0D7A0286" FromRole="Therapist" ToRole="TherapistAvailability" />
+    <NavigationProperty Name="TherapistClientAgeRanges" Relationship="ReseauPsyModel.FK__Therapist__Thera__10566F31" FromRole="Therapist" ToRole="TherapistClientAgeRange" />
+    <NavigationProperty Name="TherapistClientTypes" Relationship="ReseauPsyModel.FK__Therapist__Thera__123EB7A3" FromRole="Therapist" ToRole="TherapistClientType" />
+    <NavigationProperty Name="TherapistConsultationTypes" Relationship="ReseauPsyModel.FK__Therapist__Thera__14270015" FromRole="Therapist" ToRole="TherapistConsultationType" />
+    <NavigationProperty Name="TherapistLanguages" Relationship="ReseauPsyModel.FK__Therapist__Thera__160F4887" FromRole="Therapist" ToRole="TherapistLanguage" />
+    <NavigationProperty Name="TherapistOfferedServices" Relationship="ReseauPsyModel.FK__Therapist__Thera__17F790F9" FromRole="Therapist" ToRole="TherapistOfferedService" />
+    <NavigationProperty Name="TherapistProfessionalTitles" Relationship="ReseauPsyModel.FK__Therapist__Thera__19DFD96B" FromRole="Therapist" ToRole="TherapistProfessionalTitle" />
+    <NavigationProperty Name="TherapistSpecificSkills" Relationship="ReseauPsyModel.FK__Therapist__Thera__1BC821DD" FromRole="Therapist" ToRole="TherapistSpecificSkill" />
+    <NavigationProperty Name="TherapistTheoreticalOrientations" Relationship="ReseauPsyModel.FK__Therapist__Thera__1DB06A4F" FromRole="Therapist" ToRole="TherapistTheoreticalOrientation" />
+    <NavigationProperty Name="TherapistInfo" Relationship="ReseauPsyModel.FK__Therapist__Thera__7F4BDEC0" FromRole="Therapist" ToRole="TherapistInfo" />
+    <NavigationProperty Name="Clients" Relationship="ReseauPsyModel.FK__Clients__Therapi__0F4D3C5F" FromRole="Therapist" ToRole="Clients" />
+    <NavigationProperty Name="TherapistClientRequest" Relationship="ReseauPsyModel.FK__Therapist__Thera__72910220" FromRole="Therapist" ToRole="TherapistClientRequest" />
+    <NavigationProperty Name="TherapistBill" Relationship="ReseauPsyModel.FK__Therapist__Thera__208CD6FA" FromRole="Therapist" ToRole="TherapistBill" />
+    <NavigationProperty Name="ClientAppointments" Relationship="ReseauPsyModel.FK__ClientApp__Thera__40C49C62" FromRole="Therapist" ToRole="ClientAppointments" />
+    <NavigationProperty Name="TherapistPayInformations" Relationship="ReseauPsyModel.FK__Therapist__Thera__10AB74EC" FromRole="Therapist" ToRole="TherapistPayInformations" />
+  </EntityType>
+  <Association Name="FK__Therapist__AspNe__7755B73D">
+    <End Type="ReseauPsyModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+    <End Type="ReseauPsyModel.Therapist" Role="Therapist" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Therapist">
+        <PropertyRef Name="AspNetUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Therapist__Thera__0A9D95DB">
+    <End Type="ReseauPsyModel.Therapist" Role="Therapist" Multiplicity="1" />
+    <End Type="ReseauPsyModel.TherapistAreaOfPractice" Role="TherapistAreaOfPractice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Therapist">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TherapistAreaOfPractice">
+        <PropertyRef Name="TherapistId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Therapist__Thera__0C85DE4D">
+    <End Type="ReseauPsyModel.Therapist" Role="Therapist" Multiplicity="1" />
+    <End Type="ReseauPsyModel.TherapistAssociationAndProfessionalOrder" Role="TherapistAssociationAndProfessionalOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Therapist">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TherapistAssociationAndProfessionalOrder">
+        <PropertyRef Name="TherapistId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Therapist__Thera__0D7A0286">
+    <End Type="ReseauPsyModel.Therapist" Role="Therapist" Multiplicity="1" />
+    <End Type="ReseauPsyModel.TherapistAvailability" Role="TherapistAvailability" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Therapist">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TherapistAvailability">
+        <PropertyRef Name="TherapistId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Therapist__Thera__10566F31">
+    <End Type="ReseauPsyModel.Therapist" Role="Therapist" Multiplicity="1" />
+    <End Type="ReseauPsyModel.TherapistClientAgeRange" Role="TherapistClientAgeRange" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Therapist">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TherapistClientAgeRange">
+        <PropertyRef Name="TherapistId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Therapist__Thera__123EB7A3">
+    <End Type="ReseauPsyModel.Therapist" Role="Therapist" Multiplicity="1" />
+    <End Type="ReseauPsyModel.TherapistClientType" Role="TherapistClientType" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Therapist">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TherapistClientType">
+        <PropertyRef Name="TherapistId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Therapist__Thera__14270015">
+    <End Type="ReseauPsyModel.Therapist" Role="Therapist" Multiplicity="1" />
+    <End Type="ReseauPsyModel.TherapistConsultationType" Role="TherapistConsultationType" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Therapist">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TherapistConsultationType">
+        <PropertyRef Name="TherapistId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Therapist__Thera__160F4887">
+    <End Type="ReseauPsyModel.Therapist" Role="Therapist" Multiplicity="1" />
+    <End Type="ReseauPsyModel.TherapistLanguage" Role="TherapistLanguage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Therapist">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TherapistLanguage">
+        <PropertyRef Name="TherapistId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Therapist__Thera__17F790F9">
+    <End Type="ReseauPsyModel.Therapist" Role="Therapist" Multiplicity="1" />
+    <End Type="ReseauPsyModel.TherapistOfferedService" Role="TherapistOfferedService" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Therapist">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TherapistOfferedService">
+        <PropertyRef Name="TherapistId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Therapist__Thera__19DFD96B">
+    <End Type="ReseauPsyModel.Therapist" Role="Therapist" Multiplicity="1" />
+    <End Type="ReseauPsyModel.TherapistProfessionalTitle" Role="TherapistProfessionalTitle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Therapist">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TherapistProfessionalTitle">
+        <PropertyRef Name="TherapistId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Therapist__Thera__1BC821DD">
+    <End Type="ReseauPsyModel.Therapist" Role="Therapist" Multiplicity="1" />
+    <End Type="ReseauPsyModel.TherapistSpecificSkill" Role="TherapistSpecificSkill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Therapist">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TherapistSpecificSkill">
+        <PropertyRef Name="TherapistId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Therapist__Thera__1DB06A4F">
+    <End Type="ReseauPsyModel.Therapist" Role="Therapist" Multiplicity="1" />
+    <End Type="ReseauPsyModel.TherapistTheoreticalOrientation" Role="TherapistTheoreticalOrientation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Therapist">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TherapistTheoreticalOrientation">
+        <PropertyRef Name="TherapistId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="TherapistInfo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TherapistId" Type="Int32" Nullable="false" />
+    <Property Name="FirstName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="GenderId" Type="Int32" />
+    <Property Name="Adress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="City" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PostalCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="RegionId" Type="Int32" />
+    <Property Name="AccreditationId" Type="Int32" />
+    <Property Name="OpqNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CertificationAndSpecialities" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="TakeClientFromAssuranceCompany" Type="Boolean" />
+    <Property Name="TakeClientFromThirdPartyPayer" Type="Boolean" />
+    <Property Name="IsInterestedForFormation" Type="Boolean" />
+    <Property Name="ModificationDate" Type="DateTime" Precision="3" />
+    <Property Name="TpsNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="TvqNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Accreditations" Relationship="ReseauPsyModel.FK__Therapist__Accre__76B698BF" FromRole="TherapistInfo" ToRole="Accreditation" />
+    <NavigationProperty Name="Accreditations1" Relationship="ReseauPsyModel.FK__Therapist__Accre__77AABCF8" FromRole="TherapistInfo" ToRole="Accreditation" />
+    <NavigationProperty Name="Genders" Relationship="ReseauPsyModel.FK__Therapist__Gende__74CE504D" FromRole="TherapistInfo" ToRole="Gender" />
+    <NavigationProperty Name="Regions" Relationship="ReseauPsyModel.FK__Therapist__Regio__75C27486" FromRole="TherapistInfo" ToRole="Region" />
+    <NavigationProperty Name="Therapists" Relationship="ReseauPsyModel.FK__Therapist__Thera__7F4BDEC0" FromRole="TherapistInfo" ToRole="Therapist" />
+  </EntityType>
+  <Association Name="FK__Therapist__Accre__76B698BF">
+    <End Type="ReseauPsyModel.Accreditation" Role="Accreditation" Multiplicity="0..1" />
+    <End Type="ReseauPsyModel.TherapistInfo" Role="TherapistInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Accreditation">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TherapistInfo">
+        <PropertyRef Name="AccreditationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Therapist__Accre__77AABCF8">
+    <End Type="ReseauPsyModel.Accreditation" Role="Accreditation" Multiplicity="0..1" />
+    <End Type="ReseauPsyModel.TherapistInfo" Role="TherapistInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Accreditation">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TherapistInfo">
+        <PropertyRef Name="AccreditationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Therapist__Gende__74CE504D">
+    <End Type="ReseauPsyModel.Gender" Role="Gender" Multiplicity="0..1" />
+    <End Type="ReseauPsyModel.TherapistInfo" Role="TherapistInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Gender">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TherapistInfo">
+        <PropertyRef Name="GenderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Therapist__Regio__75C27486">
+    <End Type="ReseauPsyModel.Region" Role="Region" Multiplicity="0..1" />
+    <End Type="ReseauPsyModel.TherapistInfo" Role="TherapistInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Region">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TherapistInfo">
+        <PropertyRef Name="RegionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Therapist__Thera__7F4BDEC0">
+    <End Type="ReseauPsyModel.Therapist" Role="Therapist" Multiplicity="1" />
+    <End Type="ReseauPsyModel.TherapistInfo" Role="TherapistInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Therapist">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TherapistInfo">
+        <PropertyRef Name="TherapistId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ExternalA__Langu__0F824689">
+    <End Type="ReseauPsyModel.Language" Role="Language" Multiplicity="1" />
+    <End Type="ReseauPsyModel.ExternalAssociation" Role="ExternalAssociation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Language">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ExternalAssociation">
+        <PropertyRef Name="LanguageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="ReseauPsyInfo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Adress" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="TpsNumber" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="TvqNumber" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="City" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Region" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="RegionAbbreviation" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
+    <Property Name="PostalCode" Type="String" Nullable="false" MaxLength="7" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="ClientInfo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ClientId" Type="Int32" Nullable="false" />
+    <Property Name="FirstName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="City" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PostalCode" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="RegionId" Type="Int32" Nullable="false" />
+    <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Regions" Relationship="ReseauPsyModel.FK__ClientInf__Regio__4C8B54C9" FromRole="ClientInfo" ToRole="Region" />
+    <Property Name="TherapistHourlyWage" Type="Decimal" Precision="5" Scale="2" />
+    <Property Name="ClientHourlyCost" Type="Decimal" Precision="5" Scale="2" />
+    <Property Name="GenderId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Genders" Relationship="ReseauPsyModel.FK__ClientInf__Gende__000AF8CF" FromRole="ClientInfo" ToRole="Gender" />
+    <NavigationProperty Name="Clients" Relationship="ReseauPsyModel.FK__ClientInf__Clien__4B973090" FromRole="ClientInfo" ToRole="Clients" />
+  </EntityType>
+  <Association Name="FK__ClientInf__Regio__4C8B54C9">
+    <End Type="ReseauPsyModel.Region" Role="Region" Multiplicity="1" />
+    <End Type="ReseauPsyModel.ClientInfo" Role="ClientInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Region">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ClientInfo">
+        <PropertyRef Name="RegionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="GetClientListForAdminClientListPage_Result">
+    <Property Type="Int32" Name="ClientId" Nullable="false" />
+    <Property Type="String" Name="ClientName" Nullable="false" />
+    <Property Type="String" Name="TherapistName" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="GetClientListForTherapistClientListPage_Result">
+    <Property Type="Int32" Name="ClientId" Nullable="false" />
+    <Property Type="Boolean" Name="IsExternalClient" Nullable="true" />
+    <Property Type="String" Name="ClientName" Nullable="false" />
+  </ComplexType>
+  <Association Name="FK__ClientInf__Gende__000AF8CF">
+    <End Type="ReseauPsyModel.Gender" Role="Gender" Multiplicity="1" />
+    <End Type="ReseauPsyModel.ClientInfo" Role="ClientInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Gender">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ClientInfo">
+        <PropertyRef Name="GenderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="ExternalClientFee">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ExternalClientPercentageFeeDecimal" Type="Decimal" Nullable="false" Precision="5" Scale="4" />
+    <Property Name="ExternalClientFixedFee" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <ComplexType Name="GetListClientsForTherapistAppointment_Result">
+    <Property Type="Int32" Name="ClientId" Nullable="false" />
+    <Property Type="String" Name="ClientMessage" Nullable="false" />
+    <Property Type="DateTime" Name="ClientRequestDate" Nullable="false" Precision="23" />
+    <Property Type="Boolean" Name="IsExternalClient" Nullable="false" />
+    <Property Type="String" Name="ClientEmail" Nullable="true" />
+    <Property Type="String" Name="ClientPhone" Nullable="true" />
+    <Property Type="String" Name="Region" Nullable="true" />
+    <Property Type="String" Name="ClientCity" Nullable="true" />
+    <Property Type="String" Name="ClientPostalCode" Nullable="true" />
+    <Property Type="String" Name="ClientName" Nullable="false" />
+    <Property Type="String" Name="ClientConsultationReason" Nullable="true" />
+    <Property Type="Int32" Name="IsClientAlreadyScheduled" Nullable="false" />
+  </ComplexType>
+  <EntityType Name="Clients">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TherapistId" Type="Int32" />
+    <Property Name="LanguageId" Type="Int32" Nullable="false" />
+    <Property Name="ConsultationReasonId" Type="Int32" Nullable="false" />
+    <Property Name="ClientAgeRangeId" Type="Int32" Nullable="false" />
+    <Property Name="Message" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="RequestDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="IsExternalClient" Type="Boolean" Nullable="false" />
+    <Property Name="ExternalAssociationId" Type="Int32" />
+    <Property Name="ReasonDeleteClientRequestId" Type="Int32" />
+    <Property Name="DeletedAdditionalNotes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="ClientAvailabilities" Relationship="ReseauPsyModel.FK__ClientAva__Clien__01142BA1" FromRole="Clients" ToRole="ClientAvailability" />
+    <NavigationProperty Name="ClientConsultationTypes" Relationship="ReseauPsyModel.FK__ClientCon__Clien__03F0984C" FromRole="Clients" ToRole="ClientConsultationType" />
+    <NavigationProperty Name="ClientInfo" Relationship="ReseauPsyModel.FK__ClientInf__Clien__4B973090" FromRole="Clients" ToRole="ClientInfo" />
+    <NavigationProperty Name="ClientLanguage" Relationship="ReseauPsyModel.FK__ClientLan__Clien__51851410" FromRole="Clients" ToRole="ClientLanguage" />
+    <NavigationProperty Name="ClientsAgeRange" Relationship="ReseauPsyModel.FK__Client__ClientAg__00200768" FromRole="Clients" ToRole="ClientsAgeRange" />
+    <NavigationProperty Name="ConsultationReasons" Relationship="ReseauPsyModel.FK__Client__Consulta__75A278F5" FromRole="Clients" ToRole="ConsultationReason" />
+    <NavigationProperty Name="ExternalAssociations" Relationship="ReseauPsyModel.FK__Client__External__05D8E0BE" FromRole="Clients" ToRole="ExternalAssociation" />
+    <NavigationProperty Name="ReasonsDeleteClientRequest" Relationship="ReseauPsyModel.FK__Client__ReasonDe__06CD04F7" FromRole="Clients" ToRole="ReasonsDeleteClientRequest" />
+    <NavigationProperty Name="Languages" Relationship="ReseauPsyModel.FK__Clients__Languag__2B2A60FE" FromRole="Clients" ToRole="Language" />
+    <NavigationProperty Name="Therapists" Relationship="ReseauPsyModel.FK__Clients__Therapi__0F4D3C5F" FromRole="Clients" ToRole="Therapist" />
+    <NavigationProperty Name="ExternalAssociationClientsSent" Relationship="ReseauPsyModel.FK__ExternalA__Clien__6166761E" FromRole="Clients" ToRole="ExternalAssociationClientsSent" />
+    <NavigationProperty Name="TherapistClientRequest" Relationship="ReseauPsyModel.FK__Therapist__Clien__719CDDE7" FromRole="Clients" ToRole="TherapistClientRequest" />
+    <NavigationProperty Name="ClientAppointments" Relationship="ReseauPsyModel.FK__ClientApp__Clien__14E61A24" FromRole="Clients" ToRole="ClientAppointments" />
+  </EntityType>
+  <EntityType Name="TherapistClientRequest">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ClientId" Type="Int32" Nullable="false" />
+    <Property Name="TherapistId" Type="Int32" Nullable="false" />
+    <Property Name="RequestSentDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="AdditionMessageFromTherapist" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="AdditionalMessageFromAdmin" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsAccepted" Type="Boolean" />
+    <NavigationProperty Name="Clients" Relationship="ReseauPsyModel.FK__Therapist__Clien__719CDDE7" FromRole="TherapistClientRequest" ToRole="Clients" />
+    <NavigationProperty Name="Therapists" Relationship="ReseauPsyModel.FK__Therapist__Thera__72910220" FromRole="TherapistClientRequest" ToRole="Therapist" />
+  </EntityType>
+  <Association Name="FK__ClientAva__Clien__01142BA1">
+    <End Type="ReseauPsyModel.Clients" Role="Clients" Multiplicity="1" />
+    <End Type="ReseauPsyModel.ClientAvailability" Role="ClientAvailability" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clients">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ClientAvailability">
+        <PropertyRef Name="ClientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ClientCon__Clien__03F0984C">
+    <End Type="ReseauPsyModel.Clients" Role="Clients" Multiplicity="1" />
+    <End Type="ReseauPsyModel.ClientConsultationType" Role="ClientConsultationType" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clients">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ClientConsultationType">
+        <PropertyRef Name="ClientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ClientInf__Clien__4B973090">
+    <End Type="ReseauPsyModel.Clients" Role="Clients" Multiplicity="1" />
+    <End Type="ReseauPsyModel.ClientInfo" Role="ClientInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clients">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ClientInfo">
+        <PropertyRef Name="ClientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ClientLan__Clien__51851410">
+    <End Type="ReseauPsyModel.Clients" Role="Clients" Multiplicity="1" />
+    <End Type="ReseauPsyModel.ClientLanguage" Role="ClientLanguage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clients">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ClientLanguage">
+        <PropertyRef Name="ClientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Client__ClientAg__00200768">
+    <End Type="ReseauPsyModel.ClientsAgeRange" Role="ClientsAgeRange" Multiplicity="1" />
+    <End Type="ReseauPsyModel.Clients" Role="Clients" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ClientsAgeRange">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Clients">
+        <PropertyRef Name="ClientAgeRangeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Client__Consulta__75A278F5">
+    <End Type="ReseauPsyModel.ConsultationReason" Role="ConsultationReason" Multiplicity="1" />
+    <End Type="ReseauPsyModel.Clients" Role="Clients" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ConsultationReason">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Clients">
+        <PropertyRef Name="ConsultationReasonId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Client__External__05D8E0BE">
+    <End Type="ReseauPsyModel.ExternalAssociation" Role="ExternalAssociation" Multiplicity="0..1" />
+    <End Type="ReseauPsyModel.Clients" Role="Clients" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ExternalAssociation">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Clients">
+        <PropertyRef Name="ExternalAssociationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Client__ReasonDe__06CD04F7">
+    <End Type="ReseauPsyModel.ReasonsDeleteClientRequest" Role="ReasonsDeleteClientRequest" Multiplicity="0..1" />
+    <End Type="ReseauPsyModel.Clients" Role="Clients" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ReasonsDeleteClientRequest">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Clients">
+        <PropertyRef Name="ReasonDeleteClientRequestId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Clients__Languag__2B2A60FE">
+    <End Type="ReseauPsyModel.Language" Role="Language" Multiplicity="1" />
+    <End Type="ReseauPsyModel.Clients" Role="Clients" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Language">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Clients">
+        <PropertyRef Name="LanguageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Clients__Therapi__0F4D3C5F">
+    <End Type="ReseauPsyModel.Therapist" Role="Therapist" Multiplicity="0..1" />
+    <End Type="ReseauPsyModel.Clients" Role="Clients" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Therapist">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Clients">
+        <PropertyRef Name="TherapistId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ExternalA__Clien__6166761E">
+    <End Type="ReseauPsyModel.Clients" Role="Clients" Multiplicity="1" />
+    <End Type="ReseauPsyModel.ExternalAssociationClientsSent" Role="ExternalAssociationClientsSent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clients">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ExternalAssociationClientsSent">
+        <PropertyRef Name="ClientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Therapist__Clien__719CDDE7">
+    <End Type="ReseauPsyModel.Clients" Role="Clients" Multiplicity="1" />
+    <End Type="ReseauPsyModel.TherapistClientRequest" Role="TherapistClientRequest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clients">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TherapistClientRequest">
+        <PropertyRef Name="ClientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Therapist__Thera__72910220">
+    <End Type="ReseauPsyModel.Therapist" Role="Therapist" Multiplicity="1" />
+    <End Type="ReseauPsyModel.TherapistClientRequest" Role="TherapistClientRequest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Therapist">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TherapistClientRequest">
+        <PropertyRef Name="TherapistId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="GetListClientReceipt_Result">
+    <Property Type="Int32" Name="ClientAppointmentsId" Nullable="false" />
+    <Property Type="DateTime" Name="AppointmentDate" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="ClientPaymentReceiptNumber" Nullable="true" />
+    <Property Type="String" Name="ClientName" Nullable="false" />
+    <Property Type="String" Name="ClientEmail" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="GetListClientNameSuggestion_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="String" Name="ClientName" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="GetClientReceiptsForExcel_Result">
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="DateTime" Name="AppointmentDate" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="ClientPaymentReceiptNumber" Nullable="true" />
+    <Property Type="String" Name="NatureAct" Nullable="true" />
+    <Property Type="String" Name="Secteur" Nullable="true" />
+    <Property Type="String" Name="ConsultationType" Nullable="true" />
+    <Property Type="String" Name="ClientName" Nullable="false" />
+    <Property Type="String" Name="TherapistName" Nullable="false" />
+  </ComplexType>
+  <EntityType Name="TherapistBill">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TherapistId" Type="Int32" Nullable="false" />
+    <Property Name="BillNumber" Type="Int32" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="SubTotal" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="TpsAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="TvqAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="PaymentDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Therapists" Relationship="ReseauPsyModel.FK__Therapist__Thera__208CD6FA" FromRole="TherapistBill" ToRole="Therapist" />
+  </EntityType>
+  <Association Name="FK__Therapist__Thera__208CD6FA">
+    <End Type="ReseauPsyModel.Therapist" Role="Therapist" Multiplicity="1" />
+    <End Type="ReseauPsyModel.TherapistBill" Role="TherapistBill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Therapist">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TherapistBill">
+        <PropertyRef Name="TherapistId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="ClientAppointments">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TherapistId" Type="Int32" Nullable="false" />
+    <Property Name="ClientId" Type="Int32" Nullable="false" />
+    <Property Name="StartDateTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="NbSession" Type="Decimal" Nullable="false" Precision="2" Scale="1" />
+    <Property Name="EndDateTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="NatureActId" Type="Int32" Nullable="false" />
+    <Property Name="ProfessionalTitleId" Type="Int32" Nullable="false" />
+    <Property Name="ConsultationTypeId" Type="Int32" Nullable="false" />
+    <Property Name="RepetitionId" Type="Int32" />
+    <Property Name="AppointmentStatusId" Type="Int32" Nullable="false" />
+    <Property Name="TherapistBillId" Type="Int32" />
+    <Property Name="ClientPaymentReceiptNumber" Type="Int32" />
+    <Property Name="TotalDollarAmount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="ClientPaymentDate" Type="DateTime" Precision="3" />
+    <Property Name="PaymentUrlCode" Type="Guid" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="ReasonDeleteClientAppointmentId" Type="Int32" />
+    <Property Name="ReferenceStartDateTime" Type="DateTime" Precision="3" />
+    <Property Name="IsRemeinderEmailSent" Type="Boolean" Nullable="false" />
+    <Property Name="ClientBillGeneratedDate" Type="DateTime" Precision="3" />
+    <Property Name="TherapistPayInformationId" Type="Int32" />
+    <NavigationProperty Name="AppointmentStatus" Relationship="ReseauPsyModel.FK__ClientApp__Appoi__24285DB4" FromRole="ClientAppointments" ToRole="AppointmentStatu" />
+    <NavigationProperty Name="ClientAppointmentRepetition" Relationship="ReseauPsyModel.FK__ClientApp__Repet__75F77EB0" FromRole="ClientAppointments" ToRole="ClientAppointmentRepetition" />
+    <NavigationProperty Name="Clients" Relationship="ReseauPsyModel.FK__ClientApp__Clien__14E61A24" FromRole="ClientAppointments" ToRole="Clients" />
+    <NavigationProperty Name="ConsultationTypes" Relationship="ReseauPsyModel.FK__ClientApp__Consu__42ACE4D4" FromRole="ClientAppointments" ToRole="ConsultationType" />
+    <NavigationProperty Name="NatureActs" Relationship="ReseauPsyModel.FK__ClientApp__Natur__41B8C09B" FromRole="ClientAppointments" ToRole="NatureAct" />
+    <NavigationProperty Name="ProfessionalTitles" Relationship="ReseauPsyModel.FK__ClientApp__Profe__47C69FAC" FromRole="ClientAppointments" ToRole="ProfessionalTitle" />
+    <NavigationProperty Name="ReasonsDeleteClientAppointment" Relationship="ReseauPsyModel.FK__ClientApp__Reaso__4A4E069C" FromRole="ClientAppointments" ToRole="ReasonsDeleteClientAppointment" />
+    <NavigationProperty Name="Therapists" Relationship="ReseauPsyModel.FK__ClientApp__Thera__40C49C62" FromRole="ClientAppointments" ToRole="Therapist" />
+    <NavigationProperty Name="ClientPaymentInfos" Relationship="ReseauPsyModel.FK__ClientPay__Clien__2F2FFC0C" FromRole="ClientAppointments" ToRole="ClientPaymentInfo" />
+    <NavigationProperty Name="TherapistPayInformations" Relationship="ReseauPsyModel.FK__ClientApp__Thera__55DFB4D9" FromRole="ClientAppointments" ToRole="TherapistPayInformations" />
+  </EntityType>
+  <Association Name="FK__ClientApp__Appoi__24285DB4">
+    <End Type="ReseauPsyModel.AppointmentStatu" Role="AppointmentStatu" Multiplicity="1" />
+    <End Type="ReseauPsyModel.ClientAppointments" Role="ClientAppointments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AppointmentStatu">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ClientAppointments">
+        <PropertyRef Name="AppointmentStatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ClientApp__Repet__75F77EB0">
+    <End Type="ReseauPsyModel.ClientAppointmentRepetition" Role="ClientAppointmentRepetition" Multiplicity="0..1" />
+    <End Type="ReseauPsyModel.ClientAppointments" Role="ClientAppointments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ClientAppointmentRepetition">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ClientAppointments">
+        <PropertyRef Name="RepetitionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ClientApp__Clien__14E61A24">
+    <End Type="ReseauPsyModel.Clients" Role="Clients" Multiplicity="1" />
+    <End Type="ReseauPsyModel.ClientAppointments" Role="ClientAppointments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clients">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ClientAppointments">
+        <PropertyRef Name="ClientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ClientApp__Consu__42ACE4D4">
+    <End Type="ReseauPsyModel.ConsultationType" Role="ConsultationType" Multiplicity="1" />
+    <End Type="ReseauPsyModel.ClientAppointments" Role="ClientAppointments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ConsultationType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ClientAppointments">
+        <PropertyRef Name="ConsultationTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ClientApp__Natur__41B8C09B">
+    <End Type="ReseauPsyModel.NatureAct" Role="NatureAct" Multiplicity="1" />
+    <End Type="ReseauPsyModel.ClientAppointments" Role="ClientAppointments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NatureAct">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ClientAppointments">
+        <PropertyRef Name="NatureActId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ClientApp__Profe__47C69FAC">
+    <End Type="ReseauPsyModel.ProfessionalTitle" Role="ProfessionalTitle" Multiplicity="1" />
+    <End Type="ReseauPsyModel.ClientAppointments" Role="ClientAppointments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProfessionalTitle">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ClientAppointments">
+        <PropertyRef Name="ProfessionalTitleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ClientApp__Reaso__4A4E069C">
+    <End Type="ReseauPsyModel.ReasonsDeleteClientAppointment" Role="ReasonsDeleteClientAppointment" Multiplicity="0..1" />
+    <End Type="ReseauPsyModel.ClientAppointments" Role="ClientAppointments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ReasonsDeleteClientAppointment">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ClientAppointments">
+        <PropertyRef Name="ReasonDeleteClientAppointmentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ClientApp__Thera__40C49C62">
+    <End Type="ReseauPsyModel.Therapist" Role="Therapist" Multiplicity="1" />
+    <End Type="ReseauPsyModel.ClientAppointments" Role="ClientAppointments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Therapist">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ClientAppointments">
+        <PropertyRef Name="TherapistId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ClientPay__Clien__2F2FFC0C">
+    <End Type="ReseauPsyModel.ClientAppointments" Role="ClientAppointments" Multiplicity="1" />
+    <End Type="ReseauPsyModel.ClientPaymentInfo" Role="ClientPaymentInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ClientAppointments">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ClientPaymentInfo">
+        <PropertyRef Name="ClientAppointmentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="GetListClaimableAppointmentForTherapistClaimForm_Result">
+    <Property Type="Int32" Name="AppointmentId" Nullable="false" />
+    <Property Type="DateTime" Name="AppointmentDate" Nullable="false" Precision="23" />
+    <Property Type="Decimal" Name="NbSession" Nullable="false" Precision="2" Scale="1" />
+    <Property Type="Int32" Name="ClientPaymentReceiptNumber" Nullable="true" />
+    <Property Type="String" Name="ClientName" Nullable="false" />
+    <Property Type="String" Name="NatureAct" Nullable="true" />
+  </ComplexType>
+  <EntityType Name="TherapistPayInformations">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TherapistId" Type="Int32" Nullable="false" />
+    <Property Name="ChangedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="TherapistHourlyWage" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="ClientHourlyCost" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="IsTaxable" Type="Boolean" Nullable="false" />
+    <Property Name="PayInfoName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsDefault" Type="Boolean" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="ClientAppointments" Relationship="ReseauPsyModel.FK__ClientApp__Thera__55DFB4D9" FromRole="TherapistPayInformations" ToRole="ClientAppointments" />
+    <NavigationProperty Name="Therapists" Relationship="ReseauPsyModel.FK__Therapist__Thera__10AB74EC" FromRole="TherapistPayInformations" ToRole="Therapist" />
+  </EntityType>
+  <Association Name="FK__ClientApp__Thera__55DFB4D9">
+    <End Type="ReseauPsyModel.TherapistPayInformations" Role="TherapistPayInformations" Multiplicity="0..1" />
+    <End Type="ReseauPsyModel.ClientAppointments" Role="ClientAppointments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TherapistPayInformations">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ClientAppointments">
+        <PropertyRef Name="TherapistPayInformationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Therapist__Thera__10AB74EC">
+    <End Type="ReseauPsyModel.Therapist" Role="Therapist" Multiplicity="1" />
+    <End Type="ReseauPsyModel.TherapistPayInformations" Role="TherapistPayInformations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Therapist">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TherapistPayInformations">
+        <PropertyRef Name="TherapistId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

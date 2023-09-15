@@ -1,0 +1,91 @@
+﻿@using ReseauPsy.Resources
+
+@using System.Globalization
+@using ReseauPsy.Resources
+@{
+    ViewBag.Title = Resource.PaymentInvalid_Title;
+    Layout = "~/Views/Shared/_LayoutClient.cshtml";
+
+    var routeValues = this.ViewContext.RouteData.Values;
+    var controller = routeValues["controller"] as string;
+    var action = routeValues["action"] as string;
+    string queryString = Request.QueryString.ToString() == "" ? "" : "?" + Request.QueryString.ToString();
+}
+
+
+
+
+
+<div class="row g-0">
+    <div class="col-md-4">
+        <div class="client-left d-flex align-items-center">
+            <div class="w-100 h-100 d-flex flex-column justify-content-around">
+
+                <div class="d-block d-md-none">
+                    <div class="row">
+                        <div class="col-8">
+                            <a class="navbar-brand"><img src="/_assets/img/theme/logo-white.svg" class="img-responsive" /></a>
+                        </div>
+                        <div class="col-4 text-end">
+                            @if (CultureInfo.CurrentCulture.Name == "fr-CA")
+                            {
+                                <a class="nav-link" href="/en/@controller/@action@queryString">@Global.Menu_English</a>
+                            }
+                            else
+                            {
+                                <a class="nav-link" href="/fr/@controller/@action@queryString">@Global.Menu_Francais</a>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+
+             
+
+
+
+               
+
+
+
+            </div>
+
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="client-right">
+            <div class="row d-none d-md-flex">
+                <div class="col-4">
+                    <a class="navbar-brand"><img src="/_assets/img/theme/logo-black.svg" class="img-responsive" /></a>
+                </div>
+                <div class="col-8 text-end">
+                    @if (CultureInfo.CurrentCulture.Name == "fr-CA")
+                    {
+                        <a class="nav-link" href="/en/@controller/@action@queryString">@Global.Menu_English</a>
+                    }
+                    else
+                    {
+                        <a class="nav-link" href="/fr/@controller/@action@queryString">@Global.Menu_Francais</a>
+                    }
+                </div>
+                <div class="col-12">
+                    <hr />
+                </div>
+            </div>
+
+            <div class="text-center">
+                <h1>Lien invalide</h1>
+            </div>
+
+            <div class="alert alert-danger">
+                @Resource.PaymentInvalid_Text
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+
+
+

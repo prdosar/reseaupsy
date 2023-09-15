@@ -1,0 +1,241 @@
+﻿
+@{
+    ViewBag.Title = "Conditions générales d'utilisation";
+    if (Context.User.Identity.IsAuthenticated)
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_LayoutGeneral.cshtml";
+
+    }
+}
+<section id="termsofuse">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+
+                <h1>CONDITIONS GÉNÉRALES D’UTILISATION DU SITE RÉSEAUPSY INC.</h1>
+
+                <p>Merci de lire attentivement les présentes conditions générales avant d’utiliser le présent Site accessible à l’adresse suivante : www.reseaupsy.ca  (ci-après, le « Site »).</p>
+                <p>Ce Site est la propriété de <strong>RéseauPsy</strong>. Il est géré et maintenu par <strong>RéseauPsy</strong> et son équipe sur un site hébergé d’une société immatriculée dans la Province du Québec, Canada.  À tout moment, la référence au Site inclut <strong>RéseauPsy</strong>.</p>
+                <p>Toute personne souhaitant bénéficier des services du Site, doit être une personne physique âgée de plus de 14 ans et sera désignée ci-après par le terme « l’Utilisateur ».</p>
+                <p>En utilisant le Site, l’Utilisateur accepte d’être lié par les Modalités et Conditions stipulées (ci-après les « Conditions ») en tant qu’Utilisateur. Dans l’éventualité où il n’adhère pas aux Conditions, <strong>RéseauPsy</strong> demande de ne pas naviguer ni transiger sur le Site <strong>RéseauPsy</strong> peut modifier les Conditions à tout moment et sans préavis et donc, la version modifiée prendra effet dès sa publication.</p>
+                <ol>
+                    <li>
+                        <strong class="mb16">DESCRIPTION DES SERVICES</strong>
+                        <p>Le Site est un fournisseur de services en ligne qui a pour mission de faciliter la mise en relation avec des thérapeutes offrant de la consultation en cabinet privé en présentiel ou en visioconférence. Les thérapeutes présents sur le Site sont situés dans la province du Québec et font tous partie d’un Ordre professionnel.</p>
+                        <p><strong>RéseauPsy</strong> agit en tant que simple intermédiaire entre les Utilisateurs et les thérapeutes et ne fournit personnellement aucun service de soins de santé, en santé mentale, services sociaux ou de psychothérapie, ni aucun autre service professionnel.</p>
+                        <p>N’UTILISEZ PAS LE SITE POUR DES URGENCES MÉDICALES OU SI VOUS AVEZ DES IDÉES SUICIDAIRES. SI VOUS AVEZ UNE URGENCE MÉDICALE OU SI VOUS ENVISAGEZ DE VOUS FAIRE DU MAL OU D’EN FAIRE À D’AUTRES PERSONNES, VOUS DEVRIEZ CESSER D’UTILISER LE SITE ET COMPOSER LE 911 IMMÉDIATEMENT, OU VOUS PRÉSENTER AUX URGENCES DE L’HÔPITAL OU DU CENTRE DE SANTÉ LE PLUS PROCHE.</p>
+                    </li>
+
+                    <li>
+                        <strong class="mb16">PORTÉE DES CONDITIONS D’UTILISATION</strong>
+                        <p>Le présent document contient les Conditions qui régissent l’utilisation du Site, ainsi que tous les applications et services offerts par le biais des transactions faites sur ce dernier.</p>
+                    </li>
+
+                    <li>
+                        <strong class="mb16">ADMISSIBILITÉ DE L’UTILISATEUR</strong>
+                        <p>L’Utilisateur doit avoir la capacité juridique pour consentir aux présentes Conditions et doit être une personne physique consentant en son propre nom et être âgée de plus de 14 ans ou une personne morale dûment représentée par une personne en position et autorité de le faire, et ce, en considération de la loi qui régit son lieu de domicile.</p>
+                        <p>Toutes les personnes âgées de moins de 14 ans peuvent utiliser le Site seulement en présence de leur parent ou tuteur légal.</p>
+                        <p>Falsifier une identité en utilisant le Site sera considéré comme une violation des Conditions générales d'utilisation du Site.  Il peut en résulter une expulsion totale, permanente et irrévocable du Site, en plus de poursuites civiles ou pénales.</p>
+                    </li>
+
+                    <li>
+                        <strong class="mb16">OBLIGATIONS DES THÉRAPEUTES</strong>
+                        <p>Pour faire partie de l’équipe de <strong>RéseauPsy</strong>, vous devrez vous assurer de respecter certaines obligations, entre autres :</p>
+                        <ul>
+                            <li>De détenir un permis d’exercice en règle et de vous conformer aux obligations de votre ordre professionnel respectif notamment en ce qui concerne l’obligation de formation continue;</li>
+                            <li>De prendre les moyens nécessaires pour s’assurer de la sécurité optimale des informations confidentielles et documents qui sont transmis en ligne ;</li>
+                            <li>De respecter la confidentialité des échanges entre vous et le client;</li>
+                            <li>De transmettre la documentation nécessaire pour recueillir le consentement du client;</li>
+                            <li>D’informer <strong>RéseauPsy</strong> en cas de changement de votre pratique, d’enquête disciplinaire diligentée par votre ordre, y compris des limitations de pratique et plus largement, de tout évènement qui pourrait entraîner des conséquences sur votre pratique;</li>
+                            <li>Lorsque vous demeurez dans d’impossibilité d’honorer la consultation avec votre client, de l’informer dans les plus brefs délais ;</li>
+                            <li>Lors d’absence plus longue de votre part, de s’assurer d’informer les clients dans un délai raisonnable et de prendre les moyens nécessaires pour assurer le suivi;</li>
+                            <li>De vous abstenir de commettre tout geste frauduleux ou négligent ou qui, à notre avis raisonnable, est douteux ou risque de porter atteinte à la réputation de <strong>RéseauPsy</strong>.</li>
+                        </ul>
+                        <p>EN CAS DE NON-RESPECT DES OBLIGATIONS PRÉCITÉES, <strong>RÉSEAUPSY</strong> SE RÉSERVE LE DROIT DE METTRE FIN À LA COLLABORATION AVEC LE THÉRAPEUTE.</p>
+                    </li>
+
+                    <li>
+                        <strong class="mb16">FONCTIONNEMENT</strong>
+                        <ol>
+                            <li>
+                                <strong class="mb16">Fonctionnement du compte d’Utilisateur du thérapeute</strong>
+                                <p>Lorsque vous êtes un thérapeute et que vous souhaitez bénéficier de nos services de mise en relation avec des clients, vous devez au préalable nous écrire en remplissant le formulaire présent sur le Site dans la section – Joignez l’Équipe.</p>
+                                <p>Une fois le formulaire reçu, nous prendrons contact avec vous pour en savoir davantage sur votre demande.</p>
+                                <p>Après la rencontre avec l’un de nos agents et si vous désirez toujours faire partie de l’équipe de <strong>RéseauPsy</strong>, nous vous enverrons un contrat de collaboration à signer dans lequel vous trouverez les termes et conditions applicables à nos services.</p>
+                                <p><strong>RéseauPsy</strong> vous créera ensuite un compte utilisateur et vous transmettra les codes d’accès attribués afin que vous soyez en mesure d’utiliser le Site et bénéficier des services de <strong>RéseauPsy</strong>.</p>
+                                <p>Ce compte ne pourra être utilisé que par le thérapeute qui a contracté avec <strong>RéseauPsy</strong> pour ses services et qui a fourni les renseignements à ce propos.</p>
+                                <p><strong>RéseauPsy</strong> se réserve le droit de désactiver, à tout moment, tout compte d’utilisateur qui vous a été attribué à son entière discrétion.</p>
+                                <p>Vous vous engagez à nous communiquer des renseignements véridiques, à jour, complets et exacts chaque fois que vous êtes invité à fournir des renseignements, et à mettre à jour ces renseignements le plus rapidement possible après tout changement.</p>
+                                <p>Vous vous engagez à modifier immédiatement votre mot de passe lorsque vous avez des raisons de penser que la confidentialité de celui-ci a été compromise ou qu'une personne non habilitée a eu, ou est susceptible d'avoir accès à votre compte d’utilisateur. Vous devez également en informer immédiatement le Service Client de <strong>RéseauPsy</strong> qui pourra suspendre tout accès au compte.</p>
+                                <p>Grâce à votre compte d’utilisateur sur le Site de <strong>RéseauPsy</strong>, vous aurez accès à un agenda sécurisé et privé en ligne sur lequel vous devrez en tout temps planifier vos consultations avec votre clientèle et en assurer le suivi.</p>
+                                <p>Dans le cas où vous désirez mettre fin à votre collaboration avec <strong>RéseauPsy</strong>, sachez qu’après votre retrait vous ne pourrez plus avoir accès à votre compte d’utilisateur et à ses différentes interfaces.</p>
+                            </li>
+
+                            <li>
+                                <strong class="mb16">Fonctionnement des demandes de consultation</strong>
+                                <p>Pour soumettre une demande de consultation sur le Site avec un thérapeute, vous devez donner plusieurs informations, telles que votre nom, votre prénom, votre courriel de contact, votre code postal, vos disponibilités, ainsi que vos besoins thérapeutiques.</p>
+                                <p>Vous vous engagez à nous communiquer des renseignements véridiques, à jour, complets et exacts chaque fois que vous êtes invité à fournir des renseignements sur le Site.</p>
+                                <p>Une fois la demande de consultation reçue par <strong>RéseauPsy</strong>, une réponse vous sera acheminée par courriel ou par téléphone dans les meilleurs délais.</p>
+                            </li>
+
+                        </ol>
+                    </li>
+
+
+                    <li>
+                        <strong class="mb16">MODALITÉS RELATIVES AU PAIEMENT DES HONORAIRES DES CONSULTATIONS</strong>
+
+                        <ol>
+                            <li>
+                                <strong class="mb16">Sécurité des paiements</strong>
+                                <p>Réseau Psy est l’intermédiaire transactionnel entre les Utilisateurs et les Thérapeutes.</p>
+                                <p>Le Site accepte uniquement les cartes de crédit autorisées. Toutes les données transmises resteront privées et intégrales.</p>
+                                <p>Le Site utilise la Plateforme externe de paiement PandaPay. L’Utilisateur, doit en tout temps, préalablement à tout achat, prendre connaissance des modalités de transaction auprès de PandaPay.</p>
+
+                            </li>
+                            <li>
+                                <strong class="mb16">Honoraires</strong>
+                                <p>Les honoraires payables pour les consultations individuelles, les thérapies de groupe ou encore les interventions de groupe sont déterminés individuellement et de façon discrétionnaire par chacun des thérapeutes référencés sur le Site.</p>
+                                <p>Les honoraires sont affichés en dollars canadiens (CAD).</p>
+                                <p>En fonction du thérapeute consulté, des taxes pourront être appliquées en supplément des honoraires. Cette information sera transmise par le thérapeute.</p>
+                                <p>Le Site n’est pas responsable du taux de change de l’Utilisateur achetant ses services avec une banque utilisant d’autres devises, et ne peut en aucun cas être tenu responsable d’un montant qui serait différent lors de l’achat de produits similaires, à intervalle. Le taux de change est hors du contrôle du Site et l’Utilisateur a l’entière responsabilité de vérifier les taux de change avant de transiger avec le Site.</p>
+                                <p>Au moment du paiement de la consultation, un reçu officiel de paiement vous sera transmis par courriel de façon automatique.</p>
+                                <p>Les clients doivent éventuellement s’assurer que leurs assurances couvrent le paiement des honoraires aux fins de remboursement. <strong>RéseauPsy</strong> ne pourra en être tenue responsable.</p>
+
+                                <ul>
+                                    <li>Pour les consultations individuelles</li>
+                                </ul>
+                                <p>Toute consultation avec un thérapeute implique, au moment de la réservation, le paiement total pour des honoraires de consultation.</p>
+                                <ul>
+                                    <li>Pour les thérapies et interventions de groupe</li>
+                                </ul>
+                                <p>Au moment de la confirmation de la prise de rendez-vous, un premier paiement de <strong>cinquante pourcent (50%)</strong> du montant total des rencontres prévues devra être réalisé.</p>
+                                <p>Un deuxième paiement du montant restant dû sera prélevé à mi-parcours de l'intervention de groupe (par exemple à la 5e rencontre sur 10 rencontres incluses au forfait).</p>
+                            </li>
+                        </ol>
+                    </li>
+
+                    <li>
+                        <strong class="mb16">MODALITÉS D’ANNULATION ET DE REMBOURSEMENT</strong>
+                        <ol>
+                            <li>
+                                <strong class="mb16">Pour les consultations individuelles :</strong>
+                                <ul>
+                                    <li>Annulation vingt-quatre (24) heures ou plus avant le jour et l'heure de consultation, <strong>RéseauPsy</strong>, annulera la préautorisation bancaire sur la carte de crédit ;</li>
+                                    <li>Annulation à moins de vingt-quatre (24) heures, des frais administratifs d'annulation représentant cinquante (50) à cent pour cent (100%) du montant total de la consultation seront, à la discrétion du thérapeute, facturés à moins que ce dernier décide de les annuler.</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <strong class="mb16">Pour les thérapies et interventions de groupe :</strong>
+                                <table class="table">
+                                    <tr>
+                                        <td><strong>Demande effectuée par une personne individuelle</strong></td>
+                                        <td>
+                                            <p>En cas d’annulation deux (2) semaines ou plus avant la première séance de groupe, les honoraires versés pourront être remboursés.</p>
+                                            <p>Au-delà de ce délai, aucun remboursement ne pourra être accordé.</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Demande effectuée par une personne morale, un organisme à but non lucratif ou autres</strong></td>
+                                        <td>
+                                            <p>Toute annulation quatre (4) semaines ou plus avant la première séance de groupe entraînera un remboursement des honoraires versés.</p>
+                                            <p>Au-delà de ce délai, aucun remboursement ne pourra être accordé.</p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </li>
+                        </ol>
+
+                    </li>
+                    <li>
+                        <strong class="mb16">DROITS D’AUTEUR ET MARQUES DE COMMERCE</strong>
+                        <p>L’Utilisateur reconnaît que les Renseignements, les documents, les images, les marques de commerce, les produits et services et autres éléments publiés sur le Site (collectivement l’ « Information »), ce qui inclut aussi la présentation et la disposition de telle Information sur le Site, ainsi que toute Information lui étant reliée, sont la propriété exclusive du Site. Toute utilisation de l’Information est interdite sans l’autorisation préalable écrite du Site. Sauf dans le cas précis où le Site octroie à une personne une licence écrite d’utilisation de l’Information, aucune licence d’utilisation ou autre droit, exprès ou implicite, n’est accordé à qui que ce soit.</p>
+                        <p>Plus spécifiquement, l’utilisation du Site n’octroie aucun droit, titre ou intérêt de quelque nature que ce soit vis-à-vis de l’Information ce qui inclut notamment les logos et les autres marques lui appartenant, cette dernière se réservant l’intégralité des droits de Propriété intellectuelle reliés à l’Information.</p>
+                        <p>L’Utilisateur reconnaît que les services et les documents disponibles gratuitement ou onéreusement en ligne sont la propriété exclusive du Site, et que le téléchargement de ses éléments, de manière gratuite ou payante, n’accorde en aucun cas un droit à l’Utilisateur de les reproduire, les distribuer ou les vendre.</p>
+                        <p>Reproduire, copier, manipuler, ou vendre les services ou les documents du Site sans le consentement écrit préalable du propriétaire légal de ces services et documents constitue une violation et pourrait entraîner des poursuites civiles ou pénales.</p>
+                    </li>
+
+                    <li>
+                        <strong class="mb16">RESTRICTIONS D’UTILISATION DE L’INFORMATION</strong>
+                        <p>Aucune Information tirée du Site ne peut être copiée, reproduite, publiée, affichée, transmise ou distribuée par quelque moyen que ce soit, à l’exception d’un téléchargement d’une copie unique de l’Information sur un maximum de deux (2) ordinateurs/appareils différents, pour un usage strictement personnel et non commercial. Reproduire, copier, manipuler, ou utiliser ces Informations sans le consentement écrit préalable du propriétaire légal de ces documents pourrait entraîner des poursuites civiles ou pénales.</p>
+                        <p>Toute autre utilisation de l’Information doit préalablement avoir été autorisée par écrit par le Site. Toute modification de l’Information ou toute utilisation de cette Information pour toutes autres fins constitue une violation des droits d’auteur et des autres droits de propriété du Site. En particulier, l’utilisation de l’Information sur un autre Site Internet ou dans un environnement informatique en réseau est interdite, à moins que le Site y consente par écrit. L’Utilisateur doit contacter le Site afin d’obtenir le consentement requis et/ou pour obtenir des Informations supplémentaires sur l’octroi d’en tel consentement, et ce, en s’adressant par courriel à administration@reseaupsy.ca ou par courrier postal  Réseaupsy inc., 6277 rue D'Iberville, Montréal (Québec) H2G2C5, Canada.</p>
+                        <p>Dans l’éventualité où le Site accordait à un Utilisateur un droit d’utilisation de l’Information, cette utilisation est assujettie aux conditions suivantes :</p>
+                        <ol type="i">
+                            <li>Elle doit être référencée comme suit : « Reproduction autorisée par le Site de <strong>RéseauPsy</strong>: www.reseaupsy.ca  Tous droits réservés. » ;</li>
+                            <li>Toutes les mentions de droits d’auteur ou de tout autre droit de propriété doivent être conservées intactes ;</li>
+                            <li>L’Information ne peut être manipulée ou modifiée d’aucune manière ;</li>
+                            <li>Aucun graphique ou dessin ne peut être utilisé sans le texte qui l’accompagne.</li>
+                           
+
+                        </ol>
+                    </li>
+
+                    <li>
+                        <strong>CONFIDENTIALITÉ DES RENSEIGNEMENTS PERSONNELS</strong>
+                        <p>Le Site a mis en place une Politique de confidentialité pour ainsi assurer le respect de la protection de l’échange d’Informations personnelles et confidentielles entre le Site et l’Utilisateur. Elle est disponible ici : <a href="@Url.Action("PrivacyPolicy", "General")">Politique de confidentialité</a>.</p>
+                    </li>
+
+
+                    <li>
+                        <strong class="mb16">RESPONSABILITÉS LIMITÉES CONCERNANT L’UTILISATION DU SITE</strong>
+                        <p>L’Utilisateur du Site est responsable des frais résultants de son utilisation, tels que, mais non limitativement, les frais liés aux données ou dépassement de données cellulaires.</p>
+                        <p>Le Site ne sera en aucun cas responsable des interruptions de services attribuables aux caractéristiques et aux limites du réseau Internet, notamment dans le cas d’interruption des réseaux d’accès, des performances techniques et des délais de réponse pour consulter le contenu numérique du Site.</p>
+                        <p>En raison des caractéristiques intrinsèques d’Internet, le Site n’offre aucune garantie contre les risques de détournement, d’intrusion, de contamination ou de piratage des données, fichiers et programmes. Il appartient à l’Utilisateur de prendre toutes les mesures appropriées afin de protéger ses propres données, fichiers et programmes, entre autres de se prémunir contre les virus informatiques.</p>
+                        <p>Le Site ou toute partie affiliée n’est pas responsable de tout dommage qui peut résulter de l’utilisation du Site.</p>
+                        <p>Le Site ne peut être tenu responsable du matériel que l’Utilisateur juge offensant, indécent ou choquant. Malgré les multiples efforts du Site, des Informations manquantes et erreurs peuvent survenir.</p>
+                    </li>
+
+                    <li>
+                        <strong>LIENS SORTANTS</strong>
+                        <p>Le Site peut diriger vers des Sites web qui sont en dehors de son contrôle. Un lien ne devrait en aucun cas être considéré comme un endossement de la part du Site, qui ne peut en aucun cas être tenu responsable des éventuels dommages survenant à la suite d’une Site sur une page par un lien sortant.</p>
+                        <p>Bien que le Site utilise la Plateforme externe Pandapay pour, entre autres, le paiement des services, le Site n’est pas responsable des Termes et Conditions ni de leur Politique de confidentialité. En ce sens, l’Utilisateur doit en tout temps prendre connaissance des Conditions d’utilisation des autres Sites avant de procéder à son inscription et à un achat sur le Site.</p>
+                    </li>
+
+                    <li>
+                        <strong class="mb16">LIMITATION ET EXONÉRATION DE RESPONSABILITÉ DE <strong>RÉSEAUPSY</strong> CONCERNANT SES SERVICES DE MISE EN RELATION</strong>
+                        <p><strong>RéseauPsy</strong> intervient en tant qu’intermédiaire dans la mise en relation entre les Utilisateurs et les thérapeutes. </p>
+                        <p><strong>RéseauPsy</strong> ne prend pas part contractuellement à la prestation de services.</p>
+                        <p>Tous les thérapeutes référencés sur le Site demeurent indépendants de <strong>RéseauPsy</strong> et sont exclusivement responsables de leurs prestations de service en santé mentale.</p>
+                        <p><strong>RéseauPsy</strong> n’est pas présente pour contrôler et/ou vérifier le bon déroulement d’une consultation, elle ne peut être tenue responsable d’aucun résultat ni conséquence et le Client dégage <strong>RéseauPsy</strong> de toute responsabilité à cet effet.</p>
+                        <p>La présente exonération de responsabilité équivaut à une renonciation de réclamations de toutes natures.</p>
+                    </li>
+
+
+                    <li>
+                        <strong class="mb16">USAGE ILLÉGAL</strong>
+                        <p>Il est illégal d’utiliser les services du Site à des fins illégales, destructrices ou dangereuses. Cela comprend également de tenter d’endommager, de désactiver, de surcharger ou de toute autre manière compromettre le Site.</p>
+                        <p>Accéder ou tenter d’accéder à des informations mises à la disposition de l’Utilisateur non intentionnellement est illégal et pourrait entraîner des poursuites civiles ou pénales.</p>
+
+                    </li>
+                    <li>
+                        <strong class="mb16">LOI APPLICABLE</strong>
+                        <p>Le Site est opéré à partir de la province de Québec, Canada. Tout conflit pouvant survenir entre un Utilisateur et le Site sera donc régi par les lois applicables dans la province du Québec, district de Montréal.</p>
+                    </li>
+                    <li>
+                        <strong class="mb16">DOCUMENT ÉCRIT</strong>
+                        <p>L’Utilisateur peut conserver une copie de ce document. Ajoutons que ces Conditions générales d’utilisation du Site sont disponibles en tout temps sur le Site et peuvent être consultées à cet effet.</p>
+
+                    </li>
+                    <li>
+                        <strong class="mb16">SERVICE DE L’UTILISATEUR</strong>
+                        <p>Les questionnements de l’Utilisateur concernant le présent document peuvent être soumis par courriel à l’adresse suivante : administration@reseaupsy.ca ou par courrier postal à RéseauPsy, inc., 6277 rue D'Iberville, Montréal (Québec) H2G2C5, Canada.</p>
+
+                    </li>
+
+
+
+
+                </ol>
+
+
+
+            </div>
+        </div>
+    </div>
+</section>

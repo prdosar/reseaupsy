@@ -1,0 +1,62 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+
+.field-validation-error{
+    color: red;
+}
+
+.input-validation-error.form-control {
+    border: 2px solid red;
+}
+
+
+
+
+.info-bubble {
+    position: relative;
+    display: inline-block;
+}
+
+    .info-bubble .info-bubble-text {
+        visibility: hidden;
+        width: 120px;
+        background-color: #808080;
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        padding: 5px 0;
+        /* Position the tooltip */
+        position: absolute;
+        z-index: 1;
+    }
+
+    .info-bubble:hover .info-bubble-text {
+        visibility: visible;
+    }
+
+.pager li span {
+    color:black;
+}

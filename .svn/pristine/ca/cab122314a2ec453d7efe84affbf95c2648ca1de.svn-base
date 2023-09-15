@@ -1,0 +1,266 @@
+﻿@model ReseauPsy.ViewModel.Therapist.AppointmentNotPayedViewModel
+@using ReseauPsy.Resources
+@{
+    ViewBag.Title = Resource.AppointmentNotPayed_Title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <section id="page-therapist-nonpayed">
+
+
+        @* Title *@
+        <h1>@Resource.AppointmentNotPayed_H1</h1>
+
+        <div class="page-instruction">@Resource.AppointmentNotPayed_Text</div>
+
+
+        <div id="js-not-payed-empty" class="alert alert-info @(Model.Clients.Count() > 0 ?"d-none" : "")">
+            @Resource.AppointmentNotPayed_AllPayed
+            
+        </div>
+
+
+
+        @* Tableau *@
+        <div id="js-not-payed-table" class="table-responsive @(Model.Clients.Count() > 0 ?"" : "d-none")">
+            <table style="min-width:450px;">
+                <thead>
+                    <tr>
+                        <th style="width:120px;">@Global.Date</th>
+                        <th style="width:140px;">@Global.Client</th>
+                        <th style="width:120px;" class="d-none d-md-table-cell">@Global.Phone</th>
+                        <th style="width:140px;" class="d-none d-md-table-cell">@Global.Email</th>
+                        <th style="width:100px;" class="d-none d-md-table-cell text-end">@Global.Amount</th>
+                        <th style="width:190px;" class="text-end">@Global.Action</th>
+                    </tr>
+                </thead>
+                <tbody id="js-not-payed-table-body">
+                    @foreach (var client in Model.Clients)
+                    {
+                        <tr>
+                            <td style="max-width:120px;">@client.AppointmentDate.ToString("dd MMM yyyy")</td>
+                            <td style="max-width:140px;">@client.ClientName</td>
+                            <td style="max-width:120px;" class="d-none d-md-table-cell">@client.PhoneNumber</td>
+                            <td style="max-width:140px;" class="js-appointment-not-payed-client-email d-none d-md-table-cell">@client.Email</td>
+                            <td style="max-width:100px;" class="d-none d-md-table-cell text-end">@client.TotalDollarAmount.ToString("C")</td>
+                            <td style="max-width:190px;" class="text-end">
+                                <input class="js-appointment-not-payed-appointment-id" type="hidden" value="@client.AppointmentId" />
+                                <div class="btn btn-primary js-appointment-not-payed-send-link-button" title="@Global.ResendLink">@Global.ResendLink</div>
+                                <div class="btn btn-danger js-appointment-not-payed-delete-appointment" title="@Global.Delete"><i class="fas fa-trash-alt"></i></div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+
+
+        @* Modal delete Appointment not payed *@
+        <div id="DeleteAppointmentNotPayedModal" class="modal fade" tabindex="-1">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">@Resource.AppointmentNotPayed_DeleteModal_Title</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal">
+                            <i class="far fa-times-circle"></i>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="row">
+                            <div class="col-12">
+                                @Resource.AppointmentNotPayed_DeleteModal_Text
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button id="js-appointment-not-payed-close-delete-appointment-modal-button" type="button" class="btn btn-secondary">@Global.Cancel</button>
+                        <button id="js-appointment-not-payed-modal-delete-appointment-button" type="button" class="btn btn-primary">@Global.Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        @* Modal send back link *@
+
+        <div id="SendPaymentLinkToClientModal" class="modal fade" tabindex="-1">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">@Resource.AppointmentNotPayed_SendModal_Title</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal">
+                            <i class="far fa-times-circle"></i>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    @Resource.AppointmentNotPayed_SendModal_Text
+                                </div>
+                            </div>
+                        </div>
+
+
+                        @* Email *@
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label>@Global.Email</label>
+                                    <input id="js-appointment-not-payed-send-link-modal-email-input" class="form-control" type="text" />
+                                </div>
+                            </div>
+                        </div>
+
+                        @* Message *@
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label>@Global.Message</label>
+                                    <textarea id="js-appointment-not-payed-send-link-modal-message" class="form-control" rows="5"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button id="js-appointment-not-payed-send-link-modal-close-button" type="button" class="btn btn-secondary">@Global.Cancel</button>
+                        <button id="js-appointment-not-payed-send-link-modal-send-button" type="button" class="btn btn-primary">@Global.Send</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+</div>
+
+
+@section scripts
+{
+    <script>
+
+        function InitDeleteAppointmentNotPayed() {
+            var appointmentId;
+            var tableRow;
+            var deleteModalId = $("#DeleteAppointmentNotPayedModal")
+
+            //Open modal
+            $(".js-appointment-not-payed-delete-appointment").on("click", function () {
+                appointmentId = $(this).parent().children(".js-appointment-not-payed-appointment-id").val();
+                tableRow = $(this).closest("tr")
+
+                OpenModal(deleteModalId);
+            })
+
+            //Function to close the modal
+            function closeDeleteModal() {
+                appointmentId = null;
+                closeModal(deleteModalId)
+            }
+
+            //Close modal
+            $("#js-appointment-not-payed-close-delete-appointment-modal-button").on("click", function () {
+                closeDeleteModal()
+            })
+
+            //Delete appointment
+            $("#js-appointment-not-payed-modal-delete-appointment-button").on("click", function () {
+
+                $.ajax({
+                    type: "POST",
+                    url: "/fr/therapist/DeleteNotPayedAppointment/",
+                    data: `{"appointmentId":"${appointmentId}"}`,
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        tableRow.remove();
+                        closeDeleteModal()
+
+                        if ($('#js-not-payed-table-body tr').length == 0) {
+                            //The table is empty, add the no more request message
+
+                            $("#js-not-payed-empty").removeClass("d-none");
+                            $("#js-not-payed-table").addClass("d-none");
+
+
+                        }
+
+                    },
+                    error: function () {
+                        toastr["error"]
+                            ("@Global.GenericError",
+                                "@Global.Error");
+                    }
+                })
+            })
+        }
+
+        function InitSendPaymentLinkModal() {
+            var clientEmail;
+            var appointmentId;
+            var clientEmail;
+            var clientEmailInput = $("#js-appointment-not-payed-send-link-modal-email-input");
+            var messageInput = $("#js-appointment-not-payed-send-link-modal-message");
+            var sendLinkModal = $("#SendPaymentLinkToClientModal")
+
+            //Open send link modal
+            $(".js-appointment-not-payed-send-link-button").on("click", function () {
+                clientEmail = $(this).closest("tr").children(".js-appointment-not-payed-client-email").text();
+                appointmentId = $(this).parent().children(".js-appointment-not-payed-appointment-id").val();
+                clientEmailInput.val(clientEmail)
+                OpenModal(sendLinkModal)
+            })
+
+            //function to close the modal
+            function CloseSendLinkModal() {
+                clientEmailInput.val("")
+                messageInput.val("")
+
+                closeModal(sendLinkModal)
+            }
+
+            //Close modal
+            $("#js-appointment-not-payed-send-link-modal-close-button").on("click", function () {
+                CloseSendLinkModal()
+            })
+
+            //Send link
+            $("#js-appointment-not-payed-send-link-modal-send-button").on("click", function () {
+
+                var message = EscapeHtmlEntities(messageInput.val())
+
+                $.ajax({
+                    type: "POST",
+                    url: "/fr/therapist/SendBackPaymentLinkToClient/",
+                    data: `{"appointmentId":"${appointmentId}",
+                            "clientEmail":"${clientEmail}",
+                            "message":"${message}"}`,
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        CloseSendLinkModal()
+                        toastr["success"]
+                            ("@Resource.AppointmentNotPayed_Success",
+                                "@Global.Success");
+                    },
+                    error: function () {
+                        toastr["error"]
+                            ("@Global.GenericError",
+                                "@Global.Error");
+                    }
+                })
+
+            })
+
+        }
+
+        InitDeleteAppointmentNotPayed();
+        InitSendPaymentLinkModal();
+
+    </script>
+}
+

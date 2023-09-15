@@ -1,0 +1,374 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{737C32DE-4700-438B-A73B-2235D103F9AA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Business</RootNamespace>
+    <AssemblyName>Business</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="EPPlus, Version=5.7.5.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.5.7.5\lib\net45\EPPlus.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IO.RecyclableMemoryStream, Version=1.4.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IO.RecyclableMemoryStream.1.4.1\lib\net46\Microsoft.IO.RecyclableMemoryStream.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Annotations.4.7.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.FileSystem.Primitives, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.FileSystem.Primitives.4.3.0\lib\net46\System.IO.FileSystem.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.Packaging, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Packaging.5.0.0\lib\net46\System.IO.Packaging.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Threading.Tasks" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Accreditation.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Admin.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppointmentStatu.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AreasOfPractice.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetRole.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetUser.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetUserClaim.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetUserLogin.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClientAppointmentRepetition.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClientAppointments.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClientAvailability.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClientConsultationType.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClientInfo.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClientLanguage.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClientPaymentInfo.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Clients.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClientsAgeRange.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClientType.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ConsultationReason.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ConsultationType.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DayOfTheWeek_PeriodOfTheDay.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DaysOfTheWeek.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ExternalAssociation.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ExternalAssociationClientSentStatu.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ExternalAssociationClientsSent.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ExternalClientFee.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Gender.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetCancelationCountByCancelationReason_Result.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetClientListForAdminClientListPage_Result.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetClientListForTherapistClientListPage_Result.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetClientReceiptsForExcel_Result.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetClientSentToExternalAssociationCount_Result.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetClientSentToExternalAssociation_Result.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetInfosAdminDashboard_Result.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetListAdmin_Result.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetListAppointmentForAdminCount_Result.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetListAppointmentForAdmin_Result.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetListClaimableAppointmentForTherapistClaimForm_Result.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetListClientAppointmentNotPayed_Result.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetListClientForClientRequestPage_Result.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetListClientNameSuggestion_Result.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetListClientReceipt_Result.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetListClientRequestWaitingForTherapist_Result.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetListClientsForTherapistAppointment_Result.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetListClientToConfirmPresence_Result.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetListIncommingAppointmentTherapist_Result.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetListTherapistBillForAdmin_Result.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetListTherapistBillPaymentForAdminExcel_Result.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetListTherapistBillSentForAdminExcel_Result.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetListTherapistBillSent_Result.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetListTherapistForClientRequestPage_Result.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetTherapistClosingRates_Result.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetTherapistListForAdmin_Result.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Language.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NatureAct.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OfferedService.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OfferedServiceType.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OfferedService_OfferedServiceType.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PeriodsOfTheDay.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProfessionalTitle.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReasonsDeleteClientAppointment.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReasonsDeleteClientRequest.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Region.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReseauPsyEntities.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReseauPsyEntities.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReseauPsyEntities.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReseauPsyEntities.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReseauPsyEntities.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="ReseauPsyInfo.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ResetPassword.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SpecificSkill.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Tax.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TheoreticalOrientation.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Therapist.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TherapistAreaOfPractice.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TherapistAssociationAndProfessionalOrder.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TherapistAvailability.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TherapistBill.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TherapistClientAgeRange.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TherapistClientRequest.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TherapistClientType.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TherapistConsultationType.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TherapistInfo.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TherapistLanguage.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TherapistOfferedService.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TherapistPayInformations.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TherapistProfessionalTitle.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TherapistSpecificSkill.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TherapistTheoreticalOrientation.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VerifiyIfTherapistInscriptionCompleted_Result.cs">
+      <DependentUpon>ReseauPsyEntities.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <None Include="packages.config" />
+    <EntityDeploy Include="ReseauPsyEntities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ReseauPsyEntities.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="ReseauPsyEntities.edmx.diagram">
+      <DependentUpon>ReseauPsyEntities.edmx</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ReseauPsyEntities.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ReseauPsyEntities.edmx</DependentUpon>
+      <LastGenOutput>ReseauPsyEntities.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="ReseauPsyEntities.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ReseauPsyEntities.edmx</DependentUpon>
+      <LastGenOutput>ReseauPsyEntities.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

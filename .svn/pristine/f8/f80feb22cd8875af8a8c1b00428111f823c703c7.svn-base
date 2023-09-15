@@ -1,0 +1,980 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AdminCalendar_H1" xml:space="preserve">
+    <value>Appointment calendar</value>
+  </data>
+  <data name="AdminCalendar_Title" xml:space="preserve">
+    <value>Appointment calendar</value>
+    <comment>Titre de la page dans l'onglet</comment>
+  </data>
+  <data name="AdminDashboard_Appointments" xml:space="preserve">
+    <value>Appointments</value>
+  </data>
+  <data name="AdminDashboard_Bill" xml:space="preserve">
+    <value>Invoice</value>
+  </data>
+  <data name="AdminDashboard_Consultation" xml:space="preserve">
+    <value>Consultation</value>
+  </data>
+  <data name="AdminDashboard_H1" xml:space="preserve">
+    <value>Dashboard</value>
+  </data>
+  <data name="AdminDashboard_Title" xml:space="preserve">
+    <value>Dashboard</value>
+    <comment>Titre de la page dans l'onglet</comment>
+  </data>
+  <data name="AdminDashboard_Todo" xml:space="preserve">
+    <value>Request(s) to be trated</value>
+  </data>
+  <data name="AdminDashboard_ToPay" xml:space="preserve">
+    <value>Invoice(s) to be paid</value>
+  </data>
+  <data name="AdminDashboard_WeeklyAppointment" xml:space="preserve">
+    <value>Weekly appointment</value>
+  </data>
+  <data name="AdminDetail_CreateError" xml:space="preserve">
+    <value>An error occured during the creation of the administrator.</value>
+  </data>
+  <data name="AdminDetail_CreateSuccess" xml:space="preserve">
+    <value>Administrator has been successfully created.</value>
+  </data>
+  <data name="AdminDetail_EditError" xml:space="preserve">
+    <value>An error occured during the modification of the administrator.</value>
+  </data>
+  <data name="AdminDetail_EditSuccess" xml:space="preserve">
+    <value>Administrator has been successfully modified.</value>
+  </data>
+  <data name="AdminDetail_H1" xml:space="preserve">
+    <value>Administrator details</value>
+  </data>
+  <data name="AdminDetail_LeavePasswordEmpty" xml:space="preserve">
+    <value>Please leave password fields empty if you do not wish to change your password.</value>
+  </data>
+  <data name="AdminDetail_Title" xml:space="preserve">
+    <value>Administrator details</value>
+    <comment>Titre de la page dans l'onglet</comment>
+  </data>
+  <data name="AdminList_DeleteModal_Text" xml:space="preserve">
+    <value>Are you sure you want to delete{0}?</value>
+    <comment>Le {0} sera remplacé par le nom de l'administrateur</comment>
+  </data>
+  <data name="AdminList_DeleteModal_Title" xml:space="preserve">
+    <value>Confirm deletion</value>
+  </data>
+  <data name="AdminList_H1" xml:space="preserve">
+    <value>List of administrators</value>
+  </data>
+  <data name="AdminList_RestaureModal_Text" xml:space="preserve">
+    <value>Are you sure you want to restore{0}?</value>
+    <comment>Le {0} sera remplacé par le nom de l'administrateur</comment>
+  </data>
+  <data name="AdminList_RestaureModal_Title" xml:space="preserve">
+    <value>Confirm restoration</value>
+  </data>
+  <data name="AdminList_Title" xml:space="preserve">
+    <value>List of administrators</value>
+    <comment>Titre de la page dans l'onglet</comment>
+  </data>
+  <data name="AppointmentList_ExcelDocumentTableHeader_Client" xml:space="preserve">
+    <value>Client</value>
+    <comment>Entête de colonne de fichier Excel</comment>
+  </data>
+  <data name="AppointmentList_ExcelDocumentTableHeader_Date" xml:space="preserve">
+    <value>Date</value>
+    <comment>Entête de colonne de fichier Excel</comment>
+  </data>
+  <data name="AppointmentList_ExcelDocumentTableHeader_ReclamationStatus" xml:space="preserve">
+    <value>Claim status</value>
+    <comment>Entête de colonne de fichier Excel</comment>
+  </data>
+  <data name="AppointmentList_ExcelDocumentTableHeader_Status" xml:space="preserve">
+    <value>Status</value>
+    <comment>Entête de colonne de fichier Excel</comment>
+  </data>
+  <data name="AppointmentList_ExcelDocumentTableHeader_Therapist" xml:space="preserve">
+    <value>Therapist</value>
+    <comment>Entête de colonne de fichier Excel</comment>
+  </data>
+  <data name="AppointmentList_ExcelDocumentTableHeader_Time" xml:space="preserve">
+    <value>Time</value>
+    <comment>Entête de colonne de fichier Excel</comment>
+  </data>
+  <data name="AppointmentList_ExcelDocument_TabName" xml:space="preserve">
+    <value>Appointment</value>
+    <comment>Nom de la Tab dans le fichier Excel</comment>
+  </data>
+  <data name="AppointmentList_H1" xml:space="preserve">
+    <value>List of appointments</value>
+  </data>
+  <data name="AppointmentList_ReclamationStatus_Claimed" xml:space="preserve">
+    <value>Claimed</value>
+  </data>
+  <data name="AppointmentList_ReclamationStatus_NotClaimed" xml:space="preserve">
+    <value>Unclaimed</value>
+  </data>
+  <data name="AppointmentList_ReclamationStatus_Payed" xml:space="preserve">
+    <value>Paid</value>
+  </data>
+  <data name="AppointmentList_Title" xml:space="preserve">
+    <value>List of appointments</value>
+    <comment>Titre de la page dans l'onglet</comment>
+  </data>
+  <data name="AppointmentNotPayed_AllPayed" xml:space="preserve">
+    <value>All appointments have been paid.</value>
+  </data>
+  <data name="AppointmentNotPayed_DeleteModal_Text" xml:space="preserve">
+    <value>You are about to delete an unpaid appointment. Please make sure to delete only amounts due. Once deleted, the payment for any appointment can not be paid.</value>
+  </data>
+  <data name="AppointmentNotPayed_DeleteModal_Title" xml:space="preserve">
+    <value>Unpaid invoice</value>
+  </data>
+  <data name="AppointmentNotPayed_H1" xml:space="preserve">
+    <value>Unpaid appointments</value>
+  </data>
+  <data name="AppointmentNotPayed_SendModal_Text" xml:space="preserve">
+    <value>This form allows you to sent back an email to a client, with a link for payment. You can add a personalized message. The appropriate link will be included in the email.</value>
+  </data>
+  <data name="AppointmentNotPayed_SendModal_Title" xml:space="preserve">
+    <value>Send back payment link</value>
+  </data>
+  <data name="AppointmentNotPayed_Success" xml:space="preserve">
+    <value>Email has successfully be sent.</value>
+  </data>
+  <data name="AppointmentNotPayed_Text" xml:space="preserve">
+    <value>The above table shows all unpaid appointments. The appointments will disappear from such list when payments are made by clients. You may then claim such payments to RéseauPsy.</value>
+  </data>
+  <data name="AppointmentNotPayed_Title" xml:space="preserve">
+    <value>Unpaid appointments</value>
+  </data>
+  <data name="AppointmentRequest_AssignModal_NoteForAssociation" xml:space="preserve">
+    <value>Note to external association </value>
+  </data>
+  <data name="AppointmentRequest_AssignModal_NoteForTherapist" xml:space="preserve">
+    <value>Note to therapist</value>
+  </data>
+  <data name="AppointmentRequest_AssignModal_ReturnMessage" xml:space="preserve">
+    <value>Message from therapist</value>
+  </data>
+  <data name="AppointmentRequest_AssignModal_Title" xml:space="preserve">
+    <value>Assign consultation request</value>
+  </data>
+  <data name="AppointmentRequest_DeleteModal_Reason" xml:space="preserve">
+    <value>Reason for deletion</value>
+  </data>
+  <data name="AppointmentRequest_DeleteModal_Text" xml:space="preserve">
+    <value>Are you sure you want to delete this consultation request?</value>
+  </data>
+  <data name="AppointmentRequest_DeleteModal_Title" xml:space="preserve">
+    <value>Confirm deletion</value>
+  </data>
+  <data name="AppointmentRequest_H1" xml:space="preserve">
+    <value>Appointment request</value>
+  </data>
+  <data name="AppointmentRequest_RestoreModal_Reason" xml:space="preserve">
+    <value>Reason for deletion</value>
+  </data>
+  <data name="AppointmentRequest_RestoreModal_Text" xml:space="preserve">
+    <value>You are about to restore a consultation request that had previously been deleted. Do you want to continue the process?</value>
+  </data>
+  <data name="AppointmentRequest_RestoreModal_Title" xml:space="preserve">
+    <value>Confirm restoration</value>
+  </data>
+  <data name="AppointmentRequest_RetreiveModal_Text" xml:space="preserve">
+    <value>This consultation request has already been sent to a therapist and is waiting for confirmation. If you retreive this request, it will disappear from the therapist' list of pending requests. Are you sure you want to continue the process?</value>
+  </data>
+  <data name="AppointmentRequest_RetreiveModal_Title" xml:space="preserve">
+    <value>Confirm retreival</value>
+  </data>
+  <data name="AppointmentRequest_Status_Deleted" xml:space="preserve">
+    <value>Deleted</value>
+  </data>
+  <data name="AppointmentRequest_Status_HasTherapist" xml:space="preserve">
+    <value>Associate</value>
+  </data>
+  <data name="AppointmentRequest_Status_NoTherapist" xml:space="preserve">
+    <value>Non-associate</value>
+  </data>
+  <data name="AppointmentRequest_Status_SentToExternalAssociation" xml:space="preserve">
+    <value>External association </value>
+  </data>
+  <data name="AppointmentRequest_Status_Waiting" xml:space="preserve">
+    <value>Pending</value>
+  </data>
+  <data name="AppointmentRequest_Title" xml:space="preserve">
+    <value>Appointment request</value>
+    <comment>Titre de la page dans l'onglet</comment>
+  </data>
+  <data name="Appointment_CantResize" xml:space="preserve">
+    <value>You cannot modify the duration of this appointment, because the customer has already received the payment link.</value>
+  </data>
+  <data name="ChangePassword_Confirmation" xml:space="preserve">
+    <value>Your password has been successfully changed.</value>
+  </data>
+  <data name="ChangePassword_Error_CurrentPassword" xml:space="preserve">
+    <value>The current password is not valid.</value>
+  </data>
+  <data name="ChangePassword_H1" xml:space="preserve">
+    <value>Change my password</value>
+  </data>
+  <data name="ChangePassword_Title" xml:space="preserve">
+    <value>Change my password</value>
+  </data>
+  <data name="ClaimForm_BillSent" xml:space="preserve">
+    <value>Sent invoices</value>
+  </data>
+  <data name="ClaimForm_BillSentTableStatus_NotPayed" xml:space="preserve">
+    <value>Unpaid</value>
+  </data>
+  <data name="ClaimForm_BillSentTableStatus_Payed" xml:space="preserve">
+    <value>Paid</value>
+  </data>
+  <data name="ClaimForm_ClaimAppointment" xml:space="preserve">
+    <value>Appointment claim</value>
+  </data>
+  <data name="ClaimForm_ExcelDocumentTableHeader_Amount" xml:space="preserve">
+    <value>Amount</value>
+    <comment>Entête de colonne de fichier Excel</comment>
+  </data>
+  <data name="ClaimForm_ExcelDocumentTableHeader_BillNumber" xml:space="preserve">
+    <value>Invoice number</value>
+    <comment>Entête de colonne de fichier Excel</comment>
+  </data>
+  <data name="ClaimForm_ExcelDocumentTableHeader_DateSent" xml:space="preserve">
+    <value>Sending date</value>
+    <comment>Entête de colonne de fichier Excel</comment>
+  </data>
+  <data name="ClaimForm_ExcelDocumentTableHeader_PaymentStatus" xml:space="preserve">
+    <value>Payment status</value>
+    <comment>Entête de colonne de fichier Excel</comment>
+  </data>
+  <data name="ClaimForm_ExcelDocumentTableHeader_Tps" xml:space="preserve">
+    <value>GST</value>
+    <comment>Entête de colonne de fichier Excel</comment>
+  </data>
+  <data name="ClaimForm_ExcelDocumentTableHeader_Tvq" xml:space="preserve">
+    <value>QST</value>
+    <comment>Entête de colonne de fichier Excel</comment>
+  </data>
+  <data name="ClaimForm_ExcelDocument_TabName" xml:space="preserve">
+    <value>Invoices</value>
+    <comment>Nom de la Tab dans le fichier Excel</comment>
+  </data>
+  <data name="ClaimForm_H1" xml:space="preserve">
+    <value>Claimable appointment</value>
+  </data>
+  <data name="ClaimForm_NoClaimmable" xml:space="preserve">
+    <value>There is no claimable appointment</value>
+  </data>
+  <data name="ClaimForm_PreviewModal_Title" xml:space="preserve">
+    <value>Preview invoice</value>
+  </data>
+  <data name="ClaimForm_Text" xml:space="preserve">
+    <value>Appointments appearing in the table below are ready to be claimed to the Administration Office. To be shown in this table, the Client's presence must have been confirmed and the consultation must have been paid.</value>
+  </data>
+  <data name="ClaimForm_Title" xml:space="preserve">
+    <value>Claimable appointments</value>
+  </data>
+  <data name="ClientListAdmin_H1" xml:space="preserve">
+    <value>List of clients</value>
+  </data>
+  <data name="ClientListTherapist_H1" xml:space="preserve">
+    <value>List of clients</value>
+  </data>
+  <data name="ClientListTherapist_Label_ClientType" xml:space="preserve">
+    <value>Type of client</value>
+  </data>
+  <data name="ClientListTherapist_ModalDelete_Text" xml:space="preserve">
+    <value>Are you sure you want to delete this client?</value>
+  </data>
+  <data name="ClientListTherapist_ModalDelete_Title" xml:space="preserve">
+    <value>Client deletion</value>
+  </data>
+  <data name="ClientListTherapist_ModalRestore_Text" xml:space="preserve">
+    <value>Are you sure you want to restore this client?</value>
+  </data>
+  <data name="ClientListTherapist_ModalRestore_Title" xml:space="preserve">
+    <value>Client restoration</value>
+  </data>
+  <data name="ClientListTherapist_Option_ExternalClient" xml:space="preserve">
+    <value>External</value>
+  </data>
+  <data name="ClientListTherapist_Option_InternalClient" xml:space="preserve">
+    <value>Internal</value>
+  </data>
+  <data name="ClientReceiptPdf_Label_AdministrativeCharges" xml:space="preserve">
+    <value>Administrative charge related to no-show</value>
+  </data>
+  <data name="ClientReceiptPdf_Label_AppointmentDate" xml:space="preserve">
+    <value>Appointment date</value>
+  </data>
+  <data name="ClientReceiptPdf_Label_ReciptForInsurance" xml:space="preserve">
+    <value>Receipt for insurance</value>
+  </data>
+  <data name="ClientReceiptPdf_Label_TherapistName" xml:space="preserve">
+    <value>Insured by</value>
+  </data>
+  <data name="ClientReceiptPdf_Label_TherapistTitle" xml:space="preserve">
+    <value>Therapist's title(s)</value>
+  </data>
+  <data name="ClientReceiptPdf_Name_AppointmentType" xml:space="preserve">
+    <value>{0} in {1}</value>
+    <comment>{0} le type de consultuation (evaluation)
+{1} le type de soin (sexologie)</comment>
+  </data>
+  <data name="ClientReceipt_ExcelDocumentRow_AppointmentType" xml:space="preserve">
+    <value>{0} in {1}</value>
+    <comment>{0} le type de consultuation (evaluation)
+{1} le type de soin (sexologie)</comment>
+  </data>
+  <data name="ClientReceipt_ExcelDocument_AppointmentType" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="ClientReceipt_ExcelDocument_ClientName" xml:space="preserve">
+    <value>Client</value>
+  </data>
+  <data name="ClientReceipt_ExcelDocument_ConsultationType" xml:space="preserve">
+    <value>Consultation type</value>
+  </data>
+  <data name="ClientReceipt_ExcelDocument_Date" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="ClientReceipt_ExcelDocument_ReceiptNumber" xml:space="preserve">
+    <value># Receipt</value>
+  </data>
+  <data name="ClientReceipt_ExcelDocument_SubTotal" xml:space="preserve">
+    <value>Subtotal</value>
+  </data>
+  <data name="ClientReceipt_ExcelDocument_TabName" xml:space="preserve">
+    <value>Client Receipt</value>
+  </data>
+  <data name="ClientReceipt_ExcelDocument_Therapist" xml:space="preserve">
+    <value>Therapist</value>
+  </data>
+  <data name="ClientReceipt_ExcelDocument_Total" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="ClientReceipt_ExcelDocument_Tps" xml:space="preserve">
+    <value>TPS</value>
+  </data>
+  <data name="ClientReceipt_ExcelDocument_Tvq" xml:space="preserve">
+    <value>TVQ</value>
+  </data>
+  <data name="ConfirmPresence_AllConfirmedMessage" xml:space="preserve">
+    <value>All appointments have been confirmed</value>
+  </data>
+  <data name="ConfirmPresence_H1" xml:space="preserve">
+    <value>Presence to be confirmed</value>
+  </data>
+  <data name="ConfirmPresence_ModalAnnulationFees_Message" xml:space="preserve">
+    <value>Should we apply administrative charges in case of late cancellation?</value>
+  </data>
+  <data name="ConfirmPresence_ModalAnnulationFees_Title" xml:space="preserve">
+    <value>Cancellation charges</value>
+  </data>
+  <data name="ConfirmPresence_PresenceToConfirm" xml:space="preserve">
+    <value>Confirm presence</value>
+  </data>
+  <data name="ConfirmPresence_Title" xml:space="preserve">
+    <value>Presence to be confirmed</value>
+  </data>
+  <data name="ConfirmPresence_ToastrSuccess_Message" xml:space="preserve">
+    <value>Presence has been confirmed!</value>
+  </data>
+  <data name="DetailClientAdmin_H1_CreateClient" xml:space="preserve">
+    <value>Creation of a client</value>
+  </data>
+  <data name="DetailClientAdmin_H1_EditClient" xml:space="preserve">
+    <value>Modification of a client</value>
+  </data>
+  <data name="DetailClientAdmin_Label_CommunicationLanguage" xml:space="preserve">
+    <value>Communication language</value>
+  </data>
+  <data name="DetailClientAdmin_Label_ConsultationReason" xml:space="preserve">
+    <value>Reason for consultation</value>
+  </data>
+  <data name="DetailClientAdmin_Label_UseCustomRate" xml:space="preserve">
+    <value>Use custom hourly rates</value>
+  </data>
+  <data name="DetailClientAdmin_SucceededCreated" xml:space="preserve">
+    <value>Client has been successfully created</value>
+  </data>
+  <data name="DetailClientAdmin_SucceededEdited" xml:space="preserve">
+    <value>Client has been successfully modified</value>
+  </data>
+  <data name="DetailsTherapist_CreateTherapist" xml:space="preserve">
+    <value>Create a therapist</value>
+  </data>
+  <data name="DetailsTherapist_EditTherapist" xml:space="preserve">
+    <value>Modifiy a therapist</value>
+  </data>
+  <data name="DetailTherapist_ClientFromInsurance" xml:space="preserve">
+    <value>Do you accept clients from insurance companies?</value>
+  </data>
+  <data name="DetailTherapist_ClientFromThirdParty" xml:space="preserve">
+    <value>Do you accept clients from third-party payers like CSST, IVAC or CAVAC?</value>
+  </data>
+  <data name="DetailTherapist_InterestedInFormation" xml:space="preserve">
+    <value>Are you interested in following additional trainings offered by RéseauPsy?</value>
+  </data>
+  <data name="DetailTherapist_MaxRequest" xml:space="preserve">
+    <value>Maximal requests per week</value>
+  </data>
+  <data name="DetailTherapist_SuccedeedCreated" xml:space="preserve">
+    <value>Therapist has been successfully created.</value>
+  </data>
+  <data name="DetailTherapist_SuccedeedModified" xml:space="preserve">
+    <value>Therapist has been successfully modified.</value>
+  </data>
+  <data name="DetailTherapist_Title" xml:space="preserve">
+    <value>Therapist details</value>
+    <comment>Titre de la page dans l'onglet</comment>
+  </data>
+  <data name="ExternalAssociation_ChangeStatus" xml:space="preserve">
+    <value>Change of status</value>
+  </data>
+  <data name="ExternalAssociation_ExcelDocumentTableHeader_Association" xml:space="preserve">
+    <value>Association</value>
+    <comment>Entête de colonne de fichier Excel</comment>
+  </data>
+  <data name="ExternalAssociation_ExcelDocumentTableHeader_Client" xml:space="preserve">
+    <value>Client</value>
+    <comment>Entête de colonne de fichier Excel</comment>
+  </data>
+  <data name="ExternalAssociation_ExcelDocumentTableHeader_SentDate" xml:space="preserve">
+    <value>Sending date</value>
+    <comment>Entête de colonne de fichier Excel</comment>
+  </data>
+  <data name="ExternalAssociation_ExcelDocumentTableHeader_Status" xml:space="preserve">
+    <value>Status</value>
+    <comment>Entête de colonne de fichier Excel</comment>
+  </data>
+  <data name="ExternalAssociation_ExcelDocumentTableHeader_StatusChangedDate" xml:space="preserve">
+    <value>Date of change of status</value>
+    <comment>Entête de colonne de fichier Excel</comment>
+  </data>
+  <data name="ExternalAssociation_ExcelDocument_TabName" xml:space="preserve">
+    <value>Clients</value>
+    <comment>Nom de la Tab dans le fichier Excel</comment>
+  </data>
+  <data name="ExternalAssociation_H1" xml:space="preserve">
+    <value>External associations</value>
+  </data>
+  <data name="ExternalAssociation_Title" xml:space="preserve">
+    <value>External associations</value>
+    <comment>Titre de la page dans l'onglet</comment>
+  </data>
+  <data name="ForgotPassword_H1" xml:space="preserve">
+    <value>Forgotten password</value>
+  </data>
+  <data name="ForgotPassword_ReturnToLogin" xml:space="preserve">
+    <value>Return to connection page </value>
+  </data>
+  <data name="ForgotPassword_Subtitle" xml:space="preserve">
+    <value>Please enter you email address to receive a link permitting to reset your password.</value>
+  </data>
+  <data name="ForgotPassword_Success_Message" xml:space="preserve">
+    <value>If the email address corresponds to a valid account, an email has been sent to you to reset your password.</value>
+  </data>
+  <data name="ForgotPassword_Title" xml:space="preserve">
+    <value>Forgotten password</value>
+    <comment>Titre de la page dans l'onglet</comment>
+  </data>
+  <data name="ListClientReceipt_H1" xml:space="preserve">
+    <value>List of clients receipts</value>
+  </data>
+  <data name="ListClientReceipt_ModalSend_Instruction" xml:space="preserve">
+    <value>You can change email address before sending back the receipt.</value>
+  </data>
+  <data name="ListClientReceipt_ModalSend_Title" xml:space="preserve">
+    <value>Send the receipt back</value>
+  </data>
+  <data name="ListClientReceipt_ResendReceipt" xml:space="preserve">
+    <value>Send the receipt back</value>
+  </data>
+  <data name="ListClientReceipt_Title" xml:space="preserve">
+    <value>List of clients receipts</value>
+    <comment>Titre de la page dans l'onglet</comment>
+  </data>
+  <data name="ListClientReceipt_Toastr_ResendConfirmation" xml:space="preserve">
+    <value>Receipt has been sent!</value>
+  </data>
+  <data name="Login_Error_AccountLocked" xml:space="preserve">
+    <value>Your account is locked because you have made too many unsuccessful login attempts. Please use the link 'Forgotten password'  to reset your password.</value>
+  </data>
+  <data name="Login_Error_ConnectionFailed" xml:space="preserve">
+    <value>Your connection attempt has failed. Please try again.</value>
+  </data>
+  <data name="Login_ForgotPassword" xml:space="preserve">
+    <value>Forgotten password?</value>
+  </data>
+  <data name="Login_H1" xml:space="preserve">
+    <value>Hello!</value>
+    <comment>Titre de la page</comment>
+  </data>
+  <data name="Login_RememberMe" xml:space="preserve">
+    <value>Remember my password</value>
+  </data>
+  <data name="Login_Subtitle" xml:space="preserve">
+    <value>Login to access your dashboard</value>
+  </data>
+  <data name="Login_Title" xml:space="preserve">
+    <value>Connection</value>
+    <comment>Titre de l'onglet</comment>
+  </data>
+  <data name="MyProfile_H1" xml:space="preserve">
+    <value>My profile</value>
+  </data>
+  <data name="MyProfile_Incomplete" xml:space="preserve">
+    <value>Your inscription is not complete. You must complete it before having access to the other sections of the website.</value>
+    <comment>Cette phrase apparait lorsque le thérapeute accède à son profil et qu'il n,a pas été complété</comment>
+  </data>
+  <data name="MyProfile_Title" xml:space="preserve">
+    <value>My profile</value>
+  </data>
+  <data name="MyProfil_ClientFromInsurance" xml:space="preserve">
+    <value>Do you accept clients from insurance companies?</value>
+  </data>
+  <data name="MyProfil_ClientFromThirdParty" xml:space="preserve">
+    <value>Do you accept clients from third-party payers like CSST, IVAC or CAVAC?</value>
+  </data>
+  <data name="MyProfil_GoTODashboard" xml:space="preserve">
+    <value>Go to your dashboard</value>
+  </data>
+  <data name="MyProfil_InterestedInFormation" xml:space="preserve">
+    <value>Are you interested in following additional trainings offered by RéseauPsy?</value>
+  </data>
+  <data name="MyProfil_MaxRequest" xml:space="preserve">
+    <value>Maximal requests per week</value>
+  </data>
+  <data name="MyProfil_SuccessMessage" xml:space="preserve">
+    <value>Your profile has been successfully modified</value>
+  </data>
+  <data name="MySkills_H1" xml:space="preserve">
+    <value>My spheres of competence</value>
+    <comment>Titre de la page dans l'onglet</comment>
+  </data>
+  <data name="MySkills_Title" xml:space="preserve">
+    <value>My spheres of competence</value>
+    <comment>Titre de la page dans l'onglet</comment>
+  </data>
+  <data name="PaymentInvalid_Text" xml:space="preserve">
+    <value>The address you have used is not valid. Please try again.</value>
+  </data>
+  <data name="PaymentInvalid_Title" xml:space="preserve">
+    <value />
+    <comment>Titre de la page dans l'onglet</comment>
+  </data>
+  <data name="Payment_PreAutorisation_Done" xml:space="preserve">
+    <value>Thank You! Your appointment has been pre-paid. Your payment will automatically be taken when your therapist confirms your presence to the consultation. You will be able to download your receipt once the payment is confirmed.</value>
+  </data>
+  <data name="Payment_PreAutorisation_Message" xml:space="preserve">
+    <value>&lt;strong&gt;Attention!&lt;/strong&gt; Since your appointment has not occured yet, this is a pre-payment authorization. Your payment will automatically be taken when your therapist confirms your presence at your consultation.</value>
+  </data>
+  <data name="Payment_ReceiptAvailable" xml:space="preserve">
+    <value>Thank You! Your appointment has been pre-paid. You may download your receipt by clicking on the button above.</value>
+  </data>
+  <data name="Payment_Title" xml:space="preserve">
+    <value>Payment of an appointment</value>
+    <comment>Titre de la page dans l'onglet</comment>
+  </data>
+  <data name="ResetPassword_ErrorMessage_FailedToReset" xml:space="preserve">
+    <value>An error has occured during the reset of your password. Please try again later.</value>
+  </data>
+  <data name="ResetPassword_ErrorMessage_InvalidLink" xml:space="preserve">
+    <value>The link is invalid.</value>
+  </data>
+  <data name="ResetPassword_ErrorMessage_LinkExpired" xml:space="preserve">
+    <value>The link has expired.</value>
+  </data>
+  <data name="ResetPassword_ErrorMessage_LinkUsed" xml:space="preserve">
+    <value>The link has already been used.</value>
+  </data>
+  <data name="ResetPassword_Error_Requirement" xml:space="preserve">
+    <value>Password is not safe enough. It must include :
+&lt;ul&gt;
+&lt;li&gt;Minimum of one number&lt;/li&gt;
+&lt;li&gt;A minimum of 6 characters&lt;/li&gt;
+&lt;li&gt;A minimum of one lowercase letter&lt;/li&gt;
+&lt;li&gt;A minimum of one uppercase letter&lt;/li&gt;
+&lt;li&gt;A minimum of one special character&lt;/li&gt;
+&lt;/ul&gt;</value>
+  </data>
+  <data name="ResetPassword_H1" xml:space="preserve">
+    <value>Reset your password</value>
+  </data>
+  <data name="ResetPassword_ResendLink" xml:space="preserve">
+    <value>Ask to have the link sent again</value>
+  </data>
+  <data name="ResetPassword_SuccessMessage_PasswordReseted" xml:space="preserve">
+    <value>The password linked to the email address has successfully been reset.</value>
+  </data>
+  <data name="ResetPassword_Title" xml:space="preserve">
+    <value>Reset your password</value>
+    <comment>Titre de la page dans l'onglet</comment>
+  </data>
+  <data name="Statistics_H1" xml:space="preserve">
+    <value>Statistics</value>
+  </data>
+  <data name="Statistics_H2_Cancelation" xml:space="preserve">
+    <value>Cancellation</value>
+  </data>
+  <data name="Statistics_H2_Conversion" xml:space="preserve">
+    <value>Conversion</value>
+  </data>
+  <data name="Statistics_Title" xml:space="preserve">
+    <value>Statistics</value>
+    <comment>Titre de la page dans l'onglet</comment>
+  </data>
+  <data name="TherapistApointment_ModalAppointment_Title" xml:space="preserve">
+    <value>Appointment</value>
+  </data>
+  <data name="TherapistAppointment_H1" xml:space="preserve">
+    <value>Appointment</value>
+    <comment>Titre de la page dans l'onglet</comment>
+  </data>
+  <data name="TherapistAppointment_Instruction" xml:space="preserve">
+    <value>Consultation request to be scheduled</value>
+  </data>
+  <data name="TherapistAppointment_ModalApplyFor_Text" xml:space="preserve">
+    <value>This appointment is part of a series of consultations. Do you want to modify all future appointments or only this appointment?</value>
+  </data>
+  <data name="TherapistAppointment_ModalApplyFor_Title" xml:space="preserve">
+    <value>Apply modification</value>
+  </data>
+  <data name="TherapistAppointment_ModalAppointment_AddRepetition" xml:space="preserve">
+    <value>Add a repetition</value>
+  </data>
+  <data name="TherapistAppointment_ModalAppointment_Cancel" xml:space="preserve">
+    <value>Cancel this appointment</value>
+  </data>
+  <data name="TherapistAppointment_ModalAppointment_EndAfter" xml:space="preserve">
+    <value>Ends after</value>
+  </data>
+  <data name="TherapistAppointment_ModalAppointment_InfoBubble" xml:space="preserve">
+    <value>One consultation = 1 hour</value>
+  </data>
+  <data name="TherapistAppointment_ModalAppointment_RepeatDay" xml:space="preserve">
+    <value>Repeat the</value>
+  </data>
+  <data name="TherapistAppointment_ModalAppointment_RepeatEvery" xml:space="preserve">
+    <value>Repeat all the </value>
+  </data>
+  <data name="TherapistAppointment_ModalAppointment_RepetitionOptions" xml:space="preserve">
+    <value>Repeat option</value>
+  </data>
+  <data name="TherapistAppointment_ModalAppointment_Return" xml:space="preserve">
+    <value>Refer the client to the Administration Office</value>
+  </data>
+  <data name="TherapistAppointment_ModalAppointment_SendLink" xml:space="preserve">
+    <value>Notice: You must send the videoconference link to the client!</value>
+  </data>
+  <data name="TherapistAppointment_ModalAppointment_StartFrom" xml:space="preserve">
+    <value>Starts from </value>
+  </data>
+  <data name="TherapistAppointment_ModalDelete_AllAppointment" xml:space="preserve">
+    <value>All appointments of the series of consultations</value>
+  </data>
+  <data name="TherapistAppointment_ModalDelete_DeleteInfo" xml:space="preserve">
+    <value>Notice: If you want to apply administrative charges to the appointment, you must keep this appointment and apply those charges in the presence confirmation page.</value>
+  </data>
+  <data name="TherapistAppointment_ModalDelete_Text" xml:space="preserve">
+    <value>Please specify reason for appointment deletion.</value>
+  </data>
+  <data name="TherapistAppointment_ModalDelete_Title" xml:space="preserve">
+    <value>Confirm deletion</value>
+  </data>
+  <data name="TherapistAppointment_ModalReturn_Text" xml:space="preserve">
+    <value>You are about to refer the client to the Administration Office. Consequently, you will not be able to consult the data in relation with this client, nor confirm any appointment. Please specify the reason for referring this client to the Administration Office.</value>
+  </data>
+  <data name="TherapistAppointment_ModalReturn_Title" xml:space="preserve">
+    <value>Refer to the Administration Office.</value>
+  </data>
+  <data name="TherapistAppointment_Title" xml:space="preserve">
+    <value>Appointment</value>
+    <comment>Titre de la page dans l'onglet</comment>
+  </data>
+  <data name="TherapistBillPdf_Label_BilledAt" xml:space="preserve">
+    <value>Billed to </value>
+  </data>
+  <data name="TherapistBillPdf_Label_BillNumber" xml:space="preserve">
+    <value>Invoice No.</value>
+  </data>
+  <data name="TherapistBillPdf_Label_BillTitle" xml:space="preserve">
+    <value>Invoice</value>
+  </data>
+  <data name="TherapistBillPdf_Label_DateTitle" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="TherapistBillPdf_Label_Subtotal" xml:space="preserve">
+    <value>Subtotal</value>
+  </data>
+  <data name="TherapistBillPdf_Label_Total" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="TherapistBillPdf_Th_Amount" xml:space="preserve">
+    <value>Amount</value>
+  </data>
+  <data name="TherapistBillPdf_Th_Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="TherapistBillPdf_Th_HourlyWage" xml:space="preserve">
+    <value>Hourly salary</value>
+  </data>
+  <data name="TherapistBillPdf_Th_Quantity" xml:space="preserve">
+    <value>Quantity</value>
+  </data>
+  <data name="TherapistBill_ExcelDocumentTableHeader_BillNumber" xml:space="preserve">
+    <value>Invoice number</value>
+    <comment>Entête de colonne de fichier Excel</comment>
+  </data>
+  <data name="TherapistBill_ExcelDocumentTableHeader_BillPaymentDate" xml:space="preserve">
+    <value>Date of payment of the invoice</value>
+    <comment>Entête de colonne de fichier Excel</comment>
+  </data>
+  <data name="TherapistBill_ExcelDocumentTableHeader_BillSentDate" xml:space="preserve">
+    <value>Invoice issued date</value>
+    <comment>Entête de colonne de fichier Excel</comment>
+  </data>
+  <data name="TherapistBill_ExcelDocumentTableHeader_Bill_TabName" xml:space="preserve">
+    <value>Invoices</value>
+    <comment>Nom de la Tab dans le fichier Excel</comment>
+  </data>
+  <data name="TherapistBill_ExcelDocumentTableHeader_Payment_TabName" xml:space="preserve">
+    <value>Payments</value>
+    <comment>Nom de la Tab dans le fichier Excel</comment>
+  </data>
+  <data name="TherapistBill_ExcelDocumentTableHeader_SubTotal" xml:space="preserve">
+    <value>Subtotal</value>
+    <comment>Entête de colonne de fichier Excel</comment>
+  </data>
+  <data name="TherapistBill_ExcelDocumentTableHeader_TherapistName" xml:space="preserve">
+    <value>Therapist</value>
+    <comment>Entête de colonne de fichier Excel</comment>
+  </data>
+  <data name="TherapistBill_ExcelDocumentTableHeader_TherapistTpsNumber" xml:space="preserve">
+    <value>GST number</value>
+    <comment>Entête de colonne de fichier Excel</comment>
+  </data>
+  <data name="TherapistBill_ExcelDocumentTableHeader_TherapistTvqNumber" xml:space="preserve">
+    <value>QST number</value>
+    <comment>Entête de colonne de fichier Excel</comment>
+  </data>
+  <data name="TherapistBill_ExcelDocumentTableHeader_TotalBill" xml:space="preserve">
+    <value>Total amount</value>
+    <comment>Entête de colonne de fichier Excel</comment>
+  </data>
+  <data name="TherapistBill_ExcelDocumentTableHeader_TpsAmount" xml:space="preserve">
+    <value>GST amount</value>
+    <comment>Entête de colonne de fichier Excel</comment>
+  </data>
+  <data name="TherapistBill_ExcelDocumentTableHeader_TvqAmount" xml:space="preserve">
+    <value>QST amount</value>
+    <comment>Entête de colonne de fichier Excel</comment>
+  </data>
+  <data name="TherapistBill_H1" xml:space="preserve">
+    <value>List of therapist invoices</value>
+  </data>
+  <data name="TherapistBill_ModalExport_ExportationType" xml:space="preserve">
+    <value>Exportation type</value>
+  </data>
+  <data name="TherapistBill_ModalExport_Title" xml:space="preserve">
+    <value>Exportation details</value>
+  </data>
+  <data name="TherapistBill_ModalPay_Instruction" xml:space="preserve">
+    <value>Please enter the date on which you have paid the invoice.</value>
+  </data>
+  <data name="TherapistBill_ModalPay_Title" xml:space="preserve">
+    <value>Confirm payment</value>
+  </data>
+  <data name="TherapistBill_Title" xml:space="preserve">
+    <value>List of therapist invoices</value>
+    <comment>Titre de la page dans l'onglet</comment>
+  </data>
+  <data name="TherapistClientRequest_ConsultModal_Title" xml:space="preserve">
+    <value>Client's information</value>
+  </data>
+  <data name="TherapistClientRequest_Text" xml:space="preserve">
+    <value>The following requests have been sent to you by the Administration Office. Please accept or decline by clicking on Consult. The requests that have not been answered before expiration date will automatically be sent back to the Administration Office.</value>
+  </data>
+  <data name="TherapistClientRequest_Title" xml:space="preserve">
+    <value>Pending request</value>
+  </data>
+  <data name="TherapistClientRequest_ToastrAccepted_Link" xml:space="preserve">
+    <value>Access to appointments</value>
+  </data>
+  <data name="TherapistClientRequest_ToastrAccepted_Message" xml:space="preserve">
+    <value>You may now make an appointment on the appointment page.</value>
+  </data>
+  <data name="TherapistClientRequest_ToastrRefused_Message" xml:space="preserve">
+    <value>The request has been sent back to the Administration Office.</value>
+  </data>
+  <data name="TherapistDashBoard_H1" xml:space="preserve">
+    <value>Dashboard</value>
+  </data>
+  <data name="TherapistDashBoard_SeeAll" xml:space="preserve">
+    <value>See all the appointments</value>
+  </data>
+  <data name="TherapistDashBoard_Title" xml:space="preserve">
+    <value>Dashboard</value>
+    <comment>Titre de la page dans l'onglet</comment>
+  </data>
+  <data name="TherapistList_H1" xml:space="preserve">
+    <value>List of therapists</value>
+  </data>
+  <data name="TherapistList_ModalDelete_Title" xml:space="preserve">
+    <value>Confirm deletion</value>
+  </data>
+  <data name="TherapistList_ModalRestore_Text" xml:space="preserve">
+    <value>Are you sure you want to restore{0}?</value>
+    <comment>{0} sera remplacé par le nom du thérapeute</comment>
+  </data>
+  <data name="TherapistList_ModalRestore_Title" xml:space="preserve">
+    <value>Confirm restoration</value>
+  </data>
+  <data name="TherapistList_Modal_Delete_Text" xml:space="preserve">
+    <value>Are you sure you want to delete{0}?</value>
+    <comment>{0} sera remplacé par le nom du thérapeute</comment>
+  </data>
+  <data name="TherapistList_Multiselect_NoAvailability" xml:space="preserve">
+    <value>No availability</value>
+  </data>
+  <data name="TherapistList_Multiselect_NoService" xml:space="preserve">
+    <value>No service</value>
+  </data>
+  <data name="TherapistList_Multiselect_SelectedAvailability" xml:space="preserve">
+    <value>{0} selected availabilities</value>
+  </data>
+  <data name="TherapistList_Multiselect_SelectedService" xml:space="preserve">
+    <value>{0} chosen services</value>
+  </data>
+  <data name="TherapistList_Title" xml:space="preserve">
+    <value>List of therapists</value>
+    <comment>Titre de la page dans l'onglet</comment>
+  </data>
+  <data name="_Global_ReseauPsy_Adresse" xml:space="preserve">
+    <value>6277, D'Iberville Street</value>
+  </data>
+  <data name="_Global_ReseauPsy_Adresse2" xml:space="preserve">
+    <value>Montreal, Quebec, H2G 2C5</value>
+  </data>
+  <data name="_Global_ReseauPsy_Name" xml:space="preserve">
+    <value>RéseauPsy Inc.</value>
+  </data>
+</root>

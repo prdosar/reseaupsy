@@ -1,0 +1,371 @@
+﻿@model ReseauPsy.ViewModel.Admin.DetailsAdminViewModel
+@using ReseauPsy.Resources
+@{
+    ViewBag.Title = Resource.AdminDetail_Title;
+}
+
+
+
+<div style="overflow: hidden; height: 0px; background: transparent;" data-description="dummyPanel for Chrome auto-fill issue">
+    <input type="text" id="email" style="height: 0; background: transparent; color: transparent; border: none;" data-description="dummyUsername" />
+    <input type="password" id="password" style="height: 0; background: transparent; color: transparent; border: none;" data-description="dummyPassword" />
+</div>
+
+
+<section id="page-admin-detail">
+
+    <div class="container">
+
+        <h1>@Resource.AdminDetail_H1</h1>
+
+        @if (Model.AdminId != null)
+        {
+            <div id="js-admin-list-no-result" class="row">
+                <div class="col-12">
+                    <div class="alert alert-info">
+                        @Resource.AdminDetail_LeavePasswordEmpty
+                    </div>
+                </div>
+            </div>
+        }
+
+
+        <div class="row">
+            @* Name *@
+            <div class="col-sm-6 form-group">
+                <label>@Global.AdministratorName</label>
+                <input type="text" id="js-detail-admin-name" class="form-control" value="@Model.AdminName" />
+            </div>
+
+            @* Email *@
+            <div class="col-sm-6 form-group">
+                <label>@Global.Email</label>
+                <input type="text" id="js-detail-admin-email" class="form-control" value="@Model.AdminEmail" />
+            </div>
+        </div>
+
+        <div class="row">
+
+            @* Password *@
+            <div class="col-sm-6 form-group">
+                <label>@Global.Password</label>
+                <input type="password" id="js-detail-admin-password" class="form-control" />
+            </div>
+
+            @* Confirm password *@
+            <div class="col-sm-6 form-group">
+                <label>@Global.PasswordConfirmation</label>
+                <input type="password" id="js-detail-admin-confirm-password" class="form-control" />
+            </div>
+        </div>
+
+
+
+        @* Error password no match *@
+        <div id="js-detail-admin-error-password-no-match" class="row d-none">
+            <div class="col-12">
+                <div class="alert alert-danger">@Global.PasswordCompare</div>
+            </div>
+        </div>
+
+        @* Error password required *@
+        <div id="js-detail-admin-error-password-required" class="row d-none">
+            <div class="col-12">
+                <div class="alert alert-danger">@Global.PasswordRequired</div>
+            </div>
+        </div>
+
+        @* Error not strong *@
+        <div id="js-detail-admin-error-password-not-strong" class="row d-none">
+            <div class="col-12">
+                <div class="alert alert-danger">
+                    @Global.PasswordStrong
+                    <ul>
+                        <li>@Global.PasswordStrong_Length</li>
+                        <li>@Global.PasswordStrong_Upper</li>
+                        <li>@Global.PasswordStrong_Lower</li>
+                        <li>@Global.PasswordStrong_Digit</li>
+                        <li>@Global.PasswordStrong_Special</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        @* Email already in use *@
+        <div id="js-detail-admin-error-email-used" class="row d-none">
+            <div class="col-12">
+                <div class="alert alert-danger">@Global.Email_AlreadyUsed</div>
+            </div>
+        </div>
+
+
+        <input type="hidden" id="js-detail-admin-id" value="@Model.AdminId" />
+
+        @* Buttons *@
+        <div class="row">
+
+            <div class="col-12 text-end">
+                <div class="form-group">
+                    @* Cancel *@
+                    <a href="@Url.Action("adminlist", "admin")" class="btn btn-secondary">@Global.Cancel</a>
+
+                    @* Save *@
+                    <div id="js-detail-admin-save" class="btn btn-primary">@Global.Save</div>
+                </div>
+            </div>
+
+        </div>
+
+
+
+    </div>
+
+</section>
+
+
+
+
+@section scripts
+{
+    <script>
+
+        $("#js-detail-admin-save").on("click", function () {
+            var adminId = $("#js-detail-admin-id").val()
+
+            if (adminId != "") {
+                EditAdmin()
+            }
+            else {
+                CreateAdmin()
+            }
+
+        })
+
+        //Function to modify admin profile
+        function EditAdmin() {
+
+            //Verify the fields
+            if (!VerifyDetailAdminFields())
+                return false
+
+            //Set all the elements
+            var adminId = $("#js-detail-admin-id").val()
+
+            var nameInput = $("#js-detail-admin-name")
+            var name = nameInput.val()
+
+            var emailInput = $("#js-detail-admin-email")
+            var email = emailInput.val()
+
+            var passwordInput = $("#js-detail-admin-password")
+            var password = passwordInput.val()
+
+
+            $.ajax({
+                type: "POST",
+                url: "/fr/admin/EditAdmin/",
+                data: `{"adminId":"${adminId}",
+                                        "name":"${name}",
+                                        "email":"${email}",
+                                        "password":"${password}"}`,
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+
+                    if (data.success == true) {
+                        nameInput.val("")
+                        emailInput.val("")
+                        passwordInput.val("")
+                        $("#js-detail-admin-confirm-password").val("")
+
+                        $("#js-detail-admin-error-password-no-match").addClass("d-none")
+                        $("#js-detail-admin-error-password-required").addClass("d-none")
+                        $("#js-detail-admin-error-password-not-strong").addClass("d-none")
+                        $("#js-detail-admin-error-email-used").addClass("d-none")
+
+                        toastr["success"]
+                            ("@Resource.AdminDetail_EditSuccess",
+                                "@Global.Success");
+                    }
+                    else if (data.error == "emailUsed") {
+                        $("#js-detail-admin-error-email-used").removeClass("d-none")
+                    }
+                    else {
+                        toastr["error"]
+                            ("@Resource.AdminDetail_EditError",
+                                "@Global.Error");
+                    }
+
+
+                },
+                error: function () {
+                    toastr["error"]
+                        ("@Resource.AdminDetail_EditError",
+                            "@Global.Error");
+                }
+            })
+
+        }
+
+        //Function to create an admin
+        function CreateAdmin() {
+            if (!VerifyDetailAdminFields(true))
+                return false
+
+            var nameInput = $("#js-detail-admin-name")
+            var name = nameInput.val()
+
+            var emailInput = $("#js-detail-admin-email")
+            var email = emailInput.val()
+
+            var passwordInput = $("#js-detail-admin-password")
+            var password = passwordInput.val()
+
+            $.ajax({
+                type: "POST",
+                url: "/fr/admin/CreateAdmin/",
+                data: `{"name":"${name}",
+                        "email":"${email}",
+                        "password":"${password}"}`,
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+
+                    if (data.result == 'Redirect')
+                        window.location = data.url;
+
+                    else if (data.error == "emailUsed") {
+                        $("#js-detail-admin-error-email-used").removeClass("d-none")
+                    }
+                    else {
+                        toastr["error"]
+                            ("@Resource.AdminDetail_CreateError",
+                                "@Global.Error");
+                    }
+
+
+                },
+                error: function () {
+                    toastr["error"]
+                        ("@Resource.AdminDetail_CreateError",
+                            "@Global.Error");
+                }
+            })
+
+
+
+
+        }
+
+        //Function to verify the fields
+        function VerifyDetailAdminFields(isCreate) {
+            var isPageValid = true;
+
+            //Name
+            var nameInput = $("#js-detail-admin-name")
+            var name = nameInput.val()
+            if (name.trim() == "") {
+                nameInput.addClass("input-validation-error")
+                isPageValid = false;
+            }
+
+            //Email
+            var emailInput = $("#js-detail-admin-email")
+            var email = emailInput.val()
+
+            if (email.trim() == "" || !VerifyFieldWithRegex(emailInput, email, /^(([^<>()[\]\\.,;:\s@@"]+(\.[^<>()[\]\\.,;:\s@@"]+)*)|(".+"))@@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)) {
+                emailInput.addClass("input-validation-error")
+                isPageValid = false;
+            }
+
+            //Passwords
+            var passwordInput = $("#js-detail-admin-password")
+            var password = passwordInput.val()
+            var confirmPasswordInput = $("#js-detail-admin-confirm-password")
+            var confirmPassword = confirmPasswordInput.val();
+
+
+            if (isCreate) {
+                //In create mode
+                if (password.trim() == "") {
+                    passwordInput.addClass("input-validation-error")
+
+                    $("#js-detail-admin-error-password-required").removeClass("d-none")
+                    isPageValid = false
+                }
+
+                if (!VerifyFieldWithRegex(passwordInput, password, new RegExp("(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})"))) {
+                    passwordInput.addClass("input-validation-error")
+                    $("#js-detail-admin-error-password-not-strong").removeClass("d-none")
+                    isPageValid = false
+                }
+
+
+                if (password != confirmPassword) {
+                    confirmPasswordInput.addClass("input-validation-error")
+                    $("#js-detail-admin-error-password-no-match").removeClass("d-none")
+                    isPageValid = false
+                }
+
+            }
+
+            else {
+                //In edit mode
+                if ((password == "" && confirmPassword.trim() != "") || (password != "" && confirmPassword.trim() == "")) {
+                    passwordInput.addClass("input-validation-error")
+                    confirmPasswordInput.addClass("input-validation-error")
+                    $("#js-detail-admin-error-password-no-match").removeClass("d-none")
+
+                    isPageValid = false
+                }
+                if (password != "" && !VerifyFieldWithRegex(passwordInput, password, new RegExp("(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})"))) {
+                    passwordInput.addClass("input-validation-error")
+                    $("#js-detail-admin-error-password-not-strong").removeClass("d-none")
+                    isPageValid = false
+                }
+                if (password != confirmPassword) {
+                    confirmPasswordInput.addClass("input-validation-error")
+
+                    $("#js-detail-admin-error-password-no-match").removeClass("d-none")
+
+                    isPageValid = false;
+                }
+            }
+
+            return isPageValid
+        }
+
+
+        //------------------ remove errors --------------------------
+        //Name
+        $("#js-detail-admin-name").on("change", function () {
+            GenericCheckDefaultFieldError($(this), $(this).val(), "")
+        })
+
+        //Email
+        $("#js-detail-admin-email").on("change", function () {
+            GenericCheckDefaultFieldError($(this), $(this).val(), "")
+            VerifyFieldWithRegex($(this), $(this).val(), /^(([^<>()[\]\\.,;:\s@@"]+(\.[^<>()[\]\\.,;:\s@@"]+)*)|(".+"))@@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
+        })
+
+        //Password
+        $("#js-detail-admin-password").on("change", function () {
+            $(this).removeClass("input-validation-error")
+            $("#js-detail-admin-confirm-password").removeClass("input-validation-error")
+            $("#js-detail-admin-error-password-no-match").addClass("d-none")
+            $("#js-detail-admin-error-password-required").addClass("d-none")
+
+        })
+
+        //Confirm Password
+        $("#js-detail-admin-confirm-password").on("change", function () {
+            $(this).removeClass("input-validation-error")
+            $("#js-detail-admin-password").removeClass("input-validation-error")
+            $("#js-detail-admin-error-password-no-match").addClass("d-none")
+            $("#js-detail-admin-error-password-required").addClass("d-none")
+        })
+
+
+
+
+
+    </script>
+}

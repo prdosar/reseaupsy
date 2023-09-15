@@ -1,0 +1,980 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ReseauPsyModelStoreContainer" CdmEntityContainer="ReseauPsyEntities">
+    <EntitySetMapping Name="Accreditations">
+      <EntityTypeMapping TypeName="ReseauPsyModel.Accreditation">
+        <MappingFragment StoreEntitySet="Accreditations">
+          <ScalarProperty Name="AccreditationEN" ColumnName="AccreditationEN" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Accreditation1" ColumnName="Accreditation" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Admins">
+      <EntityTypeMapping TypeName="ReseauPsyModel.Admin">
+        <MappingFragment StoreEntitySet="Admins">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="AspNetUsersId" ColumnName="AspNetUsersId" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AppointmentStatus">
+      <EntityTypeMapping TypeName="ReseauPsyModel.AppointmentStatu">
+        <MappingFragment StoreEntitySet="AppointmentStatus">
+          <ScalarProperty Name="StatusEN" ColumnName="StatusEN" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AreasOfPractices">
+      <EntityTypeMapping TypeName="ReseauPsyModel.AreasOfPractice">
+        <MappingFragment StoreEntitySet="AreasOfPractice">
+          <ScalarProperty Name="AreaOfPracticeEN" ColumnName="AreaOfPracticeEN" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="AreaOfPractice" ColumnName="AreaOfPractice" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetRoles">
+      <EntityTypeMapping TypeName="ReseauPsyModel.AspNetRole">
+        <MappingFragment StoreEntitySet="AspNetRoles">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUserClaims">
+      <EntityTypeMapping TypeName="ReseauPsyModel.AspNetUserClaim">
+        <MappingFragment StoreEntitySet="AspNetUserClaims">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+          <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUserLogins">
+      <EntityTypeMapping TypeName="ReseauPsyModel.AspNetUserLogin">
+        <MappingFragment StoreEntitySet="AspNetUserLogins">
+          <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+          <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUsers">
+      <EntityTypeMapping TypeName="ReseauPsyModel.AspNetUser">
+        <MappingFragment StoreEntitySet="AspNetUsers">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+          <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+          <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+          <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+          <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+          <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+          <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClientConsultationTypes">
+      <EntityTypeMapping TypeName="ReseauPsyModel.ClientConsultationType">
+        <MappingFragment StoreEntitySet="ClientConsultationTypes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+          <ScalarProperty Name="ConsultationTypeId" ColumnName="ConsultationTypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClientsAgeRanges">
+      <EntityTypeMapping TypeName="ReseauPsyModel.ClientsAgeRange">
+        <MappingFragment StoreEntitySet="ClientsAgeRange">
+          <ScalarProperty Name="ClientAgeRangeEN" ColumnName="ClientAgeRangeEN" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ClientAgeRange" ColumnName="ClientAgeRange" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClientTypes">
+      <EntityTypeMapping TypeName="ReseauPsyModel.ClientType">
+        <MappingFragment StoreEntitySet="ClientTypes">
+          <ScalarProperty Name="ClientTypeEN" ColumnName="ClientTypeEN" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ClientType1" ColumnName="ClientType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ConsultationReasons">
+      <EntityTypeMapping TypeName="ReseauPsyModel.ConsultationReason">
+        <MappingFragment StoreEntitySet="ConsultationReasons">
+          <ScalarProperty Name="ConsultationReasonEN" ColumnName="ConsultationReasonEN" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ConsultationReason1" ColumnName="ConsultationReason" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ConsultationTypes">
+      <EntityTypeMapping TypeName="ReseauPsyModel.ConsultationType">
+        <MappingFragment StoreEntitySet="ConsultationTypes">
+          <ScalarProperty Name="ConsultationTypeEN" ColumnName="ConsultationTypeEN" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ConsultationType1" ColumnName="ConsultationType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DayOfTheWeek_PeriodOfTheDay">
+      <EntityTypeMapping TypeName="ReseauPsyModel.DayOfTheWeek_PeriodOfTheDay">
+        <MappingFragment StoreEntitySet="DayOfTheWeek_PeriodOfTheDay">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DaysOfTheWeekId" ColumnName="DaysOfTheWeekId" />
+          <ScalarProperty Name="PeriodsOfTheDayId" ColumnName="PeriodsOfTheDayId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DaysOfTheWeeks">
+      <EntityTypeMapping TypeName="ReseauPsyModel.DaysOfTheWeek">
+        <MappingFragment StoreEntitySet="DaysOfTheWeek">
+          <ScalarProperty Name="DayOfTheWeekEN" ColumnName="DayOfTheWeekEN" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DayOfTheWeek" ColumnName="DayOfTheWeek" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ExternalAssociationClientSentStatus">
+      <EntityTypeMapping TypeName="ReseauPsyModel.ExternalAssociationClientSentStatu">
+        <MappingFragment StoreEntitySet="ExternalAssociationClientSentStatus">
+          <ScalarProperty Name="StatusEN" ColumnName="StatusEN" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ExternalAssociationClientsSents">
+      <EntityTypeMapping TypeName="ReseauPsyModel.ExternalAssociationClientsSent">
+        <MappingFragment StoreEntitySet="ExternalAssociationClientsSent">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ExternalAssociationId" ColumnName="ExternalAssociationId" />
+          <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+          <ScalarProperty Name="ExternalAssociationClientSentStatusId" ColumnName="ExternalAssociationClientSentStatusId" />
+          <ScalarProperty Name="SentToAssociationDate" ColumnName="SentToAssociationDate" />
+          <ScalarProperty Name="StatusChangedDate" ColumnName="StatusChangedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ExternalAssociations">
+      <EntityTypeMapping TypeName="ReseauPsyModel.ExternalAssociation">
+        <MappingFragment StoreEntitySet="ExternalAssociations">
+          <ScalarProperty Name="LanguageId" ColumnName="LanguageId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Genders">
+      <EntityTypeMapping TypeName="ReseauPsyModel.Gender">
+        <MappingFragment StoreEntitySet="Genders">
+          <ScalarProperty Name="GenderEN" ColumnName="GenderEN" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Gender1" ColumnName="Gender" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Languages">
+      <EntityTypeMapping TypeName="ReseauPsyModel.Language">
+        <MappingFragment StoreEntitySet="Languages">
+          <ScalarProperty Name="LanguageEN" ColumnName="LanguageEN" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Language1" ColumnName="Language" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NatureActs">
+      <EntityTypeMapping TypeName="ReseauPsyModel.NatureAct">
+        <MappingFragment StoreEntitySet="NatureActs">
+          <ScalarProperty Name="NatureActEN" ColumnName="NatureActEN" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="NatureAct1" ColumnName="NatureAct" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OfferedService_OfferedServiceType">
+      <EntityTypeMapping TypeName="ReseauPsyModel.OfferedService_OfferedServiceType">
+        <MappingFragment StoreEntitySet="OfferedService_OfferedServiceType">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="OfferedServiceId" ColumnName="OfferedServiceId" />
+          <ScalarProperty Name="OfferedServiceTypeId" ColumnName="OfferedServiceTypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OfferedServices">
+      <EntityTypeMapping TypeName="ReseauPsyModel.OfferedService">
+        <MappingFragment StoreEntitySet="OfferedServices">
+          <ScalarProperty Name="OfferedServiceEN" ColumnName="OfferedServiceEN" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="OfferedService1" ColumnName="OfferedService" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OfferedServiceTypes">
+      <EntityTypeMapping TypeName="ReseauPsyModel.OfferedServiceType">
+        <MappingFragment StoreEntitySet="OfferedServiceTypes">
+          <ScalarProperty Name="ServiceTypeEN" ColumnName="ServiceTypeEN" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ServiceType" ColumnName="ServiceType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PeriodsOfTheDays">
+      <EntityTypeMapping TypeName="ReseauPsyModel.PeriodsOfTheDay">
+        <MappingFragment StoreEntitySet="PeriodsOfTheDay">
+          <ScalarProperty Name="PeriodOfTheDayEN" ColumnName="PeriodOfTheDayEN" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="PeriodOfTheDay" ColumnName="PeriodOfTheDay" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProfessionalTitles">
+      <EntityTypeMapping TypeName="ReseauPsyModel.ProfessionalTitle">
+        <MappingFragment StoreEntitySet="ProfessionalTitles">
+          <ScalarProperty Name="SecteurEN" ColumnName="SecteurEN" />
+          <ScalarProperty Name="Secteur" ColumnName="Secteur" />
+          <ScalarProperty Name="ProfessionalTitleEN" ColumnName="ProfessionalTitleEN" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ProfessionalTitle1" ColumnName="ProfessionalTitle" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ReasonsDeleteClientAppointments">
+      <EntityTypeMapping TypeName="ReseauPsyModel.ReasonsDeleteClientAppointment">
+        <MappingFragment StoreEntitySet="ReasonsDeleteClientAppointment">
+          <ScalarProperty Name="ReasonEN" ColumnName="ReasonEN" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Reason" ColumnName="Reason" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ReasonsDeleteClientRequests">
+      <EntityTypeMapping TypeName="ReseauPsyModel.ReasonsDeleteClientRequest">
+        <MappingFragment StoreEntitySet="ReasonsDeleteClientRequest">
+          <ScalarProperty Name="ReasonEN" ColumnName="ReasonEN" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Reason" ColumnName="Reason" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Regions">
+      <EntityTypeMapping TypeName="ReseauPsyModel.Region">
+        <MappingFragment StoreEntitySet="Regions">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Region1" ColumnName="Region" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SpecificSkills">
+      <EntityTypeMapping TypeName="ReseauPsyModel.SpecificSkill">
+        <MappingFragment StoreEntitySet="SpecificSkills">
+          <ScalarProperty Name="SpecificSkillEN" ColumnName="SpecificSkillEN" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="SpecificSkill1" ColumnName="SpecificSkill" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TheoreticalOrientations">
+      <EntityTypeMapping TypeName="ReseauPsyModel.TheoreticalOrientation">
+        <MappingFragment StoreEntitySet="TheoreticalOrientations">
+          <ScalarProperty Name="TheoreticalOrientationEN" ColumnName="TheoreticalOrientationEN" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TheoreticalOrientation1" ColumnName="TheoreticalOrientation" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TherapistAreaOfPractices">
+      <EntityTypeMapping TypeName="ReseauPsyModel.TherapistAreaOfPractice">
+        <MappingFragment StoreEntitySet="TherapistAreaOfPractice">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TherapistId" ColumnName="TherapistId" />
+          <ScalarProperty Name="AreaOfPracticeId" ColumnName="AreaOfPracticeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TherapistAssociationAndProfessionalOrders">
+      <EntityTypeMapping TypeName="ReseauPsyModel.TherapistAssociationAndProfessionalOrder">
+        <MappingFragment StoreEntitySet="TherapistAssociationAndProfessionalOrder">
+          <ScalarProperty Name="DeleteDate" ColumnName="DeleteDate" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TherapistId" ColumnName="TherapistId" />
+          <ScalarProperty Name="AssociationName" ColumnName="AssociationName" />
+          <ScalarProperty Name="AssociationNumber" ColumnName="AssociationNumber" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TherapistAvailabilities">
+      <EntityTypeMapping TypeName="ReseauPsyModel.TherapistAvailability">
+        <MappingFragment StoreEntitySet="TherapistAvailability">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TherapistId" ColumnName="TherapistId" />
+          <ScalarProperty Name="DayOfTheWeek_PeriodOfTheDay_Id" ColumnName="DayOfTheWeek_PeriodOfTheDay_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TherapistClientAgeRanges">
+      <EntityTypeMapping TypeName="ReseauPsyModel.TherapistClientAgeRange">
+        <MappingFragment StoreEntitySet="TherapistClientAgeRange">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TherapistId" ColumnName="TherapistId" />
+          <ScalarProperty Name="ClientAgeRangeId" ColumnName="ClientAgeRangeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TherapistClientTypes">
+      <EntityTypeMapping TypeName="ReseauPsyModel.TherapistClientType">
+        <MappingFragment StoreEntitySet="TherapistClientType">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TherapistId" ColumnName="TherapistId" />
+          <ScalarProperty Name="ClientTypeId" ColumnName="ClientTypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TherapistConsultationTypes">
+      <EntityTypeMapping TypeName="ReseauPsyModel.TherapistConsultationType">
+        <MappingFragment StoreEntitySet="TherapistConsultationType">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TherapistId" ColumnName="TherapistId" />
+          <ScalarProperty Name="ConsultationTypeId" ColumnName="ConsultationTypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TherapistLanguages">
+      <EntityTypeMapping TypeName="ReseauPsyModel.TherapistLanguage">
+        <MappingFragment StoreEntitySet="TherapistLanguage">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TherapistId" ColumnName="TherapistId" />
+          <ScalarProperty Name="LanguageId" ColumnName="LanguageId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TherapistOfferedServices">
+      <EntityTypeMapping TypeName="ReseauPsyModel.TherapistOfferedService">
+        <MappingFragment StoreEntitySet="TherapistOfferedService">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TherapistId" ColumnName="TherapistId" />
+          <ScalarProperty Name="OfferedService_OfferedServiceTypeId" ColumnName="OfferedService_OfferedServiceTypeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TherapistProfessionalTitles">
+      <EntityTypeMapping TypeName="ReseauPsyModel.TherapistProfessionalTitle">
+        <MappingFragment StoreEntitySet="TherapistProfessionalTitle">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TherapistId" ColumnName="TherapistId" />
+          <ScalarProperty Name="ProfessionalTitleId" ColumnName="ProfessionalTitleId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TherapistSpecificSkills">
+      <EntityTypeMapping TypeName="ReseauPsyModel.TherapistSpecificSkill">
+        <MappingFragment StoreEntitySet="TherapistSpecificSkill">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TherapistId" ColumnName="TherapistId" />
+          <ScalarProperty Name="SpecificSkillId" ColumnName="SpecificSkillId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TherapistTheoreticalOrientations">
+      <EntityTypeMapping TypeName="ReseauPsyModel.TherapistTheoreticalOrientation">
+        <MappingFragment StoreEntitySet="TherapistTheoreticalOrientation">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TherapistId" ColumnName="TherapistId" />
+          <ScalarProperty Name="TheoreticalOrientationId" ColumnName="TheoreticalOrientationId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="AspNetUserRoles" TypeName="ReseauPsyModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+      <EndProperty Name="AspNetRoles">
+        <ScalarProperty Name="Id" ColumnName="RoleId" />
+      </EndProperty>
+      <EndProperty Name="AspNetUsers">
+        <ScalarProperty Name="Id" ColumnName="UserId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <EntitySetMapping Name="ClientAvailabilities">
+      <EntityTypeMapping TypeName="ReseauPsyModel.ClientAvailability">
+        <MappingFragment StoreEntitySet="ClientAvailabilities">
+          <ScalarProperty Name="DayOfTheWeek_PeriodOfTheDay_Id" ColumnName="DayOfTheWeek_PeriodOfTheDay_Id" />
+          <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="GetListTherapistForClientRequestPage" FunctionName="ReseauPsyModel.Store.GetListTherapistForClientRequestPage">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ReseauPsyModel.GetListTherapistForClientRequestPage_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="TherapistAvailabilities" ColumnName="TherapistAvailabilities" />
+          <ScalarProperty Name="NbRequest" ColumnName="NbRequest" />
+          <ScalarProperty Name="IsMatch" ColumnName="IsMatch" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetListClientRequestWaitingForTherapist" FunctionName="ReseauPsyModel.Store.GetListClientRequestWaitingForTherapist">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ReseauPsyModel.GetListClientRequestWaitingForTherapist_Result">
+          <ScalarProperty Name="RequestId" ColumnName="RequestId" />
+          <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+          <ScalarProperty Name="RequestSentDate" ColumnName="RequestSentDate" />
+          <ScalarProperty Name="Region" ColumnName="Region" />
+          <ScalarProperty Name="ConsultationReason" ColumnName="ConsultationReason" />
+          <ScalarProperty Name="Message" ColumnName="Message" />
+          <ScalarProperty Name="AdditionalMessageFromAdmin" ColumnName="AdditionalMessageFromAdmin" />
+          <ScalarProperty Name="ClientName" ColumnName="ClientName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetClientSentToExternalAssociation" FunctionName="ReseauPsyModel.Store.GetClientSentToExternalAssociation">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ReseauPsyModel.GetClientSentToExternalAssociation_Result">
+          <ScalarProperty Name="ExternalAssociationClientSentId" ColumnName="ExternalAssociationClientSentId" />
+          <ScalarProperty Name="AssociationName" ColumnName="AssociationName" />
+          <ScalarProperty Name="SentToAssociationDate" ColumnName="SentToAssociationDate" />
+          <ScalarProperty Name="StatusChangedDate" ColumnName="StatusChangedDate" />
+          <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+          <ScalarProperty Name="ClientName" ColumnName="ClientName" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetClientSentToExternalAssociationCount" FunctionName="ReseauPsyModel.Store.GetClientSentToExternalAssociationCount">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ReseauPsyModel.GetClientSentToExternalAssociationCount_Result">
+          <ScalarProperty Name="TotalResult" ColumnName="TotalResult" />
+          <ScalarProperty Name="NotDefinedCount" ColumnName="NotDefinedCount" />
+          <ScalarProperty Name="TookInChargeCount" ColumnName="TookInChargeCount" />
+          <ScalarProperty Name="NotTookInChargeCount" ColumnName="NotTookInChargeCount" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetListAdmin" FunctionName="ReseauPsyModel.Store.GetListAdmin">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ReseauPsyModel.GetListAdmin_Result">
+          <ScalarProperty Name="AdminId" ColumnName="AdminId" />
+          <ScalarProperty Name="AdminName" ColumnName="AdminName" />
+          <ScalarProperty Name="AdminEmail" ColumnName="AdminEmail" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetListAdminCount" FunctionName="ReseauPsyModel.Store.GetListAdminCount" />
+    <FunctionImportMapping FunctionImportName="GetTherapistListForAdmin" FunctionName="ReseauPsyModel.Store.GetTherapistListForAdmin">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ReseauPsyModel.GetTherapistListForAdmin_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="MaxWeeklyRequest" ColumnName="MaxWeeklyRequest" />
+          <ScalarProperty Name="Region" ColumnName="Region" />
+          <ScalarProperty Name="Accreditation" ColumnName="Accreditation" />
+          <ScalarProperty Name="CurrentWeeklyRequestSent" ColumnName="CurrentWeeklyRequestSent" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetTherapistListForAdminCount" FunctionName="ReseauPsyModel.Store.GetTherapistListForAdminCount" />
+    <FunctionImportMapping FunctionImportName="GetListClientForClientRequestPage" FunctionName="ReseauPsyModel.Store.GetListClientForClientRequestPage">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ReseauPsyModel.GetListClientForClientRequestPage_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="RequestDate" ColumnName="RequestDate" />
+          <ScalarProperty Name="Region" ColumnName="Region" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+          <ScalarProperty Name="Message" ColumnName="Message" />
+          <ScalarProperty Name="DeletedAdditionalNotes" ColumnName="DeletedAdditionalNotes" />
+          <ScalarProperty Name="RegionId" ColumnName="RegionId" />
+          <ScalarProperty Name="consultationReason" ColumnName="consultationReason" />
+          <ScalarProperty Name="DeleteReason" ColumnName="DeleteReason" />
+          <ScalarProperty Name="RequestStatus" ColumnName="RequestStatus" />
+          <ScalarProperty Name="LastTherapistMessage" ColumnName="LastTherapistMessage" />
+          <ScalarProperty Name="RefusedCount" ColumnName="RefusedCount" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetListClientForClientRequestPageCount" FunctionName="ReseauPsyModel.Store.GetListClientForClientRequestPageCount" />
+    <EntitySetMapping Name="ClientAppointmentRepetitions">
+      <EntityTypeMapping TypeName="ReseauPsyModel.ClientAppointmentRepetition">
+        <MappingFragment StoreEntitySet="ClientAppointmentRepetition">
+          <ScalarProperty Name="ReferenceDate" ColumnName="ReferenceDate" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="GetListAppointmentForAdmin" FunctionName="ReseauPsyModel.Store.GetListAppointmentForAdmin">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ReseauPsyModel.GetListAppointmentForAdmin_Result">
+          <ScalarProperty Name="TherapistName" ColumnName="TherapistName" />
+          <ScalarProperty Name="StartDateTime" ColumnName="StartDateTime" />
+          <ScalarProperty Name="ClientName" ColumnName="ClientName" />
+          <ScalarProperty Name="AppointmentStatus" ColumnName="AppointmentStatus" />
+          <ScalarProperty Name="AppointmentReclamationStatus" ColumnName="AppointmentReclamationStatus" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetListAppointmentForAdminCount" FunctionName="ReseauPsyModel.Store.GetListAppointmentForAdminCount">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ReseauPsyModel.GetListAppointmentForAdminCount_Result">
+          <ScalarProperty Name="TotalResult" ColumnName="TotalResult" />
+          <ScalarProperty Name="TotalNotClaimed" ColumnName="TotalNotClaimed" />
+          <ScalarProperty Name="TotalClaimed" ColumnName="TotalClaimed" />
+          <ScalarProperty Name="TotalPayed" ColumnName="TotalPayed" />
+          <ScalarProperty Name="TotalForthcoming" ColumnName="TotalForthcoming" />
+          <ScalarProperty Name="TotalCompleted" ColumnName="TotalCompleted" />
+          <ScalarProperty Name="TotalCanceledWithCharge" ColumnName="TotalCanceledWithCharge" />
+          <ScalarProperty Name="TotalCanceledWithoutCharge" ColumnName="TotalCanceledWithoutCharge" />
+          <ScalarProperty Name="TotalPresenceToConfirm" ColumnName="TotalPresenceToConfirm" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetListClientToConfirmPresence" FunctionName="ReseauPsyModel.Store.GetListClientToConfirmPresence">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ReseauPsyModel.GetListClientToConfirmPresence_Result">
+          <ScalarProperty Name="AppointmentId" ColumnName="AppointmentId" />
+          <ScalarProperty Name="ClientName" ColumnName="ClientName" />
+          <ScalarProperty Name="AppointmentDateTime" ColumnName="AppointmentDateTime" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetListTherapistBillSentCount" FunctionName="ReseauPsyModel.Store.GetListTherapistBillSentCount" />
+    <FunctionImportMapping FunctionImportName="GetListTherapistBillSent" FunctionName="ReseauPsyModel.Store.GetListTherapistBillSent">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ReseauPsyModel.GetListTherapistBillSent_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DateSend" ColumnName="DateSend" />
+          <ScalarProperty Name="BillNumber" ColumnName="BillNumber" />
+          <ScalarProperty Name="Subtotal" ColumnName="Subtotal" />
+          <ScalarProperty Name="TpsAmount" ColumnName="TpsAmount" />
+          <ScalarProperty Name="TvqAmount" ColumnName="TvqAmount" />
+          <ScalarProperty Name="PaymentStatus" ColumnName="PaymentStatus" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="Taxes">
+      <EntityTypeMapping TypeName="ReseauPsyModel.Tax">
+        <MappingFragment StoreEntitySet="Taxes">
+          <ScalarProperty Name="ChangedDate" ColumnName="ChangedDate" />
+          <ScalarProperty Name="TvqDecimal" ColumnName="TvqDecimal" />
+          <ScalarProperty Name="TpsDecimal" ColumnName="TpsDecimal" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClientPaymentInfos">
+      <EntityTypeMapping TypeName="ReseauPsyModel.ClientPaymentInfo">
+        <MappingFragment StoreEntitySet="ClientPaymentInfos">
+          <ScalarProperty Name="ResponseBody" ColumnName="ResponseBody" />
+          <ScalarProperty Name="DidSucceed" ColumnName="DidSucceed" />
+          <ScalarProperty Name="CvvResponse" ColumnName="CvvResponse" />
+          <ScalarProperty Name="AvsResponse" ColumnName="AvsResponse" />
+          <ScalarProperty Name="TransactionDateTime" ColumnName="TransactionDateTime" />
+          <ScalarProperty Name="ApprovalCode" ColumnName="ApprovalCode" />
+          <ScalarProperty Name="ResponseText" ColumnName="ResponseText" />
+          <ScalarProperty Name="ResponseCode" ColumnName="ResponseCode" />
+          <ScalarProperty Name="UniqueRef" ColumnName="UniqueRef" />
+          <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+          <ScalarProperty Name="ClientAppointmentId" ColumnName="ClientAppointmentId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ResetPasswords">
+      <EntityTypeMapping TypeName="ReseauPsyModel.ResetPassword">
+        <MappingFragment StoreEntitySet="ResetPassword">
+          <ScalarProperty Name="IsUsed" ColumnName="IsUsed" />
+          <ScalarProperty Name="LinkExpirationDate" ColumnName="LinkExpirationDate" />
+          <ScalarProperty Name="RequestDate" ColumnName="RequestDate" />
+          <ScalarProperty Name="ResetUrl" ColumnName="ResetUrl" />
+          <ScalarProperty Name="AspnetId" ColumnName="AspnetId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="GetListIncommingAppointmentTherapist" FunctionName="ReseauPsyModel.Store.GetListIncommingAppointmentTherapist">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ReseauPsyModel.GetListIncommingAppointmentTherapist_Result">
+          <ScalarProperty Name="ClientName" ColumnName="ClientName" />
+          <ScalarProperty Name="AppointmentDate" ColumnName="AppointmentDate" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetListClientReceiptCount" FunctionName="ReseauPsyModel.Store.GetListClientReceiptCount" />
+    <FunctionImportMapping FunctionImportName="GetListTherapistBillForAdmin" FunctionName="ReseauPsyModel.Store.GetListTherapistBillForAdmin">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ReseauPsyModel.GetListTherapistBillForAdmin_Result">
+          <ScalarProperty Name="TherapistBillId" ColumnName="TherapistBillId" />
+          <ScalarProperty Name="TherapistName" ColumnName="TherapistName" />
+          <ScalarProperty Name="BillSentDate" ColumnName="BillSentDate" />
+          <ScalarProperty Name="BillNumber" ColumnName="BillNumber" />
+          <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+          <ScalarProperty Name="BillTotalAmount" ColumnName="BillTotalAmount" />
+          <ScalarProperty Name="IsPayed" ColumnName="IsPayed" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetListTherapistBillForAdminCount" FunctionName="ReseauPsyModel.Store.GetListTherapistBillForAdminCount" />
+    <FunctionImportMapping FunctionImportName="GetListTherapistBillPaymentForAdminExcel" FunctionName="ReseauPsyModel.Store.GetListTherapistBillPaymentForAdminExcel">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ReseauPsyModel.GetListTherapistBillPaymentForAdminExcel_Result">
+          <ScalarProperty Name="BillId" ColumnName="BillId" />
+          <ScalarProperty Name="TherapistName" ColumnName="TherapistName" />
+          <ScalarProperty Name="BillNumber" ColumnName="BillNumber" />
+          <ScalarProperty Name="SubTotal" ColumnName="SubTotal" />
+          <ScalarProperty Name="TpsAmount" ColumnName="TpsAmount" />
+          <ScalarProperty Name="TvqAmount" ColumnName="TvqAmount" />
+          <ScalarProperty Name="TpsNumber" ColumnName="TpsNumber" />
+          <ScalarProperty Name="TvqNumber" ColumnName="TvqNumber" />
+          <ScalarProperty Name="BillSendDate" ColumnName="BillSendDate" />
+          <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetListTherapistBillSentForAdminExcel" FunctionName="ReseauPsyModel.Store.GetListTherapistBillSentForAdminExcel">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ReseauPsyModel.GetListTherapistBillSentForAdminExcel_Result">
+          <ScalarProperty Name="BillId" ColumnName="BillId" />
+          <ScalarProperty Name="TherapistName" ColumnName="TherapistName" />
+          <ScalarProperty Name="BillNumber" ColumnName="BillNumber" />
+          <ScalarProperty Name="SubTotal" ColumnName="SubTotal" />
+          <ScalarProperty Name="TpsAmount" ColumnName="TpsAmount" />
+          <ScalarProperty Name="TvqAmount" ColumnName="TvqAmount" />
+          <ScalarProperty Name="TpsNumber" ColumnName="TpsNumber" />
+          <ScalarProperty Name="TvqNumber" ColumnName="TvqNumber" />
+          <ScalarProperty Name="BillSendDate" ColumnName="BillSendDate" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="VerifiyIfTherapistInscriptionCompleted" FunctionName="ReseauPsyModel.Store.VerifiyIfTherapistInscriptionCompleted">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ReseauPsyModel.VerifiyIfTherapistInscriptionCompleted_Result">
+          <ScalarProperty Name="IsInscriptionCompleted" ColumnName="IsInscriptionCompleted" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetCancelationCountByCancelationReason" FunctionName="ReseauPsyModel.Store.GetCancelationCountByCancelationReason">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ReseauPsyModel.GetCancelationCountByCancelationReason_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="NbCancelation" ColumnName="NbCancelation" />
+          <ScalarProperty Name="Reason" ColumnName="Reason" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetTherapistClosingRates" FunctionName="ReseauPsyModel.Store.GetTherapistClosingRates">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ReseauPsyModel.GetTherapistClosingRates_Result">
+          <ScalarProperty Name="TherapistId" ColumnName="TherapistId" />
+          <ScalarProperty Name="TherapistName" ColumnName="TherapistName" />
+          <ScalarProperty Name="TotalSent" ColumnName="TotalSent" />
+          <ScalarProperty Name="Accepted" ColumnName="Accepted" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetInfosAdminDashboard" FunctionName="ReseauPsyModel.Store.GetInfosAdminDashboard">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ReseauPsyModel.GetInfosAdminDashboard_Result">
+          <ScalarProperty Name="RequestToDo" ColumnName="RequestToDo" />
+          <ScalarProperty Name="CurrentAppointmentCount" ColumnName="CurrentAppointmentCount" />
+          <ScalarProperty Name="BillToPayCount" ColumnName="BillToPayCount" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="ClientLanguages">
+      <EntityTypeMapping TypeName="ReseauPsyModel.ClientLanguage">
+        <MappingFragment StoreEntitySet="ClientLanguage">
+          <ScalarProperty Name="LanguageId" ColumnName="LanguageId" />
+          <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="GetListClientAppointmentNotPayed" FunctionName="ReseauPsyModel.Store.GetListClientAppointmentNotPayed">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ReseauPsyModel.GetListClientAppointmentNotPayed_Result">
+          <ScalarProperty Name="AppointmentId" ColumnName="AppointmentId" />
+          <ScalarProperty Name="AppointmentDate" ColumnName="AppointmentDate" />
+          <ScalarProperty Name="ClientName" ColumnName="ClientName" />
+          <ScalarProperty Name="TotalDollarAmount" ColumnName="TotalDollarAmount" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="Therapists">
+      <EntityTypeMapping TypeName="ReseauPsyModel.Therapist">
+        <MappingFragment StoreEntitySet="Therapists">
+          <ScalarProperty Name="AspNetUserId" ColumnName="AspNetUserId" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="AdminNotes" ColumnName="AdminNotes" />
+          <ScalarProperty Name="MaxWeeklyRequest" ColumnName="MaxWeeklyRequest" />
+          <ScalarProperty Name="HiringDate" ColumnName="HiringDate" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TherapistInfo">
+      <EntityTypeMapping TypeName="ReseauPsyModel.TherapistInfo">
+        <MappingFragment StoreEntitySet="TherapistInfo">
+          <ScalarProperty Name="TvqNumber" ColumnName="TvqNumber" />
+          <ScalarProperty Name="TpsNumber" ColumnName="TpsNumber" />
+          <ScalarProperty Name="ModificationDate" ColumnName="ModificationDate" />
+          <ScalarProperty Name="IsInterestedForFormation" ColumnName="IsInterestedForFormation" />
+          <ScalarProperty Name="TakeClientFromThirdPartyPayer" ColumnName="TakeClientFromThirdPartyPayer" />
+          <ScalarProperty Name="TakeClientFromAssuranceCompany" ColumnName="TakeClientFromAssuranceCompany" />
+          <ScalarProperty Name="CertificationAndSpecialities" ColumnName="CertificationAndSpecialities" />
+          <ScalarProperty Name="OpqNumber" ColumnName="OpqNumber" />
+          <ScalarProperty Name="AccreditationId" ColumnName="AccreditationId" />
+          <ScalarProperty Name="RegionId" ColumnName="RegionId" />
+          <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Adress" ColumnName="Adress" />
+          <ScalarProperty Name="GenderId" ColumnName="GenderId" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="TherapistId" ColumnName="TherapistId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ReseauPsyInfo">
+      <EntityTypeMapping TypeName="ReseauPsyModel.ReseauPsyInfo">
+        <MappingFragment StoreEntitySet="ReseauPsyInfo">
+          <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+          <ScalarProperty Name="RegionAbbreviation" ColumnName="RegionAbbreviation" />
+          <ScalarProperty Name="Region" ColumnName="Region" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="TvqNumber" ColumnName="TvqNumber" />
+          <ScalarProperty Name="TpsNumber" ColumnName="TpsNumber" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="Adress" ColumnName="Adress" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClientInfo">
+      <EntityTypeMapping TypeName="ReseauPsyModel.ClientInfo">
+        <MappingFragment StoreEntitySet="ClientInfo">
+          <ScalarProperty Name="GenderId" ColumnName="GenderId" />
+          <ScalarProperty Name="ClientHourlyCost" ColumnName="ClientHourlyCost" />
+          <ScalarProperty Name="TherapistHourlyWage" ColumnName="TherapistHourlyWage" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="RegionId" ColumnName="RegionId" />
+          <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="GetClientListForAdminClientListPage" FunctionName="ReseauPsyModel.Store.GetClientListForAdminClientListPage">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ReseauPsyModel.GetClientListForAdminClientListPage_Result">
+          <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+          <ScalarProperty Name="ClientName" ColumnName="ClientName" />
+          <ScalarProperty Name="TherapistName" ColumnName="TherapistName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetClientListForAdminClientListPageCount" FunctionName="ReseauPsyModel.Store.GetClientListForAdminClientListPageCount" />
+    <FunctionImportMapping FunctionImportName="GetClientListForTherapistClientListPage" FunctionName="ReseauPsyModel.Store.GetClientListForTherapistClientListPage">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ReseauPsyModel.GetClientListForTherapistClientListPage_Result">
+          <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+          <ScalarProperty Name="IsExternalClient" ColumnName="IsExternalClient" />
+          <ScalarProperty Name="ClientName" ColumnName="ClientName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetClientListForTherapistClientListPageCount" FunctionName="ReseauPsyModel.Store.GetClientListForTherapistClientListPageCount" />
+    <EntitySetMapping Name="ExternalClientFee">
+      <EntityTypeMapping TypeName="ReseauPsyModel.ExternalClientFee">
+        <MappingFragment StoreEntitySet="ExternalClientFee">
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="ExternalClientFixedFee" ColumnName="ExternalClientFixedFee" />
+          <ScalarProperty Name="ExternalClientPercentageFeeDecimal" ColumnName="ExternalClientPercentageFeeDecimal" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="GetListClientsForTherapistAppointment" FunctionName="ReseauPsyModel.Store.GetListClientsForTherapistAppointment">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ReseauPsyModel.GetListClientsForTherapistAppointment_Result">
+          <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+          <ScalarProperty Name="ClientMessage" ColumnName="ClientMessage" />
+          <ScalarProperty Name="ClientRequestDate" ColumnName="ClientRequestDate" />
+          <ScalarProperty Name="IsExternalClient" ColumnName="IsExternalClient" />
+          <ScalarProperty Name="ClientEmail" ColumnName="ClientEmail" />
+          <ScalarProperty Name="ClientPhone" ColumnName="ClientPhone" />
+          <ScalarProperty Name="Region" ColumnName="Region" />
+          <ScalarProperty Name="ClientCity" ColumnName="ClientCity" />
+          <ScalarProperty Name="ClientPostalCode" ColumnName="ClientPostalCode" />
+          <ScalarProperty Name="ClientName" ColumnName="ClientName" />
+          <ScalarProperty Name="ClientConsultationReason" ColumnName="ClientConsultationReason" />
+          <ScalarProperty Name="IsClientAlreadyScheduled" ColumnName="IsClientAlreadyScheduled" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="Clients">
+      <EntityTypeMapping TypeName="ReseauPsyModel.Clients">
+        <MappingFragment StoreEntitySet="Clients">
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="DeletedAdditionalNotes" ColumnName="DeletedAdditionalNotes" />
+          <ScalarProperty Name="ReasonDeleteClientRequestId" ColumnName="ReasonDeleteClientRequestId" />
+          <ScalarProperty Name="ExternalAssociationId" ColumnName="ExternalAssociationId" />
+          <ScalarProperty Name="IsExternalClient" ColumnName="IsExternalClient" />
+          <ScalarProperty Name="RequestDate" ColumnName="RequestDate" />
+          <ScalarProperty Name="Message" ColumnName="Message" />
+          <ScalarProperty Name="ClientAgeRangeId" ColumnName="ClientAgeRangeId" />
+          <ScalarProperty Name="ConsultationReasonId" ColumnName="ConsultationReasonId" />
+          <ScalarProperty Name="LanguageId" ColumnName="LanguageId" />
+          <ScalarProperty Name="TherapistId" ColumnName="TherapistId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TherapistClientRequest">
+      <EntityTypeMapping TypeName="ReseauPsyModel.TherapistClientRequest">
+        <MappingFragment StoreEntitySet="TherapistClientRequest">
+          <ScalarProperty Name="IsAccepted" ColumnName="IsAccepted" />
+          <ScalarProperty Name="AdditionalMessageFromAdmin" ColumnName="AdditionalMessageFromAdmin" />
+          <ScalarProperty Name="AdditionMessageFromTherapist" ColumnName="AdditionMessageFromTherapist" />
+          <ScalarProperty Name="RequestSentDate" ColumnName="RequestSentDate" />
+          <ScalarProperty Name="TherapistId" ColumnName="TherapistId" />
+          <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="GetListClientReceipt" FunctionName="ReseauPsyModel.Store.GetListClientReceipt">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ReseauPsyModel.GetListClientReceipt_Result">
+          <ScalarProperty Name="ClientAppointmentsId" ColumnName="ClientAppointmentsId" />
+          <ScalarProperty Name="AppointmentDate" ColumnName="AppointmentDate" />
+          <ScalarProperty Name="ClientPaymentReceiptNumber" ColumnName="ClientPaymentReceiptNumber" />
+          <ScalarProperty Name="ClientName" ColumnName="ClientName" />
+          <ScalarProperty Name="ClientEmail" ColumnName="ClientEmail" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetListClientNameSuggestion" FunctionName="ReseauPsyModel.Store.GetListClientNameSuggestion">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ReseauPsyModel.GetListClientNameSuggestion_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ClientName" ColumnName="ClientName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetClientReceiptsForExcel" FunctionName="ReseauPsyModel.Store.GetClientReceiptsForExcel">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ReseauPsyModel.GetClientReceiptsForExcel_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="AppointmentDate" ColumnName="AppointmentDate" />
+          <ScalarProperty Name="ClientPaymentReceiptNumber" ColumnName="ClientPaymentReceiptNumber" />
+          <ScalarProperty Name="NatureAct" ColumnName="NatureAct" />
+          <ScalarProperty Name="Secteur" ColumnName="Secteur" />
+          <ScalarProperty Name="ConsultationType" ColumnName="ConsultationType" />
+          <ScalarProperty Name="ClientName" ColumnName="ClientName" />
+          <ScalarProperty Name="TherapistName" ColumnName="TherapistName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="TherapistBill">
+      <EntityTypeMapping TypeName="ReseauPsyModel.TherapistBill">
+        <MappingFragment StoreEntitySet="TherapistBill">
+          <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+          <ScalarProperty Name="TvqAmount" ColumnName="TvqAmount" />
+          <ScalarProperty Name="TpsAmount" ColumnName="TpsAmount" />
+          <ScalarProperty Name="SubTotal" ColumnName="SubTotal" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="BillNumber" ColumnName="BillNumber" />
+          <ScalarProperty Name="TherapistId" ColumnName="TherapistId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClientAppointments">
+      <EntityTypeMapping TypeName="ReseauPsyModel.ClientAppointments">
+        <MappingFragment StoreEntitySet="ClientAppointments">
+          <ScalarProperty Name="TherapistPayInformationId" ColumnName="TherapistPayInformationId" />
+          <ScalarProperty Name="ClientBillGeneratedDate" ColumnName="ClientBillGeneratedDate" />
+          <ScalarProperty Name="IsRemeinderEmailSent" ColumnName="IsRemeinderEmailSent" />
+          <ScalarProperty Name="ReferenceStartDateTime" ColumnName="ReferenceStartDateTime" />
+          <ScalarProperty Name="ReasonDeleteClientAppointmentId" ColumnName="ReasonDeleteClientAppointmentId" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="PaymentUrlCode" ColumnName="PaymentUrlCode" />
+          <ScalarProperty Name="ClientPaymentDate" ColumnName="ClientPaymentDate" />
+          <ScalarProperty Name="TotalDollarAmount" ColumnName="TotalDollarAmount" />
+          <ScalarProperty Name="ClientPaymentReceiptNumber" ColumnName="ClientPaymentReceiptNumber" />
+          <ScalarProperty Name="TherapistBillId" ColumnName="TherapistBillId" />
+          <ScalarProperty Name="AppointmentStatusId" ColumnName="AppointmentStatusId" />
+          <ScalarProperty Name="RepetitionId" ColumnName="RepetitionId" />
+          <ScalarProperty Name="ConsultationTypeId" ColumnName="ConsultationTypeId" />
+          <ScalarProperty Name="ProfessionalTitleId" ColumnName="ProfessionalTitleId" />
+          <ScalarProperty Name="NatureActId" ColumnName="NatureActId" />
+          <ScalarProperty Name="EndDateTime" ColumnName="EndDateTime" />
+          <ScalarProperty Name="NbSession" ColumnName="NbSession" />
+          <ScalarProperty Name="StartDateTime" ColumnName="StartDateTime" />
+          <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+          <ScalarProperty Name="TherapistId" ColumnName="TherapistId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="GetListClaimableAppointmentForTherapistClaimForm" FunctionName="ReseauPsyModel.Store.GetListClaimableAppointmentForTherapistClaimForm">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ReseauPsyModel.GetListClaimableAppointmentForTherapistClaimForm_Result">
+          <ScalarProperty Name="AppointmentId" ColumnName="AppointmentId" />
+          <ScalarProperty Name="AppointmentDate" ColumnName="AppointmentDate" />
+          <ScalarProperty Name="NbSession" ColumnName="NbSession" />
+          <ScalarProperty Name="ClientPaymentReceiptNumber" ColumnName="ClientPaymentReceiptNumber" />
+          <ScalarProperty Name="ClientName" ColumnName="ClientName" />
+          <ScalarProperty Name="NatureAct" ColumnName="NatureAct" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="TherapistPayInformations">
+      <EntityTypeMapping TypeName="ReseauPsyModel.TherapistPayInformations">
+        <MappingFragment StoreEntitySet="TherapistPayInformations">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
+          <ScalarProperty Name="PayInfoName" ColumnName="PayInfoName" />
+          <ScalarProperty Name="IsTaxable" ColumnName="IsTaxable" />
+          <ScalarProperty Name="ClientHourlyCost" ColumnName="ClientHourlyCost" />
+          <ScalarProperty Name="TherapistHourlyWage" ColumnName="TherapistHourlyWage" />
+          <ScalarProperty Name="ChangedDate" ColumnName="ChangedDate" />
+          <ScalarProperty Name="TherapistId" ColumnName="TherapistId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,2700 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AdminDashBoard_Button_Goto" xml:space="preserve">
+    <value>Go</value>
+  </data>
+  <data name="AdminDashboard_Label_BillToPayDesc" xml:space="preserve">
+    <value>Facture à payer</value>
+  </data>
+  <data name="AdminDashboard_Label_BillToPayTitle" xml:space="preserve">
+    <value>Facture</value>
+  </data>
+  <data name="AdminDashboard_Label_ConsultationRequestTitle" xml:space="preserve">
+    <value>Demandes</value>
+  </data>
+  <data name="AdminDashboard_Label_ConsultationRequestTitleDesc" xml:space="preserve">
+    <value>Demande de consultations</value>
+  </data>
+  <data name="AdminDashboard_Label_CurrentAppointmentDesc" xml:space="preserve">
+    <value>Rendez-vous présentement</value>
+  </data>
+  <data name="AdminDashboard_Label_CurrentAppointmentTitle" xml:space="preserve">
+    <value>Rendez-vous</value>
+  </data>
+  <data name="AdminDashboard_Label_PageTitle" xml:space="preserve">
+    <value>DashBoard</value>
+  </data>
+  <data name="AdminList_Button_Apply" xml:space="preserve">
+    <value>Apply</value>
+  </data>
+  <data name="AdminList_Button_CreateAdmin" xml:space="preserve">
+    <value>Add </value>
+  </data>
+  <data name="AdminList_DDL_Active" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="AdminList_DDL_Inactive" xml:space="preserve">
+    <value>Inactive</value>
+  </data>
+  <data name="AdminList_DeleteModalButton_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="AdminList_DeleteModalButton_Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="AdminList_Label_Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="AdminList_ModalHeader_DeleteConfirmation" xml:space="preserve">
+    <value>Delete Confirmation</value>
+  </data>
+  <data name="AdminList_ModalHeader_RestoreConfirmation" xml:space="preserve">
+    <value>Restore confirmation</value>
+  </data>
+  <data name="AdminList_ModalText_DeleteConfirmation" xml:space="preserve">
+    <value>Are you sure you want to delete {0}?</value>
+  </data>
+  <data name="AdminList_ModalText_RestoreConfirmation" xml:space="preserve">
+    <value>Are you sure you want to restore {0}?</value>
+  </data>
+  <data name="AdminList_RestoreModalButton_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="AdminList_RestoreModalButton_Restore" xml:space="preserve">
+    <value>Restore</value>
+  </data>
+  <data name="AdminList_TableButton_Modify" xml:space="preserve">
+    <value>Modify</value>
+  </data>
+  <data name="AdminList_TableButton_Restore" xml:space="preserve">
+    <value>Restore</value>
+  </data>
+  <data name="AdminList_TableLabel_Action" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="AdminList_TableLabel_Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="AdminList_TableLabel_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="AdminList_TableLabel_Role" xml:space="preserve">
+    <value>Role</value>
+  </data>
+  <data name="AdminList_Title_AdminList" xml:space="preserve">
+    <value>Administrators List</value>
+  </data>
+  <data name="AdminNavBar_Link_AppointmentCalendar" xml:space="preserve">
+    <value>Appointment Calendar</value>
+  </data>
+  <data name="AdminNavBar_Link_AppointmentList" xml:space="preserve">
+    <value>Appointment list</value>
+  </data>
+  <data name="AdminNavBar_Link_AppointmentRequest" xml:space="preserve">
+    <value>Consultation requests</value>
+  </data>
+  <data name="AdminNavBar_Link_ClientReceipt" xml:space="preserve">
+    <value>Client receipt</value>
+  </data>
+  <data name="AdminNavBar_Link_ExternalAssociation" xml:space="preserve">
+    <value>External Association</value>
+  </data>
+  <data name="AdminNavBar_Link_Statistic" xml:space="preserve">
+    <value>Statistic</value>
+  </data>
+  <data name="AdminNavBar_Link_Therapist" xml:space="preserve">
+    <value>Therapist</value>
+  </data>
+  <data name="AdminNavBar_Link_TherapistBill" xml:space="preserve">
+    <value>Therapist bill</value>
+  </data>
+  <data name="AdminNavBar_NavBar_ChangePassword" xml:space="preserve">
+    <value>Change password</value>
+  </data>
+  <data name="AdminStatistic_Alert_NoDataCancelationChart" xml:space="preserve">
+    <value>Il n'y a pas de données à afficher</value>
+  </data>
+  <data name="AdminStatistic_Alert_NoDataConversionChart" xml:space="preserve">
+    <value>Il n'y a pas de données à afficher</value>
+  </data>
+  <data name="AdminStatistic_ButtonText_ApplyFilter" xml:space="preserve">
+    <value>Apply</value>
+  </data>
+  <data name="AdminStatistic_ChartLabel_TotalAccepted" xml:space="preserve">
+    <value>Accepté</value>
+  </data>
+  <data name="AdminStatistic_ChartLabel_TotalSent" xml:space="preserve">
+    <value>Envoyé</value>
+  </data>
+  <data name="AdminStatistic_Label_EndDate" xml:space="preserve">
+    <value>Date de fin</value>
+  </data>
+  <data name="AdminStatistic_Label_PageTitle" xml:space="preserve">
+    <value>Statistiques</value>
+  </data>
+  <data name="AdminStatistic_Label_StartDate" xml:space="preserve">
+    <value>Date de début</value>
+  </data>
+  <data name="AdminStatistic_TableHeader_CancelationAmount" xml:space="preserve">
+    <value>Nombre d'annulation</value>
+  </data>
+  <data name="AdminStatistic_TableHeader_CancelationPercent" xml:space="preserve">
+    <value>Pourcentage d'annulation</value>
+  </data>
+  <data name="AdminStatistic_TableHeader_CancelReason" xml:space="preserve">
+    <value>Raison d'annulation</value>
+  </data>
+  <data name="AdminStatistic_TableHeader_ConversionRate" xml:space="preserve">
+    <value>Conversion</value>
+  </data>
+  <data name="AdminStatistic_TableHeader_Therapist" xml:space="preserve">
+    <value>Thérapeute</value>
+  </data>
+  <data name="AdminStatistic_TableHeader_TotalAppointmentAccepted" xml:space="preserve">
+    <value>Acceptés</value>
+  </data>
+  <data name="AdminStatistic_TableHeader_TotalAppointmentSent" xml:space="preserve">
+    <value>Envoyés</value>
+  </data>
+  <data name="AdminStatistic_ToastrErrorDescription_FailedToApplyFilter" xml:space="preserve">
+    <value>Une erreur est survenu lors de l'application des filtresé Veuillez réessayer plus tard</value>
+  </data>
+  <data name="AdminStatistic_ToastrErrorTitle_FailedToApplyFilter" xml:space="preserve">
+    <value>Échec de l'application des filtres</value>
+  </data>
+  <data name="Application_Title_Suffix" xml:space="preserve">
+    <value>reseaupsy.ca</value>
+  </data>
+  <data name="AppointmentCalendarAdmin_DateLabel_Date" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="AppointmentCalendarAdmin_PageTitle_AppointmentCalendar" xml:space="preserve">
+    <value>Appointment Calendar</value>
+  </data>
+  <data name="AppointmentList_AppointmentReclamationStatusDdlOption_All" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="AppointmentList_AppointmentReclamationStatusDdlOption_Claimed" xml:space="preserve">
+    <value>Claimed</value>
+  </data>
+  <data name="AppointmentList_AppointmentReclamationStatusDdlOption_NotClaimed" xml:space="preserve">
+    <value>Not claimed</value>
+  </data>
+  <data name="AppointmentList_AppointmentReclamationStatusDdlOption_Payed" xml:space="preserve">
+    <value>Payed</value>
+  </data>
+  <data name="AppointmentList_AppointmentStatusDdlOption_All" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="AppointmentList_Button_ApplyFilter" xml:space="preserve">
+    <value>Apply</value>
+  </data>
+  <data name="AppointmentList_ExcelDocumentTableHeader_Client" xml:space="preserve">
+    <value>Client</value>
+  </data>
+  <data name="AppointmentList_ExcelDocumentTableHeader_Date" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="AppointmentList_ExcelDocumentTableHeader_ReclamationStatus" xml:space="preserve">
+    <value>Reclamation status</value>
+  </data>
+  <data name="AppointmentList_ExcelDocumentTableHeader_Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="AppointmentList_ExcelDocumentTableHeader_Therapist" xml:space="preserve">
+    <value>Therapist</value>
+  </data>
+  <data name="AppointmentList_ExcelDocumentTableHeader_Time" xml:space="preserve">
+    <value>Time</value>
+  </data>
+  <data name="AppointmentList_ExcelDocument_TabName" xml:space="preserve">
+    <value>Appointments</value>
+  </data>
+  <data name="AppointmentList_ExportButton_ExportToExcel" xml:space="preserve">
+    <value>Export to Excel</value>
+  </data>
+  <data name="AppointmentList_FilterLabel_AppointmentReclamationStatus" xml:space="preserve">
+    <value>Reclamation status</value>
+  </data>
+  <data name="AppointmentList_FilterLabel_AppointmentStatus" xml:space="preserve">
+    <value>Appointment status</value>
+  </data>
+  <data name="AppointmentList_FilterLabel_EndDate" xml:space="preserve">
+    <value>End date</value>
+  </data>
+  <data name="AppointmentList_FilterLabel_StartDate" xml:space="preserve">
+    <value>Start date</value>
+  </data>
+  <data name="AppointmentList_FilterLabel_Therapist" xml:space="preserve">
+    <value>Therapist</value>
+  </data>
+  <data name="AppointmentList_PageTitle_AppointmentList" xml:space="preserve">
+    <value>Appointment List</value>
+  </data>
+  <data name="AppointmentList_ReclamationStatus_Claimed" xml:space="preserve">
+    <value>Claimed</value>
+  </data>
+  <data name="AppointmentList_ReclamationStatus_NotClaimed" xml:space="preserve">
+    <value>Not claimed</value>
+  </data>
+  <data name="AppointmentList_ReclamationStatus_Payed" xml:space="preserve">
+    <value>Payed</value>
+  </data>
+  <data name="AppointmentList_TableHeader_Client" xml:space="preserve">
+    <value>Client</value>
+  </data>
+  <data name="AppointmentList_TableHeader_Date" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="AppointmentList_TableHeader_ReclamationStatus" xml:space="preserve">
+    <value>Reclamation status</value>
+  </data>
+  <data name="AppointmentList_TableHeader_Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="AppointmentList_TableHeader_Therapist" xml:space="preserve">
+    <value>Therapist</value>
+  </data>
+  <data name="AppointmentList_TherapistDdlOption_All" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="AppointmentList_ToastrErrorDescription_FailedToApplyFilter" xml:space="preserve">
+    <value>An error occured while loading the page. Please try again later</value>
+  </data>
+  <data name="AppointmentList_ToastrErrorDescription_FailedToConfirmPresence" xml:space="preserve">
+    <value>An error occured while changing the presence status. Please try again later</value>
+  </data>
+  <data name="AppointmentList_ToastrErrorTitle_FailedToApplyFilter" xml:space="preserve">
+    <value>Failed to load datas</value>
+  </data>
+  <data name="AppointmentList_ToastrErrorTitle_FailedToConfirmPresence" xml:space="preserve">
+    <value>Failed to change status</value>
+  </data>
+  <data name="AppointmentList_TotalTable_TotalCanceldWithCharge" xml:space="preserve">
+    <value>Canceled with charge</value>
+  </data>
+  <data name="AppointmentList_TotalTable_TotalCanceldWithoutCharge" xml:space="preserve">
+    <value>Canceled without charge</value>
+  </data>
+  <data name="AppointmentList_TotalTable_TotalClaimed" xml:space="preserve">
+    <value>Claimed</value>
+  </data>
+  <data name="AppointmentList_TotalTable_TotalCompleted" xml:space="preserve">
+    <value>Completed</value>
+  </data>
+  <data name="AppointmentList_TotalTable_TotalForthcoming" xml:space="preserve">
+    <value>Forthcoming</value>
+  </data>
+  <data name="AppointmentList_TotalTable_TotalNotClaimed" xml:space="preserve">
+    <value>Not claimed</value>
+  </data>
+  <data name="AppointmentList_TotalTable_TotalPayed" xml:space="preserve">
+    <value>Payed</value>
+  </data>
+  <data name="AppointmentList_TotalTable_TotalPresenceToConfirm" xml:space="preserve">
+    <value>Presence to confirm</value>
+  </data>
+  <data name="AppointmentNotPayed_DeleteModalBody_ConfirmDeleteMessage" xml:space="preserve">
+    <value>Are you sure you want to delete the appointment not payed?</value>
+  </data>
+  <data name="AppointmentNotPayed_DeleteModalButton_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="AppointmentNotPayed_DeleteModalButton_Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="AppointmentNotPayed_DeleteModal_Header" xml:space="preserve">
+    <value>Delete appointment not payed</value>
+  </data>
+  <data name="AppointmentNotPayed_Label_AllPayed" xml:space="preserve">
+    <value>Tous les rendez-vous ont été payés!</value>
+  </data>
+  <data name="AppointmentNotPayed_Label_Instruction" xml:space="preserve">
+    <value>Le tableau ci-dessous affiche les rendez-vous non payés. Les rendez-vous disparaiteront de cette liste lorsque les clients les auronts payés. Vous pourrez ensuite les réclamer à Réseau Psy.</value>
+  </data>
+  <data name="AppointmentNotPayed_PageTitle_AppointmentNotPayed" xml:space="preserve">
+    <value>Appointment not payed</value>
+  </data>
+  <data name="AppointmentNotPayed_SendBackLinkModal_Header" xml:space="preserve">
+    <value>Send back payment link</value>
+  </data>
+  <data name="AppointmentNotPayed_SendLinkModalButton_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="AppointmentNotPayed_SendLinkModalButton_Send" xml:space="preserve">
+    <value>Send</value>
+  </data>
+  <data name="AppointmentNotPayed_SendLinkModalLabel_Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="AppointmentNotPayed_SendLinkModalLabel_Message" xml:space="preserve">
+    <value>Message</value>
+  </data>
+  <data name="AppointmentNotPayed_TableButton_Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="AppointmentNotPayed_TableButton_SendLink" xml:space="preserve">
+    <value>Send back link</value>
+  </data>
+  <data name="AppointmentNotPayed_TableHeader_Action" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="AppointmentNotPayed_TableHeader_Amount" xml:space="preserve">
+    <value>Amount</value>
+  </data>
+  <data name="AppointmentNotPayed_TableHeader_Client" xml:space="preserve">
+    <value>Client</value>
+  </data>
+  <data name="AppointmentNotPayed_TableHeader_Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="AppointmentNotPayed_TableHeader_PhoneNumber" xml:space="preserve">
+    <value>Phone number</value>
+  </data>
+  <data name="AppointmentNotPayed_ToastrErrorDescription_FailedToDeleteAppointment" xml:space="preserve">
+    <value>An error occured while attempting to delete the appointment. Please try again later</value>
+  </data>
+  <data name="AppointmentNotPayed_ToastrErrorDescription_FailedToSendEmail" xml:space="preserve">
+    <value>An error occured while sending the email to the client. Please try again later</value>
+  </data>
+  <data name="AppointmentNotPayed_ToastrErrorTitle_FailedToDeleteAppointment" xml:space="preserve">
+    <value>Failed to delete appointment</value>
+  </data>
+  <data name="AppointmentNotPayed_ToastrErrorTitle_FailedToSendEmail" xml:space="preserve">
+    <value>Failed to send email</value>
+  </data>
+  <data name="AppointmentNotPayed_ToastrSuccessDescription_EmailSent" xml:space="preserve">
+    <value>The email was successfully sent to the client</value>
+  </data>
+  <data name="AppointmentNotPayed_ToastrSuccessTitle_EmailSent" xml:space="preserve">
+    <value>Email sent</value>
+  </data>
+  <data name="AppointmentRequest_AssignationModalTherapistDdl_BestMatch" xml:space="preserve">
+    <value>Best match</value>
+  </data>
+  <data name="AppointmentRequest_AssignationModalTherapistDdl_NoMatch" xml:space="preserve">
+    <value>No match</value>
+  </data>
+  <data name="AppointmentRequest_AssignationModalTherapistDdl_OtherMatch" xml:space="preserve">
+    <value>Other match</value>
+  </data>
+  <data name="AppointmentRequest_AssignModalAssignToDdl_Choose" xml:space="preserve">
+    <value>Choose...</value>
+  </data>
+  <data name="AppointmentRequest_AssignModalButton_Assign" xml:space="preserve">
+    <value>Assing the client</value>
+  </data>
+  <data name="AppointmentRequest_AssignModalButton_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="AppointmentRequest_AssignModalDdl_ExternalAssociation" xml:space="preserve">
+    <value>External association</value>
+  </data>
+  <data name="AppointmentRequest_AssignModalExternalAssociationDdl_Choose" xml:space="preserve">
+    <value>Choose...</value>
+  </data>
+  <data name="AppointmentRequest_AssignModalHeader_AssignRequest" xml:space="preserve">
+    <value>Assign client consultation request</value>
+  </data>
+  <data name="AppointmentRequest_AssignModalLabel_AssignTo" xml:space="preserve">
+    <value>Assign to</value>
+  </data>
+  <data name="AppointmentRequest_AssignModalLabel_Availabilities" xml:space="preserve">
+    <value>Availabilities</value>
+  </data>
+  <data name="AppointmentRequest_AssignModalLabel_ClientCityRegion" xml:space="preserve">
+    <value>City / Region</value>
+  </data>
+  <data name="AppointmentRequest_AssignModalLabel_ClientConsultationReason" xml:space="preserve">
+    <value>Consultation reason</value>
+  </data>
+  <data name="AppointmentRequest_AssignModalLabel_ClientConsultationType" xml:space="preserve">
+    <value>Consultation type</value>
+  </data>
+  <data name="AppointmentRequest_AssignModalLabel_ClientEmail" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="AppointmentRequest_AssignModalLabel_ClientLanguage" xml:space="preserve">
+    <value>Langue parlé</value>
+  </data>
+  <data name="AppointmentRequest_AssignModalLabel_ClientMessage" xml:space="preserve">
+    <value>Client message</value>
+  </data>
+  <data name="AppointmentRequest_AssignModalLabel_ClientName" xml:space="preserve">
+    <value>Client name</value>
+  </data>
+  <data name="AppointmentRequest_AssignModalLabel_ClientPhone" xml:space="preserve">
+    <value>Phone number</value>
+  </data>
+  <data name="AppointmentRequest_AssignModalLabel_ClientPostalCode" xml:space="preserve">
+    <value>Postal code</value>
+  </data>
+  <data name="AppointmentRequest_AssignModalLabel_ClientRegion" xml:space="preserve">
+    <value>Region</value>
+  </data>
+  <data name="AppointmentRequest_AssignModalLabel_ExternalAssociation" xml:space="preserve">
+    <value>External association</value>
+  </data>
+  <data name="AppointmentRequest_AssignModalLabel_NoteForAssociation" xml:space="preserve">
+    <value>Notes for the external association</value>
+  </data>
+  <data name="AppointmentRequest_AssignModalLabel_NoteForTherapist" xml:space="preserve">
+    <value>Notes for the therapist</value>
+  </data>
+  <data name="AppointmentRequest_AssignModalLabel_TherapistRefusedMessage" xml:space="preserve">
+    <value>Therapist message</value>
+  </data>
+  <data name="AppointmentRequest_Button_ApplyFilter" xml:space="preserve">
+    <value>Apply</value>
+  </data>
+  <data name="AppointmentRequest_DeleteModalButton_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="AppointmentRequest_DeleteModalButton_Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="AppointmentRequest_DeleteModalDdlLabel_DeleteReason" xml:space="preserve">
+    <value>Delete reason</value>
+  </data>
+  <data name="AppointmentRequest_DeleteModalDdlOption_Choose" xml:space="preserve">
+    <value>Choose...</value>
+  </data>
+  <data name="AppointmentRequest_DeleteModalHeader_DeleteConfirmation" xml:space="preserve">
+    <value>Delete confirmation</value>
+  </data>
+  <data name="AppointmentRequest_DeleteModalLabel_AdditionalNotes" xml:space="preserve">
+    <value>Additional notes</value>
+  </data>
+  <data name="AppointmentRequest_DeleteModalText_DeleteConfirmation" xml:space="preserve">
+    <value>Are you sure you want to delete the client request?</value>
+  </data>
+  <data name="AppointmentRequest_EndDate_Label" xml:space="preserve">
+    <value>End date</value>
+  </data>
+  <data name="AppointmentRequest_RestoreModalButton_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="AppointmentRequest_RestoreModalButton_Restore" xml:space="preserve">
+    <value>Restore</value>
+  </data>
+  <data name="AppointmentRequest_RestoreModalHeader_RestoreConfirmation" xml:space="preserve">
+    <value>Restore confirmation</value>
+  </data>
+  <data name="AppointmentRequest_RestoreModalLabel_DeleteNotes" xml:space="preserve">
+    <value>Additional notes</value>
+  </data>
+  <data name="AppointmentRequest_RestoreModalLabel_DeleteReason" xml:space="preserve">
+    <value>Delete reason</value>
+  </data>
+  <data name="AppointmentRequest_RestoreModalText_RestoreConfirmation" xml:space="preserve">
+    <value>You are about to restore a consultation request that was previously deleted. Are you sure you want to proceed?</value>
+  </data>
+  <data name="AppointmentRequest_RetrieveModalAlert_RequestAlreadySent" xml:space="preserve">
+    <value>This client request was already sent to a therapist and is waiting for his answer. If you retrieve the client request, it will disapear from the client list of waiting request. Are you sure you want to proceed?</value>
+  </data>
+  <data name="AppointmentRequest_RetrieveModalButton_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="AppointmentRequest_RetrieveModalButton_Retrieve" xml:space="preserve">
+    <value>Retrieve</value>
+  </data>
+  <data name="AppointmentRequest_RetrieveModalHeader_RetrieveConfirmation" xml:space="preserve">
+    <value>Retrieve confirmation</value>
+  </data>
+  <data name="AppointmentRequest_StartDate_Label" xml:space="preserve">
+    <value>Start Date</value>
+  </data>
+  <data name="AppointmentRequest_StatusDdl_Done" xml:space="preserve">
+    <value>Processed</value>
+  </data>
+  <data name="AppointmentRequest_StatusDdl_ToDo" xml:space="preserve">
+    <value>To be treated</value>
+  </data>
+  <data name="AppointmentRequest_Status_Deleted" xml:space="preserve">
+    <value>Deleted</value>
+  </data>
+  <data name="AppointmentRequest_Status_HasTherapist" xml:space="preserve">
+    <value>Assigned</value>
+  </data>
+  <data name="AppointmentRequest_Status_Label" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="AppointmentRequest_Status_NoTherapist" xml:space="preserve">
+    <value>Not assigned</value>
+  </data>
+  <data name="AppointmentRequest_Status_SentToExternalAssociation" xml:space="preserve">
+    <value>Assigned</value>
+  </data>
+  <data name="AppointmentRequest_Status_Waiting" xml:space="preserve">
+    <value>Waiting</value>
+  </data>
+  <data name="AppointmentRequest_TableButton_Assign" xml:space="preserve">
+    <value>Assign</value>
+  </data>
+  <data name="AppointmentRequest_TableButton_Reactivate" xml:space="preserve">
+    <value>Reactivate</value>
+  </data>
+  <data name="AppointmentRequest_TableHeader_Action" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="AppointmentRequest_TableHeader_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="AppointmentRequest_TableHeader_Region" xml:space="preserve">
+    <value>Region</value>
+  </data>
+  <data name="AppointmentRequest_TableHeader_RequestDate" xml:space="preserve">
+    <value>Request date</value>
+  </data>
+  <data name="AppointmentRequest_TableHeader_ReturnedCount" xml:space="preserve">
+    <value>Returned</value>
+  </data>
+  <data name="AppointmentRequest_TableHeader_Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="AppointmentRequest_ToastrErrorDescription_DateInvalid" xml:space="preserve">
+    <value>Please review the date fields</value>
+  </data>
+  <data name="AppointmentRequest_ToastrErrorDescription_FailedToAssignClient" xml:space="preserve">
+    <value>An error occured while attempting to assign the client request. Please try again later</value>
+  </data>
+  <data name="AppointmentRequest_ToastrErrorDescription_FailedToDeleteRequest" xml:space="preserve">
+    <value>An error occured while attempting to delete the client request. Please try again later</value>
+  </data>
+  <data name="AppointmentRequest_ToastrErrorDescription_FailedToLoadTable" xml:space="preserve">
+    <value>An error occured while loading the clients into the table. Please try again later</value>
+  </data>
+  <data name="AppointmentRequest_ToastrErrorDescription_FailedToLoadTherapistList" xml:space="preserve">
+    <value>An error occured while binding the therapist list to the drop down list. Please try again later</value>
+  </data>
+  <data name="AppointmentRequest_ToastrErrorDescription_FailedToRestoreClient" xml:space="preserve">
+    <value>An errror occured while attempting to restore the client request. Please try again later</value>
+  </data>
+  <data name="AppointmentRequest_ToastrErrorDescription_FailedToRetrieveClient" xml:space="preserve">
+    <value>An error occured while attempting to retrieve the client request from the therapist. Please try again later.</value>
+  </data>
+  <data name="AppointmentRequest_ToastrErrorTitle_DateInvalid" xml:space="preserve">
+    <value>Invalid date</value>
+  </data>
+  <data name="AppointmentRequest_ToastrErrorTitle_FailedToAssignClient" xml:space="preserve">
+    <value>Assignation failed</value>
+  </data>
+  <data name="AppointmentRequest_ToastrErrorTitle_FailedToDeleteRequest" xml:space="preserve">
+    <value>Failed to delete the request</value>
+  </data>
+  <data name="AppointmentRequest_ToastrErrorTitle_FailedToLoadTable" xml:space="preserve">
+    <value>Failed to load the list of clients</value>
+  </data>
+  <data name="AppointmentRequest_ToastrErrorTitle_FailedToLoadTherapistList" xml:space="preserve">
+    <value>Failed to retrieve the therapists list</value>
+  </data>
+  <data name="AppointmentRequest_ToastrErrorTitle_FailedToRestoreClient" xml:space="preserve">
+    <value>Failed to restore</value>
+  </data>
+  <data name="AppointmentRequest_ToastrErrorTitle_FailedToRetrieveClient" xml:space="preserve">
+    <value>Failed to retrieve the client request</value>
+  </data>
+  <data name="ChangePassword_ButtonText_ChangePassword" xml:space="preserve">
+    <value>Changer le mot de passe</value>
+  </data>
+  <data name="ChangePassword_Error_InvalidPassword" xml:space="preserve">
+    <value>Vous avez entré un mauvais mot de passe</value>
+  </data>
+  <data name="ChangePassword_Error_PasswordNoMatch" xml:space="preserve">
+    <value>Les mots de passe ne concordent pas</value>
+  </data>
+  <data name="ChangePassword_Error_PasswordNotStrong" xml:space="preserve">
+    <value>Mot de passe pas assez sécuritaire. Il faut que le mot de passe ait:</value>
+  </data>
+  <data name="ChangePassword_Label_ConfirmPassword" xml:space="preserve">
+    <value>Confirmer le mot de passe</value>
+  </data>
+  <data name="ChangePassword_Label_NewPassword" xml:space="preserve">
+    <value>Nouveau mot de passe</value>
+  </data>
+  <data name="ChangePassword_Label_OldPassword" xml:space="preserve">
+    <value>Ancien mot de passe</value>
+  </data>
+  <data name="ChangePassword_Label_PageTitle" xml:space="preserve">
+    <value>Changement de mot de passe</value>
+  </data>
+  <data name="ChangePassword_Label_PasswordMinimum1Digit" xml:space="preserve">
+    <value>Minimum d'un chiffre</value>
+  </data>
+  <data name="ChangePassword_Label_PasswordMinimum1LowerCase" xml:space="preserve">
+    <value>Minimum d'une lettre minuscule</value>
+  </data>
+  <data name="ChangePassword_Label_PasswordMinimum1SpecialChar" xml:space="preserve">
+    <value>Minimum d'un caractère spécial</value>
+  </data>
+  <data name="ChangePassword_Label_PasswordMinimum1UpperCase" xml:space="preserve">
+    <value>Minimum d'une lettre majuscule</value>
+  </data>
+  <data name="ChangePassword_Label_PasswordMinimum6Char" xml:space="preserve">
+    <value>Un minimum de 6 caractères</value>
+  </data>
+  <data name="ChangePassword_Success_PasswordChanged" xml:space="preserve">
+    <value>Votre mot de passe a été changé avec success</value>
+  </data>
+  <data name="ChangePassword_ToastrErrorDescription_FailedToChangePassword" xml:space="preserve">
+    <value>Une erreur est survenue lors du changement de mot de passe. Veuillez réessayer plus tard</value>
+  </data>
+  <data name="ChangePassword_ToastrErrorTitle_FailedToChangePassword" xml:space="preserve">
+    <value>Échec du changement de mot de passe</value>
+  </data>
+  <data name="ClaimForm_AlertInfo_NoClaimableAppointment" xml:space="preserve">
+    <value>There is no claimable appointment</value>
+  </data>
+  <data name="ClaimForm_BillSentFilter_Apply" xml:space="preserve">
+    <value>Apply</value>
+  </data>
+  <data name="ClaimForm_BillSentFilter_EndDate" xml:space="preserve">
+    <value>End date</value>
+  </data>
+  <data name="ClaimForm_BillSentFilter_StartDate" xml:space="preserve">
+    <value>Start date</value>
+  </data>
+  <data name="ClaimForm_BillSentTableButton_SeePdf" xml:space="preserve">
+    <value>See PDF</value>
+  </data>
+  <data name="ClaimForm_BillSentTableHeader_Action" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="ClaimForm_BillSentTableHeader_Amount" xml:space="preserve">
+    <value>Amount</value>
+  </data>
+  <data name="ClaimForm_BillSentTableHeader_BillNumber" xml:space="preserve">
+    <value>Bill number</value>
+  </data>
+  <data name="ClaimForm_BillSentTableHeader_ClaimDate" xml:space="preserve">
+    <value>Sent date</value>
+  </data>
+  <data name="ClaimForm_BillSentTableHeader_PaymentStatus" xml:space="preserve">
+    <value>Payment status</value>
+  </data>
+  <data name="ClaimForm_BillSentTableHeader_Tps" xml:space="preserve">
+    <value>TPS</value>
+  </data>
+  <data name="ClaimForm_BillSentTableHeader_Tvq" xml:space="preserve">
+    <value>TVQ</value>
+  </data>
+  <data name="ClaimForm_BillSentTableStatus_NotPayed" xml:space="preserve">
+    <value>Not payed</value>
+  </data>
+  <data name="ClaimForm_BillSentTableStatus_Payed" xml:space="preserve">
+    <value>Payed</value>
+  </data>
+  <data name="ClaimForm_BillSentTableTitle_BillSent" xml:space="preserve">
+    <value>Bills sent</value>
+  </data>
+  <data name="ClaimForm_BillsSentButton_ExportToExcel" xml:space="preserve">
+    <value>Export to Excel</value>
+  </data>
+  <data name="ClaimForm_BillsTableAlertInfo_NoBills" xml:space="preserve">
+    <value>There is no bills</value>
+  </data>
+  <data name="ClaimForm_Button_ClaimAppointment" xml:space="preserve">
+    <value>Claim appointment</value>
+  </data>
+  <data name="ClaimForm_ExcelDocumentTableHeader_Amount" xml:space="preserve">
+    <value>Amount</value>
+  </data>
+  <data name="ClaimForm_ExcelDocumentTableHeader_BillNumber" xml:space="preserve">
+    <value>Bill number</value>
+  </data>
+  <data name="ClaimForm_ExcelDocumentTableHeader_DateSent" xml:space="preserve">
+    <value>Sent date</value>
+  </data>
+  <data name="ClaimForm_ExcelDocumentTableHeader_PaymentStatus" xml:space="preserve">
+    <value>Payment status</value>
+  </data>
+  <data name="ClaimForm_ExcelDocumentTableHeader_Tps" xml:space="preserve">
+    <value>TPS</value>
+  </data>
+  <data name="ClaimForm_ExcelDocumentTableHeader_Tvq" xml:space="preserve">
+    <value>TVQ</value>
+  </data>
+  <data name="ClaimForm_ExcelDocument_TabName" xml:space="preserve">
+    <value>Bills sent</value>
+  </data>
+  <data name="ClaimForm_PageTitle_ClaimableAppointment" xml:space="preserve">
+    <value>Claimable appointments</value>
+  </data>
+  <data name="ClaimForm_PreviewTherapistBillButton_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="ClaimForm_PreviewTherapistBillButton_Send" xml:space="preserve">
+    <value>Send</value>
+  </data>
+  <data name="ClaimForm_PreviewTherapistBillModalTableHeader_Amount" xml:space="preserve">
+    <value>Amount</value>
+  </data>
+  <data name="ClaimForm_PreviewTherapistBillModalTableHeader_Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="ClaimForm_PreviewTherapistBillModalTableHeader_HourlyWage" xml:space="preserve">
+    <value>Hourly wage</value>
+  </data>
+  <data name="ClaimForm_PreviewTherapistBillModalTableHeader_Quantity" xml:space="preserve">
+    <value>Qty</value>
+  </data>
+  <data name="ClaimForm_PreviewTherapistBillModalTableLabel_Subtotal" xml:space="preserve">
+    <value>Subtotal</value>
+  </data>
+  <data name="ClaimForm_PreviewTherapistBillModalTableLabel_Total" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="ClaimForm_PreviewTherapistBillModalTableLabel_TotalTps" xml:space="preserve">
+    <value>TPS</value>
+  </data>
+  <data name="ClaimForm_PreviewTherapistBillModalTableLabel_TotalTvq" xml:space="preserve">
+    <value>TVQ</value>
+  </data>
+  <data name="ClaimForm_PreviewTherapistBillModalWasPresent_No" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="ClaimForm_PreviewTherapistBillModalWasPresent_Yes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="ClaimForm_PreviewTherapistBillModal_Bill" xml:space="preserve">
+    <value>Bill</value>
+  </data>
+  <data name="ClaimForm_PreviewTherapistBillModal_BillNumber" xml:space="preserve">
+    <value>Bill number</value>
+  </data>
+  <data name="ClaimForm_PreviewTherapistBillModal_Date" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="ClaimForm_PreviewTherapistBill_Title" xml:space="preserve">
+    <value>Preview bill</value>
+  </data>
+  <data name="ClaimForm_TableHeader_AppointmentDate" xml:space="preserve">
+    <value>Appointment date</value>
+  </data>
+  <data name="ClaimForm_TableHeader_ClaimableAmount" xml:space="preserve">
+    <value>Claimable amount</value>
+  </data>
+  <data name="ClaimForm_TableHeader_ClaimAppointment" xml:space="preserve">
+    <value>Claim appointment</value>
+  </data>
+  <data name="ClaimForm_TableHeader_Client" xml:space="preserve">
+    <value>Client</value>
+  </data>
+  <data name="ClaimForm_TableHeader_NatureAct" xml:space="preserve">
+    <value>Nature act</value>
+  </data>
+  <data name="ClaimForm_TableHeader_NbSession" xml:space="preserve">
+    <value>Session</value>
+  </data>
+  <data name="ClaimForm_ToastrErrorDescription_FailedToApplyFilter" xml:space="preserve">
+    <value>An error occured while applying the filter. Pleazse try again later</value>
+  </data>
+  <data name="ClaimForm_ToastrErrorDescription_FailedToSendBill" xml:space="preserve">
+    <value>An error occured while sending the bill to the administration. Pleasse try again later</value>
+  </data>
+  <data name="ClaimForm_ToastrErrorTitle_FailedToApplyFilter" xml:space="preserve">
+    <value>Failed to apply filter</value>
+  </data>
+  <data name="ClaimForm_ToastrErrorTitle_FailedToSendBill" xml:space="preserve">
+    <value>Failed to send bill</value>
+  </data>
+  <data name="ClientInvalidPaymentPage_Alert_InvalidUrl" xml:space="preserve">
+    <value>The adress that you aretrying to reach is invalid. Please review your email to access the proper page.</value>
+  </data>
+  <data name="ClientPayment_AlertInfo_PaidReceiptNotAvailable" xml:space="preserve">
+    <value>Votre rendez-vous est payé. Vous devez attendre que votre thérapeute confirme votre présence pour télécharger votre reçu</value>
+  </data>
+  <data name="ClientPayment_Alert_PaidReceiptAvailable" xml:space="preserve">
+    <value>Votre rendez-vous est payé. Vous pouvez télécharger votre reçu ici bas</value>
+  </data>
+  <data name="ClientPayment_ButtonText_Send" xml:space="preserve">
+    <value>Send</value>
+  </data>
+  <data name="ClientPayment_Button_DownloadReceipt" xml:space="preserve">
+    <value>Download your receipt</value>
+  </data>
+  <data name="ClientPayment_Label_CardCvv" xml:space="preserve">
+    <value>CVV</value>
+  </data>
+  <data name="ClientPayment_Label_CardExpiration" xml:space="preserve">
+    <value>Expiration date</value>
+  </data>
+  <data name="ClientPayment_Label_CardNumber" xml:space="preserve">
+    <value>Card number</value>
+  </data>
+  <data name="ClientPayment_Label_CardOwner" xml:space="preserve">
+    <value>Card owner name</value>
+  </data>
+  <data name="ClientPayment_Label_SubTotal" xml:space="preserve">
+    <value>Subtotal</value>
+  </data>
+  <data name="ClientPayment_Label_TPS" xml:space="preserve">
+    <value>Tps</value>
+  </data>
+  <data name="ClientPayment_Label_TVQ" xml:space="preserve">
+    <value>Tvq</value>
+  </data>
+  <data name="ClientPayment_ToastrErrorDescription_FailedToDownloadReceipt" xml:space="preserve">
+    <value>An error occured while attempting to download the receipt. Please try again later</value>
+  </data>
+  <data name="ClientPayment_ToastrErrorDescription_FailedToProccessPayment" xml:space="preserve">
+    <value>An error occured while attempting to process the payment. Please try again</value>
+  </data>
+  <data name="ClientPayment_ToastrErrorTitle_FailedToDownloadReceipt" xml:space="preserve">
+    <value>Failed to download receipt</value>
+  </data>
+  <data name="ClientPayment_ToastrErrorTitle_FailedToProccessPayment" xml:space="preserve">
+    <value>Failed to proccess the payment</value>
+  </data>
+  <data name="ConfirmPresence_AdministrativeChargeModalBody_IsApplyCharges" xml:space="preserve">
+    <value>Do we apply administrative charge for late cancel?</value>
+  </data>
+  <data name="ConfirmPresence_AdministrativeChargeModalButton_Apply" xml:space="preserve">
+    <value>Apply</value>
+  </data>
+  <data name="ConfirmPresence_AdministrativeChargeModalButton_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="ConfirmPresence_AdministrativeChargeModalTitle_AdministrativeCharge" xml:space="preserve">
+    <value>Administrative charge</value>
+  </data>
+  <data name="ConfirmPresence_AdministrativeChargeModal_ApplyCharge" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="ConfirmPresence_AdministrativeChargeModal_DontApplyCharge" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="ConfirmPresence_AlertInfo_AllPresenceAnswered" xml:space="preserve">
+    <value>All presence was answered</value>
+  </data>
+  <data name="ConfirmPresence_EmailClientContent_AppointmentNeedPayment" xml:space="preserve">
+    <value>Vous pouvez payer votre rendez-vous à l'adresse suivante: {0}</value>
+  </data>
+  <data name="ConfirmPresence_EmailClientContent_PaymentReimbursed" xml:space="preserve">
+    <value>Your appointment with your Reseau Psy therapist was reimbursed to you</value>
+  </data>
+  <data name="ConfirmPresence_EmailClientContent_ReceiptReady" xml:space="preserve">
+    <value>You can download your online recipt at the following adress: {0}</value>
+  </data>
+  <data name="ConfirmPresence_EmailClientSubject_AppointmentNeedPayment" xml:space="preserve">
+    <value>Your ReseauPsy appointment requier a payment</value>
+  </data>
+  <data name="ConfirmPresence_EmailClientSubject_PaymentReimbursed" xml:space="preserve">
+    <value>Payment reimbursed</value>
+  </data>
+  <data name="ConfirmPresence_EmailClientSubject_ReceiptReady" xml:space="preserve">
+    <value>Download your Reseau psy receipt</value>
+  </data>
+  <data name="ConfirmPresence_PageTitle_ConfirmPresence" xml:space="preserve">
+    <value>Confirm Presence</value>
+  </data>
+  <data name="ConfirmPresence_TableButton_No" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="ConfirmPresence_TableButton_Yes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="ConfirmPresence_TableHeader_AppointmentDate" xml:space="preserve">
+    <value>Appointment date</value>
+  </data>
+  <data name="ConfirmPresence_TableHeader_Client" xml:space="preserve">
+    <value>Client</value>
+  </data>
+  <data name="ConfirmPresence_TableHeader_ConfirmPresence" xml:space="preserve">
+    <value>Confirm the presence</value>
+  </data>
+  <data name="DataBase_Accreditation_Language" xml:space="preserve">
+    <value>AccreditationEN</value>
+  </data>
+  <data name="DataBase_Gender_Language" xml:space="preserve">
+    <value>GenderEN</value>
+  </data>
+  <data name="Database_ProfessionalTitle_Language" xml:space="preserve">
+    <value>ProfessionalTitleEN</value>
+  </data>
+  <data name="DetailsAdmin_Error_CreationFailed" xml:space="preserve">
+    <value>The creation of the administrator failed. Please try again later</value>
+  </data>
+  <data name="DetailsAdmin_Error_EmailAlreadyUsed" xml:space="preserve">
+    <value>The email entered is already used</value>
+  </data>
+  <data name="DetailsAdmin_Error_EmailInvalid" xml:space="preserve">
+    <value>Le courriel est invalide</value>
+  </data>
+  <data name="DetailsAdmin_Error_EmailRequired" xml:space="preserve">
+    <value>The email is required</value>
+  </data>
+  <data name="DetailsAdmin_Error_ModificationFailed" xml:space="preserve">
+    <value>The modification of the administrator failed. Please try again later</value>
+  </data>
+  <data name="DetailsAdmin_Error_NameRequired" xml:space="preserve">
+    <value>The administrator name is required</value>
+  </data>
+  <data name="DetailsAdmin_Error_PasswordLength" xml:space="preserve">
+    <value>The {0} must be at least {2} characters long</value>
+  </data>
+  <data name="DetailsAdmin_Error_PasswordNoMatch" xml:space="preserve">
+    <value>The passwords don't match</value>
+  </data>
+  <data name="DetailsAdmin_Error_PasswordRequired" xml:space="preserve">
+    <value>The password is required</value>
+  </data>
+  <data name="DetailsAdmin_Error_RoleRequired" xml:space="preserve">
+    <value>The role is required</value>
+  </data>
+  <data name="DetailsAdmin_Label_AdminName" xml:space="preserve">
+    <value>Administrator name</value>
+  </data>
+  <data name="DetailsAdmin_Label_ConfirmPassword" xml:space="preserve">
+    <value>Confirm Password</value>
+  </data>
+  <data name="DetailsAdmin_Label_Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="DetailsAdmin_Label_Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="DetailsAdmin_Label_Role" xml:space="preserve">
+    <value>Role</value>
+  </data>
+  <data name="DetailsAdmin_Title_CreateAdmin" xml:space="preserve">
+    <value>Create an administrator</value>
+  </data>
+  <data name="DetailsAdmin_Title_EditAdmin" xml:space="preserve">
+    <value>Modify an administrator</value>
+  </data>
+  <data name="DetailsTherapist_Button_Add" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="DetailsTherapist_Button_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="DetailsTherapist_Button_Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="DetailsTherapist_DDL_AssuranceChoose" xml:space="preserve">
+    <value>Choose...</value>
+  </data>
+  <data name="DetailsTherapist_DDL_AssuranceNo" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="DetailsTherapist_DDL_AssuranceYes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="DetailsTherapist_DDL_InterestedFormationChoose" xml:space="preserve">
+    <value>Choose...</value>
+  </data>
+  <data name="DetailsTherapist_DDL_InterestedFormationNo" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="DetailsTherapist_DDL_InterestedFormationYes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="DetailsTherapist_DDL_SelectAccreditation" xml:space="preserve">
+    <value>Choose an acreditation...</value>
+  </data>
+  <data name="DetailsTherapist_DDL_SelectGender" xml:space="preserve">
+    <value>Select a gender...</value>
+  </data>
+  <data name="DetailsTherapist_DDL_SelectRegion" xml:space="preserve">
+    <value>Choose a region...</value>
+  </data>
+  <data name="DetailsTherapist_DDL_ThirdPartyChoose" xml:space="preserve">
+    <value>Choose...</value>
+  </data>
+  <data name="DetailsTherapist_DDL_ThirdPartyNo" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="DetailsTherapist_DDL_ThirdPartyYes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="DetailsTherapist_ErrorLabel_EmailAlreadyInUse" xml:space="preserve">
+    <value>Courriel déjà en utilisation</value>
+  </data>
+  <data name="DetailsTherapist_Error_ClientHourlyCostRequired" xml:space="preserve">
+    <value>The cost of the therapist per hour for the client is required</value>
+  </data>
+  <data name="DetailsTherapist_Error_CreationFailed" xml:space="preserve">
+    <value>The creation of the therapist failed. Please try again later</value>
+  </data>
+  <data name="DetailsTherapist_Error_EditFailed" xml:space="preserve">
+    <value>The modification of the therapist failed. Please try again later</value>
+  </data>
+  <data name="DetailsTherapist_Error_EmailInUse" xml:space="preserve">
+    <value>The entered email is already in use</value>
+  </data>
+  <data name="DetailsTherapist_Error_EmailInvalid" xml:space="preserve">
+    <value>The email is invalid</value>
+  </data>
+  <data name="DetailsTherapist_Error_EmailRequired" xml:space="preserve">
+    <value>The email is required</value>
+  </data>
+  <data name="DetailsTherapist_Error_FirstNameRequired" xml:space="preserve">
+    <value>The first name is required</value>
+  </data>
+  <data name="DetailsTherapist_Error_HiringDateRequired" xml:space="preserve">
+    <value>The hiring date is required</value>
+  </data>
+  <data name="DetailsTherapist_Error_HourlyWageRange" xml:space="preserve">
+    <value>The hourly wage must be between 1.00$ and 999.00$</value>
+  </data>
+  <data name="DetailsTherapist_Error_HourlyWageRequired" xml:space="preserve">
+    <value>The hourly wage is required</value>
+  </data>
+  <data name="DetailsTherapist_Error_LastNameRequired" xml:space="preserve">
+    <value>The last name is required</value>
+  </data>
+  <data name="DetailsTherapist_Label_Accreditation" xml:space="preserve">
+    <value>Accreditation</value>
+  </data>
+  <data name="DetailsTherapist_Label_AdminNotes" xml:space="preserve">
+    <value>Admin Notes</value>
+  </data>
+  <data name="DetailsTherapist_Label_Adress" xml:space="preserve">
+    <value>Adress</value>
+  </data>
+  <data name="DetailsTherapist_Label_AllowHourlyWageBonus" xml:space="preserve">
+    <value>Apply</value>
+  </data>
+  <data name="DetailsTherapist_Label_AreaOfPractice" xml:space="preserve">
+    <value>Area of practice (maximum of 2)</value>
+  </data>
+  <data name="DetailsTherapist_Label_Association" xml:space="preserve">
+    <value>Association and other professional order</value>
+  </data>
+  <data name="DetailsTherapist_Label_Availabilities" xml:space="preserve">
+    <value>Availabilities</value>
+  </data>
+  <data name="DetailsTherapist_Label_Certification" xml:space="preserve">
+    <value>Certification</value>
+  </data>
+  <data name="DetailsTherapist_Label_City" xml:space="preserve">
+    <value>City</value>
+  </data>
+  <data name="DetailsTherapist_Label_ClientAge" xml:space="preserve">
+    <value>Client age</value>
+  </data>
+  <data name="DetailsTherapist_Label_ClientHourlyCost" xml:space="preserve">
+    <value>Coût client horaire</value>
+  </data>
+  <data name="DetailsTherapist_Label_ClientTypes" xml:space="preserve">
+    <value>Client types</value>
+  </data>
+  <data name="DetailsTherapist_Label_ConsultationType" xml:space="preserve">
+    <value>Consultation type</value>
+  </data>
+  <data name="DetailsTherapist_Label_Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="DetailsTherapist_Label_FirstName" xml:space="preserve">
+    <value>First Name</value>
+  </data>
+  <data name="DetailsTherapist_Label_Gender" xml:space="preserve">
+    <value>Gender</value>
+  </data>
+  <data name="DetailsTherapist_Label_HiringDate" xml:space="preserve">
+    <value>Hiring date</value>
+  </data>
+  <data name="DetailsTherapist_Label_HourlyWage" xml:space="preserve">
+    <value>Hourly wage</value>
+  </data>
+  <data name="DetailsTherapist_Label_InterestedFormation" xml:space="preserve">
+    <value>Are you interested to take additional formation offered by Reseau Psy?</value>
+  </data>
+  <data name="DetailsTherapist_Label_IsTaxable" xml:space="preserve">
+    <value>Appliquer</value>
+  </data>
+  <data name="DetailsTherapist_Label_Language" xml:space="preserve">
+    <value>Languages in therapy</value>
+  </data>
+  <data name="DetailsTherapist_Label_LastName" xml:space="preserve">
+    <value>Last Name</value>
+  </data>
+  <data name="DetailsTherapist_Label_MaxWeeklyRequest" xml:space="preserve">
+    <value>Max weekly request</value>
+  </data>
+  <data name="DetailsTherapist_Label_OfferedSerive" xml:space="preserve">
+    <value>Offered Services</value>
+  </data>
+  <data name="DetailsTherapist_Label_OpqNumber" xml:space="preserve">
+    <value>OPQ number</value>
+  </data>
+  <data name="DetailsTherapist_Label_Phone" xml:space="preserve">
+    <value>Phone number</value>
+  </data>
+  <data name="DetailsTherapist_Label_PostalCode" xml:space="preserve">
+    <value>Postal code</value>
+  </data>
+  <data name="DetailsTherapist_Label_ProfessionalTitles" xml:space="preserve">
+    <value>Professional titles</value>
+  </data>
+  <data name="DetailsTherapist_Label_Region" xml:space="preserve">
+    <value>Region</value>
+  </data>
+  <data name="DetailsTherapist_Label_Skills" xml:space="preserve">
+    <value>Specific skills</value>
+  </data>
+  <data name="DetailsTherapist_Label_TakeAssuranceClient" xml:space="preserve">
+    <value>Do you take clients from assurance compagny?</value>
+  </data>
+  <data name="DetailsTherapist_Label_TakeThirdPartyClient" xml:space="preserve">
+    <value>Do you take clients from third party payer such as the CSST, the ICAV or the CAVAC?</value>
+  </data>
+  <data name="DetailsTherapist_Label_TheoreticalOrientation" xml:space="preserve">
+    <value>Theoretical orientation (maximum 2)</value>
+  </data>
+  <data name="DetailsTherapist_Label_TpsNumber" xml:space="preserve">
+    <value>TPS number</value>
+  </data>
+  <data name="DetailsTherapist_Label_TvqNumber" xml:space="preserve">
+    <value>TVQ number</value>
+  </data>
+  <data name="DetailsTherapist_SkillToastrErrorTitle_FieldNotValid" xml:space="preserve">
+    <value>Field not valid</value>
+  </data>
+  <data name="DetailsTherapist_TableDDL_PracticeChoose" xml:space="preserve">
+    <value>Choose...</value>
+  </data>
+  <data name="DetailsTherapist_TableDDL_ServiceChoose" xml:space="preserve">
+    <value>Choose...</value>
+  </data>
+  <data name="DetailsTherapist_TableDDL_SkillChoose" xml:space="preserve">
+    <value>Choose...</value>
+  </data>
+  <data name="DetailsTherapist_TableDDL_TheoreticalChoose" xml:space="preserve">
+    <value>Choose...</value>
+  </data>
+  <data name="DetailsTherapist_Table_AssociationAction" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+  <data name="DetailsTherapist_Table_AssociationCancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="DetailsTherapist_Table_AssociationModify" xml:space="preserve">
+    <value>Modify</value>
+  </data>
+  <data name="DetailsTherapist_Table_AssociationName" xml:space="preserve">
+    <value>Association name</value>
+  </data>
+  <data name="DetailsTherapist_Table_AssociationNumber" xml:space="preserve">
+    <value>Association Number</value>
+  </data>
+  <data name="DetailsTherapist_Table_PracticeAction" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+  <data name="DetailsTherapist_Table_PracticeCancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="DetailsTherapist_Table_PracticeModify" xml:space="preserve">
+    <value>Modify</value>
+  </data>
+  <data name="DetailsTherapist_Table_PracticeName" xml:space="preserve">
+    <value>Area of practice</value>
+  </data>
+  <data name="DetailsTherapist_Table_ServiceAction" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+  <data name="DetailsTherapist_Table_ServiceCancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="DetailsTherapist_Table_ServiceModify" xml:space="preserve">
+    <value>Modify</value>
+  </data>
+  <data name="DetailsTherapist_Table_ServiceName" xml:space="preserve">
+    <value>Offered service</value>
+  </data>
+  <data name="DetailsTherapist_Table_ServiceType" xml:space="preserve">
+    <value>Service type</value>
+  </data>
+  <data name="DetailsTherapist_Table_SkillAction" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+  <data name="DetailsTherapist_Table_SkillCancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="DetailsTherapist_Table_SkilllName" xml:space="preserve">
+    <value>Specific skills</value>
+  </data>
+  <data name="DetailsTherapist_Table_SkillModify" xml:space="preserve">
+    <value>Modify</value>
+  </data>
+  <data name="DetailsTherapist_Table_TheoreticalAction" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+  <data name="DetailsTherapist_Table_TheoreticalCancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="DetailsTherapist_Table_TheoreticalModify" xml:space="preserve">
+    <value>Modify</value>
+  </data>
+  <data name="DetailsTherapist_Table_TheoreticalName" xml:space="preserve">
+    <value>Theoreticcal orientation</value>
+  </data>
+  <data name="DetailsTherapist_Title_CreateTherapist" xml:space="preserve">
+    <value>Create a new therapist</value>
+  </data>
+  <data name="DetailsTherapist_Title_EditTherapist" xml:space="preserve">
+    <value>Edit a therapist</value>
+  </data>
+  <data name="DetailsTherapist_ToastrErrorDescription_FailedToCreateTherapist" xml:space="preserve">
+    <value>Une erreur s'est produite lors de la création du thérapeute. Veuillez réessayer plus tard</value>
+  </data>
+  <data name="DetailsTherapist_ToastrErrorDescription_FailedToModifyTherapist" xml:space="preserve">
+    <value>Une errur s'est produit lors de la modification du profile du thérapeute. Veuillez réessayer plus tard</value>
+  </data>
+  <data name="DetailsTherapist_ToastrErrorTitle_FailedToCreateTherapist" xml:space="preserve">
+    <value>Échec de la création du thérapeute</value>
+  </data>
+  <data name="DetailsTherapist_ToastrErrorTitle_FailedToModifyTherapist" xml:space="preserve">
+    <value>Échec de la modification du thérapeute</value>
+  </data>
+  <data name="DetailsTherapist_ToastrError_CheckField" xml:space="preserve">
+    <value>Please look at your fields</value>
+  </data>
+  <data name="DetailsTherapist_ToastrError_FieldNotValid" xml:space="preserve">
+    <value>Invalid field</value>
+  </data>
+  <data name="DetailsTherapist_ToastrSuccessDescription_ModificationTherapist" xml:space="preserve">
+    <value>La modification du porofile du thérapeute a été faait avec succès</value>
+  </data>
+  <data name="DetailsTherapist_ToastrSuccessDescription_TherapistCreation" xml:space="preserve">
+    <value>La création du thérapeute s'est d.roulé avec succès</value>
+  </data>
+  <data name="DetailsTherapist_ToastrSuccessTitle_ModificationTherapist" xml:space="preserve">
+    <value>Modification terminé</value>
+  </data>
+  <data name="DetailsTherapist_ToastrSuccessTitle_TherapistCreation" xml:space="preserve">
+    <value>Création terminé</value>
+  </data>
+  <data name="ExternalAssociationClient_ExcelDocumentTableHeader_Association" xml:space="preserve">
+    <value>Association</value>
+  </data>
+  <data name="ExternalAssociationClient_ExcelDocumentTableHeader_Client" xml:space="preserve">
+    <value>Client</value>
+  </data>
+  <data name="ExternalAssociationClient_ExcelDocumentTableHeader_SentDate" xml:space="preserve">
+    <value>Sent date</value>
+  </data>
+  <data name="ExternalAssociationClient_ExcelDocumentTableHeader_Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="ExternalAssociationClient_ExcelDocumentTableHeader_StatusChangedDate" xml:space="preserve">
+    <value>Status changed date</value>
+  </data>
+  <data name="ExternalAssociationClient_ExcelDocument_TabName" xml:space="preserve">
+    <value>Clients</value>
+  </data>
+  <data name="ExternalAssociationClient_ExcelHeader_Association" xml:space="preserve">
+    <value>Association</value>
+  </data>
+  <data name="ExternalAssociationClient_ExcelHeader_ChangedStatusDate" xml:space="preserve">
+    <value>Status changed date</value>
+  </data>
+  <data name="ExternalAssociationClient_ExcelHeader_Client" xml:space="preserve">
+    <value>Client</value>
+  </data>
+  <data name="ExternalAssociationClient_ExcelHeader_SentDate" xml:space="preserve">
+    <value>Sent date</value>
+  </data>
+  <data name="ExternalAssociationClient_ExcelHeader_Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="ExternalAssociationClient_ExportButton_ExportToExcel" xml:space="preserve">
+    <value>Export to Excel</value>
+  </data>
+  <data name="ExternalAssociationClient_ExternalAssociationDdl_All" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="ExternalAssociationClient_FilterButton_Apply" xml:space="preserve">
+    <value>Apply</value>
+  </data>
+  <data name="ExternalAssociationClient_Label_EndDate" xml:space="preserve">
+    <value>End date</value>
+  </data>
+  <data name="ExternalAssociationClient_Label_ExternalAssociation" xml:space="preserve">
+    <value>Association</value>
+  </data>
+  <data name="ExternalAssociationClient_Label_PageTitle" xml:space="preserve">
+    <value>Client sent to external association</value>
+  </data>
+  <data name="ExternalAssociationClient_Label_StartDate" xml:space="preserve">
+    <value>Start date</value>
+  </data>
+  <data name="ExternalAssociationClient_Label_Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="ExternalAssociationClient_StatusDdl_All" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="ExternalAssociationClient_TableButton_Cancel" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
+  <data name="ExternalAssociationClient_TableButton_ChangeStatus" xml:space="preserve">
+    <value>Change status</value>
+  </data>
+  <data name="ExternalAssociationClient_TableHeader_Action" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="ExternalAssociationClient_TableHeader_Association" xml:space="preserve">
+    <value>Association</value>
+  </data>
+  <data name="ExternalAssociationClient_TableHeader_Client" xml:space="preserve">
+    <value>Client</value>
+  </data>
+  <data name="ExternalAssociationClient_TableHeader_SentDate" xml:space="preserve">
+    <value>Sent date</value>
+  </data>
+  <data name="ExternalAssociationClient_TableHeader_Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="ExternalAssociationClient_TableHeader_StatusChangedDate" xml:space="preserve">
+    <value>Status changed date</value>
+  </data>
+  <data name="ExternalAssociationClient_ToastrErrorDescription_FailedToApplyFilter" xml:space="preserve">
+    <value>An error occured while attempting to apply to filter to the result. Please try again later</value>
+  </data>
+  <data name="ExternalAssociationClient_ToastrErrorDescription_FailedToSetStatus" xml:space="preserve">
+    <value>An error occured while attempting to change the status of the client sent to the external association. Please try again later</value>
+  </data>
+  <data name="ExternalAssociationClient_ToastrErrorTitle_FailedToApplyFilter" xml:space="preserve">
+    <value>Failed to apply the filter</value>
+  </data>
+  <data name="ExternalAssociationClient_ToastrErrorTitle_FailedToSetStatus" xml:space="preserve">
+    <value>Failed to change the status</value>
+  </data>
+  <data name="ExternalAssociationClient_TotalTable_NotDefined" xml:space="preserve">
+    <value>Not defined</value>
+  </data>
+  <data name="ExternalAssociationClient_TotalTable_NotTookInCharge" xml:space="preserve">
+    <value>Not took in charge</value>
+  </data>
+  <data name="ExternalAssociationClient_TotalTable_TookInCharge" xml:space="preserve">
+    <value>Took in charge</value>
+  </data>
+  <data name="ForgotPassword_Button_Send" xml:space="preserve">
+    <value>Envoyer</value>
+  </data>
+  <data name="ForgotPassword_EmailContent_ResetPassword" xml:space="preserve">
+    <value>Votre lien est valide pendant {0} heures.
+Vous pouvez réinitialiser votre mot de passe à l'adresse suivante: {1}</value>
+  </data>
+  <data name="ForgotPassword_EmailSubject_ResetPassword" xml:space="preserve">
+    <value>Réinitialisation de mot de passe</value>
+  </data>
+  <data name="ForgotPassword_Error_EmailInvalid" xml:space="preserve">
+    <value>The email is invalid</value>
+  </data>
+  <data name="ForgotPassword_Error_EmailRequired" xml:space="preserve">
+    <value>The email is required</value>
+  </data>
+  <data name="ForgotPassword_Label_Email" xml:space="preserve">
+    <value>Adresse courriel</value>
+  </data>
+  <data name="ForgotPassword_Link_ReturnToLogin" xml:space="preserve">
+    <value>Retour à la page de connexion</value>
+  </data>
+  <data name="ForgotPassword_PageTitle" xml:space="preserve">
+    <value>Mot de passe oublié</value>
+  </data>
+  <data name="ForgotPassword_Subtitle" xml:space="preserve">
+    <value>Veuillez entrer votre adresse courriel pour créer un nouveau mot de passe</value>
+  </data>
+  <data name="ForgotPassword_Success_Message" xml:space="preserve">
+    <value>Si le courriel correspond à un compte valide, un courriel vous a été acheminé afin de réinitialiser votre mot de passe</value>
+  </data>
+  <data name="ForgotPassword_Title" xml:space="preserve">
+    <value>Mot de passe oublié</value>
+  </data>
+  <data name="Layout_Connected_Suffix" xml:space="preserve">
+    <value>reseaupsy.ca</value>
+  </data>
+  <data name="Layout_NotConnected_LegalBy" xml:space="preserve">
+    <value>Propulsé par {0}</value>
+    <comment>{0} Remplacé par 3wDesign</comment>
+  </data>
+  <data name="Layout_NotConnected_LegalData" xml:space="preserve">
+    <value>Vos données sont protégées.</value>
+  </data>
+  <data name="Layout_NotConnected_LegalRights" xml:space="preserve">
+    <value>Tous droits réservés Réseau Psy © {0}</value>
+    <comment>{0} Remplacé par l'année courante</comment>
+  </data>
+  <data name="ListClientReceipt_ButtonText_Apply" xml:space="preserve">
+    <value>Apply</value>
+  </data>
+  <data name="ListClientReceipt_ButtonText_DownloadReceipt" xml:space="preserve">
+    <value>Download</value>
+  </data>
+  <data name="ListClientReceipt_ButtonText_ResendReceipt" xml:space="preserve">
+    <value>Renvoyer le reçu</value>
+  </data>
+  <data name="ListClientReceipt_ButtonText_ResendReceiptModalCancel" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
+  <data name="ListClientReceipt_ButtonText_ResendReceiptModalSendReceipt" xml:space="preserve">
+    <value>Envoyer</value>
+  </data>
+  <data name="ListClientReceipt_DdlOption_All" xml:space="preserve">
+    <value>Tous</value>
+  </data>
+  <data name="ListClientReceipt_EmailContent_ResendReceipt" xml:space="preserve">
+    <value>Vous pouvez télécharger votre reçu à l'adresse suivante: {0}</value>
+  </data>
+  <data name="ListClientReceipt_EmailSubject_ResendReceipt" xml:space="preserve">
+    <value>Votre reçu de votre rendez-vous chez Réseau Psy</value>
+  </data>
+  <data name="ListClientReceipt_FilterLabel_Client" xml:space="preserve">
+    <value>Client</value>
+  </data>
+  <data name="ListClientReceipt_FilterLabel_EndDate" xml:space="preserve">
+    <value>Date de fin</value>
+  </data>
+  <data name="ListClientReceipt_FilterLabel_StartDate" xml:space="preserve">
+    <value>Date de début</value>
+  </data>
+  <data name="ListClientReceipt_FilterLabel_Therapist" xml:space="preserve">
+    <value>Thérapeute</value>
+  </data>
+  <data name="ListClientReceipt_Label_PageTitle1" xml:space="preserve">
+    <value>Liste des reçu client</value>
+  </data>
+  <data name="ListClientReceipt_Label_ResendReceiptModalEmailClient" xml:space="preserve">
+    <value>Email du client</value>
+  </data>
+  <data name="ListClientReceipt_Label_ResendReceiptModalTitle" xml:space="preserve">
+    <value>Renvoyer le reçu</value>
+  </data>
+  <data name="ListClientReceipt_TableHeaderLabel_Action" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="ListClientReceipt_TableHeaderLabel_AppointmentDate" xml:space="preserve">
+    <value>Date du rendez-vous</value>
+  </data>
+  <data name="ListClientReceipt_TableHeaderLabel_Client" xml:space="preserve">
+    <value>Client</value>
+  </data>
+  <data name="ListClientReceipt_TableLabel_EmptyTable" xml:space="preserve">
+    <value>Il n'y a pas de résultat selon vos filtres</value>
+  </data>
+  <data name="ListClientReceipt_ToastrErrorDescription_FailedToApplyFilter" xml:space="preserve">
+    <value>Une erreur est survenue lors de l'application des filtres. Veuillez réessayer plus tard</value>
+  </data>
+  <data name="ListClientReceipt_ToastrErrorDescription_FailedToSendEmail" xml:space="preserve">
+    <value>Une erreur est survenue lors de l'envoie du courriel au client. Veuillez réessayer plus tard</value>
+  </data>
+  <data name="ListClientReceipt_ToastrErrorTitle_FailedToApplyFilter" xml:space="preserve">
+    <value>Échec de l'application des filtres</value>
+  </data>
+  <data name="ListClientReceipt_ToastrErrorTitle_FailedToSendEmail" xml:space="preserve">
+    <value>Échec de l'envoie du courriel</value>
+  </data>
+  <data name="ListClientReceipt_ToastrSuccessDescription_EmailSent" xml:space="preserve">
+    <value>Le courriel a été envoyé au client avec succès</value>
+  </data>
+  <data name="ListClientReceipt_ToastrSuccessTitle_EmailSent" xml:space="preserve">
+    <value>Courriel envoyé</value>
+  </data>
+  <data name="Login_Button_Login" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="Login_Error_AccountLocked" xml:space="preserve">
+    <value>Votre compte est verouillé car vous avez effectués trop de tentatives. Utilisez le lien mot de passe oublié pour réinitialiser votre mot de passe</value>
+  </data>
+  <data name="Login_Error_ConnectionFailed" xml:space="preserve">
+    <value>Votre tentative de connexion à échoué. Veuillez réessayer.</value>
+  </data>
+  <data name="Login_Error_EmailInvalid" xml:space="preserve">
+    <value>The email is invalid</value>
+  </data>
+  <data name="Login_Error_EmailRequired" xml:space="preserve">
+    <value>The email is required</value>
+  </data>
+  <data name="Login_Error_PasswordRequired" xml:space="preserve">
+    <value>The password is required</value>
+  </data>
+  <data name="Login_Label_Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="Login_Label_Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="Login_Label_RememberMe" xml:space="preserve">
+    <value>Mémoriser mon mot de passe</value>
+  </data>
+  <data name="Login_Link_ForgotPassword" xml:space="preserve">
+    <value>Forgot password?</value>
+  </data>
+  <data name="Login_Subtitle" xml:space="preserve">
+    <value>Connectez-vous pour accéder à votre tableau de bord</value>
+  </data>
+  <data name="Login_Title" xml:space="preserve">
+    <value>Log in</value>
+  </data>
+  <data name="Menu_About" xml:space="preserve">
+    <value>about</value>
+  </data>
+  <data name="Menu_EN" xml:space="preserve">
+    <value>en</value>
+  </data>
+  <data name="Menu_FR" xml:space="preserve">
+    <value>fr</value>
+  </data>
+  <data name="MyProfile_Button_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="MyProfile_Button_Modify" xml:space="preserve">
+    <value>Modify</value>
+  </data>
+  <data name="MyProfile_DDL_AssuranceChoose" xml:space="preserve">
+    <value>Choose...</value>
+  </data>
+  <data name="MyProfile_DDL_AssuranceNo" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="MyProfile_DDL_AssuranceYes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="MyProfile_DDL_InterestedFormationChoose" xml:space="preserve">
+    <value>Choose...</value>
+  </data>
+  <data name="MyProfile_DDL_InterestedFormationNo" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="MyProfile_DDL_InterestedFormationYes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="MyProfile_DDL_ThirdPartyChoose" xml:space="preserve">
+    <value>Choose...</value>
+  </data>
+  <data name="MyProfile_DDL_ThirdPartyNo" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="MyProfile_DDL_ThirdPartyYes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="MyProfile_Title_MyProfile" xml:space="preserve">
+    <value>My Profile</value>
+  </data>
+  <data name="MySkills_OrientationToastrErrorDescription_FieldNotValid" xml:space="preserve">
+    <value>One of the field is invalid. Please review them</value>
+  </data>
+  <data name="MySkills_OrientationToastrErrorHeader_FieldNotValid" xml:space="preserve">
+    <value>Field not valid</value>
+  </data>
+  <data name="MySkills_PageTitle_MySkills" xml:space="preserve">
+    <value>My skills</value>
+  </data>
+  <data name="MySkills_PracticeTableDLL_Choose" xml:space="preserve">
+    <value>Choose...</value>
+  </data>
+  <data name="MySkills_PracticeTable_CancelButton" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="MySkills_PracticeTable_ModifyButton" xml:space="preserve">
+    <value>Modify</value>
+  </data>
+  <data name="MySkills_ServiceTableDDL_Choose" xml:space="preserve">
+    <value>Choose...</value>
+  </data>
+  <data name="MySkills_ServiceTable_CancelButton" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="MySkills_SkillsTableHeader_Action" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="MySkills_SkillsTableHeader_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="MySkills_SkillTableDdl_Choose" xml:space="preserve">
+    <value>Choose...</value>
+  </data>
+  <data name="MySkills_SkillTable_CancelButton" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="MySkills_SkillTable_ModifyButton" xml:space="preserve">
+    <value>Modify</value>
+  </data>
+  <data name="MySkills_SkillToastrErrorDescription_FieldNotValid" xml:space="preserve">
+    <value>Please review your fields</value>
+  </data>
+  <data name="MySkills_TableDDL_ServiceChoose" xml:space="preserve">
+    <value>Choose...</value>
+  </data>
+  <data name="MySkills_TableHeader_PracticeAction" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="MySkills_TableHeader_PracticeName" xml:space="preserve">
+    <value>Area of practice</value>
+  </data>
+  <data name="MySkills_TableHeader_ServiceAction" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="MySkills_TableHeader_ServiceName" xml:space="preserve">
+    <value>Service</value>
+  </data>
+  <data name="MySkills_TableHeader_ServiceType" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="MySkills_TableTitle_AreaOfPractice" xml:space="preserve">
+    <value>Area of practice (maximum 2)</value>
+  </data>
+  <data name="MySkills_TableTitle_Association" xml:space="preserve">
+    <value>Association or other professional order</value>
+  </data>
+  <data name="MySkills_TableTitle_OfferedService" xml:space="preserve">
+    <value>Offered service</value>
+  </data>
+  <data name="MySkills_TableTitle_SpecificSkills" xml:space="preserve">
+    <value>Specific skills</value>
+  </data>
+  <data name="MySkills_TableTitle_TheoreticalOrientation" xml:space="preserve">
+    <value>Theoretical Orientation (maximum 2)</value>
+  </data>
+  <data name="MySkills_Table_AssociationAction" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="MySkills_Table_AssociationCancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="MySkills_Table_AssociationModify" xml:space="preserve">
+    <value>Modifier</value>
+  </data>
+  <data name="MySkills_Table_AssociationName" xml:space="preserve">
+    <value>Association / other professional order name</value>
+  </data>
+  <data name="MySkills_Table_AssociationNumber" xml:space="preserve">
+    <value>Number</value>
+  </data>
+  <data name="MySkills_Table_AssociationSave" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="MySkills_Table_ServiceModify" xml:space="preserve">
+    <value>Modify</value>
+  </data>
+  <data name="MySkills_TheoreticalTableDdl_Choose" xml:space="preserve">
+    <value>Choose...</value>
+  </data>
+  <data name="MySkills_TheoreticalTableHeader_Action" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="MySkills_TheoreticalTableHeader_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="MySkills_TheoreticalTable_CancelButton" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="MySkills_TheoreticalTable_ModifyButton" xml:space="preserve">
+    <value>Modify</value>
+  </data>
+  <data name="MySkills_ToastrErrorDescription_CheckField" xml:space="preserve">
+    <value>Please review your fields</value>
+  </data>
+  <data name="MySkills_ToastrErrorDescription_FailedToAddAssociation" xml:space="preserve">
+    <value>Error while attempting to add the association. Please try again later</value>
+  </data>
+  <data name="MySkills_ToastrErrorDescription_FailedToAddOrientation" xml:space="preserve">
+    <value>Error while attempting to add the thepretical orientation. Please try again later</value>
+  </data>
+  <data name="MySkills_ToastrErrorDescription_FailedToAddPracticeArea" xml:space="preserve">
+    <value>An error occured while attempting to add the area of practice. Please try again later</value>
+  </data>
+  <data name="MySkills_ToastrErrorDescription_FailedToAddService" xml:space="preserve">
+    <value>An error occured while adding the service. Please try again later</value>
+  </data>
+  <data name="MySkills_ToastrErrorDescription_FailedToAddSkill" xml:space="preserve">
+    <value>An error occured while attempting to add the specific skill. Please try again later</value>
+  </data>
+  <data name="MySkills_ToastrErrorDescription_FailedToDeleteAssociation" xml:space="preserve">
+    <value>Error while attempting to delete the association. Please try again later</value>
+  </data>
+  <data name="MySkills_ToastrErrorDescription_FailedToDeleteService" xml:space="preserve">
+    <value>An error occured while deleting the service. Please try again later</value>
+  </data>
+  <data name="MySkills_ToastrErrorDescription_FailedToModifyAssociation" xml:space="preserve">
+    <value>An error occured whil attempting to update the association. Please try again later</value>
+  </data>
+  <data name="MySkills_ToastrErrorDescription_FailedToModifyOrientation" xml:space="preserve">
+    <value>An error occured while attempting to modify the theoretical orientation. Please try again later</value>
+  </data>
+  <data name="MySkills_ToastrErrorDescription_FailedToModifyService" xml:space="preserve">
+    <value>An error occured while attempting to modify the service. Please try again later</value>
+  </data>
+  <data name="MySkills_ToastrErrorDescription_FailedToModifySkill" xml:space="preserve">
+    <value>An error occured while attempting to modify the specific skill</value>
+  </data>
+  <data name="MySkills_ToastrErrorDescription_FailedToRemoveOrientation" xml:space="preserve">
+    <value>Error occured while attempting to delete the theoretical orientation. Please try again later</value>
+  </data>
+  <data name="MySkills_ToastrErrorDescription_FailedToRemovePracticeArea" xml:space="preserve">
+    <value>An error occured while attempting to remove the area of practice. Please try again later</value>
+  </data>
+  <data name="MySkills_ToastrErrorDescription_FailedToRemoveSkill" xml:space="preserve">
+    <value>An error occured while attempting to delete the specific skill. Please try again later</value>
+  </data>
+  <data name="MySkills_ToastrErrorTitle_ErrorAddAssociation" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="MySkills_ToastrErrorTitle_ErrorDeleteAssociation" xml:space="preserve">
+    <value>Error while deleting</value>
+  </data>
+  <data name="MySkills_ToastrErrorTitle_ErrorDeleteService" xml:space="preserve">
+    <value>Failed to delete service</value>
+  </data>
+  <data name="MySkills_ToastrErrorTitle_ErrorModifyAssociation" xml:space="preserve">
+    <value>Failed to modify the association</value>
+  </data>
+  <data name="MySkills_ToastrErrorTitle_FailedToAddOrientation" xml:space="preserve">
+    <value>Add failed</value>
+  </data>
+  <data name="MySkills_ToastrErrorTitle_FailedToAddPracticeArea" xml:space="preserve">
+    <value>Failed to add the area of practice</value>
+  </data>
+  <data name="MySkills_ToastrErrorTitle_FailedToAddService" xml:space="preserve">
+    <value>Failed to add the service</value>
+  </data>
+  <data name="MySkills_ToastrErrorTitle_FailedToAddSkill" xml:space="preserve">
+    <value>Add failed</value>
+  </data>
+  <data name="MySkills_ToastrErrorTitle_FailedToModifyOrientation" xml:space="preserve">
+    <value>Modification failed</value>
+  </data>
+  <data name="MySkills_ToastrErrorTitle_FailedToModifyService" xml:space="preserve">
+    <value>Failed to modify</value>
+  </data>
+  <data name="MySkills_ToastrErrorTitle_FailedToModifySkill" xml:space="preserve">
+    <value>Modification failed</value>
+  </data>
+  <data name="MySkills_ToastrErrorTitle_FailedToRemoveOrientation" xml:space="preserve">
+    <value>Delete failed</value>
+  </data>
+  <data name="MySkills_ToastrErrorTitle_FailedToRemovePracticeArea" xml:space="preserve">
+    <value>Failed to remove the area of practice</value>
+  </data>
+  <data name="MySkills_ToastrErrorTitle_FailedToRemoveSkill" xml:space="preserve">
+    <value>Delete failed</value>
+  </data>
+  <data name="MySkills_ToastrErrorTitle_FieldNotValid" xml:space="preserve">
+    <value>Field not valid</value>
+  </data>
+  <data name="MySkills_ToastrError_CheckField" xml:space="preserve">
+    <value>Invalid field</value>
+  </data>
+  <data name="MySkills_ToastrError_FieldNotValid" xml:space="preserve">
+    <value>Please look at your fields</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="Register_Error_EmailInvalid" xml:space="preserve">
+    <value>The email is invalid</value>
+  </data>
+  <data name="Register_Error_EmailRequired" xml:space="preserve">
+    <value>The email is required</value>
+  </data>
+  <data name="Register_Error_PasswordLength" xml:space="preserve">
+    <value>The {0} must be at least {2} characters long</value>
+  </data>
+  <data name="Register_Error_PasswordRequired" xml:space="preserve">
+    <value>The password is required</value>
+  </data>
+  <data name="Register_Label_Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="Register_Label_PasswordConfirmation" xml:space="preserve">
+    <value>Password Confirmation</value>
+  </data>
+  <data name="Registrer_Error_PasswordsNoMatch" xml:space="preserve">
+    <value>The password and confirmation password do not match</value>
+  </data>
+  <data name="ResetPassword_ErrorMessage_FailedToReset" xml:space="preserve">
+    <value>Une erreur est survenu lors de la réinitaialisation du mot de passe. Veuillez réessayer plus tard</value>
+  </data>
+  <data name="ResetPassword_ErrorMessage_InvalidLink" xml:space="preserve">
+    <value>Le lien est invalide</value>
+  </data>
+  <data name="ResetPassword_ErrorMessage_LinkExpired" xml:space="preserve">
+    <value>Le lien est expiré</value>
+  </data>
+  <data name="ResetPassword_ErrorMessage_LinkUsed" xml:space="preserve">
+    <value>Le lien a déjà été utilisé</value>
+  </data>
+  <data name="ResetPassword_Link_ResendLink" xml:space="preserve">
+    <value>Redemander un lien</value>
+  </data>
+  <data name="ResetPassword_SuccessMessage_PasswordReseted" xml:space="preserve">
+    <value>Le mot de passe du compte associé à l'adresse courriel a été réinitialisé avec succès</value>
+  </data>
+  <data name="TherapistAppointment_AppointmentModalClientButton_CancelAppointment" xml:space="preserve">
+    <value>Cancel this appointment</value>
+  </data>
+  <data name="TherapistAppointment_AppointmentModalClientButton_ReturnAppointment" xml:space="preserve">
+    <value>Return client to the administration</value>
+  </data>
+  <data name="TherapistAppointment_AppointmentModalClientDdl_Choose" xml:space="preserve">
+    <value>Choose...</value>
+  </data>
+  <data name="TherapistAppointment_AppointmentModalConflictTableHeader_Client" xml:space="preserve">
+    <value>Client</value>
+  </data>
+  <data name="TherapistAppointment_AppointmentModalConflictTableHeader_EndDate" xml:space="preserve">
+    <value>End date</value>
+  </data>
+  <data name="TherapistAppointment_AppointmentModalConflictTableHeader_StartDate" xml:space="preserve">
+    <value>Start date</value>
+  </data>
+  <data name="TherapistAppointment_AppointmentModalConflict_ErrorMessage" xml:space="preserve">
+    <value>The appointment(s) that you tried to save entered in conflict with the floowing appointment(s)</value>
+  </data>
+  <data name="TherapistAppointment_AppointmentModalDdlText_Text" xml:space="preserve">
+    <value>session</value>
+  </data>
+  <data name="TherapistAppointment_AppointmentModalDDL_RepetitionMonth" xml:space="preserve">
+    <value>Month</value>
+  </data>
+  <data name="TherapistAppointment_AppointmentModalDDL_RepetitionWeek" xml:space="preserve">
+    <value>Week</value>
+  </data>
+  <data name="TherapistAppointment_AppointmentModalDll_ConsultationTypeChoose" xml:space="preserve">
+    <value>Choose...</value>
+  </data>
+  <data name="TherapistAppointment_AppointmentModalDll_NatureActChoose" xml:space="preserve">
+    <value>Choose...</value>
+  </data>
+  <data name="TherapistAppointment_AppointmentModalLabel_RepeatEveryDayWeek" xml:space="preserve">
+    <value>Repeat on</value>
+  </data>
+  <data name="TherapistAppointment_AppointmentModalLabel_RepetitionEndAfterPart1" xml:space="preserve">
+    <value>End after</value>
+  </data>
+  <data name="TherapistAppointment_AppointmentModalLabel_RepetitionEndAfterPart2" xml:space="preserve">
+    <value>appointment</value>
+  </data>
+  <data name="TherapistAppointment_AppointmentModalLabel_StartsFrom" xml:space="preserve">
+    <value>Starts from</value>
+  </data>
+  <data name="TherapistAppointment_AppointmentModal_AddRepetition" xml:space="preserve">
+    <value>Add repetition</value>
+  </data>
+  <data name="TherapistAppointment_AppointmentModal_AvailabilityHighlighted" xml:space="preserve">
+    <value>* Vos disponibilités communes sont surligné en vert</value>
+  </data>
+  <data name="TherapistAppointment_AppointmentModal_City" xml:space="preserve">
+    <value>City</value>
+  </data>
+  <data name="TherapistAppointment_AppointmentModal_Client" xml:space="preserve">
+    <value>Client</value>
+  </data>
+  <data name="TherapistAppointment_AppointmentModal_ClientAvailabilities" xml:space="preserve">
+    <value>Client availabilities</value>
+  </data>
+  <data name="TherapistAppointment_AppointmentModal_ClientLanguages" xml:space="preserve">
+    <value>Langues parlées</value>
+  </data>
+  <data name="TherapistAppointment_AppointmentModal_ClientMessage" xml:space="preserve">
+    <value>Client message</value>
+  </data>
+  <data name="TherapistAppointment_AppointmentModal_ConsultationnType" xml:space="preserve">
+    <value>Consultation type</value>
+  </data>
+  <data name="TherapistAppointment_AppointmentModal_ConsultationReason" xml:space="preserve">
+    <value>Consultation reason</value>
+  </data>
+  <data name="TherapistAppointment_AppointmentModal_ConsultationType" xml:space="preserve">
+    <value>Consultation type</value>
+  </data>
+  <data name="TherapistAppointment_AppointmentModal_Date" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="TherapistAppointment_AppointmentModal_Duration" xml:space="preserve">
+    <value>Duration</value>
+  </data>
+  <data name="TherapistAppointment_AppointmentModal_Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="TherapistAppointment_AppointmentModal_Header" xml:space="preserve">
+    <value>Appointment</value>
+  </data>
+  <data name="TherapistAppointment_AppointmentModal_NatureAct" xml:space="preserve">
+    <value>Nature of the act</value>
+  </data>
+  <data name="TherapistAppointment_AppointmentModal_Phone" xml:space="preserve">
+    <value>Phone number</value>
+  </data>
+  <data name="TherapistAppointment_AppointmentModal_PostalCode" xml:space="preserve">
+    <value>Postal code</value>
+  </data>
+  <data name="TherapistAppointment_AppointmentModal_Region" xml:space="preserve">
+    <value>Region</value>
+  </data>
+  <data name="TherapistAppointment_AppointmentModal_RepeatEvery" xml:space="preserve">
+    <value>Repeat every</value>
+  </data>
+  <data name="TherapistAppointment_AppointmentModal_RepeatOption" xml:space="preserve">
+    <value>Options de répétition</value>
+  </data>
+  <data name="TherapistAppointment_AppointmentModal_SessionInfoBubble" xml:space="preserve">
+    <value>One sessoion = 1 hour</value>
+  </data>
+  <data name="TherapistAppointment_AppointmentModal_Time" xml:space="preserve">
+    <value>Time</value>
+  </data>
+  <data name="TherapistAppointment_Button_AddAppointment" xml:space="preserve">
+    <value>Add appointment</value>
+  </data>
+  <data name="TherapistAppointment_ConsultModalButton_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="TherapistAppointment_ConsultModalButton_Modify" xml:space="preserve">
+    <value>Modify</value>
+  </data>
+  <data name="TherapistAppointment_ConsultModalButton_Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="TherapistAppointment_DeleteModalApplyToOption_AllAppointment" xml:space="preserve">
+    <value>All appointment from the repetition</value>
+  </data>
+  <data name="TherapistAppointment_DeleteModalApplyToOption_ThisOnly" xml:space="preserve">
+    <value>This appointment only</value>
+  </data>
+  <data name="TherapistAppointment_DeleteModalButton_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="TherapistAppointment_DeleteModalButton_ConfirmDelete" xml:space="preserve">
+    <value>Confirm</value>
+  </data>
+  <data name="TherapistAppointment_DeleteModalDeleteReason_Choose" xml:space="preserve">
+    <value>Choose...</value>
+  </data>
+  <data name="TherapistAppointment_DeleteModalLabel_ApplyTo" xml:space="preserve">
+    <value>Apply to</value>
+  </data>
+  <data name="TherapistAppointment_DeleteModalLabel_DeleteReason" xml:space="preserve">
+    <value>Delete reason</value>
+  </data>
+  <data name="TherapistAppointment_DeleteModal_BodyText" xml:space="preserve">
+    <value>Please specify the reason why you want to want to delete the appointment</value>
+  </data>
+  <data name="TherapistAppointment_DeleteModal_Header" xml:space="preserve">
+    <value>Delete an appointment</value>
+  </data>
+  <data name="TherapistAppointment_LabelAert_WarningNeedToSendLink1" xml:space="preserve">
+    <value>Attention, vous devrez communiquer le lien de la visioconférence au client par vous même!</value>
+  </data>
+  <data name="TherapistAppointment_ModifyForModalButton_Apply" xml:space="preserve">
+    <value>Appliquer</value>
+  </data>
+  <data name="TherapistAppointment_ModifyForModalButton_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="TherapistAppointment_ModifyForModal_ApplyTo" xml:space="preserve">
+    <value>Appliquer à :</value>
+  </data>
+  <data name="TherapistAppointment_ModifyForModal_BodyText" xml:space="preserve">
+    <value>This appointment is part of a repetition. Do you want to apply the modification to all the future appointment or this one only?</value>
+  </data>
+  <data name="TherapistAppointment_ModifyForModal_Header" xml:space="preserve">
+    <value>Modify for</value>
+  </data>
+  <data name="TherapistAppointment_ModifyForModal_ThisAndAfterAppointment" xml:space="preserve">
+    <value>Ce rendez-vous et tous les suivants</value>
+  </data>
+  <data name="TherapistAppointment_ModifyForModal_ThisAppointmentOnly" xml:space="preserve">
+    <value>Ce rendez-vous seulement</value>
+  </data>
+  <data name="TherapistAppointment_PageTitle_Appointment" xml:space="preserve">
+    <value>Appointment</value>
+  </data>
+  <data name="TherapistAppointment_ReturnClientModalButton_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="TherapistAppointment_ReturnClientModalButton_ConfirmReturn" xml:space="preserve">
+    <value>Confirm</value>
+  </data>
+  <data name="TherapistAppointment_ReturnClientModalLabel_Message" xml:space="preserve">
+    <value>Message to the administrator</value>
+  </data>
+  <data name="TherapistAppointment_ReturnClientModal_BodyText" xml:space="preserve">
+    <value>You are about to return the client to the administration. You will no longer be able to access the client information nor be able to book appointment with him. Please specify the reason why you are returning him</value>
+  </data>
+  <data name="TherapistAppointment_ReturnClientModal_Header" xml:space="preserve">
+    <value>Return client</value>
+  </data>
+  <data name="TherapistAppointment_ScheduleTableButton_Consult" xml:space="preserve">
+    <value>Consult</value>
+  </data>
+  <data name="TherapistAppointment_ScheduleTableHeader_Action" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="TherapistAppointment_ScheduleTableHeader_Client" xml:space="preserve">
+    <value>Client</value>
+  </data>
+  <data name="TherapistAppointment_ScheduleTableHeader_RequestDate" xml:space="preserve">
+    <value>Request date</value>
+  </data>
+  <data name="TherapistAppointment_ScheduleTable_Title" xml:space="preserve">
+    <value>Client request to schedule</value>
+  </data>
+  <data name="TherapistAppointment_TableText_EmptyTable" xml:space="preserve">
+    <value>You responded to all the request</value>
+  </data>
+  <data name="TherapistAppointment_ToastrErrorDescription_FailedToAddAppointment" xml:space="preserve">
+    <value>An error occured while attempting to add the appointmment(s). Please try again later</value>
+  </data>
+  <data name="TherapistAppointment_ToastrErrorDescription_FailedToDeleteAppointment" xml:space="preserve">
+    <value>An error occurewd while attempting to delete the appointment. Please try again later</value>
+  </data>
+  <data name="TherapistAppointment_ToastrErrorDescription_FailedToLoadAppointmentInfo" xml:space="preserve">
+    <value>Une erreur est survenu lors du cahrgement des informations du rendez-vous. Veuillez-réessayer plus tard. </value>
+  </data>
+  <data name="TherapistAppointment_ToastrErrorDescription_FailedToLoadClientInfo" xml:space="preserve">
+    <value>Une erreur est survenu lors du chargement des informations du client. Veuillez réessayer plus tard.</value>
+  </data>
+  <data name="TherapistAppointment_ToastrErrorDescription_FailedToModifyAppointment" xml:space="preserve">
+    <value>An error occured while attempting to modify the appointment. Please try again later</value>
+  </data>
+  <data name="TherapistAppointment_ToastrErrorDescription_FailedToReturnClient" xml:space="preserve">
+    <value>An error occured while attempting to return the client to the administration. Please try again later</value>
+  </data>
+  <data name="TherapistAppointment_ToastrErrorTitle_FailedToAddAppointment" xml:space="preserve">
+    <value>Failed to add the appointment(s)</value>
+  </data>
+  <data name="TherapistAppointment_ToastrErrorTitle_FailedToDeleteAppointment" xml:space="preserve">
+    <value>Failed to delete appointment</value>
+  </data>
+  <data name="TherapistAppointment_ToastrErrorTitle_FailedToLoadAppointmentInfo" xml:space="preserve">
+    <value>Échec du chargement des informations de rendez-vous</value>
+  </data>
+  <data name="TherapistAppointment_ToastrErrorTitle_FailedToLoadClientInfo" xml:space="preserve">
+    <value>Éched lors du chargement des informations</value>
+  </data>
+  <data name="TherapistAppointment_ToastrErrorTitle_FailedToModifyAppointment" xml:space="preserve">
+    <value>Failed to modify the appointment</value>
+  </data>
+  <data name="TherapistAppointment_ToastrErrorTitle_FailedToReturnClient" xml:space="preserve">
+    <value>Failed to return the client to the administration</value>
+  </data>
+  <data name="TherapistBill_ButtonText_Apply" xml:space="preserve">
+    <value>Appliquer</value>
+  </data>
+  <data name="TherapistBill_ButtonText_Cancel" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
+  <data name="TherapistBill_ButtonText_Download" xml:space="preserve">
+    <value>Télécharger</value>
+  </data>
+  <data name="TherapistBill_ButtonText_Export" xml:space="preserve">
+    <value>Exporter</value>
+  </data>
+  <data name="TherapistBill_ButtonText_ExportToExcel" xml:space="preserve">
+    <value>Exporter vers Excel</value>
+  </data>
+  <data name="TherapistBill_ButtonText_Pay" xml:space="preserve">
+    <value>Payer</value>
+  </data>
+  <data name="TherapistBill_DdlOption_ExportDetailModalBill" xml:space="preserve">
+    <value>Facture</value>
+  </data>
+  <data name="TherapistBill_DdlOption_ExportDetailModalPayment" xml:space="preserve">
+    <value>Paiement</value>
+  </data>
+  <data name="TherapistBill_DdlOption_PaymentStatusAll" xml:space="preserve">
+    <value>Tous</value>
+  </data>
+  <data name="TherapistBill_DdlOption_PaymentStatusNotPaid" xml:space="preserve">
+    <value>Non payé</value>
+  </data>
+  <data name="TherapistBill_DdlOption_PaymentStatusPaid" xml:space="preserve">
+    <value>Payé</value>
+  </data>
+  <data name="TherapistBill_DdlOption_TherapistAll" xml:space="preserve">
+    <value>Tous</value>
+  </data>
+  <data name="TherapistBill_ExcelDocumentTableHeader_BillNumber" xml:space="preserve">
+    <value>Numéro de facture</value>
+  </data>
+  <data name="TherapistBill_ExcelDocumentTableHeader_BillPaymentDate" xml:space="preserve">
+    <value>Date du paiement de la facture</value>
+  </data>
+  <data name="TherapistBill_ExcelDocumentTableHeader_BillSentDate" xml:space="preserve">
+    <value>Date de l'envoie de la facture</value>
+  </data>
+  <data name="TherapistBill_ExcelDocumentTableHeader_SubTotal" xml:space="preserve">
+    <value>Sous-total</value>
+  </data>
+  <data name="TherapistBill_ExcelDocumentTableHeader_TherapistName" xml:space="preserve">
+    <value>Thérapeute</value>
+  </data>
+  <data name="TherapistBill_ExcelDocumentTableHeader_TherapistTpsNumber" xml:space="preserve">
+    <value>Numéro de TPS</value>
+  </data>
+  <data name="TherapistBill_ExcelDocumentTableHeader_TherapistTvqNumber" xml:space="preserve">
+    <value>Numéro de TVQ</value>
+  </data>
+  <data name="TherapistBill_ExcelDocumentTableHeader_TotalBill" xml:space="preserve">
+    <value>Montant total</value>
+  </data>
+  <data name="TherapistBill_ExcelDocumentTableHeader_TpsAmount" xml:space="preserve">
+    <value>Montant de la TPS</value>
+  </data>
+  <data name="TherapistBill_ExcelDocumentTableHeader_TvqAmount" xml:space="preserve">
+    <value>Montant de la TVQ</value>
+  </data>
+  <data name="TherapistBill_FilterLabel_EndDate" xml:space="preserve">
+    <value>Date de fin</value>
+  </data>
+  <data name="TherapistBill_FilterLabel_PaymentStatus" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="TherapistBill_FilterLabel_StartDate" xml:space="preserve">
+    <value>Date de début</value>
+  </data>
+  <data name="TherapistBill_FilterLabel_Therapist" xml:space="preserve">
+    <value>Thérapeute</value>
+  </data>
+  <data name="TherapistBill_Label_ExportDetailModalEndDate" xml:space="preserve">
+    <value>Date de fin</value>
+  </data>
+  <data name="TherapistBill_Label_ExportDetailModalExportationType" xml:space="preserve">
+    <value>Type d'exportation</value>
+  </data>
+  <data name="TherapistBill_Label_ExportDetailModalStartDate" xml:space="preserve">
+    <value>Date de début</value>
+  </data>
+  <data name="TherapistBill_Label_ExportDetailModalTitle" xml:space="preserve">
+    <value>Détail d'exportation</value>
+  </data>
+  <data name="TherapistBill_Label_PageTitle" xml:space="preserve">
+    <value>Facture thérapeute</value>
+  </data>
+  <data name="TherapistBill_Label_PayTherapistModalPaymentDate" xml:space="preserve">
+    <value>Date du paiement</value>
+  </data>
+  <data name="TherapistBill_Label_PayTherapistModalTitle" xml:space="preserve">
+    <value>Confirmer le paiement</value>
+  </data>
+  <data name="TherapistBill_TableBodyLabel_NotPaid" xml:space="preserve">
+    <value>Non payé</value>
+  </data>
+  <data name="TherapistBill_TableBodyLabel_Paid" xml:space="preserve">
+    <value>Payé</value>
+  </data>
+  <data name="TherapistBill_TableHeaderLabel_Action" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="TherapistBill_TableHeaderLabel_BillAmount" xml:space="preserve">
+    <value>Montant</value>
+  </data>
+  <data name="TherapistBill_TableHeaderLabel_BillNumber" xml:space="preserve">
+    <value>Numéro de facture</value>
+  </data>
+  <data name="TherapistBill_TableHeaderLabel_ClaimDate" xml:space="preserve">
+    <value>Date de la réclamation</value>
+  </data>
+  <data name="TherapistBill_TableHeaderLabel_PaymentDate" xml:space="preserve">
+    <value>Date du paiement</value>
+  </data>
+  <data name="TherapistBill_TableHeaderLabel_PaymentStatus" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="TherapistBill_TableHeaderLabel_Therapist" xml:space="preserve">
+    <value>Thérapeute</value>
+  </data>
+  <data name="TherapistBill_TableLabel_NoResult" xml:space="preserve">
+    <value>Il n'y a pas de résultat selon vos filtres</value>
+  </data>
+  <data name="TherapistBill_ToastrErrorDescription_FailedToApplyFilter" xml:space="preserve">
+    <value>Une erreur est surevenu lors de l'application des filtres. Veuillez réessayer plus tard</value>
+  </data>
+  <data name="TherapistBill_ToastrErrorDescription_FailedToSetPaymentDate" xml:space="preserve">
+    <value>Une erreur est survenue lors de l'application de la date de paiement. Veuillez réessayer plus tard</value>
+  </data>
+  <data name="TherapistBill_ToastrErrorTitle_FailedToApplyFilter" xml:space="preserve">
+    <value>Échec de l'application des filtres</value>
+  </data>
+  <data name="TherapistBill_ToastrErrorTitle_FailedToSetPaymentDate" xml:space="preserve">
+    <value>Échec du l'application de la date de paiement</value>
+  </data>
+  <data name="TherapistClientRequest_ConsultModalButton_AcceptRequest" xml:space="preserve">
+    <value>Accept</value>
+  </data>
+  <data name="TherapistClientRequest_ConsultModalButton_RefuseRequest" xml:space="preserve">
+    <value>Refuse</value>
+  </data>
+  <data name="TherapistClientRequest_ConsultModal_AdminMessage" xml:space="preserve">
+    <value>Admin message</value>
+  </data>
+  <data name="TherapistClientRequest_ConsultModal_ClientAvailabilities" xml:space="preserve">
+    <value>Availabilities</value>
+  </data>
+  <data name="TherapistClientRequest_ConsultModal_ClientConsultationReason" xml:space="preserve">
+    <value>Consultation reason</value>
+  </data>
+  <data name="TherapistClientRequest_ConsultModal_ClientConsultationType" xml:space="preserve">
+    <value>Consultation type</value>
+  </data>
+  <data name="TherapistClientRequest_ConsultModal_ClientLanguage" xml:space="preserve">
+    <value>Langue parlé</value>
+  </data>
+  <data name="TherapistClientRequest_ConsultModal_ClientMessage" xml:space="preserve">
+    <value>Client message</value>
+  </data>
+  <data name="TherapistClientRequest_ConsultModal_ClientRegion" xml:space="preserve">
+    <value>Region</value>
+  </data>
+  <data name="TherapistClientRequest_ConsultModal_Header" xml:space="preserve">
+    <value>Client information</value>
+  </data>
+  <data name="TherapistClientRequest_PageInformation_Information" xml:space="preserve">
+    <value>The following request was sent to you from the admin. You need to accept or refuse them by clicking on the consult button</value>
+  </data>
+  <data name="TherapistClientRequest_PageTitle_ListClientRequest" xml:space="preserve">
+    <value>Client consultation request</value>
+  </data>
+  <data name="TherapistClientRequest_TableButton_Consult" xml:space="preserve">
+    <value>Consult</value>
+  </data>
+  <data name="TherapistClientRequest_TableHeader_Action" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="TherapistClientRequest_TableHeader_Client" xml:space="preserve">
+    <value>Client</value>
+  </data>
+  <data name="TherapistClientRequest_TableHeader_ExpirationDate" xml:space="preserve">
+    <value>Expiration date</value>
+  </data>
+  <data name="TherapistClientRequest_TableHeader_ReceiveDate" xml:space="preserve">
+    <value>Reception date</value>
+  </data>
+  <data name="TherapistClientRequest_TableText_EmptyTable" xml:space="preserve">
+    <value>You have no waiting request currently</value>
+  </data>
+  <data name="TherapistClientRequest_ToastrErrorDescription_FailedToAnswerRequest" xml:space="preserve">
+    <value>An error occured while attempting to answer the request. Please try again later</value>
+  </data>
+  <data name="TherapistClientRequest_ToastrErrorTitle_FailedToAnswerRequest" xml:space="preserve">
+    <value>Failed to answer the request</value>
+  </data>
+  <data name="TherapistClientRequest_ToastrInfoDescription_RequestRefused" xml:space="preserve">
+    <value>The request was sent back to the administration</value>
+  </data>
+  <data name="TherapistClientRequest_ToastrInfoTitle_RequestRefused" xml:space="preserve">
+    <value>Request refused</value>
+  </data>
+  <data name="TherapistClientRequest_ToastrSuccessButton_GoToAppointment" xml:space="preserve">
+    <value>Go to appointment</value>
+  </data>
+  <data name="TherapistClientRequest_ToastrSuccessButton_GoToDashboard" xml:space="preserve">
+    <value>Aller au tableau de board</value>
+  </data>
+  <data name="TherapistClientRequest_ToastrSuccessDescription_RequestAccepted" xml:space="preserve">
+    <value>The client request was accepted. You can now schedule it in the appointment page</value>
+  </data>
+  <data name="TherapistClientRequest_ToastrSuccessTitle_RequestAccepted" xml:space="preserve">
+    <value>Request accepted</value>
+  </data>
+  <data name="TherapistDashBoard_Button_Goto" xml:space="preserve">
+    <value>Consulter</value>
+  </data>
+  <data name="TherapistDashBoard_Button_SeeAll" xml:space="preserve">
+    <value>Voir tous les rendez-vous</value>
+  </data>
+  <data name="TherapistDashBoard_Label_PageTitle" xml:space="preserve">
+    <value>Dashboard</value>
+  </data>
+  <data name="TherapistList_ButtonText_CreateTherapist" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="TherapistList_DdlAvailability_All" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="TherapistList_DdlAvailability_Available" xml:space="preserve">
+    <value>Available</value>
+  </data>
+  <data name="TherapistList_DdlAvailability_Complete" xml:space="preserve">
+    <value>Full</value>
+  </data>
+  <data name="TherapistList_DdlClientAge_All" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="TherapistList_DdlClientType_All" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="TherapistList_DdlConsultationType_All" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="TherapistList_DdlGender_All" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="TherapistList_DdlLanguage_All" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="TherapistList_DdlProfessionalTitle_All" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="TherapistList_DdlRegion_All" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="TherapistList_DdlStatus_Active" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="TherapistList_DdlStatus_Inactive" xml:space="preserve">
+    <value>Inactive</value>
+  </data>
+  <data name="TherapistList_Label_Availability" xml:space="preserve">
+    <value>Availability</value>
+  </data>
+  <data name="TherapistList_Label_ClientAgeRange" xml:space="preserve">
+    <value>Âge des clients</value>
+  </data>
+  <data name="TherapistList_Label_ClientType" xml:space="preserve">
+    <value>Type de client</value>
+  </data>
+  <data name="TherapistList_Label_ConsultationType" xml:space="preserve">
+    <value>Type de consultation</value>
+  </data>
+  <data name="TherapistList_Label_Gender" xml:space="preserve">
+    <value>Gender</value>
+  </data>
+  <data name="TherapistList_Label_Language" xml:space="preserve">
+    <value>Langue parlé</value>
+  </data>
+  <data name="TherapistList_Label_OfferedService" xml:space="preserve">
+    <value>Service offert</value>
+  </data>
+  <data name="TherapistList_Label_ProfessionalTitle" xml:space="preserve">
+    <value>Titre professionnel</value>
+  </data>
+  <data name="TherapistList_Label_Region" xml:space="preserve">
+    <value>Region</value>
+  </data>
+  <data name="TherapistList_Label_Status" xml:space="preserve">
+    <value>Statut</value>
+  </data>
+  <data name="TherapistList_Label_WeeklyAvailability" xml:space="preserve">
+    <value>Disponibilité</value>
+  </data>
+  <data name="TherapistList_ModalHeader_DeleteConfirmation" xml:space="preserve">
+    <value>Delete confirmation</value>
+  </data>
+  <data name="TherapistList_ModalHeader_RestoreConfirmation" xml:space="preserve">
+    <value>Restore confirmation</value>
+  </data>
+  <data name="TherapistList_ModalText_DeleteConfirmation" xml:space="preserve">
+    <value>Are you sure you want to delete {0}?</value>
+  </data>
+  <data name="TherapistList_ModalText_RestoreConfirmation" xml:space="preserve">
+    <value>Are you sure you want to restore {0}</value>
+  </data>
+  <data name="TherapistList_RestoreModalButton_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="TherapistList_RestoreModalButton_Restore" xml:space="preserve">
+    <value>Restore</value>
+  </data>
+  <data name="TherapistList_TableButton_Modify" xml:space="preserve">
+    <value>Modify</value>
+  </data>
+  <data name="TherapistList_TableButton_Restore" xml:space="preserve">
+    <value>Restore</value>
+  </data>
+  <data name="TherapistList_TableHeader_Accreditation" xml:space="preserve">
+    <value>Accreditation</value>
+  </data>
+  <data name="TherapistList_TableHeader_Action" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+  <data name="TherapistList_TableHeader_Availability" xml:space="preserve">
+    <value>Availabilities</value>
+  </data>
+  <data name="TherapistList_TableHeader_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="TherapistList_TableHeader_Region" xml:space="preserve">
+    <value>Region</value>
+  </data>
+  <data name="TherapistList_ToastrErrorDescription_FailedToDelete" xml:space="preserve">
+    <value>The therapist deletion failed. Please try again later</value>
+  </data>
+  <data name="TherapistList_ToastrErrorDescription_FailedToRestore" xml:space="preserve">
+    <value>The restoration of the therapist failed. Please try again later</value>
+  </data>
+  <data name="TherapistList_ToastrErrorTitle_FailedToDelete" xml:space="preserve">
+    <value>Failed to delete</value>
+  </data>
+  <data name="TherapistList_ToastrErrorTitle_FailedToRestore" xml:space="preserve">
+    <value>Restore failed</value>
+  </data>
+  <data name="TherapistNavBar_NavBar_Appointment" xml:space="preserve">
+    <value>Appointment</value>
+  </data>
+  <data name="TherapistNavBar_NavBar_AppointmentNotPayed" xml:space="preserve">
+    <value>Appointment not payed</value>
+  </data>
+  <data name="TherapistNavBar_NavBar_ChangePassword" xml:space="preserve">
+    <value>Change password</value>
+  </data>
+  <data name="TherapistNavBar_NavBar_ClaimForm" xml:space="preserve">
+    <value>Claim form</value>
+  </data>
+  <data name="TherapistNavBar_NavBar_ConfirmPresence" xml:space="preserve">
+    <value>Confirm Presence</value>
+  </data>
+  <data name="TherapistNavBar_NavBar_Dashboard" xml:space="preserve">
+    <value>Dashboard</value>
+  </data>
+  <data name="TherapistNavBar_NavBar_MyProfile" xml:space="preserve">
+    <value>My profile</value>
+  </data>
+  <data name="TherapistNavBar_NavBar_MySkills" xml:space="preserve">
+    <value>My skills</value>
+  </data>
+  <data name="TherapistNavBar_NavBar_WaitingRequest" xml:space="preserve">
+    <value>Waiting request</value>
+  </data>
+  <data name="TherapistProfile_Alert_InscriptionIncomplete" xml:space="preserve">
+    <value>Votre inscription est incomplète. Vous devez la terminer avant de pouvoir accéder aux autres section du site</value>
+  </data>
+  <data name="TherapistProfile_Error_AccreditationRequired" xml:space="preserve">
+    <value>Accreditation is required</value>
+  </data>
+  <data name="TherapistProfile_Error_AdressRequired" xml:space="preserve">
+    <value>Adress is required</value>
+  </data>
+  <data name="TherapistProfile_Error_CityRequired" xml:space="preserve">
+    <value>City is required</value>
+  </data>
+  <data name="TherapistProfile_Error_EmailInvalid" xml:space="preserve">
+    <value>The email is invalid</value>
+  </data>
+  <data name="TherapistProfile_Error_EmailRequired" xml:space="preserve">
+    <value>Email required</value>
+  </data>
+  <data name="TherapistProfile_Error_FirstNameRequired" xml:space="preserve">
+    <value>First name required</value>
+  </data>
+  <data name="TherapistProfile_Error_GenderRequired" xml:space="preserve">
+    <value>The gender is required</value>
+  </data>
+  <data name="TherapistProfile_Error_LastNameRequired" xml:space="preserve">
+    <value>Last name required</value>
+  </data>
+  <data name="TherapistProfile_Error_MaxWeeklyRequestRequired" xml:space="preserve">
+    <value>The max weekly request is required</value>
+  </data>
+  <data name="TherapistProfile_Error_OpqRequired" xml:space="preserve">
+    <value>OPQ number si required</value>
+  </data>
+  <data name="TherapistProfile_Error_PhoneNumberRequired" xml:space="preserve">
+    <value>The phone number is required</value>
+  </data>
+  <data name="TherapistProfile_Error_PostalCodeRequired" xml:space="preserve">
+    <value>Postal code required</value>
+  </data>
+  <data name="TherapistProfile_Error_RegionRequired" xml:space="preserve">
+    <value>Region is required</value>
+  </data>
+  <data name="TherapistProfile_Error_TpsRequired" xml:space="preserve">
+    <value>The TPS number is required</value>
+  </data>
+  <data name="TherapistProfile_Error_TvqRequired" xml:space="preserve">
+    <value>The TVQ number is required</value>
+  </data>
+  <data name="TherapistProfile_Label_Accreditation" xml:space="preserve">
+    <value>Accreditation</value>
+  </data>
+  <data name="TherapistProfile_Label_Adress" xml:space="preserve">
+    <value>Adress</value>
+  </data>
+  <data name="TherapistProfile_Label_Availabilities" xml:space="preserve">
+    <value>Availabilities</value>
+  </data>
+  <data name="TherapistProfile_Label_Certification" xml:space="preserve">
+    <value>Certification</value>
+  </data>
+  <data name="TherapistProfile_Label_City" xml:space="preserve">
+    <value>City</value>
+  </data>
+  <data name="TherapistProfile_Label_ClientAge" xml:space="preserve">
+    <value>Client age</value>
+  </data>
+  <data name="TherapistProfile_Label_ClientType" xml:space="preserve">
+    <value>Client type</value>
+  </data>
+  <data name="TherapistProfile_Label_ConsultationType" xml:space="preserve">
+    <value>Consultation type</value>
+  </data>
+  <data name="TherapistProfile_Label_Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="TherapistProfile_Label_FirstName" xml:space="preserve">
+    <value>First name</value>
+  </data>
+  <data name="TherapistProfile_Label_Gender" xml:space="preserve">
+    <value>Gender</value>
+  </data>
+  <data name="TherapistProfile_Label_HiringDate" xml:space="preserve">
+    <value>Hiring date</value>
+  </data>
+  <data name="TherapistProfile_Label_InterestedFormation" xml:space="preserve">
+    <value>Are you interested to take additional formation offered by Reseau Psy?</value>
+  </data>
+  <data name="TherapistProfile_Label_Language" xml:space="preserve">
+    <value>Language in therapy</value>
+  </data>
+  <data name="TherapistProfile_Label_LastName" xml:space="preserve">
+    <value>Last name</value>
+  </data>
+  <data name="TherapistProfile_Label_MaxWeeklyRequest" xml:space="preserve">
+    <value>Max weekly request</value>
+  </data>
+  <data name="TherapistProfile_Label_OpqNumber" xml:space="preserve">
+    <value>OPQ number</value>
+  </data>
+  <data name="TherapistProfile_Label_PhoneNumber" xml:space="preserve">
+    <value>Phone number</value>
+  </data>
+  <data name="TherapistProfile_Label_PostalCode" xml:space="preserve">
+    <value>Postal code</value>
+  </data>
+  <data name="TherapistProfile_Label_ProfessionalTitle" xml:space="preserve">
+    <value>Professional titles</value>
+  </data>
+  <data name="TherapistProfile_Label_Region" xml:space="preserve">
+    <value>Region</value>
+  </data>
+  <data name="TherapistProfile_Label_TakeAssuranceClient" xml:space="preserve">
+    <value>Do you take client from assurance company?</value>
+  </data>
+  <data name="TherapistProfile_Label_TakeThirdPartyClient" xml:space="preserve">
+    <value>Do you take clients from third party payer such as the CSST, the ICAV or the CAVAC?</value>
+  </data>
+  <data name="TherapistProfile_Label_TpsNumber" xml:space="preserve">
+    <value>TPS number</value>
+  </data>
+  <data name="TherapistProfile_Label_TvqNumber" xml:space="preserve">
+    <value>TVQ number</value>
+  </data>
+  <data name="TherapistProfile_ToastrSuccessDescription_ProfileModified" xml:space="preserve">
+    <value>Votre profile a été modifié avec succès</value>
+  </data>
+  <data name="TherapistProfile_ToastrSuccessTitle_ProfileModified" xml:space="preserve">
+    <value>Profile modifié</value>
+  </data>
+</root>

@@ -1,0 +1,131 @@
+﻿@using ReseauPsy.Resources
+@using System.Globalization
+@{
+    ViewBag.Title = Resource.AdminCalendar_Title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section id="page-admin-calendar">
+    <div class="container">
+
+        <h1>@Resource.AdminCalendar_H1</h1>
+
+
+        @* datepicker qui est déplacé en javascript *@
+        <input id="js-admin-calendar-date-set" class="form-control js-date-picker" type="text" autocomplete="off" />
+
+
+        @* Calendar *@
+        <div class="row">
+            <div class="col-sm-12">
+                <div id="js-appointment-calendar-admin-calendar"></div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+@section scripts
+{
+    <script>
+
+        function InitCalendar(date) {
+
+            var calendarEL = document.getElementById('js-appointment-calendar-admin-calendar');
+
+            var calendar = new FullCalendar.Calendar(calendarEL, {
+                contentHeight: 'auto',
+
+                schedulerLicenseKey: 'CC-Attribution-NonCommercial-NoDerivatives',
+                initialView: 'resourceTimeline',
+                slotMinTime: '06:00:00',
+                slotMaxTime: '21:00:00',
+                allDaySlot: false,
+                slotDuration: '00:30:00',
+                slotLabelInterval: '01:00:00',
+                slotLabelFormat: function (args) {
+                    return moment(args.date).format('H:mm');
+                },
+
+                dayHeaderFormat: { weekday: 'long' },
+                resources: '/api/GetTherapist',
+                events: '/api/GetTherapistAppointment',
+                eventColor: '#CCCAE6',
+                eventTextColor: '#3B377F',
+               
+               
+                eventDidMount: function (arg) {
+                    $(arg.el).attr('id', arg.event.id)
+
+                    var exampleEl = document.getElementById(arg.event.id)
+                    var tooltip = new bootstrap.Tooltip(exampleEl, {
+                        title: arg.event.title,
+                        trigger: 'hover',
+                    })
+                },
+
+
+                nowIndicator: true,
+                resourceAreaWidth: '20%',
+                resourcesInitiallyExpanded: false,
+
+                locale: '@CultureInfo.CurrentCulture.Name',
+                stickyFooterScrollbar: true,
+                eventOverlap: false,
+                datesSet: function (dateInfo) {
+                    $("#js-admin-calendar-date-set").val(moment(dateInfo.startStr.split("T")[0]).format("DD-MM-yyyy"))
+                    $("#js-admin-calendar-date-set").removeClass("input-validation-error")
+                },
+
+                headerToolbar: {
+                    left: 'prev today next',
+                    center: 'title',
+                    right: ''
+                },
+
+
+            })
+
+            
+            calendar.render();
+            if (date != null) {
+                calendar.gotoDate(date)
+            }
+
+
+            //Change calendar date
+            $("#js-admin-calendar-date-set").on("change", function () {
+                var date = toInternationnalDate($(this).val())
+                $(this).removeClass("input-validation-error")
+
+                if (!isDatePickerDateValid(date)) {
+                    $(this).addClass("input-validation-error")
+                    return false;
+                }
+
+                calendar.gotoDate(date)
+            })
+
+            setTimeout(function () {
+                calendar.gotoDate(DateTimeToday())
+            }, 250);
+            
+        }
+
+      
+
+        InitCalendar();
+
+
+
+
+        //On déplace le datepicker par dessus le titre de la date absolute et Opacité 0
+        $("#js-admin-calendar-date-set").appendTo(".fc-toolbar-title");
+
+
+
+
+
+
+    </script>
+}

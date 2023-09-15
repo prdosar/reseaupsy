@@ -1,0 +1,220 @@
+﻿@model ReseauPsy.ViewModel.Therapist.ConfirmPresenceViewModel
+@using ReseauPsy.Resources
+@{
+    ViewBag.Title = Resource.ConfirmPresence_Title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <section id="page-therapist-confirmpresence">
+
+        @* Page title *@
+        <h1>@Resource.ConfirmPresence_H1 </h1>
+
+
+        @* Table *@
+
+        <div id="js-confirm-presence-table" class="table-responsive @(Model.Clients.Count>0 ?"" : "d-none")">
+
+            <table style="min-width:400px;">
+                <thead>
+                    <tr>
+                        <th style="width:140px;">@Global.Client</th>
+                        <th style="width:120px;">@Global.AppointmentDate</th>
+                        <th style="width:140px;" class="text-end">@Resource.ConfirmPresence_PresenceToConfirm</th>
+                    </tr>
+                </thead>
+
+                <tbody id="js-confirm-presence-table-body">
+                    @foreach (var client in Model.Clients)
+                    {
+                        <tr>
+                            <td style="max-width: 140px;">@client.ClientName</td>
+                            <td style="max-width: 120px;">@client.AppointmentDateTime.ToString("dd MMM yyyy")</td>
+                            <td style="max-width: 140px;" class="text-end">
+                                <input class="js-confirm-presence-appointment-id" type="hidden" value="@client.AppointmentId" />
+                                <div class="btn btn-primary js-confirm-presence-present">@Global.Yes</div>
+                                <div class="btn btn-primary js-confirm-presence-not-present">@Global.No</div>
+                            </td>
+                        </tr>
+                    }
+
+
+                </tbody>
+            </table>
+        </div>
+
+        <div id="js-therapist-presence-empty" class="alert alert-info @(Model.Clients.Count>0 ?"d-none" : "")">
+            @Resource.ConfirmPresence_AllConfirmedMessage
+        </div>
+
+
+
+        @* administrative charge Modal *@
+
+
+
+        <div id="AdministrativeChargeModal" class="modal fade" tabindex="-1">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">@Resource.ConfirmPresence_ModalAnnulationFees_Title</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal">
+                            <i class="far fa-times-circle"></i>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-12">
+                                @Resource.ConfirmPresence_ModalAnnulationFees_Message
+                            </div>
+
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label>Appliquer les frais?</label>
+                                    <select id="js-confirm-presence-modal-apply-charge-select" class="form-select">
+                                        <option value="null">Choisir</option>
+                                        <option value="yes">@Global.Apply</option>
+                                        <option value="no">@Global.No</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button id="js-close-administrative-modal-button" type="button" class="btn btn-secondary">@Global.Cancel</button>
+                        <button id="js-apply-administrative-charge-modal-button" type="button" class="btn btn-primary">@Global.Apply</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </section>
+</div>
+
+
+@section scripts
+{
+    <script>
+
+        function SavePresenceInDb() {
+            var tableRow;
+            var appointmentId;
+            var applySelect = $("#js-confirm-presence-modal-apply-charge-select");
+            var modalId = $("#AdministrativeChargeModal")
+            var tableBody = $('#js-confirm-presence-table-body')
+
+            //Open the administrative charge modal
+            $(".js-confirm-presence-not-present").on("click", function () {
+                appointmentId = $(this).parent().children(".js-confirm-presence-appointment-id").val()
+                tableRow = $(this).closest("tr")
+
+                //reset the ddl and error class
+                applySelect.val("null");
+                applySelect.removeClass("input-validation-error");
+
+                OpenModal(modalId)
+            })
+
+            //Close the administrative charge modal
+            $("#js-close-administrative-modal-button").on("click", function () {
+                closeAdministrativeChargeModal()
+            })
+
+            function closeAdministrativeChargeModal() {
+                appointmentId = null;
+
+                //Close modal
+                closeModal(modalId)
+            }
+
+
+            //Confirm the presence
+            $(".js-confirm-presence-present").on("click", function () {
+                appointmentId = $(this).parent().children(".js-confirm-presence-appointment-id").val()
+                tableRow = $(this).closest("tr");
+                SavePresenceInDb();
+            })
+
+            //Confirm not present
+            $("#js-apply-administrative-charge-modal-button").on("click", function () {
+
+                var isApplyCharge = false;
+
+                //Verfify if there a choice in the ddl
+                if (applySelect.val() == "null") {
+                    applySelect.addClass("input-validation-error");
+                    return false
+                }
+                else if (applySelect.val() == "yes") {
+                    isApplyCharge = true;
+                }
+
+                SavePresenceInDb(isApplyCharge);
+
+            })
+
+
+            applySelect.on("change", function () {
+                $(this).removeClass("input-validation-error");
+                if ($(this).val() == "null") {
+                    $(this).addClass("input-validation-error");
+                }
+            });
+
+
+            function SavePresenceInDb(isApplyCharge) {
+                //isApplyCharge: undefined -> client was present -> id = 5
+                //isApplyCharge: true -> apply admin charges -> id = 4
+                //isApplyCharge: false -> dont apply admin charge -> id = 3
+                var statusId;
+
+
+                if (isApplyCharge == true)
+                    statusId = 4
+                else if (isApplyCharge == false)
+                    statusId = 3
+                else if (isApplyCharge == undefined)
+                    statusId = 5
+
+                $.ajax({
+                    type: "POST",
+                    url: "/fr/therapist/ConfirmPresenceChangeStatus/",
+                    data: `{"appointmentId":"${appointmentId}",
+                            "statusId":"${statusId}"}`,
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        tableRow.remove();
+                        closeAdministrativeChargeModal()
+
+                        if ($('#js-confirm-presence-table-body tr').length == 0) {
+                            //The table is empty, add the no more request message
+
+                            $("#js-confirm-presence-table").addClass("d-none");
+                            $("#js-therapist-presence-empty").removeClass("d-none");
+
+                        }
+
+                        toastr["success"]
+                            ("@Resource.ConfirmPresence_ToastrSuccess_Message",
+                                "@Global.Success");
+
+                    },
+                    error: function () {
+                        toastr["error"]
+                            ("@Global.GenericError",
+                                "@Global.Error");
+
+
+
+                    }
+                })
+            }
+        }
+
+        SavePresenceInDb();
+
+    </script>
+}

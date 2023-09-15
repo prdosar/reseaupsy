@@ -1,0 +1,405 @@
+﻿@model ReseauPsy.ViewModel.Client.PaymentViewModel
+
+@using System.Globalization
+@using ReseauPsy.Resources
+@{
+    ViewBag.Title = Resource.Payment_Title;
+    Layout = "~/Views/Shared/_LayoutClient.cshtml";
+    var guidUrl = ViewBag.guidUrl;
+
+    var routeValues = this.ViewContext.RouteData.Values;
+    var controller = routeValues["controller"] as string;
+    var action = routeValues["action"] as string;
+    string queryString = @Request.QueryString["id"];//Request.QueryString.ToString() == "" ? "" : "?" + Request.QueryString.ToString();
+
+
+}
+
+
+
+
+<div class="row g-0 shadow-body">
+    <div class="col-md-4">
+        <div class="client-left d-flex align-items-center">
+            <div class="w-100 h-100 d-flex flex-column justify-content-around">
+
+                <div class="d-block d-md-none">
+                    <div class="row">
+                        <div class="col-8">
+                            <a class="navbar-brand"><img src="/_assets/img/theme/logo-white.svg" class="img-responsive" /></a>
+                        </div>
+                        <div class="col-4 text-end">
+                            @if (CultureInfo.CurrentCulture.Name == "fr-CA")
+                            {
+                                <a class="nav-link" href="/en/@controller/@action?id=@queryString">@Global.Menu_English</a>
+                            }
+                            else
+                            {
+                                <a class="nav-link" href="/fr/@controller/@action?id=@queryString">@Global.Menu_Francais</a>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+
+                <div>
+                    @*Date du rendez-vous*@
+                    <div class="payment-item">
+                        <label>Date du rendez-vous</label>
+                        <div class="item-info">@Model.AppointmentDate.Replace("-", "/")</div>
+                    </div>
+
+                    @*Nom du thérapeute*@
+                    <div class="payment-item">
+                        <label>Thérapeute</label>
+                        <div class="item-info">@Model.TherapistName</div>
+                    </div>
+
+                    @*Description du rendez-vous de rendez-vous*@
+                    <div class="payment-item">
+                        <label>Rendez-vous</label>
+                        <div class="item-info">@Model.AppointmentType (@Model.AppointmentDuration)</div>
+                    </div>
+                </div>
+
+
+
+                <div class="amount-info">
+
+                    @* Bill Subtotal *@
+                    <div class="amount-item">
+                        <div class="row">
+                            <div class="col-7 text-start">
+                                @Global.Subtotal
+                            </div>
+                            <div class="col-5 text-end amount-value">
+                                @String.Format("{0:C}", Model.AppointmentSubtotal)
+                            </div>
+                        </div>
+                    </div>
+
+
+                    @* On affiche seulement le bloc lorsque c'est taxable *@
+                    @if (Model.IsTaxable)
+                    {
+                        @* TPS *@
+                        <div class="amount-item">
+                            <div class="row">
+                                <div class="col-7 text-start">
+                                    @Global.TPS <span>#@Model.TpsNumber</span>
+                                </div>
+                                <div class="col-5 text-end amount-value">
+                                    @String.Format("{0:C}", Model.AppointmentTps)
+
+                                </div>
+                            </div>
+                        </div>
+
+                        @* TVQ *@
+                        <div class="amount-item">
+                            <div class="row">
+                                <div class="col-7 text-start">
+                                    @Global.TVQ <span>#@Model.TvqNumber</span>
+                                </div>
+                                <div class="col-5 text-end amount-value">
+                                    @String.Format("{0:C}", Model.AppointmentTvq)
+
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+
+                    @* TOTAL *@
+
+                    <div class="total">
+                        @String.Format("{0:C}", Model.AppointmentTotal)
+                    </div>
+
+                </div>
+
+
+
+            </div>
+
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="client-right">
+            <div class="row d-none d-md-flex">
+                <div class="col-4">
+                    <a class="navbar-brand"><img src="/_assets/img/theme/logo-black.svg" class="img-responsive" /></a>
+                </div>
+                <div class="col-8 text-end">
+                    @if (CultureInfo.CurrentCulture.Name == "fr-CA")
+                    {
+                        <a class="nav-link" href="/en/@controller/@action?id=@queryString">@Global.Menu_English</a>
+                    }
+                    else
+                    {
+                        <a class="nav-link" href="/fr/@controller/@action?id=@queryString">@Global.Menu_Francais</a>
+                    }
+                </div>
+                <div class="col-12">
+                    <hr />
+                </div>
+            </div>
+            <div id="js-client-payment-card-information" class="row">
+                <div class="col-12 text-center">
+                    <h1>Information de paiement</h1>
+                </div>
+
+                @* On affiche seulement l'alerte lorsque c'est un prepaiement *@
+                @if (Model.IsPrepaiement)
+                {
+                    <div class="col-12">
+                        <div class="alert alert-info">
+                            @Html.Raw(@Resource.Payment_PreAutorisation_Message)
+                        </div>
+                    </div>
+                }
+
+
+
+
+                @*CardNumber*@
+                <div class="col-12">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-8">
+                                <label>@Global.CardNumber</label>
+                            </div>
+                            <div class="col-4 text-end">
+                                <img src="/_assets/img/credit-cards.png" class="creditcard" />
+                            </div>
+                        </div>
+
+                        <input id="js-client-payment-card-number" type="text" class="form-control js-mask-credit-card-number" />
+                    </div>
+                </div>
+                @*Card expiration*@
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>@Global.Expiration (MM/YY) </label>
+                        <input id="js-client-payment-card-expiration" type="text" class="form-control js-mask-card-exp-date" />
+                    </div>
+
+                </div>
+                @*Card cvv*@
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>@Global.CVV</label>
+                        <input id="js-client-payment-card-cvv" type="text" class="form-control js-mask-cvv" />
+                    </div>
+                </div>
+                @*Card Owner*@
+                <div class="col-12">
+                    <div class="form-group">
+                        <label>@Global.CardOwner</label>
+                        <input id="js-client-payment-card-owner" type="text" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="form-group">
+                        <div id="js-client-payment-send-button" class="btn btn-primary w-100 text-center">@Global.Send</div>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+            @* Paid and receipt available *@
+            <div id="js-client-payment-receipt-available" style="display:none">
+
+                <div class="row">
+
+                    <div class="col-12 text-center">
+                        <h1>Paiement effectué</h1>
+                    </div>
+
+                    <div class="col-12 mt-3 text-center">
+                        @Resource.Payment_ReceiptAvailable
+                    </div>
+
+                    <div class="col-12">
+                        <form action="/@CultureInfo.CurrentCulture.TwoLetterISOLanguageName/client/DownloadAppointmentReceipt" method="post">
+                            <input name="guidUrl" type="hidden" value="@guidUrl" />
+                            <input type="submit" class="btn btn-primary mt-4 w-100 text-center" value="@Global.DownloadReceipt" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            @* Paid and receipt not availablee prépaiement *@
+            <div id="js-client-payment-receipt-not-available" style="display:none">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <h1>Pré-autorisation</h1>
+                    </div>
+
+
+                    <div class="col-sm-12 text-center">
+                        @Resource.Payment_PreAutorisation_Done
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+
+
+        </div>
+    </div>
+</div>
+
+
+
+@section scripts
+{
+    <script>
+
+        initInputMask()
+        ShowDownloadReceipt()
+
+        function ShowDownloadReceipt() {
+
+            if ("@Model.IsAppointmentPaid" == "True") {
+
+                //Dont show card payment
+                $("#js-client-payment-card-information").css("display", "none")
+
+                if ("@Model.ShowDownloadReceipt" == "True") {
+                    //Receipt is available
+                    $("#js-client-payment-receipt-available").css("display", "block")
+                }
+                else {
+                    $("#js-client-payment-receipt-not-available").css("display", "block")
+                }
+            }
+        }
+
+        //Send payment button
+        $("#js-client-payment-send-button").on("click", function () {
+
+            var cardNumberInput = $("#js-client-payment-card-number")
+            var cardNumber = $("#js-client-payment-card-number").val()
+
+            var cardExpirationInput = $("#js-client-payment-card-expiration")
+            var cardExpiration = $("#js-client-payment-card-expiration").val()
+
+            var cardCvvInput = $("#js-client-payment-card-cvv")
+            var cardCvv = $("#js-client-payment-card-cvv").val()
+
+            var cardOwnerNameInput = $("#js-client-payment-card-owner")
+            var cardOwnerName = $("#js-client-payment-card-owner").val()
+
+            const urlParams = window.location.pathname.split("/")
+
+            var guidUrl;
+            for (var i = 0; i < urlParams.length; i++) {
+                //Only a guid have 36 character
+                if (urlParams[i].length == 36)
+                    guidUrl = urlParams[i]
+            }
+
+            //Verify field
+            var passedVerification = true;
+
+            //Card number
+            if (!VerifyFieldWithRegex(cardNumberInput, cardNumber, /^[0-9]{4}\s[0-9]{4}\s[0-9]{4}\s[0-9]{4}$/))
+                passedVerification = false;
+
+            //Card expiration date
+            if (!VerifyFieldWithRegex(cardExpirationInput, cardExpiration, /^[0-9]{2}\/[0-9]{2}$/))
+                passedVerification = false;
+
+            //Card cvv
+            if (!VerifyFieldWithRegex(cardCvvInput, cardCvv, /^[0-9]{3,4}$/))
+                passedVerification = false;
+
+            //Card owner name
+            if (!GenericCheckDefaultFieldError(cardOwnerNameInput, cardOwnerName, ""))
+                passedVerification = false;
+
+            //If false, dont continue the proccess
+            if (!passedVerification) {
+                return false
+            }
+
+
+            $.ajax({
+                type: "POST",
+                url: "/fr/client/PayAppointment/",
+                data: `{"cardNumber":"${cardNumber}",
+                        cardExpiration:"${cardExpiration}",
+                        cardCvv:"${cardCvv}",
+                        "cardOwnerName":"${cardOwnerName}",
+                        "guidUrl":"${guidUrl}"}`,
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    if (data.success == true) {
+                        //Remove the field for credit card
+                        $("#js-client-payment-card-information").remove();
+
+
+                        if (data.isReceiptAvailable) {
+                            //Show success message
+                            $("#js-client-payment-receipt-available").css("display", "block");
+
+                        }
+                        else {
+                            //Show prepaid message
+                            $("#js-client-payment-receipt-not-available").css("display", "block")
+                        }
+                    }
+
+                    //Simply show toastr error if it fails without explaination
+                    else {
+                        toastr["error"]
+                        ("@Global.ErrorPayment",
+                            "@Global.Error");
+                    }
+
+                },
+                error: function () {
+                    toastr["error"]
+                         ("@Global.ErrorPayment",
+                            "@Global.Error");
+                }
+            });
+
+
+        })
+
+
+        //---------------------- error class --------------------------
+
+        //Card number
+        $("#js-client-payment-card-number").on("change", function () {
+            VerifyFieldWithRegex($(this), $(this).val(), /^[0-9]{4}\s[0-9]{4}\s[0-9]{4}\s[0-9]{4}$/)
+        })
+
+        //Card expiration date
+        $("#js-client-payment-card-expiration").on("change", function () {
+            VerifyFieldWithRegex($(this), $(this).val(), /^[0-9]{2}\/[0-9]{2}$/)
+        })
+
+        //Card cvv
+        $("#js-client-payment-card-cvv").on("change", function () {
+            VerifyFieldWithRegex($(this), $(this).val(), /^[0-9]{3,4}$/)
+        })
+
+        //Card owner name
+        $("#js-client-payment-card-owner").on("change", function () {
+            GenericCheckDefaultFieldError($(this), $(this).val(), "")
+        })
+
+    </script>
+}

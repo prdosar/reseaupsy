@@ -1,0 +1,1679 @@
+﻿@model ReseauPsy.ViewModel.Therapist.MySkillsViewModel
+@using ReseauPsy.Resources
+@{
+    ViewBag.Title = Resource.MySkills_Title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string serviceTypeNames = "";
+}
+
+
+<div class="container">
+    <section id="page-therapist-myskills">
+
+        @* Page title *@
+        <h1>@Resource.MySkills_H1</h1>
+
+
+
+        @* Assocication *@
+        <h4>@Global.AssociationOrOrder</h4>
+
+        <div class="table-responsive">
+            <table style="min-width:600px;">
+                <thead>
+                    <tr>
+                        <th style="width:600px;">@Global.AssociationOrOrder</th>
+                        <th style="width:600px;">@Global.AssociationOrOrderNumber</th>
+                        <th style="width:150px;" class="text-center">@Global.Action</th>
+                    </tr>
+                </thead>
+                <tbody id="js-association-tablebody">
+                    @foreach (var association in Model.TherapistAssociation)
+                    {
+                        <tr>
+                            <td class='js-associationName'>@association.Split(new string[] { "--split--" }, StringSplitOptions.None)[1]</td>
+                            <td class='js-associationNumber'>@association.Split(new string[] { "--split--" }, StringSplitOptions.None)[2]</td>
+                            <td class='js-tableButton'>
+
+                                <input type='hidden'
+                                       data-therapist-association-id="@association.Split(new string[] { "--split--" }, StringSplitOptions.None)[0]"
+                                       name='TherapistAssociation[]'
+                                       value='@association.Split(new string[] { "--split--" }, StringSplitOptions.None)[1]--split--@association.Split(new string[] { "--split--" }, StringSplitOptions.None)[2]' />
+                                <div class='btn btn-primary associationModifyRow'>@Global.Edit</div>
+                                <div class='btn btn-danger js-delete-table-association'><i class='fas fa-trash-alt'></i></div>
+
+
+
+
+                            </td>
+                        </tr>
+                    }
+                    <tr>
+                        <td style="max-width: 600px;" class="js-associationName">
+                            <input class="form-control" type="text" />
+                        </td>
+                        <td style="max-width: 600px;" class="js-associationNumber">
+                            <input class="form-control" type="text" />
+                        </td>
+                        <td style="max-width:150px;">
+
+                            <div id="associationAddRow" class="btn btn-green"><i class="fa-solid fa-plus"></i></div>
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+
+        @* Service offert *@
+        <h4>@Global.OfferedService</h4>
+
+        <div class="table-responsive">
+
+            <table style="min-width:600px;">
+                <thead>
+                    <tr>
+                        <th style="width:600px;">@Global.Service</th>
+                        <th style="width:600px;">@Global.ServiceType</th>
+                        <th style="width:150px;" class="text-center">@Global.Action</th>
+                    </tr>
+                </thead>
+                <tbody id="js-my-skills-offered-service-tbody">
+                    @foreach (var service in Model.TherapistService)
+                    {
+                        @(serviceTypeNames = "")
+                        <tr>
+                            <td class='js-service-name'>@service.Service.Name</td>
+                            <td class='js-service-type'>
+                                @foreach (var serviceType in service.ServiceTypes)
+                                {
+                                    serviceTypeNames += serviceType.Name + ", ";
+                                }
+                                @serviceTypeNames.Remove(serviceTypeNames.Length - 2)
+                            </td>
+                            <td class='js-tableButton'>
+                                <input type='hidden'
+                                       data-service-id='@service.Service.Id'
+                                       data-service-type-ids='@String.Join(",", service.ServiceTypes.Select(x => x.Id))'
+                                       name='TherapistService[]'
+                                       value='@service.Service.Id,@String.Join(",", service.ServiceTypes.Select(x => x.Id))' />
+
+                                <div class='btn btn-primary js-service-modify-row'>@Global.Edit</div>
+                                <div class='btn btn-danger js-delete-service-row'><i class='fas fa-trash-alt'></i></div>
+                            </td>
+                        </tr>
+                    }
+                    <tr id="js-my-skills-offered-service-footer">
+                        <td style="max-width:600px;" class="js-service-name">
+                            <select class="js-ddl-offered-service form-select">
+                                <option value="null">@Global.Choose</option>
+                                @foreach (var service in Model.OfferedServices)
+                                {
+                                    <option value="@service.Service.Id">@service.Service.Name</option>
+                                }
+                            </select>
+                        </td>
+                        <td style="max-width:600px;" class="js-service-type"></td>
+                        <td style="max-width:150px;">
+                            <div id="ServiceAddRow" class="btn btn-green"><i class="fa-solid fa-plus"></i></div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+        @* Secteur de pratique *@
+
+        <h4>@Global.AreaPractice</h4>
+
+
+        <div class="table-responsive">
+            <table style="min-width:400px;">
+                <thead>
+                    <tr>
+                        <th style="width:600px;">@Global.AreaPractice</th>
+                        <th style="width:600px;" class="Area-filling-cells"></th>
+
+                        <th style="width:150px;">@Global.Action</th>
+                    </tr>
+                </thead>
+                <tbody id="js-practice-tbody">
+                    @foreach (var item in Model.TherapistAreasOfPracticeIds)
+                    {
+                        <tr>
+                            <td class='js-practice-name'>
+                                @Model.AreasOfPractice.Where(x => x.Id == item).Select(x => x.Name).Single()
+                            </td>
+                            <td class="Area-filling-cells"></td>
+                            <td class='js-tableButton'>
+                                <input type='hidden' data-practice-id='@item' name='TherapistAreasOfPracticeIds[]' value='@item' />
+                                <div class='btn btn-primary js-practice-modify-row'>@Global.Edit</div>
+                                <div class='btn btn-danger js-delete-practice-row'><i class='fas fa-trash-alt'></i></div>
+                            </td>
+                        </tr>
+                    }
+
+                    <tr id="js-practice-add-row-tr">
+                        <td style="max-width:600px;" class="js-practice-name">
+                            <select class="form-select js-ddl-practice">
+                                <option value="null">@Global.Choose</option>
+                                @foreach (var area in Model.AreasOfPractice)
+                                {
+                                    <option value="@area.Id">@area.Name</option>
+                                }
+                            </select>
+                        </td>
+                        <td style="max-width:600px;" class='Area-filling-cells'></td>
+                        <td style="max-width:150px;">
+                            <div id="js-practice-add-row" class="btn btn-green"><i class="fa-solid fa-plus"></i></div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+
+
+        @* Orientation théorique *@
+        <h4>@Global.TheoricalOrientation</h4>
+
+        <div class="table-responsive">
+            <table style="min-width:400px;">
+                <thead>
+                    <tr>
+                        <th style="width:600px;">@Global.TheoricalOrientation</th>
+                        <th style="width:600px;" class="Orientation-filling-cells"></th>
+                        <th style="width:150px;">@Global.Action</th>
+                    </tr>
+                </thead>
+                <tbody id="js-theoretical-tbody">
+                    @foreach (var orientationId in Model.TherapistTheoreticalOrientationIds)
+                    {
+                        <tr>
+                            <td class='js-orientation-name'>
+                                @Model.TheoreticalOrientations.Where(x => x.Id == orientationId).Select(x => x.Name).Single()
+                            </td>
+                            <td class='Orientation-filling-cells'></td>
+                            <td class='js-orientation-buttons'>
+                                <input type='hidden' data-orientation-id='@orientationId' name='TherapistTheoreticalOrientationIds[]' value='orientationId' />
+                                <div class='btn btn-primary js-orientation-modify-row'>@Global.Edit</div>
+                                <div class='btn btn-danger js-delete-theoretical-row'><i class='fas fa-trash-alt'></i></div>
+                            </td>
+                        </tr>
+                    }
+                <tr id="js-theoretical-add-tr">
+                    <td style="max-width:600px;" class="js-orientation-name">
+                        <select class="js-orientation-ddl form-select">
+                            <option value="null">@Global.Choose</option>
+                            @foreach (var orientation in Model.TheoreticalOrientations)
+                            {
+                                <option value="@orientation.Id">@orientation.Name</option>
+                            }
+                        </select>
+                    </td>
+                    <td style="max-width:600px;" class='Orientation-filling-cells'></td>
+                    <td style="max-width:150px;" class="js-orientation-buttons">
+                        <div id="js-orientation-add-row" class="btn btn-green"><i class="fa-solid fa-plus"></i></div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+
+
+
+
+
+        @* Compétence spécifique *@
+        <h4>@Global.Skill</h4>
+
+
+        <div class="table-responsive">
+                <table style="min-width:400px;">
+                    <thead>
+                        <tr>
+                            <th style="width:600px;">@Global.Skill</th>
+                            <th style="width:600px;" class='Competences-filling-cells'></th>
+                            <th style="width:150px;">@Global.Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="js-my-skill-skills-tbody">
+                        @foreach (var skillId in Model.TherapistSpecificSkillIds)
+                        {
+                        <tr>
+                            <td class='js-skill-name'>
+                                @Model.SpecificSkills.Where(x => x.Id == skillId).Select(x => x.Name).Single()
+                            </td>
+                            <td class='Competences-filling-cells'></td>
+                            <td class='js-skill-buttons'>
+                                <input type='hidden' data-skill-id='@skillId' name='TherapistSpecificSkillIds[]' value='@skillId' />
+                                <div class='btn btn-primary js-skill-modify-row'>@Global.Edit</div>
+                                <div class='btn btn-danger js-delete-skill-row'><i class='fas fa-trash-alt'></i></div>
+                            </td>
+                        </tr>
+                        }
+                    <tr id="js-my-skills-skills-add-tr">
+                        <td style="max-width:600px;" class="js-skill-name">
+                            <select class="form-select js-ddl-skills">
+                                <option value="null">@Global.Choose</option>
+                                @foreach (var skill in Model.SpecificSkills)
+                                {
+                                    <option value="@skill.Id">@skill.Name</option>
+                                }
+                            </select>
+                        </td>
+                        <td style="max-width:600px;" class='Competences-filling-cells'></td>
+                        <td style="max-width:150px;" class="js-skill-buttons">
+                            <div id="js-skill-add-row" class="btn btn-green"><i class="fa-solid fa-plus"></i></div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+        </div>
+    </section>
+
+</div>
+
+@section scripts
+{
+    <script>
+
+
+
+        // ------------------------------------------- Association table ---------------------------------
+        //Fonction de verification des champs
+        function VerifyAssociationInputValue(tableRow) {
+            var associationNameField = tableRow.children(".js-associationName").children();
+            var associationNumberField = tableRow.children(".js-associationNumber").children();
+
+            //On enleve les classes
+            associationNameField.removeClass("input-validation-error")
+            associationNumberField.removeClass("input-validation-error")
+
+            //On verifie si les champs sont vide
+            if (associationNameField.val().length == 0 || associationNumberField.val().length == 0) {
+                toastr["error"]("@Global.TableInvalidFieldError",
+                    "@Global.Error");
+
+                if (associationNameField.val().length == 0)
+                    associationNameField.addClass("input-validation-error")
+
+                if (associationNumberField.val().length == 0)
+                    associationNumberField.addClass("input-validation-error")
+
+                return false;
+            }
+
+            return true;
+        }
+
+        //Add row
+        $('#associationAddRow').click(function () {
+            var tableRow = $(this).closest("tr");
+            var associationName = tableRow.children(".js-associationName").children();
+            var associationNumber = tableRow.children(".js-associationNumber").children();
+
+            if (!VerifyAssociationInputValue(tableRow))
+                return false;
+
+            var associationNameEncoded = EscapeHtmlEntities(associationName.val())
+            var associationNumberEncoded = EscapeHtmlEntities(associationNumber.val())
+            
+            //On enregistre dans la bd en ajax
+            $.ajax({
+                type: "POST",
+                url: "/fr/therapist/AddAssociation/",
+                data: `{"associationNameNumber":"${associationNameEncoded}--split--${associationNumberEncoded}"}`,
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+
+                    markup =
+                        `<tr>
+                            <td class='js-associationName'>${associationNameEncoded}</td>
+                            <td class='js-associationNumber'>${associationNumberEncoded}</td>"
+                            <td class='js-tableButton'>
+
+                                    <input type='hidden'
+                                        data-therapist-association-id=${data.associationId}
+                                        name='TherapistAssociation[]'
+                                        value='${associationNameEncoded}--split--${associationNumberEncoded}'/>
+                                    <div class='btn btn-primary associationModifyRow'>@Global.Edit</div>
+                                    <div class='btn btn-danger js-delete-table-association'><i class='fas fa-trash-alt'></i></div>
+
+                            </td>
+                        </tr>`
+                    $(markup).insertBefore(tableRow);
+
+                    //On vide les champs
+                    associationName.val("");
+                    associationNumber.val("");
+                },
+                error: function () {
+                    toastr["error"]
+                        ("@Global.GenericError",
+                            "@Global.Error");
+                }
+            });
+        });
+
+        //Delete Row
+        $(document).on("click", ".js-delete-table-association", function () {
+            var tableRow = $(this).closest("tr");
+            var therapistAssociationId = tableRow.children(".js-tableButton").children("input").data("therapist-association-id")
+
+            $.ajax({
+                type: "POST",
+                url: "/fr/therapist/DeleteAssociation/",
+                data: `{"therapistAssociationId":"${therapistAssociationId}"}`,
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    tableRow.remove();
+                },
+                error: function () {
+                    toastr["error"]
+                         ("@Global.GenericError",
+                            "@Global.Error");
+                }
+            });
+
+        });
+
+        //Modify Row
+        $(document).on("click", ".associationModifyRow", function () {
+            var tableRow = $(this).closest("tr");
+
+            //On ferme les modifs de toutes les autres rows
+            $("#js-association-tablebody").children("tr").each(function () {
+                var previousAssociationName = $(this).children(".js-tableButton").children("input").data("previous-association-name");
+                if (previousAssociationName != undefined) {
+                    CancelAssociationModif(this)
+                }
+            });
+
+            var associationName = EscapeHtmlEntities(tableRow.children(".js-associationName").html().trim());
+            var associationNumber = EscapeHtmlEntities(tableRow.children(".js-associationNumber").html().trim());
+            var therapistAssociationId = tableRow.children(".js-tableButton").children("input").data("therapist-association-id")
+            //Remplce les text pour des textbox
+            tableRow.empty();
+            markup =
+                `<td class='js-associationName'><input type='text' class='form-control' value='${associationName}'/></td>
+                <td class='js-associationNumber'><input type='text' class='form-control' value='${associationNumber}'/></td>
+                <td class='js-tableButton'>
+                    <input type='hidden'
+                        data-therapist-association-id=${therapistAssociationId}
+                        data-previous-association-name='${associationName}'
+                        data-previous-association-number='${associationNumber}'/>
+                    <div class='btn btn-green associationSaveRow'><i class='fa-solid fa-floppy-disk'></i></div>
+                    <div class='btn btn-danger associationCancelRow'>@Global.Cancel</div>
+                </td>`
+            tableRow.append(markup);
+
+        });
+
+        //Function pour cancel les modifs
+        function CancelAssociationModif(tableRow) {
+            var associationName = EscapeHtmlEntities($(tableRow).children(".js-tableButton").children("input").data("previous-association-name"));
+            var associationNumber = EscapeHtmlEntities($(tableRow).children(".js-tableButton").children("input").data("previous-association-number"));
+            var therapistAssociationId = $(tableRow).children(".js-tableButton").children("input").data("therapist-association-id")
+
+            //On remplace les text box par les labels
+            $(tableRow).empty();
+
+            markup =
+                `<td class='js-associationName'>${associationName}</td>
+                <td class='js-associationNumber'>${associationNumber}</td>
+                <td class='js-tableButton'>
+
+                        <input type='hidden'
+                            data-therapist-association-id=${therapistAssociationId}
+                            name=' '
+                            value='${associationName}--split--${associationNumber}'/>
+                        <div class='btn btn-primary associationModifyRow'>@Global.Edit</div>
+                        <div class='btn btn-danger js-delete-table-association'><i class='fas fa-trash-alt'></i></div>
+
+                </td>`;
+
+            $(tableRow).append(markup);
+        }
+
+        //Cancel modif row
+        $(document).on("click", ".associationCancelRow", function () {
+            CancelAssociationModif($(this).closest("tr"))
+        });
+
+        //Save row
+        $(document).on("click", ".associationSaveRow", function () {
+            var tableRow = $(this).closest("tr");
+            var associationName = EscapeHtmlEntities(tableRow.children(".js-associationName").children("input").val());
+            var associationNumber = EscapeHtmlEntities(tableRow.children(".js-associationNumber").children("input").val());
+            var therapistAssociationId = tableRow.children(".js-tableButton").children("input").data("therapist-association-id")
+            if (!VerifyAssociationInputValue(tableRow))
+                return false
+
+            //On remplace les text box par les labels
+
+            $.ajax({
+                type: "POST",
+                url: "/fr/therapist/ModifyAssociation/",
+                data: `{"therapistAssociationId":"${therapistAssociationId}",
+                        associationNameNumber:"${associationName}--split--${associationNumber}"}`,
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    tableRow.empty()
+                    markup =
+                        `<td class='js-associationName'>${associationName}</td>
+                        <td class='js-associationNumber'>${associationNumber}</td>
+                        <td class='js-tableButton'>
+                            <input type='hidden'
+                                data-therapist-association-id=${therapistAssociationId}
+                                name='TherapistAssociation[]'
+                                value='${associationName}--split--${associationNumber}'/>
+                            <div class='btn btn-primary associationModifyRow'>@Global.Edit</div>
+                            <div class='btn btn-danger js-delete-table-association'><i class='fas fa-trash-alt'></i></div>
+                        </td>`;
+                    tableRow.append(markup);
+                },
+                error: function () {
+                    toastr["error"]
+                         ("@Global.GenericError",
+                            "@Global.Error");
+                }
+            });
+
+
+        });
+
+
+
+        //-------------------------------------------------- Javascript pour tableau infini des services offerts -------------------------------------
+
+        function CheckIfServiceCanAddRow() {
+            var services = @Html.Raw(Json.Encode(Model.OfferedServices));
+
+            if (services.length <= $("#js-my-skills-offered-service-tbody .js-tableButton input[type=hidden]").length) {
+                return false
+            }
+
+            return true
+        }
+
+        function offeredServiceManageOption(serviceId) {
+
+            $(".js-ddl-offered-service")
+                .find('option')
+                .remove()
+
+            //Rebuild the options
+            var services = @Html.Raw(Json.Encode(Model.OfferedServices));
+
+            $(".js-ddl-offered-service").append($('<option>', {
+                value: "null",
+                text: "@Global.Choose"
+            }))
+
+            for (var i = 0; i < services.length; i++) {
+                $(".js-ddl-offered-service").append($('<option>', {
+                    value: services[i].Service.Id,
+                    text: services[i].Service.Name
+                }))
+            }
+
+            //On met un selected sur une option
+            if (serviceId != undefined) {
+                $(".js-ddl-offered-service:eq(0)").val(serviceId)
+            }
+
+
+            //Search for the services already selected
+            var serviceIds = []
+            $("#js-my-skills-offered-service-tbody .js-tableButton input[type=hidden]").each(function () {
+                serviceIds.push($(this).data("service-id"))
+            })
+
+            //Remove the services already selected
+            for (var i = 0; i < serviceIds.length; i++) {
+                $(".js-service-name option[value='" + serviceIds[i] + "']").remove()
+            }
+
+            //On cache le tr ajouter s'il n'y a plus d'option
+            $("#js-my-skills-offered-service-footer").removeClass("d-none")
+            if (!CheckIfServiceCanAddRow()) {
+                $("#js-my-skills-offered-service-footer").addClass("d-none")
+            }
+        }
+        offeredServiceManageOption()
+
+        //Afficher les check boxes
+        $(document).on("change", ".js-ddl-offered-service", function () {
+            var serviceId = $(this).val();
+            var checkBoxTd = $(this).closest("tr").children(".js-service-type");
+            var hiddenField = $(this).closest("tr").children(".js-tableButton").children("input");
+            var previousServiceId = hiddenField.data("previous-service-id");
+            var previousServiceTypeIds = String(hiddenField.data("previous-service-type-ids")).split(',');
+            checkBoxTd.empty();
+
+            var services = @Html.Raw(Json.Encode(Model.OfferedServices));
+
+            markup = "";
+            for (var i = 0; i < services.length; i++) {
+                if (services[i].Service.Id == serviceId) {
+                    for (var j = 0; j < services[i].ServiceTypes.length; j++) {
+                        markup += `<input id="js-service-input-${services[i].ServiceTypes[j].Id}" type='checkbox' value='${services[i].ServiceTypes[j].Id}' name='${services[i].ServiceTypes[j].Name}' `;
+                        if (services[i].Service.Id == previousServiceId
+                            && previousServiceTypeIds.includes(String(services[i].ServiceTypes[j].Id))) {
+                            markup += `checked='checked'`
+                        }
+
+                        markup += `/><label for="js-service-input-${services[i].ServiceTypes[j].Id}">${services[i].ServiceTypes[j].Name}</label><br/>`
+                    }
+                }
+            }
+            checkBoxTd.append(markup);
+        });
+
+        //Add row
+        $(document).on("click", "#ServiceAddRow", function () {
+
+            if (!CheckIfServiceCanAddRow()) {
+                return false
+            }
+
+            var tableRow = $(this).closest("tr");
+            var serviceName = tableRow.children(".js-service-name").children().find(":selected").text();
+            var serviceId = tableRow.children(".js-service-name").children().val();
+
+            var servicesTypeShow = "";
+            var serviceTypeNames = [];
+            var serviceTypeIds = [];
+            tableRow.children(".js-service-type").children("input:checked").each(function (index,value) {
+                serviceTypeNames.push($(this).attr("name"));
+                serviceTypeIds.push($(this).attr("value"));
+
+                servicesTypeShow += $(this).attr("name");
+
+                if (index != tableRow.children(".js-service-type").children("input:checked").length - 1)
+                    servicesTypeShow += ", ";
+
+            });
+
+            if (!VerifyServiceField(tableRow, serviceTypeIds))
+                return false;
+
+            //On ajoute la row
+            markup =
+                `<tr>
+                    <td class='js-service-name'>${serviceName}</td>
+                    <td class='js-service-type'>${servicesTypeShow}</td>
+                    <td class='js-tableButton'>
+                        <input type='hidden' data-service-id='${serviceId}' data-service-type-ids='${serviceTypeIds}' name='TherapistService[]' value='${serviceId},${serviceTypeIds}'/>
+                        <div class='btn btn-primary js-service-modify-row'>@Global.Edit</div>
+                        <div class='btn btn-danger js-delete-service-row'><i class='fas fa-trash-alt'></i></div>
+                    </td>
+                </tr>`;
+
+            $.ajax({
+                type: "POST",
+                url: "/fr/therapist/AddService/",
+                data: `{"serviceId":"${serviceId}", serviceTypeIds:"${serviceTypeIds}"}`,
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    $(markup).insertBefore(tableRow);
+
+                    //On enleve l'option choisis dans la ddl
+                    //$(".js-service-name option[value='" + serviceId + "']").remove()
+
+                    //On vide les champs
+                    tableRow.children(".js-service-name").children().val("null");
+                    tableRow.children(".js-service-type").empty();
+
+                    offeredServiceManageOption()
+
+                },
+                error: function () {
+                    toastr["error"]
+                         ("@Global.GenericError",
+                            "@Global.Error");
+                }
+            })
+        });
+
+        //Fonction de verification des champs
+        function VerifyServiceField(tableRow, serviceTypeIds) {
+            var serviceNameField = tableRow.children(".js-service-name").children();
+            var serviceTypeTexts = tableRow.children(".js-service-type").children("label");
+
+            //On enleve la classe d'erreur
+            serviceNameField.removeClass("input-validation-error");
+            serviceTypeTexts.removeClass("text-danger");
+
+            //On verifie s'il y a des champs vide
+            if (serviceNameField.find(":selected").val() == "null" || serviceTypeIds == "") {
+
+                if (serviceNameField.find(":selected").val() == "null")
+                    serviceNameField.addClass("input-validation-error")
+
+                if (serviceTypeIds == "")
+                    serviceTypeTexts.addClass("text-danger")
+
+                toastr["error"]
+                    ("@Global.TableInvalidFieldError",
+                    "@Global.Error");
+
+                return false;
+            }
+            return true;
+        }
+
+        //Fonction delete
+        $(document).on("click", ".js-delete-service-row", function () {
+            var tableRow = $(this).closest("tr");
+            var hiddenField = tableRow.children(".js-tableButton").children("input");
+            var serviceId = hiddenField.data("service-id");
+            var serviceTypeIds = hiddenField.data("service-type-ids")
+
+            $.ajax({
+                type: "POST",
+                url: "/fr/therapist/DeleteService/",
+                data: `{"serviceId":"${serviceId}", serviceTypeIds:"${serviceTypeIds}"}`,
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    tableRow.remove();
+                    offeredServiceManageOption()
+                },
+                error: function () {
+                    toastr["error"]
+                          ("@Global.GenericError",
+                            "@Global.Error");
+                }
+            });
+        });
+
+        //Fonction modify
+        $(document).on("click", ".js-service-modify-row", function () {
+            var tableRow = $(this).closest("tr");
+            var serviceName = tableRow.children(".js-service-name").html();
+            var serviceId = tableRow.children(".js-tableButton").children("input").data("service-id");
+            var serviceTypeIds = tableRow.children(".js-tableButton").children("input").data("service-type-ids");
+            var serviceTypeNames = tableRow.children(".js-service-type").html();
+            //On ajoute la ddl des serive offert
+            var services = @Html.Raw(Json.Encode(Model.OfferedServices));
+            var ddlService =
+                "<select class='form-select js-ddl-offered-service'></select>"
+
+            //On ajoute la liste des type de service offert
+            var cblServiceTypes = "";
+            for (var i = 0; i < services.length; i++) {
+                if (services[i].Service.Id == serviceId) {
+                    for (var j = 0; j < services[i].ServiceTypes.length; j++) {
+                        cblServiceTypes += `<input type='checkbox' id='js-service-input-${services[i].ServiceTypes[j].Id}' value='${services[i].ServiceTypes[j].Id}' name='${services[i].ServiceTypes[j].Name}'`;
+                        if (serviceTypeNames.includes(services[i].ServiceTypes[j].Name)) {
+                            cblServiceTypes += "checked='checked'";
+                        }
+                        cblServiceTypes += `/><label for='js-service-input-${services[i].ServiceTypes[j].Id}'>${services[i].ServiceTypes[j].Name}</label><br/>`;
+                    }
+                }
+            }
+
+            //On remplace les text par des ddl et cbl
+            tableRow.empty()
+            markup =
+                `<td class='js-service-name'>${ddlService}</td>
+                <td class='js-service-type'>${cblServiceTypes}</td>
+                <td class='js-tableButton'>
+                    <input type='hidden' data-previous-service-name='${serviceName}' data-previous-service-id='${serviceId}' data-previous-service-type-ids='${serviceTypeIds}' data-previous-service-names='${serviceTypeNames}' />
+                    <div class='btn btn-green js-service-save-row'><i class='fa-solid fa-floppy-disk'></i></div>
+                    <div class='btn btn-danger js-service-cancel-row'>@Global.Edit</div>
+                </td>`
+            tableRow.append(markup);
+
+
+            //On met le dll dans le footer à choisir et le disable le temps de la modif
+            $("#js-my-skills-offered-service-footer .js-ddl-offered-service").val("null")
+            $("#js-my-skills-offered-service-footer .js-ddl-offered-service").prop("disabled", true)
+
+            //On disable tous les autres bouton modifier et ajouter
+            $(".js-service-modify-row").addClass("disabled")
+            $("#ServiceAddRow").addClass("disabled")
+
+            offeredServiceManageOption(serviceId)
+        });
+
+
+        //Fonction cancel
+        $(document).on("click", ".js-service-cancel-row", function () {
+
+            var tableRow = $(this).closest("tr");
+            var hiddenfield = tableRow.children(".js-tableButton").children("input")
+            var serviceName = hiddenfield.data("previous-service-name");
+            var serviceId = hiddenfield.data("previous-service-id");
+            var serviceTypeNames = hiddenfield.data("previous-service-names");
+            var serviceTypeIds = hiddenfield.data("previous-service-type-ids");
+
+            //On enleve les ddl et cbl et on mets les labels
+            tableRow.empty();
+
+            markup =
+                `<td class='js-service-name'>${serviceName}</td>
+                <td class='js-service-type'>${serviceTypeNames}</td>
+                <td class='js-tableButton'>
+                    <input type='hidden' data-service-id='${serviceId}' data-service-type-ids='${serviceTypeIds}' name='TherapistService[]' value='${serviceId},${serviceGlobalypeIds}'/>
+                    <div class='btn btn-primary js-service-modify-row'>@Global.Edit</div>
+                    <div class='btn btn-danger js-delete-service-row'><i class='fas fa-trash-alt'></i></div>
+                </td>`;
+
+            tableRow.append(markup);
+
+            //Enleve le disable du footer
+            $("#js-my-skills-offered-service-footer .js-ddl-offered-service").prop("disabled", false)
+
+            //On enleve le disable sur tous les autres bouton modifier et ajouter
+            $(".js-service-modify-row").removeClass("disabled")
+            $("#ServiceAddRow").removeClass("disabled")
+
+            offeredServiceManageOption()
+        });
+
+        //Fonction save
+        $(document).on("click", ".js-service-save-row", function () {
+
+            var tableRow = $(this).closest("tr");
+            var serviceName = tableRow.children(".js-service-name").children().find(":selected").text();
+            var serviceId = tableRow.children(".js-service-name").children().val();
+
+            var hiddenField = tableRow.children(".js-tableButton").children("input");
+            var previousServiceId = hiddenField.data("previous-service-id");
+            var previousServiceTypeIds = hiddenField.data("previous-service-type-ids");
+
+
+            var serviceTypeNames = [];
+            var serviceTypeIds = [];
+
+            var servicesTypeShow = "";
+
+
+
+
+            tableRow.children(".js-service-type").children("input:checked").each(function (index, value) {
+                serviceTypeNames.push($(this).attr("name"));
+                serviceTypeIds.push($(this).attr("value"));
+                servicesTypeShow += $(this).attr("name");
+
+                if (index != tableRow.children(".js-service-type").children("input:checked").length -1)
+                    servicesTypeShow += ", ";
+
+            });
+
+
+
+
+            if (!VerifyServiceField(tableRow, serviceTypeIds))
+                return false;
+
+            $.ajax({
+                type: "POST",
+                url: "/fr/therapist/ModifyService/",
+                data: `{"previousServiceId":"${previousServiceId}", previousServiceTypeIds:"${previousServiceTypeIds}", "serviceId":"${serviceId}", "serviceTypeIds":"${serviceTypeIds}"}`,
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    tableRow.empty();
+
+                    markup =
+                        `<td class='js-service-name'>${serviceName}</td>
+                        <td class='js-service-type'>${servicesTypeShow}</td>
+                        <td class='js-tableButton'>
+                            <input type='hidden' data-service-id='${serviceId}' data-service-type-ids='${serviceTypeIds}' name='TherapistService[]' value='${serviceId},${serviceTypeIds}'/>
+                            <div class='btn btn-primary js-service-modify-row'>@Global.Edit</div>
+                            <div class='btn btn-danger js-delete-service-row'><i class='fas fa-trash-alt'></i></div>
+                        </td>`;
+
+                    tableRow.append(markup);
+
+                    //Enleve le disable du footer
+                    $("#js-my-skills-offered-service-footer .js-ddl-offered-service").prop("disabled", false)
+
+                    //On enleve le disable sur tous les autres bouton modifier et ajouter
+                    $(".js-service-modify-row").removeClass("disabled")
+                    $("#ServiceAddRow").removeClass("disabled")
+
+                    offeredServiceManageOption()
+                },
+                error: function () {
+                    toastr["error"]
+                          ("@Global.GenericError",
+                            "@Global.Error");
+                }
+            })
+        });
+
+
+
+
+
+        //--------------------------------------------------- Javascript pour le tableau infini des secteurs de pratique ---------------------------
+
+        function CheckIfPracticeCanAddRow() {
+            //Le maximum de secteur de pratique est de 2
+            if ($("#js-practice-tbody .js-tableButton input[type=hidden]").length >= 2) {
+                return false
+            }
+
+            return true
+        }
+
+        function practiceManageOption(practiceId) {
+            $(".js-ddl-practice")
+                .find('option')
+                .remove()
+
+            //Rebuild the options
+            var practice = @Html.Raw(Json.Encode(Model.AreasOfPractice));
+
+            $(".js-ddl-practice").append($('<option>', {
+                value: "null",
+                 text: "@Global.Choose"
+            }))
+
+            for (var i = 0; i < practice.length; i++) {
+                $(".js-ddl-practice").append($('<option>', {
+                    value: practice[i].Id,
+                    text: practice[i].Name
+                }))
+            }
+
+
+            //On met un selected sur une option
+            if (practiceId != undefined) {
+                $(".js-ddl-practice:eq(0)").val(practiceId)
+            }
+
+
+            //Search for the services already selected
+            var practiceIds = []
+            $("#js-practice-tbody .js-tableButton input[type=hidden]").each(function () {
+                practiceIds.push($(this).data("practice-id"))
+            })
+
+
+            //Remove the services already selected
+            for (var i = 0; i < practiceIds.length; i++) {
+                $(".js-ddl-practice")
+                    .find("option[value='" + practiceIds[i] + "']")
+                    .remove()
+            }
+
+            //On cache le tr ajouter s'il n'y a plus d'option
+            $("#js-practice-add-row-tr").removeClass("d-none")
+            if (!CheckIfPracticeCanAddRow()) {
+                $("#js-practice-add-row-tr").addClass("d-none")
+            }
+
+        }
+        practiceManageOption()
+
+        //Fonction pour la validation des champs
+        function ValidationPracticeField(tableRow) {
+            var practiceNameField = tableRow.children(".js-practice-name").children();
+            var practiceNameValue = practiceNameField.find(":selected").val();
+
+            //On enleve la class d'erreur
+            practiceNameField.removeClass("input-validation-error");
+
+            //On verifie si on est à choose
+            if (practiceNameValue == "null") {
+                toastr["error"]("@Global.TableInvalidFieldError",
+                    "@Global.Error");
+                practiceNameField.addClass("input-validation-error");
+                return false;
+            }
+            return true;
+        }
+
+        //Add row
+        $(document).on("click", "#js-practice-add-row", function () {
+
+            if (!CheckIfPracticeCanAddRow()) {
+                return false
+            }
+
+            var tableRow = $(this).closest('tr');
+
+            if (!ValidationPracticeField(tableRow))
+                return false
+
+            var practiceName = tableRow.children(".js-practice-name").children().find(":selected").text();
+            var practiceId = tableRow.children(".js-practice-name").children().val();
+
+            //On ajoute la row
+            markup =
+                `<tr>
+                    <td class='js-practice-name'>${practiceName}</td>
+                    <td class='Area-filling-cells'></td>
+                    <td class='js-tableButton'>
+                        <input type='hidden' data-practice-id='${practiceId}' class='practiceIds' name='TherapistAreasOfPracticeIds[]' value='${practiceId}'/>
+                        <div class='btn btn-primary js-practice-modify-row'>@Global.Edit</div>
+                        <div class='btn btn-danger js-delete-practice-row'><i class='fas fa-trash-alt'></i></div>
+                    </td>
+                </tr>`;
+
+            $.ajax({
+                type: "POST",
+                url: "/fr/therapist/AddPracticeArea/",
+                data: `{"practiceId":"${practiceId}"}`,
+                contentType: 'application/json; charset=utf-8',
+                async: false,
+                success: function (data) {
+                    $(markup).insertBefore(tableRow);
+
+                    //On remet la ddl à choisir
+                    tableRow.children(".js-practice-name").children().val("null");
+
+                    practiceManageOption()
+                },
+                error: function () {
+                    toastr["error"]
+                          ("@Global.GenericError",
+                            "@Global.Error");
+                }
+            })
+        });
+
+        //Fonction pour delete
+        $(document).on("click", ".js-delete-practice-row", function () {
+            var tableRow = $(this).closest("tr");
+            var practiceId = tableRow.children(".js-tableButton").children("input").data("practice-id")
+
+            $.ajax({
+                type: "POST",
+                url: "/fr/therapist/RemovePracticeArea/",
+                data: `{"practiceId":"${practiceId}"}`,
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    tableRow.remove();
+                    practiceManageOption()
+                },
+                error: function () {
+                    toastr["error"]
+                          ("@Global.GenericError",
+                            "@Global.Error");
+                }
+            })
+        });
+
+        //Fonction pour modifier
+        $(document).on("click", ".js-practice-modify-row", function () {
+            var tableRow = $(this).closest("tr");
+            var practiceName = tableRow.children(".js-practice-name").html();
+            var practiceId = tableRow.children(".js-tableButton").children("input").data("practice-id");
+
+            //On remet la ddl
+            tableRow.empty();
+
+            //On ajoute la ddl des serive offert
+            var practices = @Html.Raw(Json.Encode(Model.AreasOfPractice));
+            var ddlPractice =
+                "<select class='form-select js-ddl-practice'></select>"
+
+            markup =
+                `<td class='js-practice-name'>${ddlPractice}</td>
+                <td class='Area-filling-cells'></td>
+                <td class='js-tableButton'>
+                    <input type='hidden' value='${practiceId}' class='practiceIds' data-previous-practice-name='${practiceName}' data-previous-practice-id='${practiceId}'/>
+                    <div class='btn btn-green js-practice-save-row'><i class='fa-solid fa-floppy-disk'></i></div>
+                    <div class='btn btn-danger js-practice-cancel-row'>@Global.Cancel</div>
+                </td>`;
+
+            tableRow.append(markup);
+            //loadDropDown();
+
+            //On met le dll dans le footer à choisir et le disable le temps de la modif
+            $("#js-practice-add-row-tr .js-ddl-practice").val("null")
+            $("#js-practice-add-row-tr .js-ddl-practice").prop("disabled", true)
+
+            //On disable tous les autres bouton modifier et ajouter
+            $(".js-practice-modify-row").addClass("disabled")
+            $("#js-practice-add-row").addClass("disabled")
+
+            practiceManageOption(practiceId)
+        });
+
+        //Fonction pour annuler
+        $(document).on("click", ".js-practice-cancel-row", function () {
+            var tableRow = $(this).closest("tr");
+            var practiceName = tableRow.children(".js-tableButton").children("input").data("previous-practice-name");
+            var practiceId = tableRow.children(".js-tableButton").children("input").data("previous-practice-id");
+            //On modifie la row
+            tableRow.empty();
+            markup =
+                `<td class='js-practice-name'>${practiceName}</td>
+                <td class='Area-filling-cells'></td>
+                <td class='js-tableButton'>
+                    <input type='hidden' data-practice-id='${practiceId}' name='TherapistAreasOfPracticeIds[]' value='${practiceId}'/>
+                    <div class='btn btn-primary js-practice-modify-row'>@Global.Edit</div>
+                    <div class='btn btn-danger js-delete-practice-row'><i class='fas fa-trash-alt'></i></div>
+                </td>`
+            tableRow.append(markup);
+
+
+
+            //Enleve le disable du footer
+            $("#js-practice-add-row-tr .js-ddl-practice").prop("disabled", false)
+
+            //On enleve le disable sur tous les autres bouton modifier et ajouter
+            $(".js-practice-modify-row").removeClass("disabled")
+            $("#js-practice-add-row").removeClass("disabled")
+
+            practiceManageOption()
+        });
+
+        //Fonction pour enregistrer les modif
+        $(document).on('click', ".js-practice-save-row", function () {
+            var tableRow = $(this).closest("tr");
+            var practiceName = tableRow.children(".js-practice-name").children().find(":selected").text();
+            var previousPracticeId = tableRow.children(".js-tableButton").children("input").data("previous-practice-id");
+            var practiceId = tableRow.children(".js-practice-name").children().val();
+
+            //La validation du champs
+            if (!ValidationPracticeField(tableRow))
+                return false
+
+            //On modifie la row
+            markup =
+                `<td class='js-practice-name'>${practiceName}</td>
+                <td class='Area-filling-cells'></td>
+                <td class='js-tableButton'>
+                    <input type='hidden' data-practice-id='${practiceId}' name='TherapistAreasOfPracticeIds[]' value='${practiceId}'/>
+                    <div class='btn btn-primary js-practice-modify-row'>@Global.Edit</div>
+                    <div class='btn btn-danger js-delete-practice-row'><i class='fas fa-trash-alt'></i></div>
+                </td>`
+
+            $.ajax({
+                type: "POST",
+                url: "/fr/therapist/ModifyPracticeArea/",
+                data: `{"previousPracticeId":"${previousPracticeId}","practiceId":"${practiceId}"}`,
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    tableRow.empty();
+                    tableRow.append(markup);
+
+                    //Enleve le disable du footer
+                    $("#js-practice-add-row-tr .js-ddl-practice").prop("disabled", false)
+
+                    //On enleve le disable sur tous les autres bouton modifier et ajouter
+                    $(".js-practice-modify-row").removeClass("disabled")
+                    $("#js-practice-add-row").removeClass("disabled")
+
+                    practiceManageOption()
+                },
+                error: function () {
+                    toastr["error"]
+                          ("@Global.GenericError",
+                            "@Global.Error");
+                }
+            });
+        });
+
+
+
+        //--------------------------------------------------- Javascript pour le tableau infini des orientation théorique ---------------------------
+
+
+        function CheckIfOrientationCanAddRow() {
+            //Le maximum de secteur de pratique est de 2
+            if ($("#js-theoretical-tbody .js-orientation-buttons input[type=hidden]").length >= 2) {
+                return false
+            }
+
+            return true
+        }
+
+        function orientationManageOption(orientationId) {
+            $(".js-orientation-ddl")
+                .find('option')
+                .remove()
+
+            //Rebuild the options
+            var orientations = @Html.Raw(Json.Encode(Model.TheoreticalOrientations));
+
+            $(".js-orientation-ddl").append($('<option>', {
+                value: "null",
+                text: "@Global.Choose"
+            }))
+
+            for (var i = 0; i < orientations.length; i++) {
+                $(".js-orientation-ddl").append($('<option>', {
+                    value: orientations[i].Id,
+                    text: orientations[i].Name
+                }))
+            }
+
+
+            //On met un selected sur une option
+            if (orientationId != undefined) {
+                $(".js-orientation-ddl:eq(0)").val(orientationId)
+            }
+
+
+            //Search for the services already selected
+            var orientationIds = []
+            $("#js-theoretical-tbody .js-orientation-buttons input[type=hidden]").each(function () {
+                orientationIds.push($(this).data("orientation-id"))
+            })
+
+
+            //Remove the services already selected
+            for (var i = 0; i < orientationIds.length; i++) {
+                $(".js-orientation-ddl")
+                    .find("option[value='" + orientationIds[i] + "']")
+                    .remove()
+            }
+
+            //On cache le tr ajouter s'il n'y a plus d'option
+            $("#js-theoretical-add-tr").removeClass("d-none")
+            if (!CheckIfOrientationCanAddRow()) {
+                $("#js-theoretical-add-tr").addClass("d-none")
+            }
+
+        }
+        orientationManageOption()
+
+        //Fonction pour la validation des champs
+        function ValidationOrientationField(tableRow) {
+            var orientationNameField = tableRow.children(".js-orientation-name").children();
+            var orientationNameValue = orientationNameField.find(":selected").val();
+
+            //On enleve la class d'erreur
+            orientationNameField.removeClass("input-validation-error");
+
+            //On verifie si on est à choose
+            if (orientationNameValue == "null") {
+                toastr["error"]("@Global.TableInvalidFieldError",
+                    "@Global.Error");
+                orientationNameField.addClass("input-validation-error");
+                return false;
+            }
+            return true;
+        }
+
+        //Fonction pour enlever la row de l'ajout si on dépasse 2
+        function RemoveAddRowIfOrientationAtTwo() {
+            var tableRow = $("#js-theoretical-add-tr");
+            var tbody = $("#js-theoretical-tbody")
+
+            var orientationCount = 0;
+            tbody.find("tr").each(function () {
+                orientationCount++;
+            });
+
+            if (tableRow.html() != undefined) {
+                orientationCount--;
+            }
+
+            if (orientationCount >= 2) {
+                tableRow.remove();
+            }
+
+            else if (tableRow.html() == undefined) {
+                //Le comtpe est moins que 2 et la row d'ajout est effacé
+                //On remet la row d'ajout
+                var orientations = @Html.Raw(Json.Encode(Model.TheoreticalOrientations));
+
+                orientationDdl =
+                    `<select class="form-select">` +
+                    `<option value="null">@Global.Choose</option>`
+
+                for (var i = 0; i < orientations.length; i++)
+                    orientationDdl += `<option value="${orientations[i].Id}">${orientations[i].Name}</option>`
+
+                orientationDdl += "</select>"
+
+                markup =
+                    `<tr id="js-theoretical-add-tr">
+                       <td class="js-orientation-name">${orientationDdl}</td>
+                       <td class='Orientation-filling-cells'></td>
+                       <td class="js-orientation-buttons">
+                            <div id="js-orientation-add-row" class="btn btn-green"><i class="fa-solid fa-plus"></i></div>
+                       </td >
+                   </tr>`;
+
+                tbody.append(markup);
+            }
+        }
+
+        //Fonction pour add
+        $(document).on("click", "#js-orientation-add-row", function () {
+            var tableRow = $(this).closest('tr');
+
+            if (!ValidationOrientationField(tableRow))
+                return false
+
+            var orientationName = tableRow.children(".js-orientation-name").children().find(":selected").text();
+            var orientationId = tableRow.children(".js-orientation-name").children().val();
+
+            //On ajoute la row
+            markup =
+                `<tr>
+                    <td class='js-orientation-name'>${orientationName}</td>
+                    <td class='Orientation-filling-cells'></td>
+                    <td class='js-orientation-buttons'>
+                        <input type='hidden' data-orientation-id='${orientationId}' name='TherapistTheoreticalOrientationIds[]' value='${orientationId}'/>
+                        <div class='btn btn-primary js-orientation-modify-row'>@Global.Edit</div>
+                        <div class='btn btn-danger js-delete-theoretical-row'><i class='fas fa-trash-alt'></i></div>
+                    </td>
+                </tr>`;
+
+            $.ajax({
+                type: "POST",
+                url: "/fr/therapist/AddOrientation/",
+                data: `{"orientationId":"${orientationId}"}`,
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    $(markup).insertBefore(tableRow);
+
+                    //On remet la ddl à choisir
+                    tableRow.children(".js-orientation-name").children().val("null");
+
+                    orientationManageOption()
+                },
+                error: function () {
+                    toastr["error"]
+                         ("@Global.GenericError",
+                            "@Global.Error");
+                }
+            });
+        });
+
+        //Fonction pour delete
+        $(document).on("click", ".js-delete-theoretical-row", function () {
+            var tableRow = $(this).closest("tr");
+            var orientationId = tableRow.children(".js-orientation-buttons").children("input").data("orientation-id");
+
+            $.ajax({
+                type: "POST",
+                url: "/fr/therapist/DeleteOrientation/",
+                data: `{"orientationId":"${orientationId}"}`,
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    tableRow.remove()
+                    orientationManageOption();
+                },
+                error: function () {
+                    toastr["error"]
+                          ("@Global.GenericError",
+                            "@Global.Error");
+                }
+            });
+        });
+
+        //Function pour modifier
+        $(document).on("click", ".js-orientation-modify-row", function () {
+            var tableRow = $(this).closest("tr");
+                var orientationName = tableRow.children(".js-orientation-name").html().trim();
+                var orientationId = tableRow.children(".js-orientation-buttons").children("input").data("orientation-id");
+
+                //On remet la ddl
+                tableRow.empty();
+
+                //On ajoute la ddl des serive offert
+                var ddlOrientation =
+                    "<select class='form-select js-orientation-ddl'></select>"
+
+                markup =
+                    `<td class='js-orientation-name'>${ddlOrientation}</td>
+                    <td class='Orientation-filling-cells'></td>
+                    <td class='js-orientation-buttons'>
+                        <input type='hidden' data-previous-orientation-name='${orientationName}' data-previous-orientation-id='${orientationId}'/>
+                        <div class='btn btn-green js-orientation-save-row'><i class='fa-solid fa-floppy-disk'></i></div>
+                        <div class='btn btn-danger js-orientation-cancel-row'>@Global.Cancel</div>
+                    </td>`;
+
+            tableRow.append(markup);
+
+            //Enleve le disable du footer
+            $("#js-theoretical-add-tr .js-orientation-ddl").prop("disabled", true)
+
+            //On enleve le disable sur tous les autres bouton modifier et ajouter
+            $(".js-orientation-modify-row").addClass("disabled")
+            $("#js-orientation-add-row").addClass("disabled")
+
+            orientationManageOption(orientationId)
+        });
+
+        //fonction pour annuler
+        $(document).on("click", ".js-orientation-cancel-row", function () {
+            var tableRow = $(this).closest("tr");
+                var orientationName = tableRow.children(".js-orientation-buttons").children("input").data("previous-orientation-name");
+                var orientationId = tableRow.children(".js-orientation-buttons").children("input").data("previous-orientation-id");
+
+                //On modifie la row
+                tableRow.empty();
+
+                markup =
+                    `<td class='js-orientation-name'>${orientationName}</td>
+                    <td class='Orientation-filling-cells'></td>
+                    <td class='js-orientation-buttons'>
+                        <input type='hidden' data-orientation-id='${orientationId}' name='TherapistTheoreticalOrientationIds[]' value='${orientationId}'/>
+                        <div class='btn btn-primary js-orientation-modify-row'>@Global.Edit</div>
+                        <div class='btn btn-danger js-delete-theoretical-row'><i class='fas fa-trash-alt'></i></div>
+                    </td>`;
+
+            tableRow.append(markup);
+
+            //Enleve le disable du footer
+            $("#js-theoretical-add-tr .js-orientation-ddl").prop("disabled", false)
+
+            //On enleve le disable sur tous les autres bouton modifier et ajouter
+            $(".js-orientation-modify-row").removeClass("disabled")
+            $("#js-orientation-add-row").removeClass("disabled")
+
+            orientationManageOption()
+        });
+
+        //Fonction pour enregistrer les modif
+        $(document).on("click", ".js-orientation-save-row", function () {
+            var tableRow = $(this).closest("tr");
+
+            if (!ValidationOrientationField(tableRow))
+                return false
+
+            var orientationName = tableRow.children(".js-orientation-name").children().find(":selected").text();
+            var orientationId = tableRow.children(".js-orientation-name").children().val();
+            var previousOrientationId = tableRow.children(".js-orientation-buttons").children("input").data("previous-orientation-id")
+
+            //On modifie la row
+            markup =
+                `<td class='js-orientation-name'>${orientationName}</td>
+                <td class='Orientation-filling-cells'></td>
+                <td class='js-orientation-buttons'>
+                    <input type='hidden' data-orientation-id='${orientationId}' name='TherapistTheoreticalOrientationIds[]' value='${orientationId}'/>
+                    <div class='btn btn-primary js-orientation-modify-row'>@Global.Edit</div>
+                    <div class='btn btn-danger js-delete-theoretical-row'><i class='fas fa-trash-alt'></i></div>
+                </td>`;
+
+            //On enregistre en ajax
+            $.ajax({
+                type: "POST",
+                url: "/fr/therapist/ModifyOrientation/",
+                data: `{"previousOrientationId":"${previousOrientationId}","orientationId":"${orientationId}"}`,
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    tableRow.empty();
+                    tableRow.append(markup);
+
+                    //Enleve le disable du footer
+                    $("#js-theoretical-add-tr .js-orientation-ddl").prop("disabled", false)
+
+                    //On enleve le disable sur tous les autres bouton modifier et ajouter
+                    $(".js-orientation-modify-row").removeClass("disabled")
+                    $("#js-orientation-add-row").removeClass("disabled")
+
+                    orientationManageOption()
+                },
+                error: function () {
+                    toastr["error"]
+                         ("@Global.GenericError",
+                            "@Global.Error");
+                }
+            });
+        });
+
+        //--------------------------------------------------- Compétence specifique ----------------------------------
+
+        function CheckIfSkillCanAddRow() {
+            var skills = @Html.Raw(Json.Encode(Model.SpecificSkills));
+            if (skills.length <= $("#js-my-skill-skills-tbody .js-skill-buttons input[type=hidden]").length) {
+
+                return false
+            }
+
+            return true
+        }
+
+        function skillsManageOption(skillsId) {
+            $(".js-ddl-skills")
+                .find('option')
+                .remove()
+
+            //Rebuild the options
+            var skills = @Html.Raw(Json.Encode(Model.SpecificSkills));
+
+            $(".js-ddl-skills").append($('<option>', {
+                value: "null",
+                text: "@Global.Choose"
+            }))
+
+            for (var i = 0; i < skills.length; i++) {
+                $(".js-ddl-skills").append($('<option>', {
+                    value: skills[i].Id,
+                    text: skills[i].Name
+                }))
+            }
+
+
+            //On met un selected sur une option
+            if (skillsId != undefined) {
+                $(".js-ddl-skills:eq(0)").val(skillsId)
+            }
+
+
+            //Search for the services already selected
+            var skillIds = []
+            $("#js-my-skill-skills-tbody .js-skill-buttons input[type=hidden]").each(function () {
+                skillIds.push($(this).data("skill-id"))
+            })
+
+
+            //Remove the services already selected
+            for (var i = 0; i < skillIds.length; i++) {
+                $(".js-ddl-skills")
+                    .find("option[value='" + skillIds[i] + "']")
+                    .remove()
+
+            }
+
+            //On cache le tr ajouter s'il n'y a plus d'option
+            $("#js-my-skills-skills-add-tr").removeClass("d-none")
+            if (!CheckIfSkillCanAddRow()) {
+                $("#js-my-skills-skills-add-tr").addClass("d-none")
+            }
+
+        }
+        skillsManageOption()
+
+        //Fonction pour la validation des champs
+        function ValidationSkillField(tableRow) {
+            var skillNameField = tableRow.children(".js-skill-name").children();
+            var skillNameValue = skillNameField.find(":selected").val();
+
+            //On enleve la class d'erreur
+            skillNameField.removeClass("input-validation-error");
+
+            //On verifie si on est à choose
+            if (skillNameValue == "null") {
+                toastr["error"]("@Global.TableInvalidFieldError",
+                    "@Global.Error");
+                skillNameField.addClass("input-validation-error");
+                return false;
+            }
+            return true;
+        }
+
+        //Add
+        $(document).on("click", "#js-skill-add-row", function () {
+            var tableRow = $(this).closest('tr');
+
+            //Validation des champs
+            if (!ValidationSkillField(tableRow))
+                return false;
+
+            var skillName = tableRow.children(".js-skill-name").children().find(":selected").text();
+            var skillId = tableRow.children(".js-skill-name").children().val();
+
+            //On ajoute la row
+            markup =
+                `<tr>
+                    <td class='js-skill-name'>${skillName}</td>
+                    <td class='Competences-filling-cells'></td>
+                    <td class='js-skill-buttons'>
+                        <input type='hidden' data-skill-id='${skillId}' name='TherapistSpecificSkillIds[]' value='${skillId}'/>
+                        <div class='btn btn-primary js-skill-modify-row'>@Global.Edit</div>
+                        <div class='btn btn-danger js-delete-skill-row'><i class='fas fa-trash-alt'></i></div>
+                    </td>
+                </tr>`;
+
+            $.ajax({
+                type: "POST",
+                url: "/fr/therapist/AddSkill/",
+                data: `{"skillId":"${skillId}"}`,
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    $(markup).insertBefore(tableRow);
+                    skillsManageOption()
+                },
+                error: function () {
+                    toastr["error"]
+                         ("@Global.GenericError",
+                            "@Global.Error");
+                }
+            });
+        });
+
+
+        //Fonction delete
+        $(document).on("click", ".js-delete-skill-row", function () {
+            var tableRow = $(this).closest("tr");
+            var skillId = tableRow.children(".js-skill-buttons").children("input").data("skill-id")
+
+            $.ajax({
+                type: "POST",
+                url: "/fr/therapist/DeleteSkill/",
+                data: `{"skillId":"${skillId}"}`,
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    tableRow.remove();
+                    skillsManageOption()
+                },
+                error: function () {
+                    toastr["error"]
+                          ("@Global.GenericError",
+                            "@Global.Error");
+                }
+            });
+        });
+
+        //Function modify
+        $(document).on("click", ".js-skill-modify-row", function () {
+            var tableRow = $(this).closest("tr");
+            var skillName = tableRow.children(".js-skill-name").html().trim();
+            var skillId = tableRow.children(".js-skill-buttons").children("input").data("skill-id");
+            //On remet la ddl
+            tableRow.empty();
+            //On ajoute la ddl des serive offert
+            var skills = @Html.Raw(Json.Encode(Model.SpecificSkills));
+            var ddlSkill =
+                "<select class='form-select js-ddl-skills'></select>"
+
+            markup =
+                `<td class='js-skill-name'>${ddlSkill}</td>
+                 <td class='Competences-filling-cells'></td>
+                 <td class='js-skill-buttons'>
+                    <input type='hidden' data-previous-skill-name='${skillName}' data-previous-skill-id='${skillId}'/>
+                    <div class='btn btn-green js-skill-save-row'><i class='fa-solid fa-floppy-disk'></i></div>
+                    <div class='btn btn-danger js-skill-cancel-row'>@Global.Cancel</div>
+                </td>`;
+            tableRow.append(markup);
+
+            //Met le disable du footer
+            $("#js-my-skills-skills-add-tr .js-ddl-skills").prop("disabled", true)
+
+            //On met le disable sur tous les autres bouton modifier et ajouter
+            $(".js-skill-modify-row").addClass("disabled")
+            $("#js-skill-add-row").addClass("disabled")
+
+            skillsManageOption(skillId)
+        });
+
+        //function cancel
+        $(document).on("click", ".js-skill-cancel-row", function () {
+            var tableRow = $(this).closest("tr");
+            var skillName = tableRow.children(".js-skill-buttons").children("input").data("previous-skill-name");
+            var skillId = tableRow.children(".js-skill-buttons").children("input").data("previous-skill-id");
+
+            //On modifie la
+            markup =
+                `<td class='js-skill-name'>${skillName}</td>
+                 <td class='Competences-filling-cells'></td>
+                <td class='js-skill-buttons'>
+                    <input type='hidden' data-skill-id='${skillId}' name='TherapistSpecificSkillIds[]' value='${skillId}'/>
+                    <div class='btn btn-primary js-skill-modify-row'>@Global.Edit</div>
+                    <div class='btn btn-danger js-delete-skill-row'><i class='fas fa-trash-alt'></i></div>
+                </td>`;
+
+            tableRow.empty();
+            tableRow.append(markup);
+
+            //Enleve le disable du footer
+            $("#js-my-skills-skills-add-tr .js-ddl-skills").prop("disabled", false)
+
+            //On Enleve le disable sur tous les autres bouton modifier et ajouter
+            $(".js-skill-modify-row").removeClass("disabled")
+            $("#js-skill-add-row").removeClass("disabled")
+
+            skillsManageOption()
+        });
+
+        //function save
+        $(document).on("click", ".js-skill-save-row", function () {
+            var tableRow = $(this).closest("tr");
+
+            //Validation des champs
+            if (!ValidationSkillField(tableRow))
+                return false
+
+            var skillName = tableRow.children(".js-skill-name").children().find(":selected").text();
+            var skillId = tableRow.children(".js-skill-name").children().val();
+            var previousSkillId = tableRow.children(".js-skill-buttons").children("input").data("previous-skill-id")
+            //On modifie la row
+            markup =
+                `<td class='js-skill-name'>${skillName}</td>
+                 <td class='Competences-filling-cells'></td>
+                <td class='js-skill-buttons'>
+                    <input type='hidden' data-skill-id='${skillId}' name='TherapistSpecificSkillIds[]' value='${skillId}'/>
+                    <div class='btn btn-primary js-skill-modify-row'>@Global.Edit</div>
+                    <div class='btn btn-danger js-delete-skill-row'><i class='fas fa-trash-alt'></i></div>
+                </td>`;
+
+            $.ajax({
+                type: "POST",
+                url: "/fr/therapist/ModifySkill/",
+                data: `{"previousSkillId":"${previousSkillId}","skillId":"${skillId}"}`,
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    tableRow.empty();
+                    tableRow.append(markup);
+
+                    //Enleve le disable du footer
+                    $("#js-my-skills-skills-add-tr .js-ddl-skills").prop("disabled", false)
+
+                    //On Enleve le disable sur tous les autres bouton modifier et ajouter
+                    $(".js-skill-modify-row").removeClass("disabled")
+                    $("#js-skill-add-row").removeClass("disabled")
+
+                    skillsManageOption()
+                },
+                error: function () {
+                    toastr["error"]
+                          ("@Global.GenericError",
+                            "@Global.Error");
+                }
+            });
+
+        })
+
+    </script>
+}

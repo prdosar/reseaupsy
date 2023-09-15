@@ -1,0 +1,1084 @@
+﻿@import "_theme.scss";
+
+
+
+
+//###TODO Simon: Si j'oublis d'enlever la partie suivante, on peut l'enlever
+.field-validation-error {
+	color: red !important;
+}
+
+.input-validation-error.form-control, .input-validation-error.form-select {
+	border: 2px solid red !important;
+}
+
+.checkbox-validation-error {
+	border-color: red !important;
+}
+
+.ui-datepicker {
+	background-color: #f6f6f6;
+
+	.ui-datepicker-month, .ui-datepicker-year {
+		width: 100%;
+		padding: 0.1rem 2.25rem 0.1rem 0.75rem;
+		-moz-padding-start: calc(0.75rem - 3px);
+		font-size: 15px !important;
+		font-weight: 400;
+		line-height: 1.5;
+		color: #212529;
+		background-color: #fff;
+		background-image: url("/_assets/img/icons/caret-down.svg");
+		background-repeat: no-repeat;
+		background-position: right 0.75rem center;
+		background-size: 16px 12px;
+		border: 1px solid #ced4da;
+		border-radius: 0.25rem;
+		transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		appearance: none;
+	}
+
+	.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default, .ui-button, html .ui-button.ui-state-disabled:hover, html .ui-button.ui-state-disabled:active {
+		border: 1px solid #cbcbcb;
+	}
+
+
+	.ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight {
+		border: 1px solid #cbcbcb;
+		background: #918fb9;
+		color: $cWhite;
+	}
+
+	.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active, a.ui-button:active, .ui-button:active, .ui-button.ui-state-active:hover {
+		border: 1px solid #cbcbcb;
+		background: $cpurpleLight;
+		font-weight: normal;
+		color: #ffffff;
+	}
+}
+
+
+
+#layout-not-connected {
+
+	.navbar {
+		position: relative;
+
+		@include med-575 {
+			background-color: $cPurple;
+			height: 60px;
+		}
+
+		.navbar-brand {
+			width: 300px;
+
+			@include med-991 {
+				width: 275px;
+			}
+
+			@include med-767 {
+				width: 250px;
+			}
+
+			@include med-575 {
+				width: 200px;
+			}
+
+
+			@include med-575 {
+				filter: invert(99%) sepia(51%) saturate(0%) hue-rotate(80deg) brightness(110%) contrast(100%);
+			}
+		}
+
+		.nav-item {
+
+			a {
+				color: $cBlack;
+
+				@include med-575 {
+					color: $cWhite;
+					text-align: right;
+				}
+			}
+		}
+
+		.navbar-toggler {
+			&:focus {
+				box-shadow: none;
+			}
+
+			img {
+				width: 30px;
+			}
+		}
+
+
+		.navbar-collapse {
+			@include med-575 {
+				width: 200px;
+				position: absolute;
+				background-color: $cpurpleLight;
+				right: 0px;
+				top: 60px;
+				padding: 10px 20px;
+				border-bottom-left-radius: 7px;
+			}
+		}
+	}
+
+	.form-group {
+		margin-top: 20px;
+	}
+
+	.form-control {
+		border: 1px solid $cBlack;
+		box-shadow: 0px 2px 3px rgba(0,0,0,0.15);
+	}
+}
+
+#page-login {
+	h1 {
+		margin-top: 100px;
+		font-family: $fDMSerif;
+		font-size: 80px;
+
+		@include med-1199 {
+			font-size: 75px;
+		}
+
+		@include med-991 {
+			font-size: 70px;
+		}
+
+		@include med-767 {
+			font-size: 65px;
+		}
+
+		@include med-575 {
+			font-size: 60px;
+		}
+	}
+
+	.forgot-link {
+		color: $cBlack;
+		font-size: 13px;
+
+		&:hover {
+			text-decoration: none;
+		}
+	}
+}
+
+#page-forgotpassword {
+	h1 {
+		margin-top: 100px;
+		font-family: $fDMSerif;
+	}
+}
+
+#page-resetpassword {
+	h1 {
+		margin-top: 100px;
+		font-family: $fDMSerif;
+	}
+}
+
+#layout-connected {
+	header {
+		padding: 20px 20px 0px 20px;
+		box-shadow: 0px 0px 10px #a0a0a0;
+		margin-bottom: 20px;
+
+		.navbar {
+
+			&.main-navbar {
+				padding-top: 25px;
+				padding-bottom: 0px;
+
+				.navbar-nav {
+					width: 100%;
+
+					.menu-relative {
+						position: relative;
+
+
+
+
+						@include med-575 {
+							position: static;
+						}
+					}
+				}
+			}
+
+			.logo-welcome {
+				display: flex;
+				align-items: center;
+			}
+
+			.navbar-brand {
+				width: 50px;
+				height: 50px;
+				margin-right: 10px;
+
+				@include med-450 {
+					width: 40px;
+					height: 40px;
+				}
+			}
+
+			.welcome-title {
+				font-family: $fDMSerif;
+				font-size: 50px;
+				line-height: 125%;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+				overflow: hidden;
+				max-width: 705px;
+
+				@include med-1499 {
+					max-width: 635px;
+				}
+
+				@include med-1199 {
+					max-width: 565px;
+				}
+
+				@include med-991 {
+					max-width: 495px;
+				}
+
+				@include med-767 {
+					max-width: 410px;
+				}
+
+				@include med-575 {
+					max-width: 175px;
+					line-height: 100%;
+				}
+
+
+
+
+
+				@include med-1499 {
+					font-size: 45px;
+				}
+
+				@include med-1199 {
+					font-size: 40px;
+				}
+
+				@include med-991 {
+					font-size: 35px;
+				}
+
+				@include med-767 {
+					font-size: 32px;
+				}
+
+				@include med-575 {
+					font-size: 25px;
+				}
+			}
+
+			#navbarAccount {
+				width: 60px;
+				height: 60px;
+				padding-bottom: 0px;
+
+				@include med-450 {
+					width: 40px;
+					height: 40px;
+				}
+
+
+				&::after {
+					display: none;
+				}
+			}
+
+			.navbar-nav {
+				.nav-item {
+					.nav-link {
+						font-size: 15px;
+						color: #757778;
+						display: flex;
+						align-items: center;
+						padding: 0px 0px 10px 0px;
+						margin: 0px 30px 0px 5px;
+
+						@include med-767 {
+							margin: 0px;
+						}
+
+
+						.menu-icon {
+							filter: invert(50%) sepia(6%) saturate(109%) hue-rotate(155deg) brightness(92%) contrast(90%);
+							width: 25px;
+							height: 25px;
+							margin-right: 5px;
+						}
+
+						.menu-name {
+							@include med-767 {
+								display: none;
+							}
+						}
+
+
+						&.actif {
+							border-bottom: 3px solid $cpurpleLight;
+							color: $cBlack;
+
+							.menu-icon {
+								filter: none;
+							}
+						}
+					}
+				}
+
+				.dropdown-item.active, .dropdown-item:active {
+					color: #fff;
+					text-decoration: none;
+					background-color: $cpurpleLight;
+				}
+			}
+
+			&.main-navbar {
+
+				.dropdown-menu[data-bs-popper] {
+
+					&.menu-right {
+						top: 100%;
+						right: 0px;
+						left: auto;
+						margin-top: 0.125rem;
+
+						@include med-575 {
+							left: -20px;
+							right: -20px;
+							margin-top: 0px;
+						}
+					}
+
+
+					@include med-575 {
+						left: -20px;
+						right: -20px;
+						margin-top: 0px;
+					}
+				}
+			}
+
+			&.user-navbar {
+
+				.dropdown-menu[data-bs-popper] {
+					&.menu-right {
+						top: 100%;
+						right: 0px;
+						left: auto;
+						margin-top: 0.125rem;
+					}
+				}
+			}
+		}
+	}
+}
+
+#page-therapist-dashboard {
+}
+
+#page-therapist-clientRequest {
+}
+
+#page-therapist-calendar {
+
+	.repeat-container {
+		background-color: #e7e7e7;
+		padding: 20px;
+		border-radius: 7px;
+
+		h3 {
+			text-align: center;
+			font-size: 20px;
+			padding-bottom: 15px;
+		}
+
+		label {
+			@include med-991 {
+				padding: 10px 0px 5px 0px;
+				line-height: 100%;
+			}
+		}
+
+		.row {
+			min-height: 38px;
+			align-items: center !important;
+		}
+
+		#js-appointment-modal-starts-from {
+			@include med-991 {
+				line-height: 100%;
+			}
+		}
+
+
+		#day-selected {
+			display: flex;
+
+			.js-appointment-modal-day {
+				width: 30px;
+				height: 30px;
+				background-color: $cWhite;
+				border-radius: 50%;
+				font-size: 13px;
+				color: $cBlack;
+				text-align: center;
+				cursor: pointer;
+				padding-top: 5px;
+				font-weight: 400;
+				margin-right: 10px;
+				@include noselect;
+
+
+				@include med-450 {
+					width: 25px;
+					height: 25px;
+					font-size: 11px;
+					padding-top: 4px;
+					margin-right: 8px;
+				}
+
+
+				&:hover {
+					background-color: $cPurpleSecondaryHover;
+				}
+
+
+
+				&.selected {
+					background-color: $cPurple;
+					color: $cWhite;
+
+					&:hover {
+						background-color: $cpurpleLight;
+					}
+				}
+			}
+		}
+	}
+
+	#js-conflict-list {
+		li {
+			margin-top: 20px;
+		}
+	}
+}
+
+#page-therapist-confirmpresence {
+}
+
+#page-therapist-nonpayed {
+}
+
+#page-therapist-profil {
+	font-weight: 300;
+
+	.availability .row:not(:last-child) {
+		border-bottom: 1px solid $cGrayTableRow;
+	}
+}
+
+#page-admin-statistics {
+}
+
+#page-admin-detailtherapist {
+	/*font-weight: 300;*/
+
+	.availability .row:not(:last-child) {
+		border-bottom: 1px solid $cGrayTableRow;
+	}
+
+	.js-service-type {
+		label {
+			margin-left: 5px;
+			color: $cTextColor;
+			font-size: 16px;
+
+			@include med-1199 {
+				font-size: 15px;
+			}
+
+			@include med-767 {
+				font-size: 14px;
+			}
+		}
+	}
+
+	.Area-filling-cells {
+		@include med-767 {
+			display: none;
+		}
+	}
+
+	.Orientation-filling-cells {
+		@include med-767 {
+			display: none;
+		}
+	}
+
+	.Competences-filling-cells {
+		@include med-767 {
+			display: none;
+		}
+	}
+}
+
+
+.checkbox-section {
+	margin: 20px 0px;
+
+	.form-group {
+
+		span {
+			font-size: 16px;
+			font-weight: 300;
+		}
+	}
+}
+
+
+.apexcharts-canvas {
+	margin: 0px auto;
+}
+
+.lblcheck {
+	font-size: 16px;
+	font-weight: 300;
+	color: $cTextColor;
+}
+
+#page-therapist-myskills {
+	h4 {
+		margin-top: 30px;
+	}
+
+	.js-service-type {
+		label {
+			margin-left: 5px;
+			color: $cTextColor;
+			font-size: 16px;
+
+			@include med-1199 {
+				font-size: 15px;
+			}
+
+			@include med-767 {
+				font-size: 14px;
+			}
+		}
+	}
+
+	.Area-filling-cells {
+		@include med-767 {
+			display: none;
+		}
+	}
+
+	.Orientation-filling-cells {
+		@include med-767 {
+			display: none;
+		}
+	}
+
+	.Competences-filling-cells {
+		@include med-767 {
+			display: none;
+		}
+	}
+}
+
+#page-admin-dashboard {
+}
+
+#page-therapist-claimform {
+
+	#PreviewTherapistBill {
+
+		.facture-title {
+			font-family: $fDMSerif;
+			font-size: 35px;
+		}
+
+		.table-description {
+			font-size: 14px;
+		}
+
+		.taxes-number {
+			font-size: 10px;
+			font-style: italic;
+		}
+
+		.taxes-summary {
+			font-size: 14px;
+		}
+	}
+}
+
+
+#page-admin-appointementrequest {
+
+
+	.appointment-late {
+		td {
+			background-color: #F8D7DA;
+		}
+	}
+}
+
+#page-admin-calendar {
+	#js-admin-calendar-date-set {
+		cursor: pointer;
+	}
+
+	.fc {
+		margin-top: 40px;
+
+		@include med-767 {
+			margin-top: 20px;
+		}
+
+
+
+
+		.fc-toolbar {
+
+			@include med-767 {
+				flex-direction: column;
+				justify-content: center;
+
+				.fc-toolbar-chunk {
+					margin: 5px 0px;
+				}
+
+				.fc-toolbar-chunk:nth-child(1) {
+					order: 1;
+				}
+
+				.fc-toolbar-chunk:nth-child(2) {
+					order: 2;
+				}
+			}
+
+			&.fc-header-toolbar {
+				margin-bottom: 15px;
+
+				@include med-767 {
+					margin-bottom: 5px;
+				}
+			}
+		}
+
+
+
+
+
+
+		.fc-scrollgrid {
+			background-color: $cWhite;
+		}
+
+
+		.fc-toolbar-chunk {
+			position: relative;
+		}
+
+		.fc-resource-timeline-divider {
+			visibility: hidden;
+			width: 1px;
+		}
+
+		.fc-prev-button, .fc-next-button {
+			border-radius: 50%;
+			width: 30px;
+			height: 30px;
+			padding: 0px;
+			line-height: 0.9;
+			cursor: pointer;
+			background-color: $cWhite;
+			color: $cPurple;
+			border: 1px solid $cPurple;
+			@include noselect;
+			box-shadow: none !important;
+
+			&:hover, &:active, &:focus {
+				border: 1px solid $cpurpleLight !important;
+				background-color: $cPurpleSecondaryHover !important;
+				color: $cpurpleLight !important;
+				text-decoration: none;
+				border: none;
+				box-shadow: none;
+			}
+
+
+
+
+
+			.fc-icon {
+				line-height: 1;
+				font-size: 1em;
+			}
+		}
+
+		.fc-today-button {
+			cursor: pointer;
+			display: inline-block;
+			background-color: $cPurple;
+			color: $cWhite;
+			border-radius: 5px;
+			padding: 5px 20px;
+			font-weight: 400;
+			border: 2px solid $cPurple;
+			font-size: 14px;
+			text-align: left;
+			@include noselect;
+			box-shadow: none !important;
+
+
+			&:hover, &:active, &:focus {
+				background-color: $cpurpleLight !important;
+				border: 2px solid $cpurpleLight !important;
+				color: $cWhite;
+				text-decoration: none;
+				border: none;
+			}
+
+			&:disabled {
+				background-color: $cpurpleLight !important;
+				border: 2px solid $cpurpleLight !important;
+				color: $cWhite;
+				text-decoration: none;
+				border: none;
+				cursor: not-allowed;
+			}
+		}
+
+		.fc-timeline-header-row-chrono .fc-timeline-slot-frame {
+			justify-content: center;
+		}
+
+		.fc-timeline-slot-cushion {
+			color: $cWhite;
+			text-decoration: none;
+			font-size: 15px;
+		}
+
+		.fc-datagrid-cell-main {
+			font-size: 15px;
+
+			@include med-991 {
+				font-size: 14px;
+			}
+
+			@include med-767 {
+				font-size: 12px;
+			}
+
+			@include med-575 {
+				font-size: 11px;
+			}
+		}
+
+		.fc-event-title {
+			@include noselect;
+		}
+
+		table tbody tr:nth-child(odd) td {
+			background-color: transparent;
+		}
+
+
+		.fc-resource {
+			background-color: $cWhite;
+		}
+		/*.fc-timeline-event-harness {
+            height:100%;
+        }*/
+
+		.fc-timeline-event .fc-event-title {
+			font-size: 11px;
+
+			@include med-575 {
+				font-size: 10px;
+			}
+		}
+
+		.fc-event {
+			border-radius: 3px;
+			height: 100%;
+		}
+
+		tfoot {
+			display: none;
+		}
+
+		.fc-scrollgrid-sync-inner {
+			height: 100% !important;
+		}
+
+		.fc-timeline-event-harness {
+			height: 100%;
+		}
+	}
+
+
+
+	#js-admin-calendar-date-set {
+		position: absolute;
+		opacity: 0;
+		width: 100%;
+		height: 100%;
+		top: 0px;
+		left: 0px;
+	}
+}
+
+#client-body {
+	width: 100%;
+	max-width: 900px;
+	margin: 50px auto;
+	border-radius: 10px;
+
+	@include med-767 {
+		margin: 0px auto;
+	}
+
+
+	.shadow-body {
+		box-shadow: 0px 0px 10px $cGrayTableShadow;
+	}
+
+	.client-left {
+		background-color: $cPurple;
+		color: $cWhite;
+		border-top-left-radius: 10px;
+		border-bottom-left-radius: 10px;
+		padding: 20px;
+		height: 100%;
+
+		a {
+			font-size: 15px;
+			color: $cWhite;
+
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+
+
+		@include med-767 {
+			border-top-left-radius: 10px;
+			border-top-right-radius: 10px;
+			border-bottom-left-radius: 0px;
+			border-bottom-right-radius: 0px;
+		}
+
+
+
+		.navbar-brand {
+			max-width: 220px;
+			display: block;
+		}
+
+		.payment-item {
+			margin: 10px 0px;
+
+			label {
+				color: $cWhite;
+				font-size: 15px;
+			}
+
+			.item-info {
+				font-weight: 200;
+			}
+		}
+
+		.amount-info {
+			width: 100%;
+			font-size: 15px;
+
+			@include med-767 {
+				margin-top: 25px;
+			}
+
+
+			.amount-item {
+				border-bottom: 1px solid $cpurpleLight;
+
+				span {
+					font-size: 10px;
+					font-style: italic;
+					font-weight: 200;
+				}
+
+				.amount-value {
+					font-weight: 200;
+				}
+			}
+
+			.total {
+				font-size: 50px;
+				text-align: center;
+				margin-top: 50px;
+				line-height: 1;
+
+
+				@include med-767 {
+					font-size: 40px;
+					margin-top: 40px;
+				}
+
+
+				@include med-575 {
+					font-size: 30px;
+				}
+
+
+				.total-label {
+					font-size: 16px;
+				}
+			}
+		}
+	}
+
+	.client-right {
+		padding: 20px;
+		background-color: $cWhite;
+		border-top-right-radius: 10px;
+		border-bottom-right-radius: 10px;
+		height: 100%;
+		font-weight: 300;
+
+		a {
+			font-size: 15px;
+			color: $cTextColor;
+
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+
+
+		@include med-767 {
+			border-top-left-radius: 0px;
+			border-top-right-radius: 0px;
+			border-bottom-left-radius: 10px;
+			border-bottom-right-radius: 10px;
+		}
+
+		.form-group {
+			margin-top: 20px;
+
+			@include med-767 {
+				margin-top: 10px;
+			}
+		}
+
+
+		hr {
+			margin: 20px 0px 30px 0px;
+		}
+
+		.alert {
+			width: 100%;
+			display: block;
+			font-size: 15px;
+			margin-bottom: 0px;
+		}
+
+		label {
+			font-size: 15px;
+		}
+	}
+
+	.creditcard {
+		max-width: 60px;
+margin-bottom:5px;
+	}
+}
+
+
+
+
+
+#ui-datepicker-div {
+	z-index: 1056 !important;
+}
+
+
+#page-detail-client-admin {
+	.availability .row:not(:last-child) {
+		border-bottom: 1px solid $cGrayTableRow;
+	}
+}
+
+#page-detail-client-therapist {
+	.availability .row:not(:last-child) {
+		border-bottom: 1px solid $cGrayTableRow;
+	}
+}
+
+#privacypolicy, #termsofuse {
+	margin-top: 30px;
+
+	ul, ol {
+		padding-bottom: 20px;
+	}
+
+
+
+	ol {
+		counter-reset: item;
+
+
+		&:not([type='i']) {
+
+
+
+			& > li {
+				display: block;
+			}
+
+			& > li:before {
+				content: counters(item, ".") ". ";
+				counter-increment: item;
+				margin-left: -22px;
+				font-weight: bold;
+			}
+		}
+	}
+
+	.mb16 {
+		margin-bottom: 1rem;
+		display: inline-block;
+	}
+
+
+	table {
+		tbody {
+			tr {
+				td {
+					white-space: normal;
+					background-color: transparent;
+
+					&:first-child {
+						width: 30%;
+					}
+				}
+			}
+		}
+	}
+}

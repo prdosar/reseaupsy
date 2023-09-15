@@ -1,0 +1,158 @@
+﻿
+@{
+    ViewBag.Title = "Politique de confidentialité";
+
+    if (Context.User.Identity.IsAuthenticated)
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_LayoutGeneral.cshtml";
+
+    }
+
+}
+
+<section id="privacypolicy">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+
+
+                @*#################################*@
+
+                <h1>
+                    POLITIQUE DE CONFIDENTIALITÉ RÉSEAUPSY INC.
+                </h1>
+
+                <p>Le Site accorde une grande importance à la vie privée de ses Utilisateurs.</p>
+
+                <p>Aucune divulgation des Renseignements personnels de l’Utilisateur n’aura lieu, ni même des Renseignements qui permettraient de l’identifier directement ou indirectement, et ce, sans le consentement ou sans que la loi n’y autorise.</p>
+
+                <p>La présente Politique de Confidentialité s’applique uniquement au Site. L’information recueillie auprès du Site est assujettie aux présentes dans les limites possibles pour le Site. En tout temps, l’Utilisateur doit prendre connaissance et accepter les conditions d’utilisation, lesquelles agissent de manière supplétive aux présentes.</p>
+
+                <ol>
+                    <li>
+                        <strong class="mb16">SERVICES</strong>
+                        <p>Le Site recueille des Renseignements personnels afin de mieux cerner les besoins de l’Utilisateur et lui créer un compte personnel pour interagir sur le Site.</p>
+                        <p>Le Site collecte les Renseignements suivants <strong>pour les Utilisateurs clients :</strong></p>
+                        <ul>
+                            <li>Nom complet</li>
+                            <li>Adresse postale</li>
+                            <li>Âge</li>
+                            <li>Genre</li>
+                            <li>Courriel</li>
+                            <li>Numéro de téléphone</li>
+
+                        </ul>
+
+                        <p>Le Site collecte les Renseignements suivants <strong>pour les Utilisateurs thérapeutes :</strong></p>
+                        <ul>
+                            <li>Nom complet</li>
+                            <li>Courriel</li>
+                            <li>Téléphone</li>
+                            <li>Genre</li>
+                            <li>Adresse postale</li>
+                            <li>Accréditation</li>
+                            <li>Numéro d’OPQ (si applicable)</li>
+                            <li>Numéro de TPS (Si applicable)</li>
+                            <li>Numéro de TVQ (Si applicable)</li>
+                            <li>Titres professionnels</li>
+                            <li>Domaine de pratique</li>
+                            <li>Orientation théorique</li>
+                            <li>Compétences spécifiques</li>
+                            <li>Mot de passe</li>
+                        </ul>
+
+
+
+
+                        <p>Les Renseignements personnels que le Site collecte sont recueillis à l’aide de formulaires et grâce à l’interactivité établie entre l’Utilisateur et le Site.</p>
+
+
+
+                        <p>Le Site utilise les Renseignements fournis par les <strong>Utilisateurs thérapeutes</strong> pour les finalités suivantes : </p>
+                        <ul>
+                            <li>Informations / Offres promotionnelles</li>
+                            <li>Amélioration des services proposés</li>
+                            <li>Raisons administratives</li>
+                            <li>Contact</li>
+                            <li>Gestion du Site</li>
+
+                        </ul>
+
+                        <p>Le Site utilise les Renseignements fournis par les <strong>Utilisateurs clients</strong> pour les finalités suivantes : </p>
+                        <ul>
+                           <li>Mise en relation avec un Thérapeute</li>
+                           <li>Amélioration des services rendus</li>
+                           <li>Sous réserve d’approbation du client : pour permettre la référence à une tierce clinique, thérapeute hors <strong>RéseauPsy</strong></li>
+                           <li>Statistiques anonymes</li>
+                           <li>Suivi des améliorations et nouveautés chez <strong>RéseauPsy</strong></li>
+
+
+                        </ul>
+
+                        <p><strong>En aucun cas les Renseignements personnels fournis sur le Site ne seront communiqués à des tiers sans un consentement valable de l’Utilisateur, à moins d’y être tenu par la loi.</strong></p>
+
+                    </li>
+
+                    <li>
+                        <strong class="mb16">ACCÈS ET MODIFICATION DES INFORMATIONS</strong>
+                        <p>L’Utilisateur bénéficie d’un droit d’accès ou de modification, de correction ou de suppression des Renseignements personnels le concernant.</p>
+                        <p>Pour apporter des corrections à ses Renseignements personnels ou les mettre à jour, pour demander le retrait des Renseignements personnels de la liste de contacts du Site ou pour toutes autres questions concernant la collecte et l’utilisation des Renseignements personnels, l’Utilisateur doit communiquer avec le Site en s’adressant à RéseauPsy en nous écrivant aux adresse suivantes : administration@reseaupsy.ca ou à  Réseaupsy inc., 6277 rue D'Iberville, Montréal (Québec) H2G2C5, Canada.</p>
+                        <p>Lorsqu’une personne communique par courriel, l’adresse courriel de retour est utilisée pour répondre à cette personne. Le Site n’utilise cette adresse courriel pour aucun autre but que de répondre au visiteur et, en aucun cas, cette adresse courriel n’est partagée à une tierce partie.</p>
+                        <p>Le Site ne recueillera pas des Renseignements sans autorisation. Dans l’éventualité où une demande d’Information est envoyée par courriel au Site, les Renseignements personnels ne seront alors transmis qu’aux employés du Site qui en ont besoin pour répondre à la demande d’Information et ces Renseignements personnels ne seront pas communiqués à des tiers sans un consentement valable, à moins d’y être tenu par la loi. </p>
+                    </li>
+
+
+                    <li>
+                        <strong class="mb16">PROTECTION DES RENSEIGNEMENTS PERSONNELS</strong>
+                        <p>Le Site s’engage à prendre toutes les mesures nécessaires pour protéger les Renseignements personnels enregistrés sur support électronique ou sur papier.</p>
+                        <p>Cependant, il est à noter que le Site ne peut garantir que les mesures de sécurité pourront empêcher une tierce partie mal intentionnée d’obtenir et de prendre possession des Informations échangées et gardées.</p>
+                    </li>
+
+                    <li>
+                        <strong class="mb16">LIENS VERS D’AUTRES SITES</strong>
+                        <p>La présente Politique de confidentialité ne vise que le Site et ne s’applique pas aux autres Sites web étant suggérés par des liens connexes apparaissant sur le Site concernant d’autres corporations ou services.</p>
+                        <p>Bien que le Site utilise la Plateforme externe de paiement sécurisé PandaPay, le Site n’est pas responsable des Termes et Conditions de PandayPay, ni de leur Politique de confidentialité. En ce sens, l’Utilisateur doit en tout temps prendre connaissance des Conditions d’utilisation de PandaPay avant de procéder à son inscription et à un achat sur la Site.</p>
+                        <p>Aucune des données bancaires transmises par l’Utilisateur ne sera conservée par <strong>RéseauPsy</strong>.</p>
+                    </li>
+
+                    <li>
+                        <strong class="mb16">MODIFICATIONS APPORTÉES À LA PRÉSENTE POLITIQUE DE CONFIDENTIALITÉ</strong>
+                        <p>Le Site se réserve le droit de modifier la présente Politique de confidentialité en tout temps, et ce, en affichant une nouvelle Politique de confidentialité sur le Site sans préavis ni notification. La cueillette, l’utilisation et la communication de vos Renseignements par le Site seront assujetties à la version de la Politique de confidentialité qui est alors affichée et en vigueur.</p>
+                    </li>
+
+                    <li>
+                        <strong class="mb16">ACCEPTATION</strong>
+                        <p>Concernant la présente Politique, l’Utilisateur confirme qu’il en a bien pris connaissance et qu’il en a lu les Conditions applicables.</p>
+
+                    </li>
+
+
+                    <li>
+                        <strong class="mb16">DOCUMENT ÉCRIT</strong>
+                        <p>L’Utilisateur peut garder la présente Politique de confidentialité sous forme de texte en imprimant le document complet. Cependant, cette Politique, ou sa version modifiée pourra en tout temps être retrouvée sur le Site pour consultation en ligne.</p>
+
+                    </li>
+
+
+                </ol>
+
+                @*#################################*@
+
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+

@@ -1,0 +1,51 @@
+﻿@model ReseauPsy.ViewModel.Admin.DashboardViewModel
+@using ReseauPsy.Resources
+@{
+    ViewBag.Title = Resource.AdminDashboard_Title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <section id="page-admin-dashboard">
+
+        @* Page Title *@
+        <h1>@Resource.AdminDashboard_H1</h1>
+
+
+        <div class="row">
+          
+
+            @* Appointment request *@
+            <div class="col-12 col-md-4">
+                <div class="white-card">
+                    <h3>@Resource.AdminDashboard_Consultation</h3>
+                    <div class="big-number">@Model.CountRequestToDo</div>
+                    <div class="card-info">@Resource.AdminDashboard_Todo</div>
+                    <a href="@Url.Action("AppointmentRequest","Admin")" class="btn btn-primary">@Global.View</a>
+                </div>
+            </div>
+
+            @* weekly appointment *@
+            <div class="col-12 col-md-4">
+                <div class="white-card">
+                    <h3>@Resource.AdminDashboard_Appointments</h3>
+                    <div class="big-number">@Model.CountCurrentAppointment</div>
+                    <div class="card-info">@Resource.AdminDashboard_WeeklyAppointment</div>
+                    <a href="@Url.Action("AppointmentCalendar","Admin")" class="btn btn-primary">@Global.View</a>
+                </div>
+            </div>
+
+            @* invoice to pay *@
+            <div class="col-12 col-md-4">
+                <div class="white-card">
+                    <h3>@Resource.AdminDashboard_Bill</h3>
+                    <div class="big-number">@Model.CountBillToPay</div>
+                    <div class="card-info">@Resource.AdminDashboard_ToPay</div>
+                    <a href="@Url.Action("TherapistBill","Admin")" class="btn btn-primary">@Global.View</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+</div>
+

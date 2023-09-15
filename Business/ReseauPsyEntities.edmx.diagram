@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="571e65d1f0e5463a80e91078cc0bebe3" Name="Diagram1" ZoomLevel="66">
+        <EntityTypeShape EntityType="ReseauPsyModel.Accreditation" Width="1.5" PointX="3.75" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReseauPsyModel.Admin" Width="1.5" PointX="6" PointY="38.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReseauPsyModel.AppointmentStatu" Width="1.5" PointX="8.25" PointY="38.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReseauPsyModel.AreasOfPractice" Width="1.5" PointX="11" PointY="38.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReseauPsyModel.AspNetRole" Width="1.5" PointX="1.5" PointY="35.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReseauPsyModel.AspNetUserClaim" Width="1.5" PointX="6" PointY="41.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReseauPsyModel.AspNetUserLogin" Width="1.5" PointX="6" PointY="44.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReseauPsyModel.AspNetUser" Width="1.5" PointX="3.75" PointY="34.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReseauPsyModel.ClientConsultationType" Width="1.5" PointX="8.25" PointY="23.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReseauPsyModel.ClientsAgeRange" Width="1.5" PointX="0.75" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReseauPsyModel.ClientType" Width="1.5" PointX="12" PointY="17.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReseauPsyModel.ConsultationReason" Width="1.5" PointX="0.75" PointY="22.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReseauPsyModel.ConsultationType" Width="1.5" PointX="6" PointY="21.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReseauPsyModel.DayOfTheWeek_PeriodOfTheDay" Width="1.5" PointX="12" PointY="14.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReseauPsyModel.DaysOfTheWeek" Width="1.5" PointX="6" PointY="18" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReseauPsyModel.ExternalAssociationClientSentStatu" Width="1.5" PointX="9" PointY="17.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReseauPsyModel.ExternalAssociationClientsSent" Width="1.5" PointX="11.25" PointY="23.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReseauPsyModel.ExternalAssociation" Width="1.5" PointX="0.75" PointY="24.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReseauPsyModel.Gender" Width="1.5" PointX="3.75" PointY="39.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReseauPsyModel.Language" Width="1.5" PointX="6" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReseauPsyModel.NatureAct" Width="1.5" PointX="8.25" PointY="41" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReseauPsyModel.OfferedService_OfferedServiceType" Width="1.5" PointX="9" PointY="11.125" IsExpanded="false" />
+        <EntityTypeShape EntityType="ReseauPsyModel.OfferedService" Width="1.5" PointX="6.75" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReseauPsyModel.OfferedServiceType" Width="1.5" PointX="6.75" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReseauPsyModel.PeriodsOfTheDay" Width="1.5" PointX="6" PointY="35.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReseauPsyModel.ProfessionalTitle" Width="1.5" PointX="14" PointY="38.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReseauPsyModel.ReasonsDeleteClientAppointment" Width="1.5" PointX="8.25" PointY="32.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReseauPsyModel.ReasonsDeleteClientRequest" Width="1.5" PointX="0.75" PointY="31.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReseauPsyModel.Region" Width="1.5" PointX="0.75" PointY="28.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReseauPsyModel.SpecificSkill" Width="1.5" PointX="14" PointY="41.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReseauPsyModel.TheoreticalOrientation" Width="1.5" PointX="15" PointY="18.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReseauPsyModel.TherapistAreaOfPractice" Width="1.5" PointX="13.25" PointY="32.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReseauPsyModel.TherapistAssociationAndProfessionalOrder" Width="1.5" PointX="8.25" PointY="29.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReseauPsyModel.TherapistAvailability" Width="1.5" PointX="14.25" PointY="24.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReseauPsyModel.TherapistClientAgeRange" Width="1.5" PointX="11.25" PointY="35.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReseauPsyModel.TherapistClientType" Width="1.5" PointX="14.25" PointY="21.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReseauPsyModel.TherapistConsultationType" Width="1.5" PointX="14.25" PointY="35.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReseauPsyModel.TherapistLanguage" Width="1.5" PointX="8.25" PointY="20.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReseauPsyModel.TherapistOfferedService" Width="1.5" PointX="11.25" PointY="20.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReseauPsyModel.TherapistProfessionalTitle" Width="1.5" PointX="16.25" PointY="28.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReseauPsyModel.TherapistSpecificSkill" Width="1.5" PointX="16.25" PointY="31.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReseauPsyModel.TherapistTheoreticalOrientation" Width="1.5" PointX="17.25" PointY="25.25" IsExpanded="true" />
+        <AssociationConnector Association="ReseauPsyModel.FK__Admins__AspNetUs__7D0E9093" ManuallyRouted="false" />
+        <AssociationConnector Association="ReseauPsyModel.FK__Therapist__AreaO__0B91BA14" ManuallyRouted="false" />
+        <AssociationConnector Association="ReseauPsyModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="ReseauPsyModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="ReseauPsyModel.FK__ClientCon__Consu__04E4BC85" ManuallyRouted="false" />
+        <AssociationConnector Association="ReseauPsyModel.FK__Therapist__Clien__114A936A" ManuallyRouted="false" />
+        <AssociationConnector Association="ReseauPsyModel.FK__Therapist__Clien__1332DBDC" ManuallyRouted="false" />
+        <AssociationConnector Association="ReseauPsyModel.FK__Therapist__Consu__151B244E" ManuallyRouted="false" />
+        <AssociationConnector Association="ReseauPsyModel.FK__DayOfTheW__DaysO__00AA174D" ManuallyRouted="false" />
+        <AssociationConnector Association="ReseauPsyModel.FK__DayOfTheW__Perio__7FB5F314" ManuallyRouted="false" />
+        <AssociationConnector Association="ReseauPsyModel.FK__Therapist__DayOf__056ECC6A" ManuallyRouted="false" />
+        <AssociationConnector Association="ReseauPsyModel.FK__ExternalA__Exter__65370702" ManuallyRouted="false" />
+        <AssociationConnector Association="ReseauPsyModel.FK__ExternalA__Exter__607251E5" ManuallyRouted="false" />
+        <AssociationConnector Association="ReseauPsyModel.FK__Therapist__Langu__17036CC0" ManuallyRouted="false" />
+        <AssociationConnector Association="ReseauPsyModel.FK__OfferedSe__Offer__753864A1" ManuallyRouted="false" />
+        <AssociationConnector Association="ReseauPsyModel.FK__OfferedSe__Offer__762C88DA" ManuallyRouted="false" />
+        <AssociationConnector Association="ReseauPsyModel.FK__Therapist__Offer__79FD19BE" ManuallyRouted="false" />
+        <AssociationConnector Association="ReseauPsyModel.FK__Therapist__Profe__1AD3FDA4" ManuallyRouted="false" />
+        <AssociationConnector Association="ReseauPsyModel.FK__Therapist__Speci__1CBC4616" ManuallyRouted="false" />
+        <AssociationConnector Association="ReseauPsyModel.FK__Therapist__Theor__1EA48E88" ManuallyRouted="false" />
+        <AssociationConnector Association="ReseauPsyModel.AspNetUserRoles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ReseauPsyModel.ClientAvailability" Width="1.5" PointX="17.25" PointY="22.25" />
+        <AssociationConnector Association="ReseauPsyModel.FK__ClientAva__DayOf__0FEC5ADD" />
+        <EntityTypeShape EntityType="ReseauPsyModel.ClientAppointmentRepetition" Width="1.5" PointX="0.75" PointY="0.875" />
+        <EntityTypeShape EntityType="ReseauPsyModel.Tax" Width="1.5" PointX="3.375" PointY="0.75" />
+        <EntityTypeShape EntityType="ReseauPsyModel.ClientPaymentInfo" Width="1.5" PointX="19.75" PointY="16.25" />
+        <EntityTypeShape EntityType="ReseauPsyModel.ResetPassword" Width="1.5" PointX="6" PointY="47.125" />
+        <AssociationConnector Association="ReseauPsyModel.FK__ResetPass__Aspne__38B96646" />
+        <EntityTypeShape EntityType="ReseauPsyModel.ClientLanguage" Width="1.5" PointX="14.25" PointY="15" />
+        <AssociationConnector Association="ReseauPsyModel.FK__ClientLan__Langu__536D5C82" />
+        <EntityTypeShape EntityType="ReseauPsyModel.Therapist" Width="1.5" PointX="6" PointY="28.5" />
+        <AssociationConnector Association="ReseauPsyModel.FK__Therapist__AspNe__7755B73D" />
+        <AssociationConnector Association="ReseauPsyModel.FK__Therapist__Thera__0A9D95DB" />
+        <AssociationConnector Association="ReseauPsyModel.FK__Therapist__Thera__0C85DE4D" />
+        <AssociationConnector Association="ReseauPsyModel.FK__Therapist__Thera__0D7A0286" />
+        <AssociationConnector Association="ReseauPsyModel.FK__Therapist__Thera__10566F31" />
+        <AssociationConnector Association="ReseauPsyModel.FK__Therapist__Thera__123EB7A3" />
+        <AssociationConnector Association="ReseauPsyModel.FK__Therapist__Thera__14270015" />
+        <AssociationConnector Association="ReseauPsyModel.FK__Therapist__Thera__160F4887" />
+        <AssociationConnector Association="ReseauPsyModel.FK__Therapist__Thera__17F790F9" />
+        <AssociationConnector Association="ReseauPsyModel.FK__Therapist__Thera__19DFD96B" />
+        <AssociationConnector Association="ReseauPsyModel.FK__Therapist__Thera__1BC821DD" />
+        <AssociationConnector Association="ReseauPsyModel.FK__Therapist__Thera__1DB06A4F" />
+        <EntityTypeShape EntityType="ReseauPsyModel.TherapistInfo" Width="1.5" PointX="17.25" PointY="34.875" />
+        <AssociationConnector Association="ReseauPsyModel.FK__Therapist__Accre__76B698BF" />
+        <AssociationConnector Association="ReseauPsyModel.FK__Therapist__Accre__77AABCF8" />
+        <AssociationConnector Association="ReseauPsyModel.FK__Therapist__Gende__74CE504D" />
+        <AssociationConnector Association="ReseauPsyModel.FK__Therapist__Regio__75C27486" />
+        <AssociationConnector Association="ReseauPsyModel.FK__Therapist__Thera__7F4BDEC0" />
+        <AssociationConnector Association="ReseauPsyModel.FK__ExternalA__Langu__0F824689" />
+        <EntityTypeShape EntityType="ReseauPsyModel.ReseauPsyInfo" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="ReseauPsyModel.ClientInfo" Width="1.5" PointX="21.75" PointY="24.625" />
+        <AssociationConnector Association="ReseauPsyModel.FK__ClientInf__Regio__4C8B54C9" />
+        <AssociationConnector Association="ReseauPsyModel.FK__ClientInf__Gende__000AF8CF" />
+        <EntityTypeShape EntityType="ReseauPsyModel.ExternalClientFee" Width="1.5" PointX="3.375" PointY="3.75" />
+        <EntityTypeShape EntityType="ReseauPsyModel.Clients" Width="1.5" PointX="20.25" PointY="30" />
+        <EntityTypeShape EntityType="ReseauPsyModel.TherapistClientRequest" Width="1.5" PointX="22.5" PointY="30.75" />
+        <AssociationConnector Association="ReseauPsyModel.FK__ClientAva__Clien__01142BA1" />
+        <AssociationConnector Association="ReseauPsyModel.FK__ClientCon__Clien__03F0984C" />
+        <AssociationConnector Association="ReseauPsyModel.FK__ClientInf__Clien__4B973090" />
+        <AssociationConnector Association="ReseauPsyModel.FK__ClientLan__Clien__51851410" />
+        <AssociationConnector Association="ReseauPsyModel.FK__Client__ClientAg__00200768" />
+        <AssociationConnector Association="ReseauPsyModel.FK__Client__Consulta__75A278F5" />
+        <AssociationConnector Association="ReseauPsyModel.FK__Client__External__05D8E0BE" />
+        <AssociationConnector Association="ReseauPsyModel.FK__Client__ReasonDe__06CD04F7" />
+        <AssociationConnector Association="ReseauPsyModel.FK__Clients__Languag__2B2A60FE" />
+        <AssociationConnector Association="ReseauPsyModel.FK__Clients__Therapi__0F4D3C5F" />
+        <AssociationConnector Association="ReseauPsyModel.FK__ExternalA__Clien__6166761E" />
+        <AssociationConnector Association="ReseauPsyModel.FK__Therapist__Clien__719CDDE7" />
+        <AssociationConnector Association="ReseauPsyModel.FK__Therapist__Thera__72910220" />
+        <EntityTypeShape EntityType="ReseauPsyModel.TherapistBill" Width="1.5" PointX="8.25" PointY="35" />
+        <AssociationConnector Association="ReseauPsyModel.FK__Therapist__Thera__208CD6FA" />
+        <EntityTypeShape EntityType="ReseauPsyModel.ClientAppointments" Width="1.5" PointX="24.5" PointY="22.375" />
+        <AssociationConnector Association="ReseauPsyModel.FK__ClientApp__Appoi__24285DB4" />
+        <AssociationConnector Association="ReseauPsyModel.FK__ClientApp__Repet__75F77EB0" />
+        <AssociationConnector Association="ReseauPsyModel.FK__ClientApp__Clien__14E61A24" />
+        <AssociationConnector Association="ReseauPsyModel.FK__ClientApp__Consu__42ACE4D4" />
+        <AssociationConnector Association="ReseauPsyModel.FK__ClientApp__Natur__41B8C09B" />
+        <AssociationConnector Association="ReseauPsyModel.FK__ClientApp__Profe__47C69FAC" />
+        <AssociationConnector Association="ReseauPsyModel.FK__ClientApp__Reaso__4A4E069C" />
+        <AssociationConnector Association="ReseauPsyModel.FK__ClientApp__Thera__40C49C62" />
+        <AssociationConnector Association="ReseauPsyModel.FK__ClientPay__Clien__2F2FFC0C" />
+        <EntityTypeShape EntityType="ReseauPsyModel.TherapistPayInformations" Width="1.5" PointX="8.25" PointY="43.875" />
+        <AssociationConnector Association="ReseauPsyModel.FK__ClientApp__Thera__55DFB4D9" />
+        <AssociationConnector Association="ReseauPsyModel.FK__Therapist__Thera__10AB74EC" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

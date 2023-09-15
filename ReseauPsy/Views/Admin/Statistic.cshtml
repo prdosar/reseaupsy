@@ -1,0 +1,531 @@
+﻿@model ReseauPsy.ViewModel.Admin.StatisticsViewModel
+@using ReseauPsy.Resources
+@using System.Web.UI
+@using System.Globalization
+@{
+    ViewBag.Title = Resource.Statistics_Title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<section id="page-admin-statistics">
+    <div class="container">
+
+
+        <h1>@Resource.Statistics_H1</h1>
+
+
+
+        @* Filtres *@
+        <div class="row">
+
+            @* StartDate *@
+            <div class="col-md-6 col-lg-4 col-xl-2">
+                <div class="form-group">
+                    <div>@Global.StartDate</div>
+                    <input type="text" id="js-admin-statistic-start-date" class="js-date-picker form-control" autocomplete="off" />
+                </div>
+            </div>
+
+            @* EndDate *@
+            <div class="col-md-6 col-lg-4 col-xl-2">
+                <div class="form-group">
+                    <div>@Global.EndDate</div>
+                    <input type="text" id="js-admin-statistic-end-date" class="js-date-picker form-control" autocomplete="off" />
+                </div>
+            </div>
+
+
+            @* Apply button *@
+            <div class="col-md-6 col-lg-4 col-xl-2">
+                <div class="form-group">
+                    <br />
+                    <div id="js-admin-statistic-apply-filter" class="btn btn-primary btn-filter form-control">
+                        @Global.Apply
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="mt-4">
+            @Resource.Statistics_H2_Conversion
+        </h2>
+
+        @* Table conversion *@
+        <div id="js-stat-conversion-table" class="table-responsive">
+            <table style="min-width:440px;">
+                <thead>
+                    <tr>
+                        <th style="width:140px;">@Global.Therapist</th>
+                        <th style="width:100px;" class="text-end">@Global.Sent</th>
+                        <th style="width:100px;" class="text-end">@Global.Accepted</th>
+                        <th style="width:100px;" class="text-end">@Global.Conversion</th>
+                    </tr>
+                </thead>
+                <tbody id="js-admin-statistic-conversion-tbody">
+                    @foreach (var therapist in Model.TherapistsClosingRate)
+                    {
+                        <tr>
+                            <td style="max-width: 140px;">@therapist.TherapistName</td>
+                            <td style="max-width: 100px;" class="text-end">@therapist.TotalSent</td>
+                            <td style="max-width: 100px;" class="text-end">@therapist.Accepted</td>
+                            <td style="max-width: 100px;" class="text-end">
+                                @(therapist.Accepted > 0 ?
+                                    String.Format("{0:P2}", Convert.ToDecimal(therapist.Accepted) / Convert.ToDecimal(therapist.TotalSent)) :
+                                    String.Format("{0:P2}", 0))
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        @* Conversion chart *@
+        <div class="row">
+            <div class="col-12 mt-4">
+                <div id="js-admin-statistic-conversion-chart"></div>
+            </div>
+        </div>
+
+        @* No chart data *@
+        <div id="js-admin-statistic-no-data-conversion-chart" class="row d-none">
+            <div class="col-sm-12">
+                <div class="alert alert-info">@Global.NoResult</div>
+            </div>
+        </div>
+
+        <br />
+
+        <h2>
+            @Resource.Statistics_H2_Cancelation
+        </h2>
+
+        @* Table Cancelation *@
+        <div id="js-stat-cancelation-table" class="table-responsive">
+            <table style="min-width:340px;">
+                <thead>
+                    <tr>
+                        <th style="width:140px;">@Global.CancelReason</th>
+                        <th style="width:100px;" class="text-end">@Global.Quantity</th>
+                        <th style="width:100px;" class="text-end">@Global.Percentage</th>
+                    </tr>
+                </thead>
+                <tbody id="js-admin-statistic-cancelation-tbody">
+                    @foreach (var cancelReason in Model.CancelationReason)
+                    {
+                        <tr>
+                            <td style="max-width: 140px;">@cancelReason.Reason</td>
+                            <td style="max-width: 100px;" class="text-end">@cancelReason.NbCancelation</td>
+                            <td style="max-width: 100px;" class="text-end">
+                                @(cancelReason.NbCancelation > 0 ?
+                                    String.Format("{0:P2}", Convert.ToDecimal(cancelReason.NbCancelation) / Convert.ToDecimal(Model.TotalCanceledAppointment)) :
+                                    String.Format("{0:P2}", 0))
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        @* Cancelation chart *@
+        <div class="row g-0">
+            <div class="col-12 mt-4">
+                <div id="js-admin-statistic-cancelation-chart"></div>
+            </div>
+        </div>
+
+        @* No chart data *@
+        <div id="js-admin-statistic-no-data-cancelation-chart" class="row d-none">
+            <div class="col-sm-12">
+                <div class="alert alert-info">@Global.NoResult</div>
+            </div>
+        </div>
+
+
+
+    </div>
+</section>
+
+@section scripts
+{
+    <script>
+
+        //----------------------------- Charts --------------------------
+
+        InitConversionChart();
+        InitCancelationReasonChart()
+
+        function InitConversionChart() {
+
+            //Setting chart datas
+            var therapistClosingRateModel = @Html.Raw(Json.Encode(Model.TherapistsClosingRate));
+
+            //Creating the array for the chart
+            var therapistTotalSent = [];
+            var therapistTotalAccepted = [];
+            var therapists = []
+            var therapistTotalSentCount = 0
+
+            for (var i = 0; i < therapistClosingRateModel.length; i++) {
+
+                therapistTotalSent.push(therapistClosingRateModel[i].TotalSent);
+                therapistTotalAccepted.push(therapistClosingRateModel[i].Accepted);
+                therapists.push(therapistClosingRateModel[i].TherapistName)
+                therapistTotalSentCount += therapistClosingRateModel[i].TotalSent
+
+            }
+
+            //Verify if display chart
+            if (!ManageConvertionDatasView((therapistTotalSentCount == 0)))
+                return
+
+
+            //Setting chart
+            var options = {
+                series: [{
+                    name: '@Global.Sent',
+                    data: therapistTotalSent
+                }, {
+                    name: '@Global.Accepted',
+                    data: therapistTotalAccepted
+                }],
+                chart: {
+                    type: 'bar',
+                    height: 350
+                },
+                plotOptions: {
+                    bar: {
+                        borderRadius: 4,
+                        horizontal: true,
+                    }
+                },
+                dataLabels: {
+                    enabled: false
+                },
+                xaxis: {
+                    categories: therapists
+
+                }
+            };
+
+            //Render the cahrt
+            var chart = new ApexCharts(document.querySelector("#js-admin-statistic-conversion-chart"), options);
+            chart.render();
+        }
+        function InitCancelationReasonChart() {
+
+            //Setting the model
+            var cancelationReasonModel = @Html.Raw(Json.Encode(Model.CancelationReason));
+            var totalCancelation = @Html.Raw(Json.Encode(Model.TotalCanceledAppointment));
+
+            //Verify if display the chart
+            if (!ManageCancelationDataView((totalCancelation == 0)))
+                return
+
+            //Set the datas array
+            var cancelationPercent = [];
+            var cancelationReasons = []
+
+            for (var i = 0; i < cancelationReasonModel.length; i++) {
+                cancelationPercent.push(cancelationReasonModel[i].NbCancelation / totalCancelation);
+                cancelationReasons.push(cancelationReasonModel[i].Reason)
+            }
+
+
+
+            //Setting chart data
+            var options = {
+                series: cancelationPercent,
+                chart: {
+                    width: 380,
+                    type: 'pie',
+                },
+                tooltip: {
+                    y: {
+                        formatter: function (value) {
+                            return (value * 100).toFixed() + "%";
+                        },
+                    }
+
+                },
+                labels: cancelationReasons,
+                responsive: [{
+                    breakpoint: 480,
+                    options: {
+                        chart: {
+                            width: 300
+                        },
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }]
+            };
+
+            var chart = new ApexCharts(document.querySelector("#js-admin-statistic-cancelation-chart"), options);
+            chart.render();
+        }
+
+
+
+        function UpdateConversionChart(therapistClosingRateData) {
+
+            //Creating the array for the chart
+            var therapistTotalSent = [];
+            var therapistTotalAccepted = [];
+            var therapists = []
+            var therapistTotalSentCount = 0
+
+            for (var i = 0; i < therapistClosingRateData.length; i++) {
+
+                therapistTotalSent.push(therapistClosingRateData[i].TotalSent);
+                therapistTotalAccepted.push(therapistClosingRateData[i].Accepted);
+                therapists.push(therapistClosingRateData[i].TherapistName)
+                therapistTotalSentCount += therapistClosingRateData[i].TotalSent
+
+            }
+
+            //Verify if display chart
+            if (!ManageConvertionDatasView(therapistTotalSentCount == 0)) {
+                return;
+            }
+
+            //Setting chart
+            var options = {
+                series: [{
+                    name: '@Global.Sent',
+                    data: therapistTotalSent
+                }, {
+                    name: '@Global.Accepted',
+                    data: therapistTotalAccepted
+                }],
+                decimalsInFloat: 1,
+                chart: {
+                    type: 'bar',
+                    height: 350
+                },
+                plotOptions: {
+                    bar: {
+                        borderRadius: 4,
+                        horizontal: true,
+                    }
+                },
+                dataLabels: {
+                    enabled: false
+                },
+                xaxis: {
+                    categories: therapists,
+                },
+                yaxis: {
+                    show: true
+                }
+            };
+
+
+            var chart = new ApexCharts(document.querySelector("#js-admin-statistic-conversion-chart"), options);
+
+            chart.render()
+            chart.updateOptions(options)
+        }
+        function UpdateCancelationReasonChart(cancelationReasonData, totalCancelationData) {
+
+            //Verify if display the chart
+            if (!ManageCancelationDataView((totalCancelationData == 0))) {
+                return
+            }
+
+
+            //Set the datas array
+            var cancelationPercent = [];
+            var cancelationReasons = []
+
+            for (var i = 0; i < cancelationReasonData.length; i++) {
+                cancelationPercent.push(cancelationReasonData[i].NbCancelation / totalCancelationData);
+                cancelationReasons.push(cancelationReasonData[i].Reason)
+            }
+
+            //Setting chart data
+            var options = {
+                series: cancelationPercent,
+                chart: {
+                    width: 380,
+                    type: 'pie',
+                },
+                tooltip: {
+                    y: {
+                        formatter: function (value) {
+                            return (value * 100).toFixed() + "%";
+                        },
+                    }
+
+                },
+                labels: cancelationReasons,
+                responsive: [{
+                    breakpoint: 480,
+                    options: {
+                        chart: {
+                            width: 200
+                        },
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }]
+            };
+
+            var chart = new ApexCharts(document.querySelector("#js-admin-statistic-cancelation-chart"), options);
+
+            chart.render()
+            chart.updateOptions(options)
+        }
+
+        //-------------------------- Filtres -----------------------
+
+        $("#js-admin-statistic-apply-filter").on("click", function () {
+
+            var startDateInput = $("#js-admin-statistic-start-date");
+            var endDateInput = $("#js-admin-statistic-end-date");
+
+            var startDate = toInternationnalDate(startDateInput.val());
+            var endDate = toInternationnalDate(endDateInput.val());
+
+            //Verify the dates
+            startDateInput.removeClass("input-validation-error")
+            endDateInput.removeClass("input-validation-error")
+
+            if (!isStartDateValid(startDateInput)) {
+                startDateInput.addClass("input-validation-error")
+                return false
+            }
+            if (!isEndDateValid(startDateInput, endDateInput)) {
+                endDateInput.addClass("input-validation-error")
+                return false
+            }
+
+            $.ajax({
+                async: false,
+                type: "POST",
+                url: "/fr/admin/StatisticApplyFilter/",
+                data: `{"startDate":"${startDate}",
+                        "endDate":"${endDate}"}`,
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    UpdateConversionChart(data.therapistClosingRate)
+                    UpdateCancelationReasonChart(data.cancelationReason, data.totalCanceldAppointment)
+
+                    var therapistTotalSentCount = 0
+
+                    for (var i = 0; i < therapistClosingRateModel.length; i++) {
+                        therapistTotalSentCount += therapistClosingRateModel[i].TotalSent
+                    }
+
+                    if (therapistTotalSentCount != 0) {
+                        //Rebuild the convesrion table
+                        var tableBody = $("#js-admin-statistic-conversion-tbody")
+
+                        tableBody.empty();
+
+                        for (var i = 0; i < data.therapistClosingRate.length; i++) {
+                            markup = `
+                                <tr>
+                                    <td>${data.therapistClosingRate[i].TherapistName}</td>
+                                    <td>${data.therapistClosingRate[i].TotalSent}</td>
+                                    <td>${data.therapistClosingRate[i].Accepted}</td>
+                                    <td>
+                                        ${new Intl.NumberFormat("@CultureInfo.CurrentCulture.Name", { style: 'percent', minimumFractionDigits: 2})
+                                            .format((data.therapistClosingRate[i].TotalSent == 0) ? 0 :data.therapistClosingRate[i].Accepted / data.therapistClosingRate[i].TotalSent)}
+                                    </td>
+                                </tr>`
+
+                            tableBody.append(markup)
+                        }
+                    }
+
+                    if (data.totalCanceldAppointment != 0) {
+                        // Rebuild the cancelation table
+                        tableBody = $("#js-admin-statistic-cancelation-tbody")
+
+                        tableBody.empty();
+
+                        for (var i = 0; i < data.cancelationReason.length; i++) {
+                            markup = `
+                                <tr>
+                                    <td>${data.cancelationReason[i].Reason}</td>
+                                    <td>${data.cancelationReason[i].NbCancelation}</td>
+                                    <td>
+                                        ${new Intl.NumberFormat("@CultureInfo.CurrentCulture.Name", { style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2})
+                                            .format((data.totalCanceldAppointment == 0) ? 0 : data.cancelationReason[i].NbCancelation / data.totalCanceldAppointment)}
+                                    </td>
+                                </tr>`
+
+                            tableBody.append(markup)
+                        }
+                    }
+
+                },
+                error: function () {
+                    toastr["error"]
+                    ("@Global.GenericError",
+                    "@Global.Error");
+                }
+            })
+        })
+
+
+        //----------------------- Other -----------------------------
+
+
+        //Remove error class when fill datepicker
+        $(".js-date-picker").on("change", function () {
+            if ($(this).val() != "") {
+                $(this).removeClass("input-validation-error")
+            }
+        })
+
+        function ManageConvertionDatasView(isHide) {
+
+            var table = $("#js-stat-conversion-table")
+            var chart = $("#js-admin-statistic-conversion-chart").closest(".row")
+            var noData = $("#js-admin-statistic-no-data-conversion-chart")
+
+            table.removeClass("d-none")
+            chart.removeClass("d-none")
+            noData.addClass("d-none")
+
+            if (isHide) {
+                table.addClass("d-none")
+                chart.addClass("d-none")
+                noData.removeClass("d-none")
+
+                return false
+            }
+
+            return true;
+        }
+
+        function ManageCancelationDataView(isHide) {
+            console.log("cencelation hide: " + isHide)
+            var table = $("#js-stat-cancelation-table")
+            var chart = $("#js-admin-statistic-cancelation-chart").closest(".row")
+            var noData = $("#js-admin-statistic-no-data-cancelation-chart")
+
+            table.removeClass("d-none")
+            chart.removeClass("d-none")
+            noData.addClass("d-none")
+
+            if (isHide) {
+                table.addClass("d-none")
+                chart.addClass("d-none")
+                noData.removeClass("d-none")
+
+                return false;
+            }
+
+            return true;
+        }
+
+
+
+
+    </script>
+}

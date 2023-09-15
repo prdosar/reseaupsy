@@ -1,0 +1,2134 @@
+﻿@model ReseauPsy.ViewModel.Therapist.AppointmentViewModel
+@using ReseauPsy.Resources
+@using System.Globalization
+@{
+    ViewBag.Title = Resource.TherapistAppointment_Title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section id="page-therapist-calendar">
+
+    <div class="container">
+        <h1>@Resource.TherapistAppointment_H1</h1>
+
+        <div class="page-instruction">
+            @Resource.TherapistAppointment_Instruction
+        </div>
+
+        @* Hidden fields *@
+        <input id="js-therapist-client-request-therapist-availabilities" type="hidden" value="@string.Join(",", Model.TherapistAvailabilities)" />
+
+        @* Table *@
+        <div id="js-therapist-appointment-table" class="table-responsive @(Model.Clients.Where(x => x.IsClientAlreadyScheduled == 0).Count() > 0 ?"" : "d-none")">
+            <table style="min-width:380px;">
+                <thead>
+                    <tr>
+                        <th style="width:140px;">@Global.Client</th>
+                        <th style="width:120px;">@Global.Reception</th>
+                        <th style="width:120px;" class="text-end">@Global.Action</th>
+                    </tr>
+                </thead>
+                <tbody id="js-client-to-schedule-table-body">
+                    @foreach (var client in Model.Clients.Where(x => x.IsClientAlreadyScheduled == 0).ToList())
+                    {
+                        <tr class="js-client-to-schedule-table-row">
+                            <td style="max-width: 120px;">@client.ClientName</td>
+                            <td style="max-width: 120px;">@(client.ClientRequestDate.ToString("d MMM yyyy"))</td>
+                            <td style="max-width: 140px;" class="text-end">
+                                <div class="btn btn-primary js-consult-request-button"
+                                     data-client-id="@client.ClientId"
+                                     data-is-external="@client.IsExternalClient">
+                                    @Global.Consult
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div id="js-therapist-appointment-empty"
+             class="alert alert-info @(Model.Clients.Where(x => x.IsClientAlreadyScheduled == 0).Count() > 0 ?"d-none" : "")">
+            @Global.NoDataNoFilter
+        </div>
+    </div>
+
+    <div class="container px-1 px-sm-3 calendar-container">
+
+        @* Calendar *@
+        <div class="row g-0 g-sm-3">
+            <div class="col-sm-12 ">
+                <div id="js-calendar"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal appointment -->
+    <div id="appointmentModal" class="modal fade" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">@Resource.TherapistApointment_ModalAppointment_Title</h5>
+                    <button id="js-appointment-modal-close" type="button" class="btn-close" data-bs-dismiss="modal">
+                        <i class="far fa-times-circle"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+
+
+
+                    <div class="row justify-content-end">
+                        <div class="col-12 text-end">
+                            @* Cancel appointment button *@
+                            <div id="js-appointment-modal-cancel-appointment" class="red-link" style="display:none">
+                                @Resource.TherapistAppointment_ModalAppointment_Cancel
+                            </div>
+
+                            @* Send back request to the administration *@
+                            <div id="js-appointment-modal-return-request" class="red-link" style="display:none">
+                                @Resource.TherapistAppointment_ModalAppointment_Return
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+                    <div class="row">
+                        @*Nom du client*@
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>@Global.Client</label>
+
+                                @*Nom du client static*@
+                                <div id="js-appointment-modal-client-name"></div>
+
+                                @*Nom du client ddl*@
+                                <select id="js-appointment-modal-client-ddl" class="form-select" style="display:none">
+                                    <option value="null">@Global.Choose</option>
+                                    @foreach (var client in Model.Clients.Where(x => x.IsClientAlreadyScheduled == 1).ToList())
+                                    {
+                                        <option value="@client.ClientId">
+                                            @client.ClientName
+                                        </option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+
+                        @* Email *@
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>@Global.Email</label>
+                                <div id="js-appointment-modal-client-email"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>@Global.Phone</label>
+                                <div id="js-appointment-modal-client-phone"></div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>@Global.Region</label>
+                                <div id="js-appointment-modal-client-region"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>@Global.City</label>
+                                <div id="js-appointment-modal-client-city"></div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>@Global.PostalCode</label>
+                                <div id="js-appointment-modal-client-postal-code"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>@Global.ConsultationPreference</label>
+                                <div id="js-appointment-modal-client-consultation-types"></div>
+
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>@Global.ConsultationReason</label>
+                                <div id="js-appointment-modal-client-consultation-reason"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>@Global.Language</label>
+                                <div id="js-appointment-modal-client-languages"></div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label>@Global.ClientMessage</label>
+                                <div id="js-appointment-modal-client-message"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group availability">
+                                <label>@Global.ClientAvailibility</label>
+                                @foreach (var day in Model.Availabilities)
+                                {
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            @day.Day.Name
+                                        </div>
+
+                                        @foreach (var period in day.Periods)
+                                        {
+                                            <div class="col-4 col-sm-3">
+                                                <input class="js-appointment-modal-client-availability"
+                                                       value="@period.Id"
+                                                       type="checkbox"
+                                                       disabled="disabled" /> @period.Name
+                                                </div>
+                                            }
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="smalltext">
+                                @Global.CommonAvailability
+                            </div>
+                        </div>
+                    </div>
+
+                    @* All the appointment information *@
+                    <div id="js-appointment-modal-appointment-infos">
+
+                        <div class="row">
+                            @* Nature act *@
+                            <div class="col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <label>@Global.Nature</label>
+                                    <select id="js-appointment-modal-nature-act" class="form-select">
+                                        <option value="null">@Global.Choose</option>
+                                        @foreach (var act in Model.NatureActs)
+                                        {
+                                            <option value="@act.Id">@act.Name</option>
+                                        }
+                                    </select>
+                                    <div id="js-appointment-modal-nature-act-text"></div>
+                                </div>
+                            </div>
+
+                            @* Professionnal title *@
+                            <div class="col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <label>@Global.PracticeType</label>
+                                    <select id="js-appointment-modal-professionnal-title" class="form-select">
+                                        <option value="null">@Global.Choose</option>
+                                        @foreach (var title in Model.ProfessionalTitles)
+                                        {
+                                            <option value="@title.Id" selected="@(Model.ProfessionalTitles.Count == 1)">@title.Name</option>
+                                        }
+                                    </select>
+                                    <div id="js-appointment-modal-professionnal-title-text"></div>
+                                </div>
+                            </div>
+
+                            @* Consultation type *@
+                            <div class="col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <label>@Global.ConsultationType</label>
+                                    <select id="js-appointment-modal-consultation-type" class="form-select">
+                                        <option value="null">@Global.Choose</option>
+                                        @foreach (var consultation in Model.ConsultationTypes)
+                                        {
+                                            <option value="@consultation.Id">@consultation.Name</option>
+                                        }
+                                    </select>
+                                    <div id="js-appointment-modal-consultation-type-text"></div>
+                                </div>
+                            </div>
+
+
+
+
+
+
+                            @* Date *@
+                            <div class="col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <label>@Global.Date</label>
+                                    <input id="js-appointment-modal-start-date" class="form-control js-date-picker" type="text" autocomplete="off" />
+                                    <div id="js-appointment-modal-start-date-text"></div>
+                                </div>
+                            </div>
+
+                            @* Time *@
+                            <div class="col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <label>@Global.Time</label>
+                                    <select id="js-appointment-modal-start-time" class="form-select">
+                                        @foreach (var hours in Model.DayHours)
+                                        {
+                                            <option value="@hours">@hours</option>
+                                        }
+                                    </select>
+                                    <div id="js-appointment-modal-start-time-text"></div>
+                                </div>
+                            </div>
+
+                            @* Duration *@
+                            <div class="col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <label>
+                                        @Global.Duration
+                                        <i class="fas fa-question-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="@Resource.TherapistAppointment_ModalAppointment_InfoBubble"></i>
+                                    </label>
+                                    <select id="js-appointment-modal-duration" class="form-select">
+                                        <option value="0.5">0.5 @Global.Seance</option>
+                                        <option value="1">1 @Global.Seance</option>
+                                        <option value="1.5">1.5 @Global.Seance</option>
+                                        <option value="2">2 @Global.Seance</option>
+                                    </select>
+                                    <div id="js-appointment-modal-duration-text"></div>
+                                </div>
+                            </div>
+
+                            <input id="js-is-external-client" type="hidden" value="false" />
+
+                            @* Prix *@
+                            <div id="js-appointment-modal-price" class="col-md-6 col-lg-4 d-none">
+                                <div class="form-group">
+                                    <label>Prix %%NR%%</label>
+                                    <select id="js-appointment-modal-price-select" class="form-select">
+                                        @foreach (var wage in Model.Wages)
+                                        {
+                                            <option value="@wage.Id" selected="@(wage.IsDefault ? "selected" : "")">@wage.PayInfoName</option>
+                                        }
+                                    </select>
+                                    <div id="js-appointment-modal-price-text"></div>
+                                </div>
+                            </div>
+
+
+
+
+
+
+                        </div>
+
+                        @* Alert warning *@
+                        <div id="js-appointment-modal-warning-send-link" class="row d-none">
+                            <div class="col-12">
+                                <div class="alert alert-warning">
+                                    @Resource.TherapistAppointment_ModalAppointment_SendLink
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        @* Add repetition *@
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" id="js-appointment-modal-add-repetition" />
+                                        <label class="form-check-label" for="js-appointment-modal-add-repetition">@Resource.TherapistAppointment_ModalAppointment_AddRepetition</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div id="js-appointment-modal-repeat-section" class="repeat-container" style="display:none;">
+                            <h3>@Resource.TherapistAppointment_ModalAppointment_RepetitionOptions</h3>
+                            @* Repeat every *@
+                            <div class="form-group">
+                                <div class="row justify-content-center">
+                                    <div class="col-12 col-lg-4">
+                                        <label>@Resource.TherapistAppointment_ModalAppointment_RepeatEvery</label>
+                                    </div>
+
+                                    <div class="col-5 col-lg-2">
+                                        <select id="js-appointment-modal-repeat-every" class="form-select">
+                                            @for (int i = 1; i < 7; i++)
+                                            {
+                                                <option value="@i">@i</option>
+                                            }
+                                        </select>
+                                    </div>
+
+                                    <div class="col-7 col-lg-4">
+                                        <select id="js-appointment-modal-repeat-period" class="form-control">
+                                            <option value="week">@Global.Week</option>
+                                            <option value="month">@Global.Month</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            @* Starts from *@
+                            <div class="form-group">
+                                <div id="js-appointment-modal-repeat-day">
+                                    <div class="row justify-content-center">
+                                        <div class="col-12 col-lg-4">
+                                            <label>@Resource.TherapistAppointment_ModalAppointment_StartFrom</label>
+                                        </div>
+                                        <div class="col-12 col-lg-6">
+                                            <div id="js-appointment-modal-starts-from"></div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @* Repeat day of the week *@
+                                <div class="row justify-content-center">
+                                    <div class="col-12 col-lg-4">
+                                        <label>@Resource.TherapistAppointment_ModalAppointment_RepeatDay</label>
+                                    </div>
+                                    <div class="col-12 col-lg-6" id="day-selected">
+                                        @foreach (var day in Model.Days)
+                                        {
+
+                                            <div class="js-appointment-modal-day"
+                                                 data-is-selected="false"
+                                                 data-day-id="@day.Id">
+                                                @day.Name.Substring(0, 2)
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+
+                            @* End after *@
+                            <div class="form-group">
+                                <div class="row justify-content-center">
+                                    <div class="col-12 col-lg-4">
+                                        <label>@Resource.TherapistAppointment_ModalAppointment_EndAfter</label>
+                                    </div>
+                                    <div class="col-5 col-lg-2">
+                                        <select id="js-appointment-modal-repeat-amount" class="form-select">
+                                            @for (int i = 1; i < 21; i++)
+                                            {
+                                                <option value="@i">@i</option>
+                                            }
+                                        </select>
+                                    </div>
+                                    <div class="col-7 col-lg-4 g-0">
+                                        <div class="mt-1">
+                                            @Global.Seance
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        @* Conflict section *@
+                        <div id="js-conflict-area" style="display:none">
+
+                            @* Alerte *@
+                            <div class="row">
+                                <div class="col-12 ">
+                                    <div class="alert alert-danger">
+                                        @Global.ConflictMessage
+
+                                        @* Conflict table *@
+                                        <ul id="js-conflict-list">
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button id="js-close-appointment-modal" type="button" class="btn btn-secondary">@Global.Cancel</button>
+                    <button id="js-appointment-modal-save-button" class="btn btn-primary">@Global.Save</button>
+                    <button id="js-appointment-modal-modify-button" class="btn btn-primary" style="display:none">@Global.Edit</button>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal modify for -->
+    <div id="ModifyForModal" class="modal fade" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">@Resource.TherapistAppointment_ModalApplyFor_Title</h5>
+                    <button id="js-modal-modify-for-header-button" type="button" class="btn-close" data-bs-dismiss="modal">
+                        <i class="far fa-times-circle"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+
+                    <div class="row">
+                        <div class="col-12">
+                            @Resource.TherapistAppointment_ModalApplyFor_Text
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label>@Global.ApplyTo</label>
+                                <select id="js-modal-modify-for-option" class="form-select">
+                                    <option value="one">@Global.AppointmentThisOnly</option>
+                                    <option value="all">@Global.AppointmentThisAndAfter</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+                    @* Conflict section *@
+                    <div id="js-modify-for-modal-conflict-area" style="display:none">
+
+                        @* Alerte *@
+                        <div class="row">
+                            <div class="col-sm-12 ">
+                                @* Conflict list *@
+                                <div class="alert alert-danger">
+                                    @Global.ConflictMessage
+                                    <ul id="js-modify-for-modal-conflict-ul"></ul>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <input id="js-modify-for-action" data-start-date="" data-duration="" type="hidden" value="no-action" />
+                    <button id="js-close-modify-for-modal" type="button" class="btn btn-secondary">@Global.Cancel</button>
+                    <button id="js-modify-for-modal-button" type="button" class="btn btn-primary">@Global.Apply</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @* Delete modal *@
+    <div id="DeleteModal" class="modal fade" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">@Resource.TherapistAppointment_ModalDelete_Title</h5>
+                    <button id="js-delete-modal-close" type="button" class="btn-close" data-bs-dismiss="modal">
+                        <i class="far fa-times-circle"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            @Resource.TherapistAppointment_ModalDelete_Text
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>@Global.Reason</label>
+                                <select id="js-delete-modal-delete-reason" class="form-select">
+                                    <option value="null">@Global.Choose</option>
+                                    @foreach (var reason in Model.DeleteAppointmentReasons)
+                                    {
+                                        <option value="@reason.Id">@reason.Name</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>@Global.ApplyTo</label>
+                                <select id="js-delete-modal-apply-to" class="form-select">
+                                    <option value="this-only">@Global.AppointmentThisOnly</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    @* Message information de suppression *@
+                    <div class="row alert alert-info">
+                        @Resource.TherapistAppointment_ModalDelete_DeleteInfo
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button id="js-close-delete-modal" type="button" class="btn btn-secondary">@Global.Cancel</button>
+                    <button id="js-delete-modal-delete-appointment-button" type="button" class="btn btn-primary">@Global.Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    @*Modal retourner le client à l'administration*@
+    <div id="ReturnClientModal" class="modal fade" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">@Resource.TherapistAppointment_ModalReturn_Title</h5>
+                    <button id="js-return-client-modal-x-button" type="button" class="btn-close">
+                        <i class="far fa-times-circle"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="col-12">
+                            @Resource.TherapistAppointment_ModalReturn_Text
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label>@Global.MessageAdmin</label>
+                                <div>
+                                    <textarea id="js-return-client-modal-message" class="form-control" rows="4" cols="50"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="js-close-return-client-modal-button" type="button" class="btn btn-secondary">@Global.Cancel</button>
+                    <button id="js-return-client-modal-return-appointment-button" type="button" class="btn btn-primary">@Global.Return</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+@section scripts
+{
+    <script>
+        //---------------------------- Modal ----------------------------
+
+
+
+        function InitModal() {
+            var clientId;
+            var tableRow;
+            var appointmentId;
+            var repetitionId;
+
+            //modals
+            var modalId = $("#appointmentModal")
+            var deleteModal = $("#DeleteModal")
+            var returnClientModal = $("#ReturnClientModal")
+
+            //The appointment informations
+            var startDateInput = $("#js-appointment-modal-start-date");
+            var startDateText = $("#js-appointment-modal-start-date-text");
+            var natureActDdl = $("#js-appointment-modal-nature-act");
+            var natureActText = $("#js-appointment-modal-nature-act-text");
+            var professionnalTitleDdl = $("#js-appointment-modal-professionnal-title")
+            var professionnalTitleText = $("#js-appointment-modal-professionnal-title-text")
+            var consultationTypeDdl = $("#js-appointment-modal-consultation-type");
+            var consultationTypeText = $("#js-appointment-modal-consultation-type-text");
+            var startTimeDdl = $("#js-appointment-modal-start-time")
+            var startTimeText = $("#js-appointment-modal-start-time-text")
+            var durationDdl = $("#js-appointment-modal-duration")
+            var durationText = $("#js-appointment-modal-duration-text")
+
+            //The repetition elements
+            var addRepetitionCheckbox = $("#js-appointment-modal-add-repetition");
+            var repeatEveryNumberDdl = $("#js-appointment-modal-repeat-every");
+            var repeatEveryPeriodDdl = $("#js-appointment-modal-repeat-period");
+            var repeatAmountDdl = $("#js-appointment-modal-repeat-amount");
+
+            //All the client info field
+            var clientNameField = $("#js-appointment-modal-client-name");
+            var clientEmailField = $("#js-appointment-modal-client-email")
+            var clientPhoneField = $("#js-appointment-modal-client-phone")
+            var clientConsultationTypesField = $("#js-appointment-modal-client-consultation-types")
+            var clientRegionField = $("#js-appointment-modal-client-region")
+            var clientCityField = $("#js-appointment-modal-client-city")
+            var clientPostalCodeField = $("#js-appointment-modal-client-postal-code")
+            var clientConsultationReasonField = $("#js-appointment-modal-client-consultation-reason")
+            var clientMessageField = $("#js-appointment-modal-client-message");
+            var clientLanguages = $("#js-appointment-modal-client-languages")
+
+            //Modal sections
+            var conflictSection = $("#js-conflict-area")
+            var appointmentInfosSection = $("#js-appointment-modal-appointment-infos")
+
+            //Modal buttons
+            var saveButton = $("#js-appointment-modal-save-button")
+            var modifyButton = $("#js-appointment-modal-modify-button")
+            var cancelButton = $("#js-close-appointment-modal")
+            var closeAppointementButton = $("#js-appointment-modal-close")
+
+
+
+            var cancelAppointmentButton = $("#js-appointment-modal-cancel-appointment")
+            var returnClientButton = $("#js-appointment-modal-return-request")
+            var modifyForButton = $("#js-modify-for-modal-button")
+            var closeModifyForModalButton = $("#js-close-modify-for-modal")
+            var closeModifyForModalHeaderButton = $("#js-modal-modify-for-header-button");
+
+
+            //The client availabiltiies check box
+            var clientAvailabilitiesCheckBoxes = $(".js-appointment-modal-client-availability")
+
+            //Client select
+            var clientDdl = $("#js-appointment-modal-client-ddl")
+
+            //Modify for modal action
+            var modifyForModalAction = $("#js-modify-for-action");
+
+            var returnClientAdministrationReason = $("#js-delete-modal-delete-reason");
+
+
+
+
+            //Set the client info blank
+            function SetDefaultValueModal() {
+                //Set default value
+                startDateInput.val("");
+                natureActDdl.val("null");
+                professionnalTitleDdl.val("null")
+
+                if ($("#js-appointment-modal-professionnal-title option").length == 2) {
+                    professionnalTitleDdl.val($("#js-appointment-modal-professionnal-title option:last").val())
+                }
+
+                consultationTypeDdl.val("null");
+                durationDdl.val("1")
+                addRepetitionCheckbox.prop("checked", false)
+
+
+                //Remove error class
+                startDateInput.removeClass("input-validation-error")
+                natureActDdl.removeClass("input-validation-error")
+                professionnalTitleDdl.removeClass("input-validation-error")
+                consultationTypeDdl.removeClass("input-validation-error")
+
+                //Hide sections
+                $("#js-appointment-modal-repeat-section").css("display", "none")
+                conflictSection.css("display", "none")
+                cancelAppointmentButton.css("display", "none")
+
+                //Set the client information field to blank
+
+                //Name
+                clientNameField.text("")
+
+                //Email
+                clientEmailField.text("")
+
+                //Phone
+                clientPhoneField.text("")
+
+                //Consultation type
+                clientConsultationTypesField.text("")
+
+                //Region
+                clientRegionField.text("")
+
+                //City
+                clientCityField.text("")
+
+                //Postal code
+                clientPostalCodeField.text("")
+
+                //Consultation reason
+                clientConsultationReasonField.text("")
+
+                //Client Message
+                clientMessageField.text("")
+
+                //Availabilities
+                clientAvailabilitiesCheckBoxes.each(function () {
+                    //Unchecked
+                    $(this).prop("checked", false)
+
+                    //Remove the highlight class
+                    $(this).parent().removeClass("bg-success")
+                });
+
+                //Hide the warning message
+                $("#js-appointment-modal-warning-send-link").addClass("d-none");
+
+                $("#js-is-external-client").val("false");
+
+                console.log('Reset default')
+                //Price
+                $("#js-appointment-modal-price").addClass("d-none")
+            }
+
+            //Fill the client informations
+            function LoadModalInfo() {
+
+                $.ajax({
+                    type: "GET",
+                    url: `${window.location.origin}/api/AppointmentModalClientInfos?clientid=${clientId}&isFrench=${('@CultureInfo.CurrentCulture.Name' == "fr-CA")}`,
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+
+                        //Set the information of the client in the modal
+                        clientId = clientId
+
+                        //Name
+                        clientNameField.text(data["ClientName"])
+
+                        //Email
+                        clientEmailField.text(data["ClientEmail"])
+
+                        //Phone
+                        clientPhoneField.text(data["ClientPhone"])
+
+                        //Consultation type
+                        clientConsultationTypesField.text(data["ClientConsultationTypes"])
+
+                        //Region
+                        clientRegionField.text(data["ClientRegion"])
+
+                        //City
+                        clientCityField.text(data["ClientCity"])
+
+                        //Postal code
+                        clientPostalCodeField.text(data["ClientPostalCode"])
+
+                        //Consultation reason
+                        clientConsultationReasonField.text(data["ClientConsultationReason"])
+
+                        //Client Message
+                        clientMessageField.text(data["ClientMessage"])
+
+                        //Client language
+                        clientLanguages.text(data["ClientLanguages"])
+
+                        //Price
+                        console.log("IsExternal", data["IsExternal"])
+
+                        if (!data["IsExternal"]) {
+                            $("#js-appointment-modal-price").removeClass("d-none")
+                        }
+                        else {
+                            $("#js-appointment-modal-price").addClass("d-none")
+                        }
+
+                        $("#js-is-external-client").val(data["IsExternal"]);
+
+                        //Availabilities
+                        var clientAvailabilitiesString = data["ClientAvailabilities"];
+                        var clientAvailabilities = []
+                        if (clientAvailabilitiesString.length > 1) {
+                            clientAvailabilities = (clientAvailabilitiesString).split(",")
+                        }
+                        clientAvailabilitiesCheckBoxes.each(function () {
+                            //check if we need to check
+                            if (clientAvailabilities.indexOf($(this).val()) != -1)
+                                $(this).prop("checked", true)
+                        });
+
+                        //Highlight the commun availabilities
+                        var therapistAvailabilities = $("#js-therapist-client-request-therapist-availabilities").val();
+
+                        $(".js-appointment-modal-client-availability:checked").each(function () {
+                            if (therapistAvailabilities != undefined && therapistAvailabilities.indexOf($(this).val()) != -1)
+                                $(this).parent().addClass("bg-success")
+                        })
+
+                    },
+                    error: function () {
+                        toastr["error"]
+                            ("@Global.GenericError",
+                                "@Global.Error");
+                    }
+                });
+            }
+
+            function ChangeAppointmentModalEditableField(isEditable) {
+                if (isEditable) {
+                    natureActDdl.css("display", "block")
+                    professionnalTitleDdl.css("display", "block")
+                    consultationTypeDdl.css("display", "block")
+                    startDateInput.css("display", "block")
+                    startTimeDdl.css("display", "block")
+                    durationDdl.css("display", "block")
+                    $("#js-appointment-modal-price-select").css("display", "block")
+
+                    natureActText.css("display", "none")
+                    professionnalTitleText.css("display", "none")
+                    consultationTypeText.css("display", "none")
+                    startDateText.css("display", "none")
+                    startTimeText.css("display", "none")
+                    durationText.css("display", "none")
+                    $("#js-appointment-modal-price-text").css("display", "none")
+                }
+                else {
+                    natureActDdl.css("display", "none")
+                    professionnalTitleDdl.css("display", "none")
+                    consultationTypeDdl.css("display", "none")
+                    startDateInput.css("display", "none")
+                    startTimeDdl.css("display", "none")
+                    durationDdl.css("display", "none")
+                    $("#js-appointment-modal-price-select").css("display", "none")
+
+                    natureActText.css("display", "block")
+                    professionnalTitleText.css("display", "block")
+                    consultationTypeText.css("display", "block")
+                    startDateText.css("display", "block")
+                    startTimeText.css("display", "block")
+                    durationText.css("display", "block")
+                    $("#js-appointment-modal-price-text").css("display", "block")
+                }
+
+                EnableDisableButton(modifyButton, isEditable)
+            }
+
+            //Fill the field for the appointment infos
+            function LoadAppointmentInfos(isEditable) {
+
+                ChangeAppointmentModalEditableField(isEditable)
+
+                var isFrench = "@CultureInfo.CurrentCulture.Name" == "fr-CA";
+
+                $.ajax({
+                    type: "GET",
+                    url: `${window.location.origin}/api/AppointmentModalAppointmentInfos?appointmentid=${appointmentId}&isFrench=${isFrench}`,
+                    data: `{"clientId":"${clientId}"}`,
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        natureActDdl.val(data["NatureActId"])
+                        professionnalTitleDdl.val(data["ProfessionnalTitleId"])
+                        consultationTypeDdl.val(data["ConsultationTypeId"])
+                        startDateInput.val(data["StartDate"])
+                        startTimeDdl.val(data["StartTime"])
+                        durationDdl.val(data["Duration"])
+
+                        natureActText.text(data["NatureActName"])
+                        professionnalTitleText.text(data["ProfessionnalTitleName"])
+                        consultationTypeText.text(data["ConsultationTypeName"])
+                        startDateText.text(data["StartDate"])
+                        startTimeText.text(data["StartTime"])
+
+                        var durationStr;
+                        var duration = parseFloat(data["Duration"])
+
+                        if (!data["IsEditable"]) {
+                            $("#js-appointment-modal-price-select").css("display", "none")
+                            $("#js-appointment-modal-price-text").css("display", "block")
+
+                            $("#js-appointment-modal-duration").css("display", "none")
+                            $("#js-appointment-modal-duration-text").css("display", "block")
+                        }
+                        else {
+                            $("#js-appointment-modal-price-select").css("display", "block")
+                            $("#js-appointment-modal-price-text").css("display", "none")
+
+                            $("#js-appointment-modal-duration").css("display", "block")
+                            $("#js-appointment-modal-duration-text").css("display", "none")
+
+                            if (data["TherapistWageId"] != null) {
+                                $("#js-appointment-modal-price-select").val(`${data["TherapistWageId"]}`)
+                            }
+                        }
+
+                        if (duration == 0.5) {
+                            durationStr = "30 minutes"
+                        }
+                        else if (duration == 1) {
+                            durationStr = isFrench ? "1 heure" : "1 hour"
+                        }
+                        else if (duration == 1.5) {
+                            durationStr = isFrench ? "1 heure 30 minutes" : "1 hour 30 minutes"
+                        }
+                        else {
+                            durationStr = isFrench ? "2 heures" : "2 hours"
+                        }
+
+                        durationText.text(durationStr)
+                        $("#js-appointment-modal-price-text").text(data["TherapistWageName"])
+                    },
+                    error: function () {
+                        toastr["error"]
+                            ("@Global.GenericError",
+                                "@Global.Error");
+                    }
+                });
+
+            }
+
+            //show or hide the client ddl
+            function ShowHideClientDdl(isShow) {
+                clientDdl.css("display", "none");
+                clientNameField.css("display","block")
+
+
+
+
+                if (isShow) {
+                    clientDdl.css("display", "block");
+                    clientNameField.css("display", "none")
+
+                }
+            }
+
+            //Show or hide the add repetition checkbox
+            function ShowHideRepeatCheckbox(isShow) {
+                //show by default
+                addRepetitionCheckbox.closest(".row").css("display", "block")
+
+                if (!isShow) {
+                    addRepetitionCheckbox.closest(".row").css("display", "none")
+                }
+            }
+
+            //Set the save button to active or disabled
+            function EnableDisableButton(button, isActive) {
+                //Remove disabled class by default
+                button.removeClass("disabled")
+
+                if (!isActive)
+
+                    button.addClass("disabled")
+            }
+
+
+            //Close appointment modal
+            function CloseAppointmentModal() {
+                //Set the client ddl to choose
+                clientDdl.val("null")
+                clientId = null;
+                appointmentId = null;
+
+                ShowHideRepeatCheckbox(true)
+                ShowSaveButton();
+
+                SetDefaultValueModal();
+                ShowHideClientDdl(false);
+                EnableDisableButton(saveButton, false)
+
+                ChangeAppointmentModalEditableField(true)
+
+                returnClientButton.css("display", "none");
+
+                closeModal(modalId)
+            }
+
+            //Verify if all the fields for the send are filled
+            //Return false if a filed is not filled or default value
+            function VerifyModalFields() {
+                var isAllInfoFilled = true;
+
+                //Start date validation
+                var startDate = toInternationnalDate(startDateInput.val());
+                var startTime = $("#js-appointment-modal-start-time").val()
+
+                const momentString = moment(startDate + " " + startTime, 'YYYY-MM-DD HH:mm')
+
+                //Return false if the date is not valid
+                if (!isDatePickerDateValid(startDate) || !isDateGreaterOrEqualThanToday(startDate)) {
+                    startDateInput.addClass("input-validation-error")
+                    isAllInfoFilled = false;
+                }
+
+                //Return false if the time is not valid
+                if (!isDateGreaterThanNow(momentString)) {
+                    $("#js-appointment-modal-start-time").addClass("input-validation-error")
+                    isAllInfoFilled = false;
+                }
+
+
+
+                //Nature Act
+                var natureActId = natureActDdl.val();
+
+                if (natureActId == "null") {
+                    natureActDdl.addClass("input-validation-error")
+                    isAllInfoFilled = false;
+                }
+
+                //Professionnal title
+                var professionnalTitleId = professionnalTitleDdl.val();
+
+                if (professionnalTitleId == "null") {
+                    professionnalTitleDdl.addClass("input-validation-error")
+                    isAllInfoFilled = false;
+                }
+
+
+
+                //Consultation Type
+
+                var consultationTypeId = consultationTypeDdl.val();
+
+                if (consultationTypeId == "null") {
+                    consultationTypeDdl.addClass("input-validation-error")
+                    isAllInfoFilled = false;
+                }
+
+
+
+                //If there is one error, dont go further
+                if (!isAllInfoFilled) {
+                    return false;
+                }
+
+                return true;
+            }
+
+            //Hide save button and show modify button
+            function ShowModifyButton() {
+                saveButton.css("display", "none")
+                modifyButton.css("display", "inline")
+            }
+
+            //Hide modify button and show save button
+            function ShowSaveButton() {
+                modifyButton.css("display", "none")
+                saveButton.css("display", "inline")
+            }
+
+
+            //Open Modify for modal
+            function OpenModifyForModal() {
+                $("#js-modal-modify-for-option").val("one")
+
+                closeModal(modalId)
+                OpenModal($("#ModifyForModal"))
+            }
+
+            //Modify the appointment(s)
+            function ModifyAppointment(isOneAppointmentOnly) {
+
+                var wageId = ($("#js-is-external-client").val() == "true" ? null : $("#js-appointment-modal-price-select").val())
+
+                $.ajax({
+                    type: "POST",
+                    url: "/fr/therapist/ModifyAppointment/",
+                    data: `{"appointmentId":"${appointmentId}",
+                        "actId":"${natureActDdl.val()}",
+                        "professionnalTitleId":"${professionnalTitleDdl.val()}",
+                        "typeId":"${consultationTypeDdl.val()}",
+                        "startDate":"${startDateInput.val()} ${startTimeDdl.val()}",
+                        "duration":"${durationDdl.val()}",
+                        "isThisOnly":"${isOneAppointmentOnly}",
+                        "wageId":"${wageId}"}`,
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+
+                        if (data.isSuccess) {
+                            CloseAppointmentModal();
+
+                            InitCalendar(ToJavaScriptDate(data.firstAppointnment));
+
+                            //Hide conflict section
+                            conflictSection.css("display", "none")
+                        }
+
+                        //There was a conflicts in the appointment so display it
+                        else {
+
+                            //show conflict section
+                            conflictSection.css("display", "block")
+
+                            var conflictList = $("#js-conflict-list");
+
+                            //Empty the table
+                            conflictList.empty()
+
+                            //Fill the table with the conflicts
+                            for (var i = 0; i < data.conflicts.length; i++) {
+                                markup =
+                                    `<li>
+                                        <strong>${data.conflicts[i]["title"]}</strong> - ${data.conflicts[i]["start"]}
+                                    </li>`
+
+                                conflictList.append(markup)
+                            }
+                        }
+                    },
+                    error: function () {
+                        toastr["error"]
+                            ("@Global.GenericError",
+                                "@Global.Error");
+                    }
+                })
+            }
+
+            //Load the appointment modal from the calendar click
+            function OpenAppointmentModalOnCalendarClick(date, time, duration) {
+
+                ShowHideClientDdl(true);
+                EnableDisableButton(saveButton, false)
+
+                startDateInput.val(toFrenchDate(date));
+
+                duration = (duration == undefined) ? 0.5 : duration
+                durationDdl.val(duration);
+
+                time = time.split(":")
+                startTimeDdl.val(`${time[0]}:${time[1]}`)
+
+                console.log("test4444")
+
+                OpenModal(modalId)
+            }
+            InitModal.OpenAppointmentModalOnCalendarClick = OpenAppointmentModalOnCalendarClick;
+
+            //Modify the appointment from the calendar drag and drop
+            function ModifyAppointmentFromDragDrop(appointmentIdFromEvent, repetitionId, startDateTime, duration) {
+                appointmentId = appointmentIdFromEvent
+                repetitionId = repetitionId
+
+                if (repetitionId != undefined) {
+                    modifyForModalAction.val("modifyFromCalendar")
+
+                    //Need to transfer those information to the modify for modal
+                    modifyForModalAction.data("start-date", startDateTime)
+                    modifyForModalAction.data("duration", duration)
+
+                    OpenModifyForModal();
+                    return false;
+                }
+
+                ModifyFromCalendar(true, startDateTime, duration)
+            }
+            InitModal.ModifyAppointmentFromDragDrop = ModifyAppointmentFromDragDrop;
+
+            //Modify appointment from calendar ajax
+            function ModifyFromCalendar(isThisOnly, startDateTime, duration) {
+                $.ajax({
+                    type: "POST",
+                    url: "/fr/therapist/ModifyAppointmentFromCalendar/",
+                    data: `{"appointmentId":"${appointmentId}",
+                        "startDateTimeStr":"${startDateTime}",
+                        "duration":"${duration}",
+                        "isThisOnly":"${isThisOnly}"}`,
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+
+                        //Not succeeded
+                        if (data.isException == true) {
+                            toastr["error"]
+                            ("@Global.GenericError",
+                                "@Global.Error");
+
+                            InitCalendar(ToJavaScriptDate(data.firstAppointment));
+                        }
+                        else if (data.isSuccess == false) {
+
+                            var conflictList = $("#js-modify-for-modal-conflict-ul");
+
+                            //Empty the table
+                            conflictList.empty()
+
+                            //Fill the table with the conflicts
+                            for (var i = 0; i < data.conflicts.length; i++) {
+                                markup =
+                                    `<li><strong>${data.conflicts[i]["title"]}</strong> - ${data.conflicts[i]["start"]}</li>`
+
+                                conflictList.append(markup)
+                            }
+
+                            //show the error table
+                            $("#js-modify-for-modal-conflict-area").css("display", "block")
+                        }
+                        else {
+                            //Close the modal since everything worked
+                            closeModal($("#ModifyForModal"))
+
+                            //hide the error table
+                            $("#js-modify-for-modal-conflict-area").css("display", "none")
+                            InitCalendar(ToJavaScriptDate(data.firstAppointment));
+                        }
+                    },
+                    error: function () {
+                        toastr["error"]
+                            ("@Global.GenericError",
+                                "@Global.Error");
+
+                        InitCalendar(ToJavaScriptDate(data.firstAppointment));
+                    }
+                })
+            }
+
+
+
+            //On add appointment click
+            function newAppointment() {
+                ShowHideClientDdl(true);
+                EnableDisableButton(saveButton, false)
+                OpenModal(modalId)
+            }
+            InitModal.newAppointment = newAppointment;
+
+
+
+            //On consult request click
+            $(".js-consult-request-button").on("click", function () {
+                tableRow = $(this).closest("tr")
+                clientId = $(this).data("client-id");
+                LoadModalInfo($(this).data("client-id"))
+                returnClientButton.css("display", "inline-block");
+
+                //Si c'est un client externe, on ne permet pas de le retourner à l'admin
+                if ($(this).data("is-external") == "True")
+                    returnClientButton.css("display", "none");
+
+                EnableDisableButton(saveButton, true)
+                OpenModal(modalId)
+            })
+
+            //On client ddl change
+            $("#js-appointment-modal-client-ddl").on("change", function () {
+                var value = $(this).val()
+                clientId = value;
+                EnableDisableButton(saveButton, false)
+
+                if (value != "null") {
+                    EnableDisableButton(saveButton, true)
+                    LoadModalInfo(value)
+                }
+
+            })
+
+            //On consultation type change
+            consultationTypeDdl.on("change", function () {
+
+                //Hide the warning message by default
+                $("#js-appointment-modal-warning-send-link").addClass("d-none");
+
+                if ($(this).val() == 2) {
+                    //consultation type is at online, show warning
+                    $("#js-appointment-modal-warning-send-link").removeClass("d-none");
+                }
+            })
+
+            //Open modal appointment from calendar event click
+            function CalendarOnClickEvent(startDate, element) {
+                ShowHideRepeatCheckbox(false);
+                EnableDisableButton(saveButton, true);
+                ShowModifyButton();
+
+
+                clientId = $(element).data("client-id")
+                appointmentId = $(element).data("appointment-id")
+                repetitionId = $(element).data("repetition-id")
+
+                //Check if allow to modify appointment
+                var isEditable = false;
+                if ($(element).data("is-editable") == true) {
+                    isEditable = true;
+                }
+
+
+                if (new Date() < startDate) {
+                    cancelAppointmentButton.css("display", "inline-block")
+                }
+
+                LoadModalInfo();
+                LoadAppointmentInfos(isEditable);
+
+                OpenModal(modalId)
+            }
+
+
+            InitModal.CalendarOnClickEvent = CalendarOnClickEvent;
+
+            //Close modal
+            cancelButton.on("click", function () {
+                CloseAppointmentModal()
+            })
+
+            closeAppointementButton.on("click", function () {
+                CloseAppointmentModal()
+            })
+
+
+
+
+
+
+            //Save the appointment
+            saveButton.on("click", function () {
+
+                if (clientId == null || clientId == undefined || clientId == "null") {
+                    return false
+                }
+
+                if (!VerifyModalFields())
+                    return false
+
+
+                var timeStart = $("#js-appointment-modal-start-time").val();
+                var nbSession = $("#js-appointment-modal-duration").val();
+
+                var isRepetition = addRepetitionCheckbox.is(":checked")
+                var repeatEveryNumber;
+                var repeatEveryPeriod;
+                var repeatAmount;
+                var repeatDays;
+
+                //Only set the variables if there is a repetition
+                if (isRepetition) {
+                    repeatEveryNumber = repeatEveryNumberDdl.val();
+                    repeatEveryPeriod = repeatEveryPeriodDdl.val();
+                    repeatAmount = repeatAmountDdl.val();
+
+                    //Only set the repeat days if we are on 1 week period
+                    if (repeatEveryNumber == 1 && repeatEveryPeriod == "week") {
+                        repeatDays = [];
+
+                        //Loop over selected day
+                        $(".js-appointment-modal-day.selected").each(function () {
+                            repeatDays.push($(this).data("day-id"));
+                        })
+                    }
+                }
+
+                var wageId = ($("#js-is-external-client").val() == "true" ? null : $("#js-appointment-modal-price-select").val())
+
+                AddAppointmentInfos = {
+                    ClientId: clientId,
+                    StartDate: startDateInput.val(),
+                    TimeStart: timeStart,
+                    NbSession: nbSession,
+                    WageId: wageId,
+                    NatureActId: natureActDdl.val(),
+                    ProfessionnalTitleId: professionnalTitleDdl.val(),
+                    ConsultationTypeId: consultationTypeDdl.val(),
+                    IsRepetition: isRepetition,
+                    RepeatEveryNumber: repeatEveryNumber,
+                    RepeatEveryPeriod: repeatEveryPeriod,
+                    RepeatAmount: repeatAmount,
+                    RepeatDays: repeatDays
+                }
+
+                $.ajax({
+                    type: "POST",
+                    url: "/fr/therapist/AddAppointments/",
+                    data: JSON.stringify(AddAppointmentInfos),
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+
+                        //Appointment got saved
+                        if (data.isSuccess) {
+                            $(tableRow).remove();
+
+                            //Hide conflict section
+                            conflictSection.css("display", "none")
+
+                            //Add the client in the clientDDL if he is not already there
+                            var isAlreadyInTheList = false
+                            $("#js-appointment-modal-client-ddl option").each(function () {
+                                if ($(this).val() == clientId) {
+                                   isAlreadyInTheList = true;
+                                }
+                            })
+
+                            if (!isAlreadyInTheList) {
+                                clientDdl.append(`
+                                   <option value="${clientId}">
+                                        ${clientNameField.text()}
+                                    </option>`)
+                            }
+
+                            //On verifiie s'il reste des demande à ceduler
+                            if ($(".js-client-to-schedule-table-row").length == 0) {
+                                $("#js-therapist-appointment-table").addClass("d-none");
+                                $("#js-therapist-appointment-empty").removeClass("d-none");
+                            }
+
+                            CloseAppointmentModal();
+
+                            InitCalendar(ToJavaScriptDate(data.firstAppointnment));
+                        }
+                        //There was a conflicts in tCultureInfoe appointment so display it
+                        else {
+                            //show conflict section
+                            conflictSection.css("display", "block")
+
+                            var conflictList = $("#js-conflict-list");
+
+                            //Empty the table
+                            conflictList.empty()
+
+                            //Fill the table with the conflicts
+                            for (var i = 0; i < data.conflicts.length; i++) {
+                                markup =
+                                    `<li><strong>${data.conflicts[i]["title"]}</strong> - ${data.conflicts[i]["start"]}
+                                    </li>`
+
+                                conflictList.append(markup)
+
+                            }
+                        }
+
+                    },
+                    error: function () {
+                        toastr["error"]
+                            ("@Global.GenericError",
+                                "@Global.Error");
+                    }
+                });
+
+            })
+
+
+
+
+
+
+
+            //Cancel appointment open modal
+            cancelAppointmentButton.on("click", function () {
+                //On enlève la classe d'erreur par défault
+                returnClientAdministrationReason.removeClass("input-validation-error");
+
+                //On retire l'option des all appointement
+                $("#js-delete-modal-apply-to option[value='all-appointment']").remove();
+
+                //Si il y a une répétition on ajoute l'option all appointement
+                if (repetitionId != undefined) {
+                    $("#js-delete-modal-apply-to").append(`
+                        <option value="all-appointment">
+                            @Resource.TherapistAppointment_ModalDelete_AllAppointment
+                        </option>`)
+                }
+
+                //On met la DDl reason à "choisir"
+                returnClientAdministrationReason.val("null");
+
+
+
+                //Hide the appointment modal
+                closeModal(modalId)
+
+                OpenModal(deleteModal);
+            })
+
+            //Close the cancel appointment modal
+            $("#js-close-delete-modal,#js-delete-modal-close").on("click", function () {
+
+                //Remove the hide class from the underneath modal
+                OpenModal(modalId)
+
+                closeModal(deleteModal)
+            })
+
+            //Cancel the appointment(s)
+            $("#js-delete-modal-delete-appointment-button").on("click", function () {
+
+                if (returnClientAdministrationReason.val() == "null") {
+                    returnClientAdministrationReason.addClass("input-validation-error");
+                    return false;
+                }
+
+
+                //Check if we cancel one or many appointment
+                var isThisOnly = $("#js-delete-modal-apply-to").find(":selected").val() == "this-only";
+
+                var deleteReasonId = returnClientAdministrationReason.find(":selected").val();
+
+                $.ajax({
+                    type: "POST",
+                    url: "/fr/therapist/DeleteAppointment/",
+                    data: `{"appointmentId":"${appointmentId}",
+                        "isThisOnly":"${isThisOnly}",
+                        "deleteReasonId":"${deleteReasonId}"}`,
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        closeModal(deleteModal)
+                        CloseAppointmentModal();
+                        InitCalendar();
+
+                        //Remove the all appointment option by default
+                        $("#js-delete-modal-apply-to option[value='all-appointment']").remove();
+                    },
+                    error: function () {
+                        toastr["error"]
+                            ("@Global.GenericError",
+                                "@Global.Error");
+                    }
+                })
+            })
+
+
+
+
+
+            //Modify an appointment
+            modifyButton.on("click", function () {
+
+                //We block the treatment when the button is disalbed
+                if($(this).hasClass("disabled")) {
+                    return false;
+                }
+
+                //Verfify if all the fields are right
+                if (!VerifyModalFields()) {
+                    return false;
+                }
+
+                if (repetitionId != undefined) {
+
+                    modifyForModalAction.val("modifyFromModal")
+                    OpenModifyForModal();
+
+                    //The rest of the process will be managCultureInfod elsewhere
+                    return false;
+                }
+
+                //Call the modify appointment function
+                ModifyAppointment(true);
+            })
+
+            //Modify all repetition button
+            modifyForButton.on("click", function () {
+                //On regarde la valeur du DDL pour savoir si on doit l'appliquer à un ou tous les suivant(si juste 1 == true)
+                if ($("#js-modal-modify-for-option").val() == "one") {
+                    ModifyForModalAction(true);
+                }
+                else if ($("#js-modal-modify-for-option").val() == "all") {
+                    ModifyForModalAction(false);
+                }
+                else {
+                     toastr["error"]
+                         ("@Global.GenericError",
+                                "@Global.Error");
+                }
+            })
+
+
+            function ModifyForModalAction(isOneAppointmentOnly) {
+                var action = modifyForModalAction.val();
+
+                if (action == "modifyFromModal") {
+                    //Modify all the appointment of the repetition
+                    ModifyAppointment(isOneAppointmentOnly)
+                }
+                else if (action = "modifyFromCalendar") {
+                    ModifyFromCalendar(isOneAppointmentOnly,
+                        modifyForModalAction.data("start-date"),
+                        modifyForModalAction.data("duration"))
+
+                    //Dont close the modal since it might need to stay open if there is a conflict
+                    return false;
+                }
+
+
+                closeModal($("#ModifyForModal"))
+            }
+
+            //Close modifyFor modal with header button
+            closeModifyForModalHeaderButton.on("click", function () {
+                CloseModifyForModal()
+            });
+            //Close modifyFor modal
+            closeModifyForModalButton.on("click", function () {
+                CloseModifyForModal()
+
+            });
+
+            function CloseModifyForModal () {
+                //hide the error table
+                $("#js-modify-for-modal-conflict-area").css("display", "none")
+
+                //reload calendar
+                closeModal($("#ModifyForModal"))
+                OpenModal(modalId)
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+            //Return client to the administration
+            $("#js-appointment-modal-return-request").on("click", function () {
+                $("#js-return-client-modal-message").val("");
+                $("#js-return-client-modal-message").removeClass("input-validation-error");
+
+                //Hide the appointment modal
+                closeModal(modalId)
+
+                OpenModal(returnClientModal);
+
+            })
+
+            //Close Return client modal
+            $("#js-close-return-client-modal-button,#js-return-client-modal-x-button").on("click", function () {
+
+                //Remove the hide class from the underneath modal
+                OpenModal(modalId)
+
+                closeModal(returnClientModal)
+            })
+
+            //Return client button
+            $("#js-return-client-modal-return-appointment-button").on("click", function () {
+
+                var message = $("#js-return-client-modal-message").val();
+
+                //Check if the message is empty or white space
+                if (message.trim() == "") {
+                    $("#js-return-client-modal-message").addClass("input-validation-error")
+                    return false;
+                }
+
+                //Remove error class
+                $("#js-return-client-modal-message").removeClass("input-validation-error")
+
+                message = EscapeHtmlEntities(message)
+
+                $.ajax({
+                    type: "POST",
+                    url: "/fr/therapist/ReturnClientToAdministration/",
+                    data: `{"clientId":"${clientId}",
+                        "message":"${message}"}`,
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+
+                        //On calcul le nombre de client a consulter restant
+                        var clientConsultRequestToDo = 0
+
+                        //Remove the table row
+                        $(".js-consult-request-button").each(function () {
+                            if ($(this).data("client-id") == clientId)
+                                $(this).closest("tr").remove();
+                            else
+                                clientConsultRequestToDo++
+                        })
+
+                        if (clientConsultRequestToDo == 0) {
+                            $("#js-therapist-appointment-table").addClass("d-none");
+                            $("#js-therapist-appointment-empty").removeClass("d-none");
+                        }
+
+                        //set the text area text to nothing
+                        $("#js-return-client-modal-message").val("");
+
+                        closeModal(returnClientModal)
+                        CloseAppointmentModal();
+                    },
+                    error: function () {
+                        toastr["error"]
+                            ("@Global.GenericError",
+                                "@Global.Error");
+                    }
+                })
+            })
+        }
+
+        InitModal();
+
+
+
+
+        //------------------------ field validation and remove error class --------------------------
+
+        //Start date
+        $("#js-appointment-modal-start-date").on("change", function () {
+            VerifyDateTime()
+        })
+
+        $("#js-appointment-modal-start-time").on("change", function () {
+            VerifyDateTime()
+        })
+
+        function VerifyDateTime() {
+
+            $("#js-appointment-modal-start-date").removeClass("input-validation-error")
+            $("#js-appointment-modal-start-time").removeClass("input-validation-error")
+
+            GenericCheckDefaultFieldError($("#js-appointment-modal-start-date"), $("#js-appointment-modal-start-date").val(), "")
+
+            //Start date validation
+            var startDate = toInternationnalDate($("#js-appointment-modal-start-date").val());
+            var startTime = $("#js-appointment-modal-start-time").val()
+
+            const momentString = moment(startDate + " " + startTime, 'YYYY-MM-DD HH:mm')
+
+            //Return false if the date is not valid
+            if (!isDatePickerDateValid(startDate) || !isDateGreaterOrEqualThanToday(startDate)) {
+                $("#js-appointment-modal-start-date").addClass("input-validation-error")
+                return;
+            }
+
+            //Return false if the time is not valid
+            if (!isDateGreaterThanNow(momentString)) {
+                $("#js-appointment-modal-start-time").addClass("input-validation-error")
+            }
+        }
+
+        //Nature act
+        $("#js-appointment-modal-nature-act").on("change", function () {
+            GenericCheckDefaultFieldError($(this), $(this).val(), "null")
+        })
+
+        //Consultation type
+        $("#js-appointment-modal-consultation-type").on("change", function () {
+            GenericCheckDefaultFieldError($(this), $(this).val(), "null")
+        })
+
+        //Message text area
+        $("#js-return-client-modal-message").on("change", function () {
+            GenericCheckDefaultFieldError($(this), $(this).val().trim(), "")
+        })
+
+        //------------------- Repeat day section select day --------------------
+        $(".js-appointment-modal-day").on("click", function () {
+             var isSelected = ($(this).data("is-selected") == true);
+
+             //Check if there is only one checked
+             //If only one checked, cant uncheck it since there will be no option
+             if (isSelected) {
+                 var checkedCount = 0
+                 $(".js-appointment-modal-day.selected").each(function () {
+                     checkedCount++
+                 })
+
+                 if (checkedCount <= 1) {
+                     //Cant uncheck it since there will no longer be a checked option
+                     return false;
+                 }
+             }
+
+             //Remove both class
+             $(this).removeClass("selected")
+
+             //Add selected class if it wasnt selected beforehand
+             if (!isSelected) {
+                 $(this).addClass("selected")
+
+                 //Set the data-is-selected to true
+                 $(this).data("is-selected", true)
+             }
+             else {
+
+                 //Set the data-is-selected to false
+                 $(this).data("is-selected", false)
+             }
+         })
+
+
+        //-------------------------- show repetition section -----------------------
+        //Show/Hide the repetition section
+        $("#js-appointment-modal-add-repetition").change(function () {
+            var repeatSection = $("#js-appointment-modal-repeat-section")
+
+            //Hide the repeat section by default
+            repeatSection.css("display", "none")
+
+            //Set default value
+            $("#js-appointment-modal-repeat-every").val(1);
+            $("#js-appointment-modal-repeat-period").val("week");
+            $("#js-appointment-modal-repeat-amount").val(1);
+            $("#js-appointment-modal-repeat-day").css("display", "block")
+
+            //Set check based on date
+            SetDayChecked();
+
+            if ($(this).is(":checked")) {
+                repeatSection.css("display", "block")
+            }
+        })
+
+
+
+        //amount ddl on change
+        $("#js-appointment-modal-repeat-every").on("change", function () {
+            ShowHideRepeatDay();
+        })
+
+        //Period ddl on change
+        $("#js-appointment-modal-repeat-period").on("change", function () {
+            ShowHideRepeatDay();
+        })
+
+        //Show / Hide day repetition section
+        function ShowHideRepeatDay() {
+            var numberSelected = $("#js-appointment-modal-repeat-every").val();
+            var periodSelected = $("#js-appointment-modal-repeat-period").val();
+            var repeatDaySection = $("#js-appointment-modal-repeat-day")
+
+            //Hide the section by default
+            repeatDaySection.css("display", "none")
+
+
+            if (numberSelected == 1 && periodSelected == "week") {
+                repeatDaySection.css("display", "block")
+            }
+        }
+
+        //-------------------------- Check proper date in repetition ---------------------
+        $("#js-appointment-modal-start-date").on("change", function () {
+            SetDayChecked();
+        })
+
+        function SetDayChecked() {
+            //Set the day checked value to the date day of the date selected
+            var startDate = $("#js-appointment-modal-start-date").val();
+            var datePart = startDate.split("-")
+            var javascriptDate = new Date(datePart[2], datePart[1] - 1, datePart[0])
+
+            //sunday is 0 but we want it as 7
+            var currentDay = (javascriptDate.getDay() == 0) ? 7 : javascriptDate.getDay()
+
+            $(".js-appointment-modal-day").each(function () {
+                //Remove both class beforehand
+                $(this).removeClass("selected")
+
+                if ($(this).data("day-id") == currentDay) {
+                    $(this).addClass("selected")
+                    $(this).data("is-selected", true)
+                }
+                else {
+                    $(this).data("is-selected", false)
+                }
+            })
+
+            //Set the start from text
+            var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
+            var culture = "@CultureInfo.CurrentCulture.Name"
+            var longDate = (startDate == "") ? "" : javascriptDate.toLocaleDateString(culture, options);
+
+            $("#js-appointment-modal-starts-from").text(longDate)
+        }
+
+        //----------------------------------------------------- Calendar ----------------------------------
+
+        moment.updateLocale('fr-ca', { weekdaysMin: 'D_L_M_M_J_V_S'.split('_') });
+        moment.updateLocale('en-ca', { weekdaysMin: 'S_M_T_W_T_F_S'.split('_') });
+
+        function InitCalendar(defaultDate) {
+            var calendarEL = document.getElementById('js-calendar');
+
+            var calendar = new FullCalendar.Calendar(calendarEL, {
+                initialView: 'timeGridWeek',
+                initialDate: defaultDate,
+                slotMinTime: '06:00:00',
+                slotMaxTime: '21:00:00',
+                allDaySlot: false,
+                slotDuration: '00:30:00',
+                slotLabelInterval: '01:00:00',
+
+                slotLabelFormat: function (args) {
+                    return moment(args.date).format('H:mm');
+                },
+
+
+                dayHeaderContent: (args) => {
+                    return {
+                        html:
+                            "<div class='d-block d-md-none'>" + moment(args.date).locale('@CultureInfo.CurrentCulture.Name').format('dd<br/>D') + "</div>" +
+                            "<div class='d-none d-md-block'>" + moment(args.date).locale('@CultureInfo.CurrentCulture.Name').format('dddd<br/>D') + "</div>"
+                    }
+                },
+
+
+                locale: '@CultureInfo.CurrentCulture.Name',
+                firstDay: 0,
+                contentHeight: 'auto',
+                eventOverlap: false,
+                editable: true,
+                eventSources: {
+                    url: '/api/AppointmentCalendar',
+                    className: 'js-calendar-event'
+                },
+                eventColor: '#CCCAE6',
+                eventTextColor: '#3B377F',
+                eventDidMount: function (arg) {
+                    $(arg.el).attr('data-client-id', arg.event.extendedProps["ClientId"])
+                    $(arg.el).attr('data-appointment-id', arg.event.extendedProps["AppointmentId"])
+                    $(arg.el).attr('data-repetition-id', arg.event.extendedProps["RepetitionId"])
+                    $(arg.el).attr('data-is-editable', arg.event.extendedProps["IsEditable"])
+                    $(arg.el).attr('data-is-duration-editatble', arg.event.extendedProps["IsDurationEditable"])
+                },
+                eventDurationEditable: false,
+                //To allow the add appointment on calendar empty space click
+                dateClick: function (info) {
+
+                    InitModal.OpenAppointmentModalOnCalendarClick(
+                        info.date.toLocaleDateString('fr-CA', { year: 'numeric', month: '2-digit', day: '2-digit' }),
+                        info.date.toTimeString().split(' ')[0]
+                    );
+                },
+                selectable: true,
+                selectOverlap: false,
+                selectMirror: true,
+                selectAllow: function (selectInfo) {
+                    var duration = (selectInfo.end - selectInfo.start) / 3_600_000;
+                    var isAllow = duration <= 2 &&
+                        new Date() < selectInfo.start;
+
+                    return isAllow;
+                },
+                selectMinDistance: 0,
+                select: function (info) {
+
+                    var startDate = info.startStr.split("T")[0]
+                    var startTime = info.startStr.split("T")[1]
+                    var duration = (info.end - info.start) / 3_600_000
+
+                    if (duration == 0.5) {
+                        return false
+                    }
+
+                    InitModal.OpenAppointmentModalOnCalendarClick(
+                        startDate,
+                        startTime,
+                        duration
+                    );
+                },
+                eventAllow: function (dropInfo, draggedEvent) {
+                    duration = (dropInfo.end - dropInfo.start) / 3_600_000
+                    var isAllow = duration > 0.25 &&
+                        duration <= 2 &&
+                        new Date() < dropInfo.start;
+
+                    return isAllow;
+                },
+                eventDrop: function (eventDropInfo) {
+
+
+
+                    var appointmentId = $(eventDropInfo.el).data("appointment-id")
+                    var repetitionId = $(eventDropInfo.el).data("repetition-id")
+                    var startDateTime = FullDateToShortDateTime(eventDropInfo.event.start)
+                    var duration = (eventDropInfo.event.end - eventDropInfo.event.start) / 3_600_000
+                    InitModal.ModifyAppointmentFromDragDrop(
+                        appointmentId,
+                        repetitionId,
+                        startDateTime,
+                        duration
+                    )
+                },
+                eventResize: function (eventResizeInfo) {
+
+                    if ($(eventResizeInfo.el).data("is-duration-editatble") == false) {
+                        eventResizeInfo.revert()
+
+                        toastr["warning"]
+                            ("@Resource.Appointment_CantResize",
+                                "@Global.Attention");
+                    }
+                    else {
+                        var appointmentId = $(eventResizeInfo.el).data("appointment-id")
+                        var repetitionId = $(eventResizeInfo.el).data("repetition-id")
+                        var startDateTime = FullDateToShortDateTime(eventResizeInfo.event.start)
+                        var duration = (eventResizeInfo.event.end - eventResizeInfo.event.start) / 3_600_000
+                        InitModal.ModifyAppointmentFromDragDrop(
+                            appointmentId,
+                            repetitionId,
+                            startDateTime,
+                            duration
+                        )
+                    }
+                },
+                eventClick: function (eventClickInfo) {
+                    InitModal.CalendarOnClickEvent(
+                        eventClickInfo.event.start,
+                        eventClickInfo.el)
+                },
+                customButtons: {
+                    addAppointmentButton: {
+                        text: '@Global.AddAppointment',
+                        click: function () {
+                            InitModal.newAppointment();
+                        }
+                    }
+                },
+                headerToolbar: {
+                    left: 'prev today next',
+                    center: 'title',
+                    right: 'addAppointmentButton'
+                },
+                eventTimeFormat: function (args) {
+                    return `${moment(args.start).format('H:mm')} - ${moment(args.end).format('H:mm')}`;
+                },
+                nowIndicator: true
+
+
+
+            })
+
+            calendar.render();
+        }
+
+        InitCalendar();
+
+
+        //----------------------- Other ---------------------------
+
+        //Remove error class when fill datepicker
+        $(".js-date-picker").on("change", function () {
+
+            if ($(this).val() != "") {
+                $(this).removeClass("input-validation-error")
+            }
+        })
+
+
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+
+    </script>
+}

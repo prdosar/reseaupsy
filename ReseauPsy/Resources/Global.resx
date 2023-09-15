@@ -1,0 +1,802 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Accept" xml:space="preserve">
+    <value>Accepter</value>
+  </data>
+  <data name="Accepted" xml:space="preserve">
+    <value>Accepté(s)</value>
+  </data>
+  <data name="Accreditation" xml:space="preserve">
+    <value>Accréditation</value>
+  </data>
+  <data name="Action" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="Active" xml:space="preserve">
+    <value>Actif</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>Ajouter</value>
+  </data>
+  <data name="AddAppointment" xml:space="preserve">
+    <value>Ajouter un rendez-vous</value>
+  </data>
+  <data name="AdditionnalNotes" xml:space="preserve">
+    <value>Notes supplémentaires</value>
+  </data>
+  <data name="Address" xml:space="preserve">
+    <value>Adresse</value>
+  </data>
+  <data name="AdministratorName" xml:space="preserve">
+    <value>Nom de l'administrateur</value>
+  </data>
+  <data name="AdminNote" xml:space="preserve">
+    <value>Note pour l'administration</value>
+  </data>
+  <data name="All" xml:space="preserve">
+    <value>Tous</value>
+  </data>
+  <data name="Amount" xml:space="preserve">
+    <value>Montant</value>
+  </data>
+  <data name="Application_Title_Suffix" xml:space="preserve">
+    <value>reseaupsy.ca</value>
+    <comment>Siffixe de tous les titres dans els onglets</comment>
+  </data>
+  <data name="Apply" xml:space="preserve">
+    <value>Appliquer</value>
+  </data>
+  <data name="ApplyTo" xml:space="preserve">
+    <value>Appliquer à </value>
+  </data>
+  <data name="AppointmentDate" xml:space="preserve">
+    <value>Date du rendez-vous</value>
+  </data>
+  <data name="AppointmentThisAndAfter" xml:space="preserve">
+    <value>Ce rendez-vous et tous les suivants</value>
+  </data>
+  <data name="AppointmentThisOnly" xml:space="preserve">
+    <value>Ce rendez-vous seulement</value>
+  </data>
+  <data name="AreaPractice" xml:space="preserve">
+    <value>Domaines de pratique</value>
+  </data>
+  <data name="Assign" xml:space="preserve">
+    <value>Attribuer</value>
+  </data>
+  <data name="AssignTo" xml:space="preserve">
+    <value>Attribuer à</value>
+  </data>
+  <data name="Association" xml:space="preserve">
+    <value>Association</value>
+  </data>
+  <data name="AssociationOrOrder" xml:space="preserve">
+    <value>Associations ou autres ordres</value>
+  </data>
+  <data name="AssociationOrOrderNumber" xml:space="preserve">
+    <value>Numéro de l'ordre ou de l'association</value>
+  </data>
+  <data name="Attention" xml:space="preserve">
+    <value>Attention!</value>
+  </data>
+  <data name="Avaibility" xml:space="preserve">
+    <value>Disponibilité</value>
+  </data>
+  <data name="Available" xml:space="preserve">
+    <value>Disponible</value>
+  </data>
+  <data name="BestMatch" xml:space="preserve">
+    <value>Meilleure correspondance</value>
+  </data>
+  <data name="Bill" xml:space="preserve">
+    <value>Factures</value>
+  </data>
+  <data name="BillINumber" xml:space="preserve">
+    <value>Numéro de facture</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
+  <data name="CancelledWithCharge" xml:space="preserve">
+    <value>Annulé avec frais</value>
+    <comment>1</comment>
+  </data>
+  <data name="CancelledWithoutCharge" xml:space="preserve">
+    <value>Annulé sans frais </value>
+    <comment>1</comment>
+  </data>
+  <data name="CancelReason" xml:space="preserve">
+    <value>Raison de l'annulation</value>
+  </data>
+  <data name="CardNumber" xml:space="preserve">
+    <value>Numéro de carte</value>
+  </data>
+  <data name="CardOwner" xml:space="preserve">
+    <value>Titulaire de la carte</value>
+  </data>
+  <data name="Certification" xml:space="preserve">
+    <value>Certification</value>
+  </data>
+  <data name="Choose" xml:space="preserve">
+    <value>Choisir</value>
+  </data>
+  <data name="City" xml:space="preserve">
+    <value>Ville</value>
+  </data>
+  <data name="CityRegion" xml:space="preserve">
+    <value>Ville/Région</value>
+  </data>
+  <data name="Claim" xml:space="preserve">
+    <value>Réclamation</value>
+  </data>
+  <data name="ClaimDate" xml:space="preserve">
+    <value>Date de la réclamation</value>
+  </data>
+  <data name="Claimed" xml:space="preserve">
+    <value>Réclamé</value>
+  </data>
+  <data name="Client" xml:space="preserve">
+    <value>Client</value>
+  </data>
+  <data name="ClientAge" xml:space="preserve">
+    <value>Âge du client</value>
+  </data>
+  <data name="ClientAvailibility" xml:space="preserve">
+    <value>Disponibilités du client</value>
+  </data>
+  <data name="ClientMessage" xml:space="preserve">
+    <value>Message du client</value>
+  </data>
+  <data name="ClientType" xml:space="preserve">
+    <value>Type de client</value>
+  </data>
+  <data name="CommonAvailability" xml:space="preserve">
+    <value>* Les disponibilités communes sont surlignées en vert</value>
+  </data>
+  <data name="Completed" xml:space="preserve">
+    <value>Complété</value>
+  </data>
+  <data name="ConflictMessage" xml:space="preserve">
+    <value>Le(s) rendez-vous que vous avez essayé d'enregistrer entre(nt) en conflict avec le(s) rendez-vous suivant(s)</value>
+  </data>
+  <data name="Connect" xml:space="preserve">
+    <value>Connexion</value>
+  </data>
+  <data name="Consult" xml:space="preserve">
+    <value>Consulter</value>
+  </data>
+  <data name="ConsultationPreference" xml:space="preserve">
+    <value>Préférence de consultation</value>
+  </data>
+  <data name="ConsultationReason" xml:space="preserve">
+    <value>Raison de la consultation</value>
+  </data>
+  <data name="ConsultationType" xml:space="preserve">
+    <value>Type de consultation</value>
+  </data>
+  <data name="Conversion" xml:space="preserve">
+    <value>Conversion</value>
+  </data>
+  <data name="CVV" xml:space="preserve">
+    <value>CVV</value>
+    <comment>CVV de la carte de crédit</comment>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Supprimer</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="Download" xml:space="preserve">
+    <value>Télécharger</value>
+  </data>
+  <data name="DownloadReceipt" xml:space="preserve">
+    <value>Télécharger le reçu</value>
+  </data>
+  <data name="Duration" xml:space="preserve">
+    <value>Durée</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Modifier</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Courriel</value>
+  </data>
+  <data name="EmailClient" xml:space="preserve">
+    <value>Courriel du client</value>
+  </data>
+  <data name="EmailInvalid" xml:space="preserve">
+    <value>L'adresse courriel est invalide</value>
+    <comment>Le format n'est pas bon</comment>
+  </data>
+  <data name="EmailRequired" xml:space="preserve">
+    <value>L'adresse courriel est requise</value>
+  </data>
+  <data name="Email_AlreadyUsed" xml:space="preserve">
+    <value>Cette adresse courriel est déjà utilisée</value>
+  </data>
+  <data name="EndDate" xml:space="preserve">
+    <value>Date de fin</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Erreur!</value>
+  </data>
+  <data name="ErrorPayment" xml:space="preserve">
+    <value>Impossible de procéder au paiement</value>
+  </data>
+  <data name="Expiration" xml:space="preserve">
+    <value>Expiration</value>
+  </data>
+  <data name="Export" xml:space="preserve">
+    <value>Exporter</value>
+  </data>
+  <data name="ExportToExcel" xml:space="preserve">
+    <value>Exporter vers Excel</value>
+  </data>
+  <data name="ExternalAssociation" xml:space="preserve">
+    <value>Association externe</value>
+  </data>
+  <data name="Firstname" xml:space="preserve">
+    <value>Prénom</value>
+  </data>
+  <data name="Forthcoming" xml:space="preserve">
+    <value>À venir</value>
+  </data>
+  <data name="Full" xml:space="preserve">
+    <value>Complet</value>
+  </data>
+  <data name="Gender" xml:space="preserve">
+    <value>Genre</value>
+  </data>
+  <data name="GenericError" xml:space="preserve">
+    <value>Une erreur est survenue. Veuillez réessayer plus tard.</value>
+  </data>
+  <data name="Hi" xml:space="preserve">
+    <value>Bonjour</value>
+    <comment>Salutation dans le menu en haut à gauche une fois connectée</comment>
+  </data>
+  <data name="HiringDate" xml:space="preserve">
+    <value>Date d'embauche</value>
+  </data>
+  <data name="HourlyClientCost" xml:space="preserve">
+    <value>Tarif client horaire</value>
+  </data>
+  <data name="HourlySalary" xml:space="preserve">
+    <value>Tarif horaire</value>
+  </data>
+  <data name="Inactive" xml:space="preserve">
+    <value>Inactif</value>
+  </data>
+  <data name="InvalidDate" xml:space="preserve">
+    <value>La date n'est pas valide</value>
+  </data>
+  <data name="InvalidFieldError" xml:space="preserve">
+    <value>La page contient des champs invalides. Veuillez les corriger et réessayer.</value>
+  </data>
+  <data name="IsTaxable" xml:space="preserve">
+    <value>Appliquer les taxes</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Langue</value>
+  </data>
+  <data name="Lastname" xml:space="preserve">
+    <value>Nom</value>
+  </data>
+  <data name="LegalBy" xml:space="preserve">
+    <value>Propulsé par {0}</value>
+    <comment>{0} Remplacé par 3wDesign</comment>
+  </data>
+  <data name="LegalData" xml:space="preserve">
+    <value>Vos données sont protégées.</value>
+  </data>
+  <data name="LegalRights" xml:space="preserve">
+    <value>Tous droits réservés RéseauPsy © {0}</value>
+    <comment>{0} Remplacé par l'année courante</comment>
+  </data>
+  <data name="Menu_About" xml:space="preserve">
+    <value>À propos</value>
+  </data>
+  <data name="Menu_Administration" xml:space="preserve">
+    <value>Administration</value>
+  </data>
+  <data name="Menu_Administrator" xml:space="preserve">
+    <value>Administrateurs</value>
+  </data>
+  <data name="Menu_Appointment" xml:space="preserve">
+    <value>Rendez-vous</value>
+  </data>
+  <data name="Menu_AppointmentCalendar" xml:space="preserve">
+    <value>Calendrier des rendez-vous</value>
+  </data>
+  <data name="Menu_AppointmentList" xml:space="preserve">
+    <value>Liste de rendez-vous</value>
+  </data>
+  <data name="Menu_AppointmentNotPayed" xml:space="preserve">
+    <value>Rendez-vous non payés</value>
+  </data>
+  <data name="Menu_AppointmentRequest" xml:space="preserve">
+    <value>Demande de consultation</value>
+  </data>
+  <data name="Menu_Billing" xml:space="preserve">
+    <value>Facturation</value>
+  </data>
+  <data name="Menu_ChangePassword" xml:space="preserve">
+    <value>Modifier mon mot de passe</value>
+  </data>
+  <data name="Menu_ClaimForm" xml:space="preserve">
+    <value>Formulaire de réclamation </value>
+  </data>
+  <data name="Menu_Client" xml:space="preserve">
+    <value>Clients</value>
+  </data>
+  <data name="Menu_ClientReceipt" xml:space="preserve">
+    <value>Reçus client</value>
+  </data>
+  <data name="Menu_ConfirmPresence" xml:space="preserve">
+    <value>Présence à confirmer</value>
+  </data>
+  <data name="Menu_Dashboard" xml:space="preserve">
+    <value>Tableau de bord</value>
+  </data>
+  <data name="Menu_EN" xml:space="preserve">
+    <value>en</value>
+  </data>
+  <data name="Menu_English" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="Menu_ExternalAssociation" xml:space="preserve">
+    <value>Association externe</value>
+  </data>
+  <data name="Menu_FR" xml:space="preserve">
+    <value>fr</value>
+  </data>
+  <data name="Menu_Francais" xml:space="preserve">
+    <value>French</value>
+  </data>
+  <data name="Menu_Logout" xml:space="preserve">
+    <value>Déconnexion</value>
+  </data>
+  <data name="Menu_MyProfil" xml:space="preserve">
+    <value>Mon profil</value>
+  </data>
+  <data name="Menu_MySkills" xml:space="preserve">
+    <value>Mes compétences</value>
+  </data>
+  <data name="Menu_Statistics" xml:space="preserve">
+    <value>Statistiques</value>
+  </data>
+  <data name="Menu_Therapist" xml:space="preserve">
+    <value>Thérapeutes</value>
+  </data>
+  <data name="Menu_TherapistBill" xml:space="preserve">
+    <value>Factures thérapeute</value>
+  </data>
+  <data name="Menu_WaitingRequest" xml:space="preserve">
+    <value>Demandes en attente</value>
+  </data>
+  <data name="Message" xml:space="preserve">
+    <value>Message</value>
+  </data>
+  <data name="MessageAdmin" xml:space="preserve">
+    <value>Message à l'administration</value>
+  </data>
+  <data name="MessageFromAdmin" xml:space="preserve">
+    <value>Message de l'administration</value>
+  </data>
+  <data name="Month" xml:space="preserve">
+    <value>Mois</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Nom</value>
+  </data>
+  <data name="Nature" xml:space="preserve">
+    <value>Nature</value>
+    <comment>"nature de l'act"</comment>
+  </data>
+  <data name="New" xml:space="preserve">
+    <value>Nouveau</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>Non</value>
+  </data>
+  <data name="NoBills" xml:space="preserve">
+    <value>Il n'y a pas de facture</value>
+  </data>
+  <data name="NoDataNoFilter" xml:space="preserve">
+    <value>Il n'y a pas de données.</value>
+  </data>
+  <data name="NoMatch" xml:space="preserve">
+    <value>Aucune correspondance</value>
+  </data>
+  <data name="None" xml:space="preserve">
+    <value>Aucun</value>
+  </data>
+  <data name="NoResult" xml:space="preserve">
+    <value>Il n'y a pas de résultat selon vos filtres.</value>
+  </data>
+  <data name="NotClaimed" xml:space="preserve">
+    <value>Non réclamé</value>
+  </data>
+  <data name="NotDefined" xml:space="preserve">
+    <value>Non défini</value>
+  </data>
+  <data name="NotPaid" xml:space="preserve">
+    <value>Non payé</value>
+  </data>
+  <data name="NotTookInCharge" xml:space="preserve">
+    <value>Non pris en charge</value>
+  </data>
+  <data name="OfferedService" xml:space="preserve">
+    <value>Services offerts</value>
+  </data>
+  <data name="OPQNumber" xml:space="preserve">
+    <value>Numéro de l'OPQ</value>
+  </data>
+  <data name="OPQRequired" xml:space="preserve">
+    <value>Le numéro de l'OPQ est requis.</value>
+  </data>
+  <data name="OtherMatch" xml:space="preserve">
+    <value>Autres correspondances</value>
+  </data>
+  <data name="Paid" xml:space="preserve">
+    <value>Payé</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Mot de passe</value>
+  </data>
+  <data name="PasswordCompare" xml:space="preserve">
+    <value>Les mots de passe ne concordent pas.</value>
+    <comment>Affiché lorsque le mot de passe et confirmer le mot de passe ne sont pas pareil</comment>
+  </data>
+  <data name="PasswordConfirmation" xml:space="preserve">
+    <value>Confirmer le mot de passe</value>
+    <comment>C'est le label "Confirmer votre mot de passe" Il ne faut probablement pas de "z" ici</comment>
+  </data>
+  <data name="PasswordConfirmationRequired" xml:space="preserve">
+    <value>Vous devez confirmer votre mot de passe.</value>
+  </data>
+  <data name="PasswordCurrent" xml:space="preserve">
+    <value>Mot de passe actuel</value>
+  </data>
+  <data name="PasswordLength" xml:space="preserve">
+    <value>Le mot de passe doit avoir au moins {2} caractères.</value>
+    <comment>{2} sera remplacé par le nombre de caractère minimum</comment>
+  </data>
+  <data name="PasswordNew" xml:space="preserve">
+    <value>Nouveau mot de passe</value>
+  </data>
+  <data name="PasswordRequired" xml:space="preserve">
+    <value>Le mot de passe est requis.</value>
+  </data>
+  <data name="PasswordStrong" xml:space="preserve">
+    <value>Le mot de passe n'est pas assez sécuritaire. Il doit contenir :</value>
+  </data>
+  <data name="PasswordStrong_Digit" xml:space="preserve">
+    <value>Minimum d'un chiffre</value>
+  </data>
+  <data name="PasswordStrong_Length" xml:space="preserve">
+    <value>Un minimum de 6 caractères</value>
+  </data>
+  <data name="PasswordStrong_Lower" xml:space="preserve">
+    <value>Minimum d'une lettre minuscule</value>
+  </data>
+  <data name="PasswordStrong_Special" xml:space="preserve">
+    <value>Minimum d'un caractère spécial</value>
+  </data>
+  <data name="PasswordStrong_Upper" xml:space="preserve">
+    <value>Minimum d'une lettre majuscule</value>
+  </data>
+  <data name="Pay" xml:space="preserve">
+    <value>Payer</value>
+  </data>
+  <data name="Payment" xml:space="preserve">
+    <value>Paiement</value>
+  </data>
+  <data name="PaymentDate" xml:space="preserve">
+    <value>Date de paiement</value>
+  </data>
+  <data name="Percentage" xml:space="preserve">
+    <value>Pourcentage</value>
+  </data>
+  <data name="Phone" xml:space="preserve">
+    <value>Téléphone</value>
+  </data>
+  <data name="PostalCode" xml:space="preserve">
+    <value>Code postal</value>
+  </data>
+  <data name="PracticeType" xml:space="preserve">
+    <value>Type de pratique</value>
+  </data>
+  <data name="PresenceToConfirm" xml:space="preserve">
+    <value>Présence à confirmer</value>
+  </data>
+  <data name="ProfessionnalTitle" xml:space="preserve">
+    <value>Titre professionnel</value>
+  </data>
+  <data name="Profil" xml:space="preserve">
+    <value>Profil</value>
+  </data>
+  <data name="Quantity" xml:space="preserve">
+    <value>Quantité</value>
+  </data>
+  <data name="Rate" xml:space="preserve">
+    <value>Taux</value>
+    <comment>"taux horaire"</comment>
+  </data>
+  <data name="RateAndSalary" xml:space="preserve">
+    <value>Taux et tarif</value>
+  </data>
+  <data name="Reactivate" xml:space="preserve">
+    <value>Réactiver</value>
+  </data>
+  <data name="Reason" xml:space="preserve">
+    <value>Raison</value>
+  </data>
+  <data name="ReceiptNumber" xml:space="preserve">
+    <value>Numéro de reçu</value>
+  </data>
+  <data name="Reception" xml:space="preserve">
+    <value>Réception</value>
+    <comment>"Date de réception"</comment>
+  </data>
+  <data name="Refuse" xml:space="preserve">
+    <value>Refuser</value>
+  </data>
+  <data name="Region" xml:space="preserve">
+    <value>Région</value>
+  </data>
+  <data name="RequestAccepted" xml:space="preserve">
+    <value>Demande acceptée</value>
+  </data>
+  <data name="RequestDate" xml:space="preserve">
+    <value>Date de la demande</value>
+  </data>
+  <data name="RequestRefused" xml:space="preserve">
+    <value>Demande refusée</value>
+  </data>
+  <data name="ResendLink" xml:space="preserve">
+    <value>Renvoyer le lien</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Réinitialiser</value>
+  </data>
+  <data name="Restore" xml:space="preserve">
+    <value>Restaurer</value>
+  </data>
+  <data name="Retreive" xml:space="preserve">
+    <value>Récupérer</value>
+  </data>
+  <data name="Return" xml:space="preserve">
+    <value>Retourner</value>
+  </data>
+  <data name="Returned" xml:space="preserve">
+    <value>Retourné</value>
+  </data>
+  <data name="Role" xml:space="preserve">
+    <value>Rôle</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Enregistrer</value>
+  </data>
+  <data name="Seance" xml:space="preserve">
+    <value>Séance(s)</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>Envoyer</value>
+  </data>
+  <data name="Sent" xml:space="preserve">
+    <value>Envoyé(s)</value>
+  </data>
+  <data name="SentDate" xml:space="preserve">
+    <value>Date envoyée</value>
+  </data>
+  <data name="Service" xml:space="preserve">
+    <value>Service</value>
+  </data>
+  <data name="ServiceType" xml:space="preserve">
+    <value>Type de service</value>
+  </data>
+  <data name="Skill" xml:space="preserve">
+    <value>Compétence</value>
+  </data>
+  <data name="SpecificSkill" xml:space="preserve">
+    <value>Compétence spécifique</value>
+  </data>
+  <data name="StartDate" xml:space="preserve">
+    <value>Date de début</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Statut</value>
+  </data>
+  <data name="StatusChangedDate" xml:space="preserve">
+    <value>Date de changement de statut</value>
+  </data>
+  <data name="Subtotal" xml:space="preserve">
+    <value>Sous-total</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>Succès!</value>
+  </data>
+  <data name="TableInvalidFieldError" xml:space="preserve">
+    <value>Le tableau contient des champs invalides. Veuillez les corriger et réessayer.</value>
+  </data>
+  <data name="Tax" xml:space="preserve">
+    <value>Taxes</value>
+  </data>
+  <data name="TheoricalOrientation" xml:space="preserve">
+    <value>Orientations théoriques</value>
+  </data>
+  <data name="Therapist" xml:space="preserve">
+    <value>Thérapeute</value>
+  </data>
+  <data name="Time" xml:space="preserve">
+    <value>Heure</value>
+  </data>
+  <data name="ToDo" xml:space="preserve">
+    <value>À traiter</value>
+    <comment>Label à traiter</comment>
+  </data>
+  <data name="ToDoAlready" xml:space="preserve">
+    <value>Déjà traité</value>
+    <comment>Label à déjà traité</comment>
+  </data>
+  <data name="TookInCharge" xml:space="preserve">
+    <value>Pris en charge</value>
+  </data>
+  <data name="Total" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="TPS" xml:space="preserve">
+    <value>TPS</value>
+    <comment>taxe tps</comment>
+  </data>
+  <data name="TPSNumber" xml:space="preserve">
+    <value>Numéro de TPS</value>
+  </data>
+  <data name="TPSRequired" xml:space="preserve">
+    <value>Le numéro de TPS est requis.</value>
+  </data>
+  <data name="TVQ" xml:space="preserve">
+    <value>TVQ</value>
+    <comment>taxe tvq</comment>
+  </data>
+  <data name="TVQNumber" xml:space="preserve">
+    <value>Numéro de TVQ</value>
+  </data>
+  <data name="TVQRequired" xml:space="preserve">
+    <value>Le numéro de TVQ est requis.</value>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>Voir</value>
+  </data>
+  <data name="Week" xml:space="preserve">
+    <value>Semaine</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Oui</value>
+  </data>
+  <data name="_GlobalMoney" xml:space="preserve">
+    <value>${amount} $</value>
+    <comment>Utilisé comme variable javascript pour afficher le $ à gauche ou à droite selon la langue</comment>
+  </data>
+</root>

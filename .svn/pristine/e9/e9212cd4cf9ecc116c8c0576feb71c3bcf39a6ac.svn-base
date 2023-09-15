@@ -1,0 +1,729 @@
+﻿@model ReseauPsy.ViewModel.Admin.TherapistListViewModel
+@using ReseauPsy.Resources
+@using System.Globalization;
+
+@{
+    ViewBag.Title = Resource.TherapistList_Title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section id="page-admin-therapistlist">
+    <div class="container">
+
+
+
+        <div class="row">
+            <div class="col-md-8">
+                <h1>@Resource.TherapistList_H1</h1>
+            </div>
+            <div class="col-md-4 text-end">
+                @Html.ActionLink(Global.New, "DetailTherapist", "admin", new object { }, new { @class = "btn btn-primary btn-excel" })
+            </div>
+        </div>
+
+
+
+
+
+        <div class="row">
+
+            @* Status *@
+            <div class="col-md-6 col-lg-4 col-xl-2">
+                <div class="form-group">
+                    @Global.Status
+                    <select id="js-dll-status" class="form-select js-ddl" data-ddl-field="status">
+                        @foreach (var item in Model.Status)
+                        {
+                            <option value="@item.Value"
+                                    @(Model.StatusSelectedValue == item.Value ? "selected=true" : "")>
+                                @item.Text
+                            </option>
+                        }
+                    </select>
+                </div>
+            </div>
+
+
+
+
+            @* Gender *@
+            <div class="col-md-6 col-lg-4 col-xl-2">
+                <div class="form-group">
+
+                    @Global.Gender
+                    <select id="js-ddl-genderId" class="form-select js-ddl js-filter-show" data-ddl-field="gender">
+                        <option value="null">@Global.All</option>
+                        @foreach (var item in Model.Genders)
+                        {
+                            <option value="@item.Id"
+                                    @(Model.GenderIdSelectedValue == item.Id ? "selected = true" : "")>
+                                @(CultureInfo.CurrentCulture.Name == "fr-CA" ? item.Gender1 : item.GenderEN)
+                            </option>
+                        }
+                    </select>
+                    <input type="hidden" id="js-ddl-gender-hidden" value="null" />
+                </div>
+            </div>
+
+            @* Disponibiliés *@
+            <div class="col-md-6 col-lg-4 col-xl-2">
+                <div class="form-group">
+
+                    @Global.Avaibility
+                    <select id="js-ddl-availability" class="form-select js-ddl js-filter-show" data-ddl-field="availability">
+                        @foreach (var item in Model.Availability)
+                        {
+                            <option value="@item.Value"
+                                    @(Model.AvailabilitySelectedValue == item.Value ? "selected = true" : "")>
+                                @item.Text
+                            </option>
+                        }
+                    </select>
+                    <input type="hidden" id="js-ddl-availability-hidden" value="all" />
+                </div>
+            </div>
+
+
+            @* Type de client *@
+            <div class="col-md-6 col-lg-4 col-xl-2">
+                <div class="form-group">
+
+                    @Global.ClientType
+                    <select id="js-ddl-clientTypeId" class="form-select js-ddl js-filter-show" data-ddl-field="clientType">
+                        <option value="null">@Global.All</option>
+                        @foreach (var item in Model.ClientTypes)
+                        {
+                            <option value="@item.Id"
+                                    @(Model.ClientTypeIdSelectedvalue == item.Id ? "selected = true" : "")>
+                                @(CultureInfo.CurrentCulture.Name == "fr-CA" ? item.ClientType1 : item.ClientTypeEN)
+                            </option>
+                        }
+                    </select>
+                    <input type="hidden" id="js-ddl-clientTypeId-hidden" value="null" />
+                </div>
+            </div>
+
+            @* Consultation Type *@
+            <div class="col-md-6 col-lg-4 col-xl-2">
+                <div class="form-group">
+                    @Global.ConsultationType
+                    <select id="js-ddl-consultationTypeId" class="form-select js-ddl js-filter-show" data-ddl-field="consultationType">
+                        <option value="null">@Global.All</option>
+                        @foreach (var item in Model.ConsultationTypes)
+                        {
+                            <option value="@item.Id"
+                                    @(Model.ConsultationTypeIdSelectedValue == item.Id ? "selected = true" : "")>
+                                @(CultureInfo.CurrentCulture.Name == "fr-CA" ? item.ConsultationType1 : item.ConsultationTypeEN)
+                            </option>
+                        }
+                    </select>
+                    <input type="hidden" id="js-ddl-consultationTypeId-hidden" value="null" />
+                </div>
+            </div>
+
+
+            @* Age du client*@
+            <div class="col-md-6 col-lg-4 col-xl-2">
+                <div class="form-group">
+                    @Global.ClientAge
+                    <select id="js-ddl-clientAgeId" class="form-select js-ddl js-filter-show" data-ddl-field="clientAge">
+                        <option value="null">@Global.All</option>
+                        @foreach (var item in Model.ClientsAgeRange)
+                        {
+                            <option value="@item.Id"
+                                    @(Model.ClientAgeRangeIdSelectedValue == item.Id ? "selected = true" : "")>
+                                @(CultureInfo.CurrentCulture.Name == "fr-CA" ? item.ClientAgeRange : item.ClientAgeRangeEN)
+                            </option>
+                        }
+                    </select>
+                    <input type="hidden" id="js-ddl-clientAgeId-hidden" value="null" />
+                </div>
+            </div>
+
+            @* Region *@
+            <div class="col-md-6 col-lg-4 col-xl-2">
+                <div class="form-group">
+                    @Global.Region
+                    <select id="js-ddl-regionId" class="form-select js-ddl js-filter-show" data-ddl-field="region">
+                        <option value="null">@Global.All</option>
+                        @foreach (var item in Model.Regions)
+                        {
+                            <option value="@item.Id"
+                                    @(Model.RegionIdSelectedValue == item.Id ? "selected = true" : "")>
+                                @item.Region1
+                            </option>
+                        }
+                    </select>
+                    <input type="hidden" id="js-ddl-regionId-hidden" value="null" />
+                </div>
+            </div>
+
+            @* Titre professionel*@
+            <div class="col-md-6 col-lg-4 col-xl-2">
+                <div class="form-group">
+                    @Global.ProfessionnalTitle
+                    <select id="js-ddl-professionalTitleId" class="form-select js-ddl js-filter-show" data-ddl-field="professionalTitle">
+                        <option value="null">@Global.All</option>
+                        @foreach (var item in Model.ProfessionalTitles)
+                        {
+                            <option value="@item.Id"
+                                    @(Model.ProfessionalTitleIdSelectedValue == item.Id ? "selected = true" : "")>
+                                @(CultureInfo.CurrentCulture.Name == "fr-CA" ? item.ProfessionalTitle1 : item.ProfessionalTitleEN)
+                            </option>
+                        }
+                    </select>
+                    <input type="hidden" id="js-ddl-professionalTitleId-hidden" value="null" />
+                </div>
+            </div>
+
+            @* Langue parlées en therapie *@
+            <div class="col-md-6 col-lg-4 col-xl-2">
+                <div class="form-group">
+                    @Global.Language
+                    <select id="js-ddl-languageId" class="form-select js-ddl js-filter-show" data-ddl-field="language">
+                        <option value="null">@Global.All</option>
+                        @foreach (var item in Model.Languages)
+                        {
+                            <option value="@item.Id"
+                                    @(Model.LanguageIdSelectedValue == item.Id ? "selected = true" : "")>
+                                @(CultureInfo.CurrentCulture.Name == "fr-CA" ? item.Language1 : item.LanguageEN)
+                            </option>
+                        }
+                    </select>
+                    <input type="hidden" id="js-ddl-languageId-hidden" value="null" />
+                </div>
+            </div>
+
+            @* Serive offerts *@
+            <div class="col-md-6 col-lg-4 col-xl-2">
+                <div class="form-group">
+
+                    @Global.OfferedService
+                    <select id="js-offered-service-ddl"
+                            class="form-control js-ddl selectpicker js-filter-show"
+                            data-ddl-field="offeredService"
+                            data-actions-box="true"
+                            data-selected-text-format="count"
+                            data-select-all-text="@Global.All"
+                            data-deselect-all-text="@Global.None"
+                            data-none-selected-text="@Resource.TherapistList_Multiselect_NoService"
+                            data-count-selected-text="@Resource.TherapistList_Multiselect_SelectedService"
+                            data-size="6"
+                            multiple>
+                        @foreach (var service in Model.OfferedServices)
+                        {
+                            <optgroup label="@service.Service.Name">
+                                @foreach (var serviceType in service.ServiceTypes)
+                                {
+                                    <option value="@serviceType.Id"
+                                            data-content="<span class='js-offered-service-option' data-id='@serviceType.Id'>@serviceType.Name</span>">
+                                        @(serviceType.Name)
+                                    </option>
+                                }
+                            </optgroup>
+                        }
+                    </select>
+                </div>
+            </div>
+
+            @* Week availability *@
+            <div class="col-md-6 col-lg-4 col-xl-2">
+                <div class="form-group">
+
+                    @Global.Avaibility
+                    <select id="js-week-availability-ddl"
+                            class="js-ddl selectpicker js-filter-show"
+                            data-ddl-field="weekAvailability"
+                            data-actions-box="true"
+                            data-selected-text-format="count"
+                            data-select-all-text="@Global.All"
+                            data-deselect-all-text="@Global.None"
+                            data-none-selected-text="@Resource.TherapistList_Multiselect_NoAvailability"
+                            data-count-selected-text="@Resource.TherapistList_Multiselect_SelectedAvailability"
+                            data-size="6"
+                            multiple>
+                        @foreach (var day in Model.WeekAvailability)
+                        {
+                            <optgroup label="@day.Day.Name">
+                                @foreach (var period in day.Periods)
+                                {
+                                    <option value="@period.Id"
+                                            data-content="<span class='js-availability-option' data-id='@period.Id'>@period.Name</span>">
+                                        @period.Name
+                                    </option>
+                                }
+                            </optgroup>
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4 col-xl-2">
+                <div class="form-group">
+
+                    @* Ajax apply button *@
+                    <br />
+                    <div id="js-apply-filter" class="btn btn-primary btn-filter">@Global.Apply</div>
+                </div>
+            </div>
+
+
+        </div>
+
+
+        @* No result alert *@
+        <div id="js-therapist-list-no-result" class="row @(Model.Therapists.Count < 1 ? "" : "d-none")">
+            <div class="col-12">
+                <div class="alert alert-info">
+                    @Global.NoResult
+                </div>
+            </div>
+        </div>
+
+        @* Tableu des thérapeutes *@
+        <div id="js-therapist-list-table" class="table-responsive mt-4 @(Model.Therapists.Count < 1 ? "d-none" : "")">
+
+            <table style="min-width:760px;">
+                <thead>
+
+                    <tr>
+                        <th style="width:140px;">@Global.Name</th>
+                        <th style="width:200px;">@Global.Region</th>
+                        <th style="width:90px;">@Global.Avaibility</th>
+                        <th style="width:140px;">@Global.Accreditation</th>
+                        <th style="width:190px;" class="text-end">@Global.Action</th>
+                    </tr>
+
+                </thead>
+                <tbody id="js-table-body">
+                    @foreach (var therapist in Model.Therapists)
+                    {
+                        <tr>
+                            <td style="max-width: 140px;">@($"{therapist.FirstName} {therapist.LastName}")</td>
+                            <td style="max-width: 200px;">@therapist.Region</td>
+                            <td style="max-width: 90px;">@($"{therapist.CurrentWeeklyRequestSent} / {therapist.MaxWeeklyRequest}")</td>
+                            <td style="max-width: 140px;">@therapist.Accreditation</td>
+                            <td style="max-width: 190px;" class="text-end">
+                                @Html.ActionLink(Global.Edit,
+                                    "DetailTherapist",
+                                    "Admin",
+                                    new { therapistId = therapist.Id },
+                                    new { @class = "btn btn-primary" })
+                                <div class="btn btn-danger js-delete-therapist"
+                                     data-therapist-name="@therapist.FirstName @therapist.LastName"
+                                     data-therapist-id="@therapist.Id">
+                                    <i class='fas fa-trash-alt'></i>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+
+        @* Pager *@
+        <div class="row">
+            <div class="col-sm-12">
+                <ul id="js-pager-ul" class="pager">
+                    @for (int i = 1; i < Model.NbPage + 1 && i < 4; i++)
+                    {
+                        <li>
+                            <span class="js-association-pager @(i == 1 ? " active" : "" )" data-page-number="@i">
+                                @i
+                            </span>
+                        </li>
+                    }
+                    @if (Model.NbPage > 1)
+                    {
+                        <li>
+                            <i class="fas fa-angle-right js-association-pager" data-page-number="2"></i>
+                        </li>
+                    }
+                    @if (Model.NbPage > 3)
+                    {
+                        <li>
+                            <i class="fas fa-angle-double-right js-association-pager" data-page-number="@Model.NbPage"></i>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+
+
+
+        <!-- Delete Modal -->
+        <div id="deleteTherapistModal" class="modal fade" role="dialog">
+            <div class="modal-dialog modal-lg">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">@Resource.TherapistList_ModalDelete_Title</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal">
+                            <i class="far fa-times-circle"></i>
+                        </button>
+                    </div>
+
+
+                    <div class="modal-body">
+                        <div id="js-delete-therapist-text" data-last-therapist-name="">@string.Format(Resource.TherapistList_Modal_Delete_Text, "therapistName")</div>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="btnCancel" type="button" class="btn btn-secondary">@Global.Cancel</button>
+                        <button id="btnDelete" type="button" class="btn btn-primary">@Global.Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Restore -->
+        <div id="restoreTherapistModal" class="modal fade" role="dialog">
+            <div class="modal-dialog modal-lg">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">@Resource.TherapistList_ModalRestore_Title</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal">
+                            <i class="far fa-times-circle"></i>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div id="js-restore-therapist-text" data-last-therapist-name="">@string.Format(Resource.TherapistList_ModalRestore_Text, "therapistName")</div>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="btnCancel" type="button" class="btn btn-secondary">@Global.Cancel</button>
+                        <button id="btnRestore" type="button" class="btn btn-primary">@Global.Restore</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+@section scripts
+{
+    <script>
+
+
+        $(document).ready(function () {
+
+            if ('@TempData["Message"]' != "") {
+                toastr["success"]
+                    ('@TempData["Message"]',
+                        "@Global.Success");
+            }
+        })
+
+
+        //Fonction pour cacher les filtres si on est sur status inactif
+        $("#js-dll-status").on("change", function () {
+            var status = $(this).val();
+
+            if (status == "active") {
+                $(".js-filter-show").removeAttr("disabled");
+                SetDdlDefaultValue(true)
+            }
+
+
+            else {
+                $(".js-filter-show").prop("disabled", true);
+                SetDdlDefaultValue();
+            }
+
+
+            $('.selectpicker').selectpicker('refresh');
+        });
+
+
+        //Bouton pour appliquer les filtres sur la liste
+        $('#js-apply-filter').on('click', function () {
+            TherapistListApplyFilter(1)
+        });
+
+        $(document).on("click", ".js-association-pager", function () {
+            var page = $(this).data("page-number");
+            TherapistListApplyFilter(page);
+        })
+
+        function TherapistListApplyFilter(pageNumber) {
+            var services = [];
+            $(".dropdown-item.opt.selected").find(".js-offered-service-option").each(function () {
+                services.push($(this).data("id"));
+            });
+
+            var availabilities = [];
+
+            $(".dropdown-item.opt.selected").find(".js-availability-option").each(function () {
+                availabilities.push($(this).data("id"));
+            });
+
+
+            var isDeleted = ($("#js-dll-status").val() == "inactive")
+
+            var Filters = {
+                IsDeleted: isDeleted,
+                PageNumber: pageNumber
+            }
+
+            if (!isDeleted) {
+                Filters = {
+                    IsDeleted: ($("#js-dll-status").val() == "inactive"),
+                    RegionId: $("#js-ddl-regionId").val(),
+                    GenderId: $("#js-ddl-genderId").val(),
+                    IsAvailable: $("#js-ddl-availability").val(),
+                    ClientTypeId: $("#js-ddl-clientTypeId").val(),
+                    ConsultationTypeId: $("#js-ddl-consultationTypeId").val(),
+                    ClientAgeRAngeId: $("#js-ddl-clientAgeId").val(),
+                    ProfessionalTitleId: $("#js-ddl-professionalTitleId").val(),
+                    LanguageId: $("#js-ddl-languageId").val(),
+                    OfferedServices: services.join(),
+                    WeekAvailabilities: availabilities.join(),
+                    PageNumber: pageNumber
+                };
+            }
+
+            $.ajax({
+                type: "POST",
+                url: "/fr/admin/TableTherapistList/",
+                data: JSON.stringify(Filters),
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+
+                    var table = $("#js-therapist-list-table")
+                    var noResult = $("#js-therapist-list-no-result")
+
+
+                    if (data.therapists.length < 1) {
+                        table.addClass("d-none")
+                        noResult.removeClass("d-none")
+                    }
+                    else {
+                        table.removeClass("d-none")
+                        noResult.addClass("d-none")
+
+                        var tableBody = $("#js-table-body")
+                        var cellsStyle = rebuildTableWithStyle(tableBody);
+                        tableBody.empty();
+
+                        var modifyHref = window.location.pathname.replace("therapistlist", "detailtherapist?therapistid=");
+
+
+                        for (var i = 0; i < data.therapists.length; i++) {
+
+                            var buttons =
+                                `<a href='${modifyHref}${data.therapists[i]["Id"]}' class='btn btn-primary'>@Global.Edit</a>
+                                <div class='btn btn-danger js-delete-therapist' data-therapist-id="${data.therapists[i]["Id"]}" data-therapist-name="${data.therapists[i]["FirstName"]} ${data.therapists[i]["LastName"]}"><i class='fas fa-trash-alt'></i></div>`
+
+                            if (isDeleted) {
+                                buttons =
+                                    `<div class='btn btn-primary js-restore-therapist' data-therapist-id="${data.therapists[i]["Id"]}" data-therapist-name="${data.therapists[i]["FirstName"]} ${data.therapists[i]["LastName"]}">@Global.Restore</div>`
+                            }
+
+
+                            var region = (data.therapists[i]["Region"] == null) ? "" : data.therapists[i]["Region"]
+                            var availability = (data.therapists[i]["MaxWeeklyRequest"] == null) ? 0 : data.therapists[i]["MaxWeeklyRequest"]
+                            var accreditation = (data.therapists[i]["Accreditation"] == null) ? "" : data.therapists[i]["Accreditation"]
+
+                            markup =
+                                `<tr>
+                                    <td ${cellsStyle[0]}>
+                                        ${data.therapists[i]["FirstName"]} ${data.therapists[i]["LastName"]}
+                                    </td>
+                                    <td ${cellsStyle[1]}>
+                                        ${region}
+                                    </td>
+                                    <td ${cellsStyle[2]}>
+                                        ${data.therapists[i]["CurrentWeeklyRequestSent"]} / ${availability}
+                                    </td>
+                                    <td ${cellsStyle[3]}>
+                                        ${accreditation}
+                                    </td>
+                                    <td ${cellsStyle[4]}>
+                                        ${buttons}
+                                    </td>
+                                </tr>`;
+
+                            tableBody.append(markup);
+                        }
+                    }
+
+                    //Change pager class
+                    pager($("#js-pager-ul"), data.nbPage, pageNumber, @Model.NbPagerPageShown, true, true)
+
+                    //Set ddl value in hidden field
+                    $("#js-ddl-gender-hidden").val($("#js-ddl-genderId").val())
+                    $("#js-ddl-availability-hidden").val($("#js-ddl-availability").val())
+                    $("#js-ddl-clientTypeId-hidden").val($("#js-ddl-clientTypeId").val())
+                    $("#js-ddl-consultationTypeId-hidden").val($("#js-ddl-consultationTypeId").val())
+                    $("#js-ddl-clientAgeId-hidden").val($("#js-ddl-clientAgeId").val())
+                    $("#js-ddl-regionId-hidden").val($("#js-ddl-regionId").val())
+                    $("#js-ddl-professionalTitleId-hidden").val($("#js-ddl-professionalTitleId").val())
+                    $("#js-ddl-languageId-hidden").val($("#js-ddl-languageId").val())
+
+                },
+                error: function () {
+                    toastr["error"]
+                        ("@Global.GenericError",
+                            "@Global.Error");
+                }
+            });
+        }
+
+        //Fonction pour appliquer les valeur par defaut des DDL
+        function SetDdlDefaultValue(isFilterActif) {
+
+            if (isFilterActif) {
+                $("#js-ddl-genderId").val($("#js-ddl-gender-hidden").val())
+                $("#js-ddl-availability").val($("#js-ddl-availability-hidden").val())
+                $("#js-ddl-clientTypeId").val($("#js-ddl-clientTypeId-hidden").val())
+                $("#js-ddl-consultationTypeId").val($("#js-ddl-consultationTypeId-hidden").val())
+                $("#js-ddl-clientAgeId").val($("#js-ddl-clientAgeId-hidden").val())
+                $("#js-ddl-regionId").val($("#js-ddl-regionId-hidden").val())
+                $("#js-ddl-professionalTitleId").val($("#js-ddl-professionalTitleId-hidden").val())
+                $("#js-ddl-languageId").val($("#js-ddl-languageId-hidden").val())
+            }
+            else {
+                $(".js-ddl").each(function () {
+                    var ddl = $(this).data("ddl-field");
+                    switch (ddl) {
+                        case "status":
+                            //On fait rien ici
+                            break;
+                        case "availability":
+                            $(this).val("all");
+                            break;
+                        case "weekAvailability":
+                            break;
+                        case "offeredService":
+                            break;
+                        default:
+                            $(this).val("null");
+                            break;
+                    }
+                });
+            }
+        }
+
+        $(document).ready(function () {
+            $.fn.selectpicker.Constructor.BootstrapVersion = '4';
+
+            $.fn.selectpicker.Constructor.DEFAULTS.multipleSeparator = ' | ';
+
+            $.fn.selectpicker.Constructor.DEFAULTS.selectedtextformat = "count > 3"
+            $.fn.selectpicker.Constructor.DEFAULTS.noneSelectedText = 'test'
+            $.fn.selectpicker.Constructor.DEFAULTS.actionsBox = true;
+
+            var myDefaultWhiteList = $.fn.selectpicker.Constructor.DEFAULTS.whiteList;
+            myDefaultWhiteList.span = ['data-id'];
+
+            $('#js-offered-service-ddl').selectpicker();
+            $('#js-week-availability-ddl').selectpicker();
+        });
+
+
+
+        //Function pour delete
+        function InitDeleteTherapist() {
+            var therapistId;
+            var tableRow;
+            var modalHtml = $("#deleteTherapistModal");
+
+            $(document).on("click", ".js-delete-therapist", function () {
+                therapistId = $(this).data("therapist-id");
+                tableRow = $(this).closest("tr");
+
+                //On met le nom de l'admin dans le modal
+                var deleteTextDiv = $("#js-delete-therapist-text");
+                var lastTherapistName = deleteTextDiv.data("last-therapist-name");
+                var therapistName = $(this).data("therapist-name");
+                var deleteText = deleteTextDiv.html();
+                deleteText = deleteText.replace((lastTherapistName == "") ? "therapistName" : lastTherapistName, therapistName);
+                deleteTextDiv.html(deleteText);
+                deleteTextDiv.data('last-therapist-name', therapistName);
+
+                OpenModal(modalHtml)
+            });
+
+            // Ferme le popup pour effacer
+            $("#deleteTherapistModal #btnCancel").on("click", function () {
+                closeModal(modalHtml);
+            });
+
+            //Delete l'utilisateur
+            $("#deleteTherapistModal #btnDelete").on("click", function () {
+
+                $.ajax({
+                    type: "POST",
+                    url: "/fr/admin/DeleteTherapist/",
+                    data: `{"therapistId":"${therapistId}"}`, //JSON.stringify(Student),
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        TherapistListApplyFilter(1)
+                    },
+                    error: function () {
+                        toastr["error"]
+                            ("@Global.GenericError",
+                                "@Global.Error");
+                    }
+                });
+                closeModal(modalHtml);
+            });
+        }
+
+        //Function pour restore
+        function InitRestoreTherapist() {
+            var therapistId;
+            var tableRow;
+            var modalHtml = $("#restoreTherapistModal");
+
+            $(document).on("click", ".js-restore-therapist", function () {
+                therapistId = $(this).data("therapist-id");
+                tableRow = $(this).closest("tr");
+
+                //On met le nom de l'admin dans le modal
+                var deleteTextDiv = $("#js-restore-therapist-text");
+                var lastTherapistName = deleteTextDiv.data("last-therapist-name");
+                var therapistName = $(this).data("therapist-name");
+                var deleteText = deleteTextDiv.html();
+                deleteText = deleteText.replace((lastTherapistName == "") ? "therapistName" : lastTherapistName, therapistName);
+                deleteTextDiv.html(deleteText);
+                deleteTextDiv.data('last-therapist-name', therapistName);
+
+                OpenModal(modalHtml)
+            });
+
+            // Ferme le popup pour effacer
+            $("#restoreTherapistModal #btnCancel").on("click", function () {
+                closeModal(modalHtml);
+            });
+
+            //Delete l'utilisateur
+            $("#restoreTherapistModal #btnRestore").on("click", function () {
+
+                $.ajax({
+                    type: "POST",
+                    url: "/fr/admin/RestoreTherapist/",
+                    data: `{"therapistId":"${therapistId}"}`, //JSON.stringify(Student),
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        TherapistListApplyFilter(1)
+                    },
+                    error: function () {
+                        toastr["error"]
+                            ("@Global.GenericError",
+                                "@Global.Error");
+                    }
+                });
+                closeModal(modalHtml);
+            });
+        }
+
+        InitDeleteTherapist()
+        InitRestoreTherapist();
+
+    </script>
+}

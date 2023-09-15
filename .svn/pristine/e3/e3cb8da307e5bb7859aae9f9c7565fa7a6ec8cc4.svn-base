@@ -1,0 +1,591 @@
+﻿@model ReseauPsy.ViewModel.Admin.ListTherapistBillViewModel
+@using ReseauPsy.Resources
+@using System.Globalization
+@{
+    ViewBag.Title = Resource.TherapistBill_Title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section id="admin-therapistbil">
+    <div class="container">
+
+        @* Page title *@
+        <h1>@Resource.TherapistBill_H1</h1>
+
+        @* Filters *@
+        <div class="row">
+
+            @* Start date *@
+            <div class="col-md-6 col-lg-4 col-xl-2">
+                <div>@Global.StartDate</div>
+                <input type="text" id="js-therapist-bill-start-date" class="form-control js-date-picker" autocomplete="off" />
+            </div>
+
+            @* End date *@
+            <div class="col-md-6 col-lg-4 col-xl-2">
+                <div>@Global.EndDate</div>
+                <input type="text" id="js-therapist-bill-end-date" class="form-control js-date-picker" autocomplete="off" />
+            </div>
+
+
+
+            @* Paymment status *@
+            <div class="col-md-6 col-lg-4 col-xl-2">
+                <div>@Global.Status</div>
+                <select id="js-therapist-bill-payment-status" class="form-select">
+                    <option value="null">@Global.All</option>
+                    <option value="true">@Global.Paid</option>
+                    <option value="false">@Global.NotPaid</option>
+                </select>
+            </div>
+
+            @* Therapist *@
+            <div class="col-md-6 col-lg-4 col-xl-2">
+                <div>@Global.Therapist</div>
+                <select id="js-therapist-bill-therapist" class="form-select">
+                    <option value="null">@Global.All</option>
+                    @foreach (var therapist in Model.Therapists)
+                    {
+                        <option value="@therapist.Id">@therapist.Name</option>
+                    }
+                </select>
+            </div>
+
+            @* Apply button *@
+            <div class="col-md-6 col-lg-4 col-xl-2">
+                <br />
+                <div id="js-therapist-bill-apply-filter" class="btn btn-primary btn-filter">
+                    @Global.Apply
+                </div>
+            </div>
+        </div>
+
+
+        @* No result alert *@
+        <div id="js-therapist-bill-no-result" class="row @(Model.TherapistBills.Count < 1 ? "" : "d-none")">
+            <div class="col-12">
+                <div class="alert alert-info">
+                    @Global.NoResult
+                </div>
+            </div>
+        </div>
+
+        @* Table *@
+        <div id="js-therapist-bill-table" class="table-responsive mt-4 @(Model.TherapistBills.Count > 1 ? "" : "d-none")">
+
+
+            <table style="min-width:800px;">
+                <thead>
+                    <tr>
+                        <th style="width:140px;">@Global.Therapist</th>
+                        <th style="width:120px;">@Global.ClaimDate</th>
+                        <th style="width:100px;">@Global.Status</th>
+                        <th style="width:100px;">@Global.BillINumber</th>
+                        <th style="width:100px;">@Global.Amount</th>
+                        <th style="width:120px;" class="text-end">@Global.PaymentDate</th>
+                        <th style="width:120px;" class="text-end">@Global.Action</th>
+                    </tr>
+                </thead>
+
+                <tbody id="js-therapist-bill-table-body">
+                    @foreach (var bill in Model.TherapistBills)
+                    {
+                        <tr class=@(bill.PaymentDate != null ? "bg-success" : "")>
+                            <td style="max-width: 140px;">@bill.TherapistName</td>
+                            <td style="max-width: 120px;">@bill.BillSentDate.ToString("dd MMM yyyy")</td>
+                            <td style="max-width: 100px;" class="js-therapist-bill-is-paid">
+                                @((bool)bill.IsPayed ?
+                                Global.Paid :
+                                Global.NotPaid)
+                            </td>
+                            <td style="max-width: 100px;">@bill.BillNumber</td>
+                            <td style="max-width: 100px;">@string.Format("{0:c}", bill.BillTotalAmount)</td>
+                            <td style="max-width: 120px;" class="text-end">
+                                @if (bill.PaymentDate != null)
+                                {
+                                    @bill.PaymentDate.Value.ToString("dd MMM yyyy");
+
+                                }
+                                else
+                                {
+                                    <div class="btn btn-primary js-therapist-bill-pay-button"
+                                         data-therapist-bill-id="@bill.TherapistBillId">
+                                        @Global.Pay
+                                    </div>
+                                }
+                            </td>
+                            <td style="max-width: 120px;" class="text-end">
+                                <form action="/@CultureInfo.CurrentCulture.TwoLetterISOLanguageName/admin/DownloadTherapistBill" method="post">
+                                    <input type="hidden" name="therapistBillId" value="@bill.TherapistBillId" />
+                                    <input type="submit" class="btn btn-primary" value="@Global.Download" />
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                @* Pager *@
+                <ul id="js-pager-ul" class="pager">
+                    @for (int i = 1; i < Model.NbPage + 1 && i < 4; i++)
+                    {
+                        <li>
+                            <span class="js-association-pager @(i == 1 ? "active" : "")" data-page-number="@i">
+                                @i
+                            </span>
+                        </li>
+                    }
+                    @if (Model.NbPage > 1)
+                    {
+                        <li>
+                            <i class="fas fa-angle-right js-association-pager" data-page-number="2"></i>
+                        </li>
+                    }
+                    @if (Model.NbPage > 3)
+                    {
+                        <li>
+                            <i class="fas fa-angle-double-right js-association-pager" data-page-number="@Model.NbPage"></i>
+                        </li>
+                    }
+                </ul>
+            </div>
+            <div class="col-12 col-sm-6 text-center text-sm-end mb-4 mb-sm-0 mt-2 mt-sm-3">
+                @* Export to excel *@
+                <div id="js-therapist-bill-export-excel" class="btn btn-primary btn-excel">
+                    @Global.ExportToExcel
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+</section>
+
+@* Modal payment *@
+<div id="PayTherapistModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title">@Resource.TherapistBill_ModalPay_Title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal">
+                    <i class="far fa-times-circle"></i>
+                </button>
+            </div>
+
+
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            @Resource.TherapistBill_ModalPay_Instruction
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label>@Global.PaymentDate</label>
+                            <input type="text" id="js-therapist-bill-payment-date" class="form-control js-date-picker" autocomplete="off" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="row">
+                    <div class="col-12 text-end">
+                        <div id="js-therapist-bill-close-pay-therapist-modal" class="btn btn-secondary">@Global.Cancel</div>
+                        <div id="js-therapist-bill-pay-therapist-confirm-button" class="btn btn-primary">@Global.Send</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* Modal Detail d'exprtation *@
+<div id="TherapistBillExportExcelModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title">@Resource.TherapistBill_ModalExport_Title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal">
+                    <i class="far fa-times-circle"></i>
+                </button>
+            </div>
+
+
+            <form id="js-therapist-bill-download-excel-form" action="/@CultureInfo.CurrentCulture.TwoLetterISOLanguageName/admin/DownloadExcelTherapistBill" method="post">
+
+                @* Body *@
+                <div class="modal-body">
+
+
+                    @* =Exportation dates *@
+                    <div class="row">
+
+                        @* Start date *@
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>@Global.StartDate</label>
+                                <input type="text" id="js-therapist-bill-exportation-start-date" class="form-control js-date-picker" autocomplete="off" />
+                                <input name="startDate" type="hidden" id="js-therapist-bill-exportation-start-date-hidden" />
+                            </div>
+                        </div>
+
+                        @* End date *@
+                        <div class="col-sm-6">
+                            <div class="form-group">
+
+                                <label>@Global.EndDate</label>
+                                <input type="text" id="js-therapist-bill-exportation-end-date" class="form-control js-date-picker" autocomplete="off" />
+                                <input name="endDate" type="hidden" id="js-therapist-bill-exportation-end-date-hidden" />
+                            </div>
+                        </div>
+                    </div>
+
+                    @* Exportation types *@
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label>@Resource.TherapistBill_ModalExport_ExportationType</label>
+                                <select name="exportationType" class="form-select">
+                                    <option value="payment">@Global.Payment</option>
+                                    <option value="bill">@Global.Bill</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                @* Footer *@
+                <div class="modal-footer">
+                    <div class="row">
+                        <div class="col-12 text-end">
+                            <div id="js-therapist-bill-close-export-detail-modal" class="btn btn-secondary">@Global.Cancel</div>
+                            <div id="js-therapist-bill-export-excel-button" class="btn btn-primary">@Global.Export</div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+@section scripts
+{
+    <script>
+
+
+        //------------------------------------ Apply filter -------------------------------------
+        $("#js-therapist-bill-apply-filter").on("click", function () {
+            LoadTherapistBill(1);
+        })
+
+        $(document).on("click", ".js-association-pager", function () {
+            var page = $(this).data("page-number");
+            LoadTherapistBill(page);
+        })
+
+        function LoadTherapistBill(pageNumber) {
+            var startDateInput = $("#js-therapist-bill-start-date");
+            var endDateInput = $("#js-therapist-bill-end-date");
+            var paymentStatusInput = $("#js-therapist-bill-payment-status");
+            var therapistSelect = $("#js-therapist-bill-therapist");
+
+            var startDate = toInternationnalDate(startDateInput.val());
+            var endDate = toInternationnalDate(endDateInput.val());
+            var isPaid = paymentStatusInput.val();
+            var therapistId = therapistSelect.val();
+
+            //Verify the dates
+            startDateInput.removeClass("input-validation-error")
+            endDateInput.removeClass("input-validation-error")
+
+            if (!isStartDateValid(startDateInput)) {
+                startDateInput.addClass("input-validation-error")
+                return false
+            }
+            if (!isEndDateValid(startDateInput, endDateInput)) {
+                endDateInput.addClass("input-validation-error")
+                return false
+            }
+
+            $.ajax({
+                type: "POST",
+                url: "/fr/admin/TherapistBillApplyFilter/",
+                data: `{"startDate":"${startDate}",
+                        "endDate":"${endDate}",
+                        "isPaid":"${isPaid}",
+                        "therapistId":"${therapistId}",
+                        "pageNumber":"${pageNumber}"}`,
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+
+                    $("#js-therapist-bill-no-result").addClass("d-none")
+                    $("#js-therapist-bill-table").removeClass("d-none")
+
+                    if (data.therapistbill.length == 0) {
+                        $("#js-therapist-bill-no-result").removeClass("d-none")
+                        $("#js-therapist-bill-table").addClass("d-none")
+
+                    }
+
+                    else {
+
+                        var tableBody = $("#js-therapist-bill-table-body")
+                        var cellsStyle = rebuildTableWithStyle(tableBody);
+                        tableBody.empty();
+
+                        for (var i = 0; i < data.therapistbill.length; i++) {
+
+                            var ispaid = (data.therapistbill[i]["IsPayed"]) ?
+                                "@Global.Paid" :
+                                "@Global.NotPaid"
+
+
+                            var paymentDate;
+                            var tableRowStartingTag = "<tr>";
+
+                            if (data.therapistbill[i]["PaymentDate"] != null){
+                                paymentDate = UnixToLongDate(data.therapistbill[i]["PaymentDate"], "@CultureInfo.CurrentCulture.Name")
+                                tableRowStartingTag = `<tr class="bg-success">`
+                            }
+                            else {
+                                paymentDate =
+                                    `<div class="btn btn-primary js-therapist-bill-pay-button"
+                                        data-therapist-bill-id="${data.therapistbill[i]["TherapistBillId"]}">
+                                        @Global.Pay
+                                     </div>`
+                            }
+                            markup =
+                                `${tableRowStartingTag}
+                                    <td ${cellsStyle[0]}>
+                                        ${data.therapistbill[i]["TherapistName"]}
+                                    </td>
+                                    <td ${cellsStyle[1]}>
+                                        ${UnixToLongDate(data.therapistbill[i]["BillSentDate"], "@CultureInfo.CurrentCulture.Name")}
+                                    </td>
+                                    <td ${cellsStyle[2]}>
+                                        ${ispaid}
+                                    </td>
+                                    <td ${cellsStyle[3]}>
+                                        ${data.therapistbill[i]["BillNumber"]}
+                                    </td>
+                                    <td ${cellsStyle[4]}>
+                                        ${(data.therapistbill[i]["BillTotalAmount"]).toLocaleString("@CultureInfo.CurrentCulture.Name", { style: "decimal", minimumFractionDigits: 2 })} $
+                                    </td>
+                                    <td ${cellsStyle[5]}>
+                                        ${paymentDate}
+                                    </td>
+                                    <td ${cellsStyle[6]}>
+                                        <form action="/@CultureInfo.CurrentCulture.TwoLetterISOLanguageName/admin/DownloadTherapistBill" method="post">
+                                            <input type="hidden" name="therapistBillId" value="${data.therapistbill[i]["TherapistBillId"]}" />
+                                            <input type="submit" class="btn btn-primary" value="@Global.Download" />
+                                        </form>
+                                    </td>
+                                </tr>`
+
+                            tableBody.append(markup)
+                        }
+                    }
+
+                    //Change pager class
+                    pager($("#js-pager-ul"), data.nbPage, pageNumber, @Model.NbPagerPageShown, true, true)
+                },
+
+                error: function () {
+                    toastr["error"]
+                        ("@Global.GenericError",
+                            "@Global.Error");
+                }
+            })
+
+
+        }
+
+
+
+        //-------------------------------- Confirm payment therapist Modal --------------------------
+
+        PayTherapist();
+
+        function PayTherapist() {
+
+            var modalElement = $("#PayTherapistModal")
+            var paymentDateInput = $("#js-therapist-bill-payment-date")
+            var tablePayButton;
+            var therapistBillId;
+
+            //Open modal
+            $(document).on("click", ".js-therapist-bill-pay-button", function () {
+
+                //set the payment input to nothing
+                paymentDateInput.val("")
+
+                tablePayButton = $(this)
+                therapistBillId = $(this).data("therapist-bill-id")
+
+                OpenModal(modalElement);
+            })
+
+            //Close modal
+            $("#js-therapist-bill-close-pay-therapist-modal").on("click", function () {
+                closeModal(modalElement)
+            })
+
+            //Confirm payment
+            $("#js-therapist-bill-pay-therapist-confirm-button").on("click", function () {
+
+                var paymentDate = toInternationnalDate(paymentDateInput.val())
+
+                //Verify if valid date
+                if (!isDatePickerDateValid(paymentDate)) {
+                    paymentDateInput.addClass("input-validation-error")
+                    return false
+                }
+
+                //Set the payment date in the database
+                $.ajax({
+                    type: "POST",
+                    url: "/fr/admin/TherapistBillSetPaymentDate/",
+                    data: `{"therapistBillId":"${therapistBillId}",
+                            "paymentDate":"${paymentDate}"}`,
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+
+                        var paymentDateCell = tablePayButton.parent();
+                        var tableRow = paymentDateCell.parent();
+
+                        var paymentStatusCell = tableRow.find(".js-therapist-bill-is-paid")
+
+
+                        //Remove the button
+                        tablePayButton.remove()
+
+                        //Set the payment date
+                        moment.locale('fr')
+                        paymentDateCell.append(internationnalToShortDate(paymentDate))
+
+                        //Set the payment status at is paid
+                        paymentStatusCell.empty();
+                        paymentStatusCell.append("@Global.Paid")
+
+
+                        //Close the modal
+                        closeModal(modalElement)
+                    },
+                    error: function () {
+                        toastr["error"]
+                            ("@Global.GenericError",
+                                "@Global.Error");
+                    }
+                })
+            })
+
+
+        }
+
+
+        //----------------------------- Export to excel Modal ----------------------
+
+        TherapistBillExportToExcelModal();
+
+        function TherapistBillExportToExcelModal() {
+
+            var modalElement = $("#TherapistBillExportExcelModal")
+
+            var startDateInput = $("#js-therapist-bill-exportation-start-date")
+            var endDateInput = $("#js-therapist-bill-exportation-end-date")
+
+
+
+            //Open the modal
+            $("#js-therapist-bill-export-excel").on("click", function () {
+
+                //Set the dates to null
+                startDateInput.val("")
+                endDateInput.val("")
+
+                //Remove the error class
+                endDateInput.removeClass("input-validation-error")
+                startDateInput.removeClass("input-validation-error")
+
+                OpenModal(modalElement)
+            })
+
+            //Close modal
+            $("#js-therapist-bill-close-export-detail-modal").on("click", function () {
+                closeModal(modalElement)
+            })
+
+            //Download Excel
+            $("#js-therapist-bill-export-excel-button").on("click", function () {
+
+                var startDate = toInternationnalDate(startDateInput.val())
+                var endDate = toInternationnalDate(endDateInput.val())
+
+                var isAllFieldFilled = true;
+
+                //Verify the dates
+                if (!isDatePickerDateValid(endDate) && endDate != "") {
+                    endDateInput.addClass("input-validation-error")
+                    isAllFieldFilled = false;
+                }
+
+
+                if (!isDatePickerDateValid(startDate) && startDate != "") {
+                    startDateInput.addClass("input-validation-error")
+                    isAllFieldFilled = false;
+                }
+
+                if (!isAllFieldFilled) {
+                    return false
+                }
+
+                //put the date in the hidden field for the form
+                $("#js-therapist-bill-exportation-start-date-hidden").val(startDate)
+                $("#js-therapist-bill-exportation-end-date-hidden").val(endDate)
+
+                //Submit the form for the download
+                $("#js-therapist-bill-download-excel-form").submit();
+
+                //Close the modal
+                closeModal(modalElement)
+            })
+        }
+
+
+        //----------------------- Other -----------------------------
+
+
+
+        //Remove error class when fill datepicker
+        $(".js-date-picker").on("change", function () {
+            if ($(this).val() != "") {
+                $(this).removeClass("input-validation-error")
+            }
+        })
+
+
+
+    </script>
+}

@@ -1,0 +1,322 @@
+﻿@model ReseauPsy.ViewModel.Therapist.TherapistClientRequestViewModel
+@using ReseauPsy.Resources
+@using System.Globalization
+@{
+    ViewBag.Title = Resource.TherapistClientRequest_Title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <section id="page-therapist-clientRequest">
+
+        <h1>@Resource.TherapistClientRequest_Title</h1>
+
+        <div class="page-instruction">@Resource.TherapistClientRequest_Text</div>
+
+
+        @* Hidden fields *@
+        <input id="js-therapist-availabilities" type="hidden" value="@string.Join(",", Model.TherapistAvailabilities)" />
+
+
+        @* Table Client *@
+        <div id="js-therapist-request-table" class="table-responsive @(Model.Clients.Count>0 ?"" : "d-none")">
+            <table style="min-width:380px;">
+                <thead>
+                    <tr>
+                        <th style="width:140px;">@Global.Client</th>
+                        <th style="width:120px;" class="d-none d-md-table-cell">@Global.Reception</th>
+                        <th style="width:120px;">@Global.Expiration</th>
+                        <th style="width:120px;" class="text-end">@Global.Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var client in Model.Clients)
+                    {
+                        <tr>
+                            <td style="max-width: 140px;">@client.ClientName</td>
+                            <td style="max-width: 120px;" class="d-none d-md-table-cell">@client.RequestSentDate.ToString("d MMM HH:mm")</td>
+                            <td style="max-width: 120px;">@client.RequestSentDate.AddDays(7).ToString("d MMM HH:mm")</td>
+                            <td style="max-width: 120px;" class="text-end">
+                                <div class="btn btn-primary js-consult-modal-open"
+                                     data-client-id="@client.ClientId"
+                                     data-request-id="@client.RequestId"
+                                     data-region="@client.Region"
+                                     data-consultation-reason="@client.ConsultationReason"
+                                     data-client-message="@client.Message"
+                                     data-admin-message="@client.AdditionalMessageFromAdmin"
+                                     data-consultation-type="@string.Join(", ",
+                                        Model.ClientConsultationTypes
+                                            .Where(x => x.ClientId == client.ClientId)
+                                            .Select(x => CultureInfo.CurrentCulture.Name == "fr-CA" ?
+                                                x.ConsultationType.ConsultationType1 :
+                                                x.ConsultationType.ConsultationTypeEN)
+                                            .ToList())"
+                                     data-client-availabilities="@string.Join(",",
+                                        Model.ClientAvailabilities
+                                            .Where(x => x.ClientId == client.ClientId)
+                                            .Select(x => x.DayOfTheWeek_PeriodOfTheDay_Id)
+                                            .ToList())"
+                                     data-client-langugages="@string.Join(", ",
+                                                            Model.ClientLanguages
+                                                                .Where(x => x.ClientId == client.ClientId)
+                                                                .Select(x => CultureInfo.CurrentCulture.Name =="fr-CA" ?
+                                                                    x.Language.Language1 :
+                                                                    x.Language.LanguageEN)
+                                                                .ToList())">
+                                    @Global.Consult
+                                </div>
+                            </td>
+                        </tr>
+                    }
+
+
+                </tbody>
+            </table>
+        </div>
+        <div id="js-therapist-request-empty" class="alert alert-info @(Model.Clients.Count>0 ?"d-none" : "")">
+            @Global.NoResult
+        </div>
+
+
+        <div id="consultModal" class="modal fade" tabindex="-1">
+            <div class="modal-dialog modal-lg modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">@Resource.TherapistClientRequest_ConsultModal_Title</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal">
+                            <i class="far fa-times-circle"></i>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label><i class="fas fa-exclamation-triangle"></i> @Global.MessageFromAdmin</label>
+                                    <div class="long-text text-hilight" id="js-consult-modal-admin-message"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+
+                            @* Region *@
+                            <div class="col-12 col-lg-3">
+                                <div class="form-group">
+                                    <label>@Global.Region</label>
+                                    <div id="js-consult-modal-client-region"></div>
+                                </div>
+                            </div>
+
+                            @* Consultation type *@
+                            <div class="col-12 col-lg-5">
+                                <div class="form-group">
+                                    <label>@Global.ConsultationType</label>
+                                    <div id="js-consult-modal-client-consultation-type"></div>
+                                </div>
+                            </div>
+
+
+
+                            @* Consultation reason *@
+                            <div class="col-12 col-lg-4">
+                                <div class="form-group">
+                                    <label>@Global.ConsultationReason</label>
+                                    <div id="js-consult-modal-client-consultation-reason"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+
+                            @* Langugae *@
+                            <div class="col-12 col-lg-5">
+                                <div class="form-group">
+                                    <label>@Global.Language</label>
+                                    <div id="js-consult-modal-client-language"></div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+
+                            @* Message *@
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label>@Global.ClientMessage</label>
+                                    <div class="long-text" id="js-consult-modal-client-message"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group availability">
+                                    <label>@Global.Avaibility</label>
+
+                                    @foreach (var day in Model.Availabilities)
+                                    {
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <strong>@day.Day.Name</strong>
+                                            </div>
+
+                                            @foreach (var period in day.Periods)
+                                            {
+                                                <div class="col-4 col-sm-3">
+                                                    <input class="js-consult-modal-client-availability"
+                                                           value="@period.Id"
+                                                           type="checkbox"
+                                                           disabled="disabled" /> @period.Name
+                                                    </div>
+                                                }
+                                        </div>
+                                    }
+
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="smalltext">
+                                                @Global.CommonAvailability
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary js-modal-request-answer" data-is-accepted="false">@Global.Refuse</button>
+                        <button type="button" class="btn btn-primary js-modal-request-answer" data-is-accepted="true">@Global.Accept</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </section>
+</div>
+
+@section scripts
+{
+    <script>
+
+        //------------------ Modal informaton ------------
+        function InitConsultModal() {
+            var requestId;
+            var tableRow;
+
+            $(".js-consult-modal-open").on("click", function () {
+                requestId = $(this).data("request-id");
+                tableRow = $(this).closest("tr");
+
+                $("#js-consult-modal-client-region").text($(this).data("region"))
+                $("#js-consult-modal-client-consultation-type").text($(this).data("consultation-type"))
+                $("#js-consult-modal-client-language").text($(this).data("client-langugages"))
+                $("#js-consult-modal-client-consultation-reason").text($(this).data("consultation-reason"))
+                $("#js-consult-modal-client-message").text($(this).data("client-message"))
+
+                //set the admin message
+                var adminMessage = $(this).data("admin-message")
+                var adminMessageModal = $("#js-consult-modal-admin-message")
+                adminMessageModal.text(adminMessage)
+
+               
+                if (adminMessage == "") {
+                    adminMessageModal.closest(".row").addClass("d-none")
+                }
+
+
+                //check the availabilities check box
+                var therapistAvailabilities = $("#js-therapist-availabilities").val();
+                var clientAvailabilitiesString = $(this).data("client-availabilities")
+                var clientAvailabilities = []
+                if (clientAvailabilitiesString.length > 1) {
+                    clientAvailabilities = (clientAvailabilitiesString).split(",")
+                }
+                $(".js-consult-modal-client-availability").each(function () {
+                    //First we unchecked
+                    $(this).prop("checked", false)
+
+                    //We also remove the highlight class
+                    $(this).parent().removeClass("bg-success")
+
+                    //Then we check if we need to check
+                    if (clientAvailabilities.indexOf($(this).val()) != -1)
+                        $(this).prop("checked", true)
+                });
+
+
+
+                //Highlight the commun availabilities
+                $(".js-consult-modal-client-availability:checked").each(function () {
+                    if (therapistAvailabilities != undefined && therapistAvailabilities.indexOf($(this).val()) != -1)
+                        $(this).parent().addClass("bg-success")
+                })
+
+                //Open modal
+                OpenModal($("#consultModal"));
+
+
+            });
+
+
+            //Answer the request
+            $(".js-modal-request-answer").on("click", function () {
+                var isAccepted = $(this).data("is-accepted")
+                $.ajax({
+                    type: "POST",
+                    url: "/fr/therapist/AnswerClientRequest/",
+                    data: `{"isAccepted":"${isAccepted}", "requestId":"${requestId}"}`,
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        //Remove the row
+                        tableRow.remove();
+
+                        var numberRequestRow = $('#js-therapist-request-table tbody tr').length;
+
+                        if (numberRequestRow <= 0) {
+                            $("#js-therapist-request-table").addClass("d-none");
+                            $("#js-therapist-request-empty").removeClass("d-none");
+                        }
+
+                        //Close the modal
+                        closeModal($("#consultModal"));
+
+                        //Show the proper toastr
+                        if (isAccepted) {
+                            toastr["success"]
+                                (`<div>@Resource.TherapistClientRequest_ToastrAccepted_Message</div>
+                                    <a href="@Url.Action("Appointment","Therapist")">@Resource.TherapistClientRequest_ToastrAccepted_Link</a>`,
+                                    "@Global.RequestAccepted"
+                                    , { timeOut: 0 }
+                                )
+                        }
+                        else {
+                            toastr["success"]
+                                ("@Resource.TherapistClientRequest_ToastrRefused_Message",
+                                    "@Global.RequestRefused");
+                        }
+
+                    },
+                    error: function () {
+                        toastr["error"]
+                            ("@Global.GenericError",
+                                "@Global.Error");
+                    }
+                })
+
+
+
+            })
+
+        }
+
+        InitConsultModal();
+    </script>
+}

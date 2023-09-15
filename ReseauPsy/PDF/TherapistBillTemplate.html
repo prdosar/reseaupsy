@@ -1,0 +1,223 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style type="text/css">
+
+        /***** Importation des polices ******/
+        @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Lexend:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+
+        body {
+            font-family: 'Lexend', sans-serif;
+            color: #353a46;
+        }
+
+        #MainContainer {
+            padding: 20px 40px;
+            min-height: 935px;
+        }
+
+        h1 {
+            font-family: 'DM Serif Display', serif;
+            margin-bottom: 0px;
+            margin-top: 0px;
+        }
+
+
+
+
+
+        .LeftHeader {
+            float: left;
+            width: 40%;
+            padding-top: 40px;
+        }
+
+
+        .RightHeader {
+            float: right;
+            width: 40%;
+            padding-top: 40px;
+        }
+
+        .amount {
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .clear {
+            clear: both;
+        }
+
+        .ClientInformation {
+            margin-top: 70px;
+        }
+
+        .ProduitTable {
+            border: 1px solid #e6e8f3;
+            width: 100%;
+            margin-top: 50px;
+            border-spacing: 0px;
+            border-radius: 5px;
+            box-shadow: rgba(0,0,0,.1) 5px 5px 10px;
+        }
+
+            .ProduitTable tr th, .ProduitTable tr td {
+                padding: 10px;
+                text-align: right;
+            }
+
+                .ProduitTable tr th:first-child, .ProduitTable tr td:first-child {
+                    text-align: left;
+                }
+
+            .ProduitTable thead tr th {
+                background-color: #f2f3f9;
+                border-bottom: 1px solid #e6e8f3;
+                font-weight: bold;
+                font-family: 'Lexend', sans-serif;
+            }
+
+                .ProduitTable thead tr th.col-price {
+                    min-width: 120px;
+                }
+
+                .ProduitTable thead tr th:not(:last-child) {
+                    border-right: 1px solid #e6e8f3;
+                }
+
+            .ProduitTable tbody tr:first-child td {
+                padding-top: 20px;
+            }
+
+            .ProduitTable tbody tr:last-child td {
+                padding-bottom: 20px;
+            }
+
+       
+
+        .taxesTable {
+            float: right;
+            text-align: right;
+            margin-top: 20px;
+        }
+
+            .taxesTable tbody tr td {
+                padding: 2px 10px;
+            }
+
+            .taxesTable tbody tr:last-child td {
+                font-weight: bold;
+                border-top: 1px solid #f2f3f9;
+            }
+
+        .taxesNumero {
+            font-size: 12px;
+            margin-top: 20px;
+            float: left;
+        }
+
+            .taxesNumero span {
+                font-weight: bold;
+            }
+
+
+        thead {
+            display: table-header-group!important;
+        }
+
+        tfoot {
+            display: table-row-group !important;
+        }
+
+        tr {
+            page-break-inside: avoid !important;
+        }
+
+        .d-none {
+            display: none;
+        }
+        
+    </style>
+</head>
+<body>
+    <div id="BigContainer">
+        <div id="MainContainer" style="width: 750px;margin: auto;">
+            <div class="">
+                <h1>__BillTitle__</h1>
+                __BillNumberTitle__ : RSPYF-__BillNumber__<br />
+                __DateTitle__ : __BillDate__<br />
+            </div>
+
+
+            <div class="LeftHeader">
+                <strong>__TherapistName__</strong><br />
+                __TherapistAdress__<br />
+                __TherapistCity__, Québec<br />
+                __TherapistEmail__<br />
+                __TherapistPhoneNumber__<br />
+
+            </div>
+
+            <div class="RightHeader">
+                <strong>__BilledAtTitle__</strong><br />
+                Réseau Psy Inc.<br />
+                __RspyAdress__,<br />
+                __RspyCity__, __RspyRegionAbbr__, __RspyPostalCode__<br />
+                __RspyEmail__
+            </div>
+
+            <div class="clear"></div>
+
+
+
+            <table class="ProduitTable">
+                <thead>
+                    <tr>
+                        <th>__DescriptionTitle__</th>
+                        <th>__QuantityTitle__</th>
+                        <th>__HourlyWageTitle__</th>
+                        <th>__AmountTitle__</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <!-- Insert appointments -->
+                </tbody>
+            </table>
+
+            <div class="taxesNumero therapist-bill-taxes">
+                <span>TPS</span> : __TherapistTpsNumber__<br />
+                <span>TVQ</span> : __TherapistTvqNumber__
+            </div>
+
+            <table class="taxesTable">
+                <tbody>
+                    <tr class="therapist-bill-taxes">
+                        <td>__SubtotalTitle__</td>
+                        <td>__SubTotal__$</td>
+                    </tr>
+                    <tr class="therapist-bill-taxes">
+                        <td>TPS (__TpsPercent__)</td>
+                        <td>__TPS__$</td>
+                    </tr>
+                    <tr class="therapist-bill-taxes">
+                        <td>TVQ (__TvqPercent__)</td>
+                        <td>__TVQ__$</td>
+                    </tr>
+                    <tr>
+                        <td>__TotalTitle__</td>
+                        <td>__Total__$</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="clear"></div>
+
+        </div>
+    </div>
+</body>
+</html>

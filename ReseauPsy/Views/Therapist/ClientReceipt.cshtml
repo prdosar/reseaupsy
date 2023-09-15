@@ -1,0 +1,410 @@
+﻿@model ReseauPsy.ViewModel.Therapist.ListClientReceiptsViewModel
+@using ReseauPsy.Resources
+@using System.Globalization
+@{
+    ViewBag.Title = "ClientReceipt";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section id="page-admin-receipt">
+    <div class="container">
+
+        @* Page Title *@
+        <h1>@Resource.ListClientReceipt_H1</h1>
+
+        @* Filters *@
+        <form id="js-therapist-client-receipt-excel" action="/@CultureInfo.CurrentCulture.TwoLetterISOLanguageName/therapist/DownloadExcelClientReceipt" method="post">
+            <div class="row">
+
+
+                @* Start date *@
+                <div class="col-md-6 col-lg-4 col-xl-2">
+                    <div>@Global.StartDate</div>
+                    <input type="text" id="js-client-receipt-start-date" class="form-control js-date-picker" autocomplete="off" />
+                    <input type="hidden" name="startDate" id="js-therapist-client-receipt-start-date-hidden" />
+                </div>
+
+                @* End date *@
+                <div class="col-md-6 col-lg-4 col-xl-2">
+                    <div>@Global.EndDate</div>
+                    <input type="text" id="js-client-receipt-end-date" class="form-control js-date-picker" autocomplete="off" />
+                    <input type="hidden" name="endDate" id="js-therapist-client-receipt-end-date-hidden" />
+                </div>
+
+                @* Client *@
+                <div class="col-md-6 col-lg-4 col-xl-2">
+                    <div>@Global.Client</div>
+                    <input type="text" id="js-client-receipt-client-name" class="form-control" />
+                    <datalist id="huge_list"></datalist>
+                    <input type="hidden" name="clientName" id="js-therapist-client-receipt-client-name-hidden" />
+                </div>
+
+                @* Apply button *@
+                <div class="col-md-6 col-lg-4 col-xl-2">
+                    <br />
+                    <div id="js-client-receipt-apply-filter" class="btn btn-primary btn-filter">@Global.Apply</div>
+                </div>
+
+            </div>
+        </form>
+
+        <div id="js-therapist-receipt-empty"
+             class="alert alert-info @(Model.ClientReceipts.Count() > 0 ?"d-none" : "")">
+            @Global.NoResult
+        </div>
+
+
+
+        @* Table *@
+        <div id="js-receipt-table" class="table-responsive mt-4 @(Model.ClientReceipts.Count() > 0 ?"" : "d-none")">
+
+            <table style="min-width:480px;">
+                <thead>
+                    <tr>
+                        <th style="width:140px;">@Global.Client</th>
+                        <th style="width:120px;">@Global.AppointmentDate</th>
+                        <th style="width:120px;">@Global.ReceiptNumber</th>
+                        <th style="width:220px;" class="text-end">@Global.Action</th>
+                    </tr>
+                </thead>
+
+                <tbody id="js-client-receipt-table-body">
+                    @foreach (var receipt in Model.ClientReceipts)
+                    {
+                        <tr>
+                            <td style="max-width: 140px;">@receipt.ClientName</td>
+                            <td style="max-width: 120px;">@receipt.AppointmentDate.ToString("dd MMM yyyy")</td>
+                            <td style="max-width: 120px;">@("#" + receipt.ClientPaymentReceiptNumber.ToString().PadLeft(6, '0'))</td>
+                            <td style="max-width: 220px;" class="text-end">
+                                <form action="/@CultureInfo.CurrentCulture.TwoLetterISOLanguageName/therapist/DownloadClientReceipt" method="post">
+                                    <div class="btn btn-primary js-client-receipt-resend-receipt-table-button"
+                                         data-client-email="@receipt.ClientEmail"
+                                         data-client-appointment-id="@receipt.ClientAppointmentsId">
+                                        @Resource.ListClientReceipt_ResendReceipt
+                                    </div>
+                                    <input type="hidden" name="clientAppointmentId" value="@receipt.ClientAppointmentsId" />
+                                    <button class="btn btn-green"><i class='fa-solid fa-download'></i></button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+
+
+                </tbody>
+            </table>
+
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                @* Pager *@
+                <ul id="js-pager-ul" class="pager">
+                    @for (int i = 1; i < Model.NbPage + 1 && i < 4; i++)
+                    {
+                        <li>
+                            <span class="js-association-pager @(i == 1 ? "active" : "")" data-page-number="@i">
+                                @i
+                            </span>
+                        </li>
+                    }
+                    @if (Model.NbPage > 1)
+                    {
+                        <li>
+                            <i class="fas fa-angle-right js-association-pager" data-page-number="2"></i>
+                        </li>
+                    }
+                    @if (Model.NbPage > 3)
+                    {
+                        <li>
+                            <i class="fas fa-angle-double-right js-association-pager" data-page-number="@Model.NbPage"></i>
+                        </li>
+                    }
+                </ul>
+            </div>
+            <div class="col-12 col-sm-6 text-center text-sm-end mb-4 mb-sm-0 mt-2 mt-sm-3">
+                @* Export to excel button *@
+                <div id="js-therapist-client-receipt-excel-export" class="btn btn-primary btn-excel">
+                    @Global.ExportToExcel
+                </div>
+            </div>
+        </div>
+
+
+        @* Modal resend receipt *@
+        <div id="ResendReceiptModal" class="modal fade" role="dialog">
+            <div class="modal-dialog modal-lg">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">@Resource.ListClientReceipt_ModalSend_Title</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal">
+                            <i class="far fa-times-circle"></i>
+                        </button>
+                    </div>
+
+
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <div>@Resource.ListClientReceipt_ModalSend_Instruction</div>
+
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label>@Global.EmailClient</label>
+                                    <input type="text" id="js-client-receipt-email-client" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <div class="row">
+                            <div class="col-12 text-end">
+                                <div id="js-client-receipt-close-resend-receipt-modal" class="btn btn-secondary">@Global.Cancel</div>
+                                <div id="js-client-receipt-resend-receipt-button" class="btn btn-primary">@Global.Send</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+@section scripts
+{
+    <script>
+
+        //------------------------------------ Apply filter -------------------------------------
+        $("#js-client-receipt-apply-filter").on("click", function () {
+            LoadClientReceipts(1);
+
+            $("#").val()
+            $("#js-therapist-client-receipt-end-date-hidden").val()
+            $("#js-therapist-client-receipt-client-name-hidden").val()
+        })
+
+        $(document).on("click", ".js-association-pager", function () {
+            var page = $(this).data("page-number");
+            LoadClientReceipts(page);
+        })
+
+        function LoadClientReceipts(pageNumber) {
+            var startDateInput = $("#js-client-receipt-start-date");
+            var endDateInput = $("#js-client-receipt-end-date");
+            var clientInput = $("#js-client-receipt-client-name");
+
+            var startDate = toInternationnalDate(startDateInput.val());
+            var endDate = toInternationnalDate(endDateInput.val());
+            var clientName = clientInput.val();
+
+            startDateInput.removeClass("input-validation-error")
+            endDateInput.removeClass("input-validation-error")
+
+            if (!isStartDateValid(startDateInput)) {
+                startDateInput.addClass("input-validation-error")
+                return false
+            }
+            if (!isEndDateValid(startDateInput, endDateInput)) {
+                endDateInput.addClass("input-validation-error")
+                return false
+            }
+
+            $.ajax({
+                type: "POST",
+                url: "/fr/therapist/ClientReceiptApplyFilter/",
+                data: `{"startDate":"${startDate}",
+                        "endDate":"${endDate}",
+                        "clientName":"${clientName}",
+                        "pageNumber":"${pageNumber}"}`,
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+
+                    //Met les données dans les hidden fields pour le excel
+                    $("#js-therapist-client-receipt-start-date-hidden").val(startDate)
+                    $("#js-therapist-client-receipt-end-date-hidden").val(endDate)
+                    $("#js-therapist-client-receipt-client-name-hidden").val(clientName)
+
+                    if (data.clientReceipt.length == 0) {
+                        $("#js-receipt-table").addClass("d-none");
+                        $("#js-therapist-receipt-empty").removeClass("d-none");
+                    }
+                    else {
+                        $("#js-receipt-table").removeClass("d-none");
+                        $("#js-therapist-receipt-empty").addClass("d-none");
+                        var tableBody = $("#js-client-receipt-table-body")
+
+                        var cellsStyle = rebuildTableWithStyle(tableBody);
+                        tableBody.empty();
+
+                        for (var i = 0; i < data.clientReceipt.length; i++) {
+
+                            let receiptNumber = "#000000"
+
+                            if (data.clientReceipt[i]["ClientPaymentReceiptNumber"] != null) {
+                                receiptNumber = "#" + (data.clientReceipt[i]["ClientPaymentReceiptNumber"]).toString().padStart(6, '0')
+                            }
+
+                            markup =
+                                `<tr>
+                                    <td ${cellsStyle[0]}>
+                                        ${data.clientReceipt[i]["ClientName"]}
+                                    </td>
+                                    <td ${cellsStyle[1]}>
+                                        ${UnixToLongDate(data.clientReceipt[i]["AppointmentDate"], "@CultureInfo.CurrentCulture.Name")}
+                                    </td>
+                                    <td ${cellsStyle[2]}>
+                                        ${receiptNumber}
+                                    </td>
+                                    <td ${cellsStyle[3]} class="text-end">
+                                        <form action="/@CultureInfo.CurrentCulture.TwoLetterISOLanguageName/therapist/DownloadClientReceipt" method="post">
+                                            <div class="btn btn-primary js-client-receipt-resend-receipt-table-button"
+                                                 data-client-email="${data.clientReceipt[i]["ClientEmail"]}"
+                                                 data-client-appointment-id="${data.clientReceipt[i]["ClientAppointmentsId"]}">
+                                                 @Resource.ListClientReceipt_ResendReceipt
+                                            </div>
+                                            <input type="hidden" name="clientAppointmentId" value="${data.clientReceipt[i]["ClientAppointmentsId"]}" />
+                                            <button type="submit" class="btn btn-green" ><i class='fa-solid fa-download'></i></button>
+                                        </form>
+                                    </td>
+                                </tr>`
+
+                            tableBody.append(markup)
+                        }
+                    }
+
+                    //Change pager class
+                    pager($("#js-pager-ul"), data.nbPage, pageNumber, @Model.NbPagerPageShown, true, true)
+                },
+                error: function () {
+                    toastr["error"]
+                        ("@Global.GenericError",
+                            "@Global.Error");
+                }
+            })
+        }
+
+
+
+        //--------------------------------- Resend Receipt modal ------------------------
+        ResendReceiptModal()
+
+        function ResendReceiptModal() {
+            var modalElement = $("#ResendReceiptModal")
+            var emailClientInput = $("#js-client-receipt-email-client")
+            var clientAppointmentId;
+
+            //Resend modal button from table
+            $(document).on("click", ".js-client-receipt-resend-receipt-table-button", function () {
+                var clientEmail = $(this).data("client-email")
+                clientAppointmentId = $(this).data("client-appointment-id")
+
+                //Set the email in the textbox
+                $("#js-client-receipt-email-client").val(clientEmail)
+
+                //Open the modal
+                OpenModal(modalElement);
+            })
+
+            //Close modal button
+            $("#js-client-receipt-close-resend-receipt-modal").on("click", function () {
+                closeModal(modalElement)
+            })
+
+            //Send receipt to the client
+            $("#js-client-receipt-resend-receipt-button").on("click", function () {
+                var emailClient = emailClientInput.val();
+
+                //Verify if legit email
+                if (!VerifyFieldWithRegex(emailClientInput, emailClient, /^(([^<>()[\]\\.,;:\s@@"]+(\.[^<>()[\]\\.,;:\s@@"]+)*)|(".+"))@@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)) {
+                    emailClientInput.addClass("input-validation-error")
+                    return false;
+                }
+
+                $.ajax({
+                    type: "POST",
+                    url: "/fr/therapist/ResendReceiptToClient/",
+                    data: `{"emailClient":"${emailClient}",
+                            "clientAppointmentId":"${clientAppointmentId}"}`,
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        toastr["success"]
+                            ("@Resource.ListClientReceipt_Toastr_ResendConfirmation",
+                                "@Global.Success");
+
+                        //Ferme le modal
+                        closeModal(modalElement)
+                    },
+                    error: function () {
+                        toastr["error"]
+                            ("@Global.GenericError",
+                                "@Global.Error");
+                    }
+                })
+
+            })
+        }
+
+        //---------------------------------------- Client autocomplete --------------------
+
+        autocomplete()
+
+        function autocomplete() {
+
+            var clients = new Bloodhound({
+                datumTokenizer: Bloodhound.tokenizers.obj.whitespace('ClientName'),
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                remote: {
+                    url: '/api/GetClientTherapist?textEntered=%QUERY',
+                    wildcard: '%QUERY'
+                }
+            });
+
+            $('#js-client-receipt-client-name').typeahead({
+                minLength: 3,
+                highlight: true
+            }, {
+                name: 'clients',
+                display: 'ClientName',
+                source: clients
+            });
+        }
+
+
+
+
+
+
+        //----------------------- Other -----------------------------
+
+        //Excel
+        $("#js-therapist-client-receipt-excel-export").on("click", function () {
+            console.log("321")
+            $("#js-therapist-client-receipt-excel").submit();
+        })
+
+        //Change the language of the datepicker
+        if ("@(CultureInfo.CurrentCulture.Name)" != "fr-CA") {
+            $.datepicker.setDefaults($.datepicker.regional[""]);
+        }
+
+        //Remove error class when fill datepicker
+        $(".js-date-picker").on("change", function () {
+            if ($(this).val() != "") {
+                $(this).removeClass("input-validation-error")
+            }
+        })
+
+        //Remove error class
+        $("#js-client-receipt-email-client").on("change", function () {
+            VerifyFieldWithRegex($(this), $(this).val(), /^(([^<>()[\]\\.,;:\s@@"]+(\.[^<>()[\]\\.,;:\s@@"]+)*)|(".+"))@@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
+        })
+
+    </script>
+}

@@ -1,0 +1,96 @@
+﻿@using Microsoft.AspNet.Identity
+@using System.Globalization
+@using ReseauPsy.Resources
+
+@{
+    var routeValues = this.ViewContext.RouteData.Values;
+    var controller = routeValues["controller"] as string;
+    var action = routeValues["action"] as string;
+    string queryString = Request.QueryString.ToString() == "" ? "" : "?" + Request.QueryString.ToString();
+
+
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1 user-scalable=no " />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <title>@ViewBag.Title - @Global.Application_Title_Suffix</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body id="layout-not-connected" class="d-flex flex-column min-vh-100">
+
+    <nav class="navbar navbar-expand-sm">
+        <div class="container-fluid">
+
+            <a class="navbar-brand" href="@Url.Action("Login","Account")"><img src="/_assets/img/theme/logo-black.svg" class="img-responsive" /></a> @*###TODO : Faire en sorte que la langue suive dans le lien comme un GenerateURL()*@
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainnavbar">
+                <img src="/_assets/img/icons/arrow-down-white.svg" />
+            </button>
+            <div class="collapse navbar-collapse" id="mainnavbar">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item order-1 order-sm-1">
+                        <a class="nav-link" href="http://www.reseaupsy.ca/fr/a-propos/" target="_blank">@Global.Menu_About</a>
+                    </li>
+                    <li class="nav-item order-4 order-sm-2">
+                        @if (CultureInfo.CurrentCulture.Name == "fr-CA")
+                        {
+                            <a class="nav-link" href="/en/@controller/@action@queryString">@Global.Menu_EN</a>
+                        }
+                        else
+                        {
+                            <a class="nav-link" href="/fr/@controller/@action@queryString">@Global.Menu_FR</a>
+                        }
+                    </li>
+                    <li class="nav-item order-2 order-sm-3">
+                        <a class="nav-link" href="tel:+15147277727">
+                            <img src="/_assets/img/icons/phone.svg" class="icon25 d-none d-sm-block" />
+                            <span class="d-block d-sm-none">514.727.7727</span>
+                        </a>
+                    </li>
+                    <li class="nav-item order-3 order-sm-4">
+                        <a class="nav-link" href="mailto:info@reseaupsy.ca">
+                            <img src="/_assets/img/icons/email.svg" class="icon25 d-none d-sm-block" />
+                            <span class="d-block d-sm-none">info@reseaupsy.ca</span>
+                        </a>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+
+    <footer class="mt-auto">
+        <div class="container-fluid">
+            <div class="legal text-center text-md-start">
+                <img src="/_assets/img/icons/lock.svg" class="icon15" />
+                @Global.LegalData <br class="d-md-none" />
+                @Html.Raw(String.Format(Global.LegalRights, DateTime.Now.Year)) <br class="d-md-none" />
+                @Html.Raw(String.Format(Global.LegalBy, "<a href='https://www.3wdesign.ca' class='designer' target='_blank'>3wDesign.ca</a>"))
+
+                <br />
+                <a href="@Url.Action("PrivacyPolicy", "General")">Politique de confidentialité</a> <br class="d-md-none" />
+                <span class="d-none d-md-inline"> | </span>
+                <a href="@Url.Action("TermsOfUse", "General")">Conditions générales d'utilisation</a> <br class="d-md-none" />
+            </div>
+        </div>
+    </footer>
+
+    @Scripts.Render("~/bundles/jquery")
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js" integrity="sha512-o6XqxgrUsKmchwy9G5VRNWSSxTS4Urr4loO6/0hYdpWmFUfHqGzawGxeQGMDqYzxjY9sbktPbNlkIQJWagVZQg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

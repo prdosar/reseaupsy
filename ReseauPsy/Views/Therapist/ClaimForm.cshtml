@@ -1,0 +1,673 @@
+﻿@model ReseauPsy.ViewModel.Therapist.ClaimFormViewModel
+@using ReseauPsy.Resources
+@using System.Resources
+@using System.Globalization
+@{
+    ViewBag.Title = @Resource.ClaimForm_Title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var resourceManager = new ResourceManager(typeof(Resource));
+}
+
+
+<section id="page-therapist-claimform">
+
+    <div class="container">
+        @* Page title *@
+        <h1>@Resource.ClaimForm_H1</h1>
+
+        <div class="page-instruction mb-0">
+            @Resource.ClaimForm_Text
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                @* No result alert *@
+                <div id="js-claim-form-claimable-no-result" class="@(Model.ClaimableAppointments.Count < 1 ? "" : "d-none")">
+                    <div class="alert alert-info">
+                        @Resource.ClaimForm_NoClaimmable
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="js-claim-form-claimable-appointment-table" class="@(Model.ClaimableAppointments.Count < 1 ? "d-none" : "")">
+
+            @* Table *@
+            <div class="table-responsive mt-3">
+                <table style="min-width:440px;">
+                    <thead>
+                        <tr>
+                            <th style="width:50px;">@*@Resource.ClaimForm_TableHeader_ClaimAppointment*@</th>
+                            <th style="width:140px;">@Global.Client</th>
+                            <th style="width:120px;">@Global.Date</th>
+                            <th style="width:120px;" class="d-none d-md-table-cell">@Global.Nature</th>
+                            <th style="width:50px;" class="text-end">@Global.Seance</th>
+                            <th style="width:80px;" class="text-end">@Global.Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var appointment in Model.ClaimableAppointments)
+                        {
+                            <tr>
+                                <td style="max-width: 50px;">
+                                    <input class="js-claim-form-claimable-appointment-checkbox" type="checkbox"
+                                           data-appointment-id="@appointment.AppointmentId"
+                                           data-tps-amount="@appointment.TpsAmount"
+                                           data-tvq-amount="@appointment.TvqAmount"
+                                           data-hourly-wage="@appointment.HourlyWage" />
+                                </td>
+                                <td style="max-width: 140px;" class="js-claim-form-claimable-appointment-table-client-name">@appointment.ClientName</td>
+                                <td style="max-width: 120px;" class="js-claim-form-claimable-appointment-table-appointment-date">@appointment.AppointmentDate.ToString("dd MMM yyyy")</td>
+                                <td style="max-width: 120px;" class="js-claim-form-claimable-appointment-table-nature-act d-none d-md-table-cell">@appointment.NatureAct</td>
+                                <td style="max-width: 50px;" class="js-claim-form-claimable-appointment-table-session text-end">@appointment.NbSession</td>
+                                <td style="max-width: 80px;" class="js-claim-form-claimable-appointment-table-claimable-amount text-end">@String.Format("{0:C}", appointment.ClaimableAmount)</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            @* Claim button *@
+            <div class="row">
+                <div class="col-12 text-end">
+                    <div id="js-claim-form-claim-appointment-button" class="btn btn-primary w-auto mt-3 small-button disabled" data-can-continue="false">
+                        @Resource.ClaimForm_ClaimAppointment
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <form action="/@CultureInfo.CurrentCulture.TwoLetterISOLanguageName/therapist/DownloadExcelTherapistBillsSent" method="post">
+
+            @* Table Title *@
+            <div class="row">
+                <div class="col-12 mt-3">
+                    <h2>@Resource.ClaimForm_BillSent</h2>
+                </div>
+            </div>
+
+
+
+            @* Filtre *@
+            <div class="row">
+                @* Start date *@
+                <div class="col-md-6 col-lg-4 col-xl-2">
+                    <div>@Global.StartDate</div>
+                    <input id="js-claim-form-filter-start-date" class="form-control js-date-picker" autocomplete="off" />
+                    <input type="hidden" name="startDateStr" id="js-claim-form-excel-start-date" />
+                </div>
+
+                @* End date *@
+                <div class="col-md-6 col-lg-4 col-xl-2">
+                    <div>@Global.EndDate</div>
+                    <input id="js-claim-form-filter-end-date" class="form-control js-date-picker" autocomplete="off" />
+                    <input type="hidden" name="endDateStr" id="js-claim-form-excel-end-date" />
+                </div>
+
+                @* Apply *@
+                <div class="col-md-6 col-lg-4 col-xl-2">
+                    <br />
+                    <div id="js-claim-form-filter-button-apply" class="btn btn-primary btn-filter">@Global.Apply</div>
+                </div>
+            </div>
+
+
+
+            <div class="row">
+                <div class="col-12">
+                    @* No result alert *@
+                    <div id="js-claim-form-bill-no-result" class="@(Model.BillsSent.Count < 1 ? "" : "d-none")">
+                        <div class="alert alert-info">
+                            @Global.NoResult
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            @* Table bill sent *@
+            <div id="js-admin-appointmnet-list-table" class="@(Model.BillsSent.Count < 1 ? "d-none" : "")">
+                <div class="table-responsive mt-4">
+
+                    <table style="min-width:580px;">
+                        <thead>
+                            <tr>
+                                <th style="width:120px;">@Global.Date</th>
+                                <th style="width:120px;">@Global.BillINumber</th>
+                                <th style="width:100px;">@Global.Status</th>
+                                <th style="width:100px;" class="d-none d-md-table-cell text-end">@Global.Amount</th>
+                                <th style="width:100px;" class="d-none d-md-table-cell text-end">@Global.Tax</th>
+                                <th style="width:100px;" class="text-end">@Global.Total</th>
+                                <th style="width:140px;" class="text-end">@Global.Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="js-claim-form-bill-sent-table-body">
+                            @foreach (var bill in Model.BillsSent)
+                            {
+                                <tr>
+                                    <td style="max-width: 120px;">@bill.DateSend.ToString("dd MMM yyyy") </td>
+                                    <td style="max-width: 120px;">RSPYF-@bill.BillNumber</td>
+                                    <td style="max-width: 100px;">@resourceManager.GetString(bill.PaymentStatus)</td>
+                                    <td style="max-width: 100px;" class="d-none d-md-table-cell text-end">@String.Format("{0:C}", bill.Subtotal)</td>
+                                    <td style="max-width: 100px;" class="d-none d-md-table-cell text-end">@String.Format("{0:C}", (bill.TpsAmount + bill.TvqAmount))</td>
+                                    <td style="max-width: 100px;" class="text-end">@String.Format("{0:C}", (bill.Subtotal + bill.TpsAmount + bill.TvqAmount))</td>
+                                    <td style="max-width: 140px;" class="text-end">
+                                        <button formaction="/@CultureInfo.CurrentCulture.TwoLetterISOLanguageName/therapist/DownloadTherapistBillPdf/" value="@bill.BillNumber" name="billNumber" class="btn btn-primary">
+                                            @Global.Download
+                                        </button>
+                                    </td>
+
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+
+                </div>
+
+
+                @* Pager *@
+                <div class="row">
+                    <div class="col-sm-6">
+                        <ul id="js-pager-ul" class="pager">
+                            @for (int i = 1; i < Model.NbPage + 1 && i < 4; i++)
+                            {
+                                <li>
+                                    <span class="js-association-pager @(i == 1 ? "active" : "")" data-page-number="@i">
+                                        @i
+                                    </span>
+                                </li>
+                            }
+                            @if (Model.NbPage > 1)
+                            {
+                                <li>
+                                    <i class="fas fa-angle-right js-association-pager" data-page-number="2"></i>
+                                </li>
+                            }
+                            @if (Model.NbPage > 3)
+                            {
+                                <li>
+                                    <i class="fas fa-angle-double-right js-association-pager" data-page-number="@Model.NbPage"></i>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                    @* Button export excel *@
+                    <div class="col-sm-6 text-center text-sm-end">
+                        <input type="submit" class="btn btn-primary btn-excel mt-1 mt-sm-3" value="@Global.ExportToExcel" />
+                    </div>
+                </div>
+            </div>
+
+
+        </form>
+    </div>
+
+
+    @* Modal preview bill *@
+    <div id="PreviewTherapistBill" class="modal fade" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">@Resource.ClaimForm_PreviewModal_Title</h5>
+                    <button id="js-preview-modal-close" type="button" class="btn-close" data-bs-dismiss="modal">
+                        <i class="far fa-times-circle"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="facture-title">
+                                @Global.Bill
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            @Global.BillINumber : RSPYF-@Model.TherapistBillNumber <br />
+                            @Global.Date : @DateTime.Today.ToString("dd MMM yyyy")
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mt-3">
+                            <strong>@Model.TherapistName</strong><br />
+                            @Model.TherapistRegion, Québec<br />
+                            @Model.TherapistEmail<br />
+                            @Model.TherapistPhoneNumber<br />
+
+
+                        </div>
+                        <div class="col-md-6  mt-3">
+                            <strong>Facturé à</strong><br />
+                            @Resource._Global_ReseauPsy_Name<br />
+                            @Resource._Global_ReseauPsy_Adresse<br />
+                            @Resource._Global_ReseauPsy_Adresse2<br />
+                        </div>
+                    </div>
+
+
+                    <div class="table-responsive mt-4">
+                        <table class="table-description" style="min-width:550px;">
+                            <thead>
+                                <tr>
+                                    <th style="width:250px;">@Global.Description</th>
+                                    <th class='text-end' style="width:80px;">@Global.Quantity</th>
+                                    <th class='text-end' style="width:100px;">@Global.Amount</th>
+                                    <th class='text-end' style="width:120px;">@Global.Total</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="js-claim-form-preview-bill-modal-table-body">
+                            </tbody>
+
+                        </table>
+                    </div>
+
+                    <div class="row justify-content-end mt-3">
+                        <div class="col-12 col-sm-6 col-md-6 col-lg-4 taxes-summary" style="padding-right:25px;">
+
+                            <div id="js-claim-form-preview-bil-sub-total-and-taxes">
+                                @*Sous-total*@
+                                <div class="row">
+                                    <div class="col-6">
+                                        @Global.Subtotal
+                                    </div>
+                                    <div class="col-6 text-end">
+                                        <div id="js-claim-form-preview-bill-modal-subtotal"></div>
+                                    </div>
+                                </div>
+
+                                @*TPS*@
+                                <div class="row">
+                                    <div class="col-6">
+                                        @Global.TPS <span class="taxes-number">(5%)</span>
+                                    </div>
+                                    <div class="col-6 text-end">
+                                        <div id="js-claim-form-preview-bill-modal-tps"></div>
+                                    </div>
+                                </div>
+
+                                @*TVQ*@
+                                <div class="row">
+                                    <div class="col-6">
+                                        @Global.TVQ <span class="taxes-number">(9,975%)</span>
+                                    </div>
+                                    <div class="col-6 text-end">
+                                        <div id="js-claim-form-preview-bill-modal-tvq"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            @*TOTAL*@
+                            <div class="row fw-bold">
+                                <div class="col-6">
+                                    <strong>@Global.Total</strong>
+                                </div>
+                                <div class="col-6 text-end">
+                                    <div id="js-claim-form-preview-bill-modal-total"></div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <div id="js-claim-form-preview-bill-modal-taxes-numbers" class="row">
+                        <div class="col-12 taxes-number mt-2">
+                            <div># @Global.TPS : @Model.TherapistTpsNumber</div>
+                            <div># @Global.TVQ : @Model.TherapistTvqNumber</div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button id="js-claim-form-preview-bill-cancel-button" type="button" class="btn btn-secondary">@Global.Cancel</button>
+                    <button id="js-claim-form-preview-bill-send-button" type="button" class="btn btn-primary">@Global.Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+@section scripts
+{
+    <script>
+
+        //--------------------------- Modal ----------------------------
+        function InitPreviewBillModal() {
+            var previewBillModal = $("#PreviewTherapistBill")
+            var previewModalTableBody = $("#js-claim-form-preview-bill-modal-table-body")
+
+            var appointmentsIds = []
+
+            // open modal and set informations
+            $("#js-claim-form-claim-appointment-button").on("click", function () {
+
+                //Block if there is no option checked
+                if ($(this).data("can-continue") == false || $(this).data("can-continue") == "false") {
+                    return false
+                }
+
+                var totalClaimable = 0
+                var totalTps = 0
+                var totalTvq = 0
+
+                //Loop through all the check box that are checked
+                $(".js-claim-form-claimable-appointment-checkbox:checked").each(function () {
+
+                    //Set the information for the table row
+                    var tableRow = $(this).closest("tr");
+                    var appointmentId = $(this).data("appointment-id")
+                    var appointmentDate = tableRow.children(".js-claim-form-claimable-appointment-table-appointment-date").text()
+                    var clientName = tableRow.children(".js-claim-form-claimable-appointment-table-client-name").text()
+                    var quantity = tableRow.children(".js-claim-form-claimable-appointment-table-session").text();
+                    var hourlyWage = $(this).data("hourly-wage")
+
+
+                    //var claimableAmount = parseFloat(tableRow.children(".js-claim-form-claimable-appointment-table-claimable-amount").text()).toFixed(2)
+                    var claimableAmount = (tableRow.children(".js-claim-form-claimable-appointment-table-claimable-amount").text())//.toFixed(2)
+
+                    var tps = $(this).data("tps-amount")
+                    var tvq = $(this).data("tvq-amount")
+
+                    //On utilise la variable amount pour pouvoir utiliser la resource ci-dessous qui place le $ du bon côté selon la langue
+                    var amount = hourlyWage;
+
+                    markup =
+                        `<tr class="js-claim-form-preview-bill-modal-table-row">
+                            <td>${appointmentDate} - ${clientName}</td>
+                            <td class='text-end'>${quantity}</td>
+                            <td class='text-end'>@Global._GlobalMoney</td>
+                            <td class='text-end'>${claimableAmount}</td>
+                        </tr>`
+
+                    //Insert the line
+                    previewModalTableBody.prepend(markup)
+
+                    //Calculate the total
+
+                    totalClaimable += parseFloat(claimableAmount.replace(",", ".").replace("$",""))
+                    totalTps += parseFloat(tps.replace(',', '.'))
+                    totalTvq += parseFloat(tvq.replace(',', '.'))
+
+                    //Add the appointment to the list
+                    appointmentsIds.push(appointmentId)
+                })
+
+                //Hide the sub total part and taxes if the therapist have no tax
+                if (totalTps + totalTvq == 0) {
+                    $("#js-claim-form-preview-bil-sub-total-and-taxes").addClass("d-none")
+                    $("#js-claim-form-preview-bill-modal-taxes-numbers").addClass("d-none")
+                }
+                else {
+                    $("#js-claim-form-preview-bil-sub-total-and-taxes").removeClass("d-none")
+                    $("#js-claim-form-preview-bill-modal-taxes-numbers").removeClass("d-none")
+                }
+
+
+
+                //We use the Resource _GlobalMoney to set the $ to the left or the right according to globalization
+
+                var amount = totalClaimable.toFixed(2);
+                $("#js-claim-form-preview-bill-modal-subtotal").text(`@Global._GlobalMoney`)
+
+                amount = totalTps.toFixed(2);
+                $("#js-claim-form-preview-bill-modal-tps").text(`@Global._GlobalMoney`)
+
+                amount = totalTvq.toFixed(2);
+                $("#js-claim-form-preview-bill-modal-tvq").text(`@Global._GlobalMoney`)
+
+                var total = totalClaimable + totalTps + totalTvq
+                amount = total.toFixed(2);
+                $("#js-claim-form-preview-bill-modal-total").text(`@Global._GlobalMoney`)
+
+                //Open the modal
+                OpenModal(previewBillModal)
+            })
+
+            //Close modal function
+            function closePreviewBillModal() {
+                closeModal(previewBillModal)
+
+                //Empty all row but the total row
+                $("#js-claim-form-preview-bill-modal-table-body .js-claim-form-preview-bill-modal-table-row").each(function () {
+                    $(this).remove()
+                })
+
+                //Empty the array
+                appointmentsIds = []
+            }
+
+            //Close modal
+            $("#js-claim-form-preview-bill-cancel-button").on("click", function () {
+                closePreviewBillModal()
+            })
+            $("#js-preview-modal-close").on("click", function () {
+                closePreviewBillModal()
+            })
+
+
+
+
+            //Send bill
+            $("#js-claim-form-preview-bill-send-button").on("click", function () {
+
+                $.ajax({
+                    type: "POST",
+                    url: "/fr/therapist/ClaimAppointments/",
+                    data: `{"appointmentIdsStr":"${appointmentsIds}"}`,
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        //Remove all the checked line
+                        $(".js-claim-form-claimable-appointment-checkbox:checked").each(function () {
+                            $(this).closest("tr").remove()
+
+                            if ($("#js-claim-form-claimable-appointment-table tbody tr").length < 1) {
+                                $("#js-claim-form-claimable-appointment-table").addClass("d-none");
+                                $("#js-claim-form-claimable-no-result").removeClass("d-none");
+                            }
+                        })
+
+
+                        ClaimFormBillTableApplyFilter(1)
+
+                        //close modal
+                        closePreviewBillModal()
+                    },
+                    error: function () {
+                        toastr["error"]
+                            ("@Global.GenericError",
+                                "@Global.Error");
+                    }
+                })
+
+
+            })
+        }
+
+        InitPreviewBillModal();
+
+
+        //------------------------------- Bill sent Filter -------------------------------
+        //Apply filter
+        $("#js-claim-form-filter-button-apply").on("click", function () {
+            ClaimFormBillTableApplyFilter(1)
+        })
+
+        //Click on pager
+        $(document).on("click", ".js-association-pager", function () {
+            ClaimFormBillTableApplyFilter($(this).data("page-number"))
+        })
+
+        //Function to apply the filter
+        function ClaimFormBillTableApplyFilter(pageNumber) {
+
+            var startDateInput = $("#js-claim-form-filter-start-date")
+            var endDateInput = $("#js-claim-form-filter-end-date")
+
+            var startDate = toInternationnalDate(startDateInput.val());
+            var endDate = toInternationnalDate(endDateInput.val());
+
+            //Verify the dates
+            startDateInput.removeClass("input-validation-error")
+            endDateInput.removeClass("input-validation-error")
+
+            if (!isStartDateValid(startDateInput)) {
+                startDateInput.addClass("input-validation-error")
+                return false
+            }
+            if (!isEndDateValid(startDateInput, endDateInput)) {
+                endDateInput.addClass("input-validation-error")
+                return false
+            }
+
+            $.ajax({
+                type: "POST",
+                url: "/fr/therapist/ApplyFilterTableBillSent/",
+                data: `{"startDateStr":"${startDate}",
+                        "endDateStr":"${endDate}",
+                        "pageNumber":"${pageNumber}"}`,
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    var tableBody = $("#js-claim-form-bill-sent-table-body")
+                    $("#js-claim-form-excel-start-date").val(startDateInput.val())
+                    $("#js-claim-form-excel-end-date").val(endDateInput.val())
+
+                    if (data.bills.length == 0) {
+
+                        //affiche l'alerte no result
+                        $("#js-claim-form-bill-no-result").removeClass("d-none")
+
+                        //Cache le tableau
+                        $("#js-admin-appointmnet-list-table").addClass("d-none")
+                    }
+                    else {
+
+                        //Cache l'alerte no result
+                        $("#js-claim-form-bill-no-result").addClass("d-none")
+
+                        //affiche le tableau
+                        $("#js-admin-appointmnet-list-table").removeClass("d-none")
+
+                        var cellsStyle = rebuildTableWithStyle(tableBody);
+
+                        //Empty the table
+                        tableBody.empty();
+
+                        for (var i = 0; i < data.bills.length; i++) {
+
+                            var totalTax = data.bills[i].TpsAmount + data.bills[i].TvqAmount
+                            var totalBill = data.bills[i].Subtotal + totalTax
+
+                            var currencyFormatOption = {
+                                style: 'currency',
+                                currency: 'CAD'
+                            }
+
+                            var culture = "@CultureInfo.CurrentCulture.Name"
+
+                            markup =
+                                `<tr>
+                                    <td ${cellsStyle[0]}>
+                                        ${UnixToLongDate(data.bills[i].DateSend, culture)}
+                                    </td>
+                                    <td ${cellsStyle[1]}>
+                                        RSPYF-${data.bills[i].BillNumber}
+                                    </td>
+                                    <td ${cellsStyle[2]}>
+                                        ${data.bills[i].PaymentStatus}
+                                    </td>
+                                    <td ${cellsStyle[3]}>
+                                        ${new Intl.NumberFormat(culture, currencyFormatOption).format(data.bills[i].Subtotal)}
+                                    </td>
+                                    <td ${cellsStyle[4]}>
+                                        ${new Intl.NumberFormat(culture, currencyFormatOption).format(totalTax)}
+                                    </td>
+                                    <td ${cellsStyle[5]}>
+                                        ${new Intl.NumberFormat(culture, currencyFormatOption).format(totalBill)}
+                                    </td>
+                                    <td ${cellsStyle[6]}>
+                                        <button formaction="/@CultureInfo.CurrentCulture.TwoLetterISOLanguageName/therapist/DownloadTherapistBillPdf/" value="${data.bills[i].BillNumber}" name="billNumber" class="btn btn-primary" >
+                                            @Global.Download
+                                        </button>
+                                    </td>
+                                </tr>`
+
+                            tableBody.append(markup)
+                        }
+                    }
+
+
+                    //Pager
+                     pager($("#js-pager-ul"), data.nbPage, pageNumber, @Model.NbPagerPageShown, true, true)
+                },
+                error: function () {
+                    toastr["error"]
+                        ("@Global.GenericError",
+                            "@Global.Error");
+                }
+            })
+
+        }
+
+
+
+        // ------------------------------------ remove error class -------------------------
+
+        //Start date filter
+        $("#js-claim-form-filter-start-date").on("change", function () {
+
+            $(this).removeClass("input-validation-error")
+
+            if (!isFrenchDateValidOrEmpty($(this).val())) {
+                $(this).addClass("input-validation-error")
+            }
+        })
+
+        //End date filter
+        $("#js-claim-form-filter-end-date").on("change", function () {
+            $(this).removeClass("input-validation-error")
+
+            if (!isFrenchDateValidOrEmpty($(this).val())) {
+                $(this).addClass("input-validation-error")
+            }
+        })
+
+
+        //------------------------- Other --------------
+
+        //Claim button active/disable
+        $(".js-claim-form-claimable-appointment-checkbox").on("click", function () {
+            ModifyClaimButtonState()
+        })
+
+        function ModifyClaimButtonState() {
+            var claimButton = $("#js-claim-form-claim-appointment-button")
+
+            //Remove the disabled class by default
+            claimButton.removeClass("disabled")
+            claimButton.data("can-continue", "true")
+
+            //Loop over all the check box to see tif there is atleast one checked
+            var isOneCheck = false
+            $(".js-claim-form-claimable-appointment-checkbox").each(function () {
+                if ($(this).is(":checked")) {
+                    isOneCheck = true;
+                }
+            })
+
+            console.log(isOneCheck)
+
+            //If there is none checked, add the disable class
+            if (!isOneCheck) {
+                $("#js-claim-form-claim-appointment-button").addClass("disabled")
+                claimButton.data("can-continue", "false")
+            }
+        }
+
+    </script>
+}

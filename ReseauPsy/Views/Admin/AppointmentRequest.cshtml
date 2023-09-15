@@ -1,0 +1,1247 @@
+﻿@model ReseauPsy.ViewModel.Admin.AppointmentRequestViewModel
+@using ReseauPsy.Resources
+@using System.Globalization
+@using System.Resources
+@{
+    ViewBag.Title = Resource.AppointmentRequest_Title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var resourceManager = new ResourceManager(typeof(Resource));
+}
+
+
+<section id="page-admin-appointementrequest">
+    <div class="container">
+
+        @* Title *@
+        <h1>@Resource.AppointmentRequest_H1</h1>
+
+
+
+        <div class="row">
+            @* Status *@
+            <div class="col-md-6 col-lg-4 col-xl-2">
+                <div>
+                    @Global.Status
+                </div>
+                <select id="js-ddl-status" class="form-select">
+                    @foreach (var item in Model.Status)
+                    {
+                        <option value="@item.Value">@item.Text</option>
+                    }
+                </select>
+
+                <input type="hidden" id="js-appointment-request-status-hidden" value="true" />
+            </div>
+
+            @* Start Date *@
+            <div class="col-md-6 col-lg-4 col-xl-2 js-filter-date">
+                <div>
+                    @Global.StartDate
+                </div>
+                <input type="text" id="js-start-date-text" class="form-control js-date-txt js-date-picker" autocomplete="off" disabled />
+                <input type="hidden" id="js-appointment-request-start-date-hidden" />
+            </div>
+
+            @* End Date*@
+            <div class="col-md-6 col-lg-4 col-xl-2 js-filter-date">
+                <div>
+                    @Global.EndDate
+                </div>
+                <input type="text" id="js-end-date-text" class="form-control js-date-txt js-date-picker" autocomplete="off" disabled />
+                <input type="hidden" id="js-appointment-request-end-date-hidden" />
+            </div>
+
+            @* Apply Button *@
+            <div class="col-md-6 col-lg-4 col-xl-2 js-filter-date">
+                <br />
+                <div id="js-apply-button" class="btn btn-primary btn-filter">
+                    @Global.Apply
+                </div>
+            </div>
+        </div>
+
+        @* Table waiting request *@
+        <div id="js-appointment-request-table" class="table-responsive mt-4 @(Model.Clients.Count < 1 ? "d-none" : "")">
+            <table style="min-width:795px;">
+
+                <thead>
+                    <tr>
+                        <th style="width:140px;">@Global.Name</th>
+                        <th style="width:120px;">@Global.RequestDate</th>
+                        <th style="width:120px;">@Global.Status</th>
+                        <th style="width:200px;">@Global.Region</th>
+                        <th style="width:25px;" id="js-th-returned-count" class="text-end">@Global.Returned</th>
+                        <th style="width:190px;" id="js-th-actions" class="text-end">@Global.Action</th>
+                    </tr>
+                </thead>
+
+                <tbody id="js-client-table-body">
+                    @foreach (var client in Model.Clients)
+                    {
+                        <tr class='@((DateTime.Now - client.RequestDate).TotalDays > 7 ? "appointment-late" : "")'>
+                            <td style="max-width:140px;">@($"{client.FirstName} {client.LastName}")</td>
+                            <td style="max-width:120px;" class="js-client-request-date">
+                                @client.RequestDate.ToString("dd MMM yyyy")
+                            </td>
+                            <td style="max-width:120px;">@resourceManager.GetString(client.RequestStatus)</td>
+                            <td style="max-width:200px;">@client.Region</td>
+                            <td style="max-width:25px;" class="text-end">@client.RefusedCount</td>
+                            <td style="max-width:190px;" class="text-end">
+                                <div class="js-open-assign-modal btn btn-primary"
+                                     data-client-id="@client.Id"
+                                     data-client-name="@($"{client.FirstName} {client.LastName}")"
+                                     data-client-email="@client.Email"
+                                     data-client-phone="@client.PhoneNumber"
+                                     data-client-consultation-type-ids="@(String.Join(",",
+                                                                    Model.ClientConsultationTypes
+                                                                    .Where(x => x.ClientId == client.Id)
+                                                                    .Select(x => x.ConsultationTypeId)
+                                                                    .ToList()))"
+                                     data-client-consultationtype="@(string.Join(",",
+                                                               Model.ClientConsultationTypes
+                                                                .Where(x => x.ClientId == client.Id)
+                                                                .Select(x => CultureInfo.CurrentCulture.Name == "fr-CA" ?
+                                                                    x.ConsultationTypeFR :
+                                                                    x.ConsultationTypeEN)
+                                                                .ToList()))"
+                                     data-client-region="@client.Region"
+                                     data-client-city="@client.City"
+                                     data-client-postalcode="@client.PostalCode"
+                                     data-client-consultationreason="@client.consultationReason"
+                                     data-client-message="@client.Message"
+                                     data-therapist-message="@client.LastTherapistMessage"
+                                     data-client-availabilities="@(string.Join(",",
+                                                             Model.ClientAvailabilities
+                                                             .Where(x => x.ClientId == client.Id)
+                                                             .Select(x => x.DayOfTheWeek_PeriodOfTheDay_Id)
+                                                             .ToList()))"
+                                     data-client-regionId="@client.RegionId"
+                                     data-client-languages="@string.Join(", ",
+                                                       Model.ClientLanguages
+                                                       .Where(x => x.ClientId == client.Id)
+                                                       .Select(x => CultureInfo.CurrentCulture.Name == "fr-CA" ?
+                                                            x.Language.Language1 : x.Language.LanguageEN)
+                                                       .ToList())">
+                                    @Global.Assign
+                                </div>
+                                <div class="js-delete-client-request btn btn-danger" data-client-id="@client.Id"><i class='fas fa-trash-alt'></i></div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                @* No result alert *@
+                <div id="js-appointment-request-no-result" class="@(Model.Clients.Count < 1 ? "" : "d-none")">
+                    <div class="alert alert-info">
+                        @Global.NoResult
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @* Pager *@
+        <div id="js-appointment-request-pager" class="row d-none">
+            <div class="col-sm-12">
+                <ul id="js-pager-ul" class="pager">
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- Modal Delete -->
+    <div id="deleteClientRequestModal" class="modal fade" role="dialog" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+
+
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title">@Resource.AppointmentRequest_DeleteModal_Title</h5>
+                    <button type="button" class="btn-close js-close-delete-modal-header" data-bs-dismiss="modal">
+                        <i class="far fa-times-circle"></i>
+                    </button>
+                </div>
+
+
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <div>@Resource.AppointmentRequest_DeleteModal_Text</div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="row">
+                        <div class="col-12 col-lg-6">
+                            <div class="form-group">
+                                <label>@Resource.AppointmentRequest_DeleteModal_Reason</label>
+                                <select id="js-delete-reason" class="form-select">
+                                    <option value="null">@Global.Choose</option>
+                                    @foreach (var reason in Model.DeleteReasons)
+                                    {
+                                        <option value="@reason.Id">@reason.Name</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label>@Global.AdditionnalNotes</label>
+                                <textarea id="js-delete-notes" class="form-control" rows="4" cols="50"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button id="js-close-delete-modal" type="button" class="btn btn-secondary">@Global.Cancel</button>
+                    <button id="js-delete-request-modal-button" type="button" class="btn btn-primary">@Global.Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Assign -->
+    <div id="assignClientRequestModal" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">@Resource.AppointmentRequest_AssignModal_Title</h5>
+                    <button type="button" id="js-assign-delete-modal-header" class="btn-close" data-bs-dismiss="modal">
+                        <i class="far fa-times-circle"></i>
+                    </button>
+                </div>
+
+
+
+                <div class="modal-body">
+
+                    @* Therapist refuse message *@
+                    <div id="js-appointment-request-therapist-message" class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label><i class="fas fa-exclamation-triangle"></i> @Resource.AppointmentRequest_AssignModal_ReturnMessage</label>
+                                <div class="long-text text-hilight" id="js-assign-modal-therapist-message"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        @* Name *@
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>@Global.Client</label>
+                                <div id="js-assign-modal-client-name"></div>
+                            </div>
+                        </div>
+
+                        @* Email *@
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>@Global.EmailClient</label>
+                                <div id="js-assign-modal-client-email"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        @* Phone *@
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>@Global.Phone</label>
+                                <div id="js-assign-modal-client-phone"></div>
+                            </div>
+                        </div>
+
+                        @* Consultation types *@
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>@Global.ConsultationType</label>
+                                <div id="js-assign-modal-client-consultation-type"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+
+                        @* Region *@
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>@Global.Region</label>
+                                <div id="js-assign-modal-client-region"></div>
+                            </div>
+                        </div>
+
+                        @* City *@
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>@Global.CityRegion</label>
+                                <div id="js-assign-modal-client-city"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+
+                        @* Postal code *@
+                        <div class="col-sm-6">
+                            <label>@Global.PostalCode</label>
+                            <div id="js-assign-modal-client-postalcode"></div>
+                        </div>
+
+                        @* Langues *@
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>@Global.Language</label>
+                                <div id="js-assign-modal-client-language"></div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        @* Consultation reason *@
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label>@Global.ConsultationReason</label>
+                                <div id="js-assign-modal-client-consultation-reason"></div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        @* Message *@
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label>@Global.ClientMessage</label>
+                                <div id="js-assign-modal-client-message"></div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    @* Availabilities *@
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group availability">
+                                <label>@Global.Avaibility</label>
+
+                                @foreach (var day in Model.Availabilities)
+                                {
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <strong>@day.Day.Name</strong>
+                                        </div>
+
+                                        @foreach (var period in day.Periods)
+                                        {
+                                            <div class="col-4 col-sm-3">
+                                                <input class="js-assign-modal-client-availability"
+                                                       value="@period.Id"
+                                                       type="checkbox"
+                                                       disabled="disabled" /> @period.Name
+                                                </div>
+                                            }
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>@Global.AssignTo</label>
+
+                                <select id="js-assing-modal-therapistddl" class="form-control">
+                                    <option value="null">@Global.Choose</option>
+                                    <option value="externalAssociation">@Global.ExternalAssociation</option>
+                                    <option disabled>──────────</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div id="js-assign-modal-external-association" class="col-sm-6 d-none">
+                            <div class="form-group">
+                                <label>@Global.ExternalAssociation</label>
+                                <select id="js-assign-modal-associationddl" class="form-select">
+                                    <option value="null">@Global.Choose</option>
+                                    @foreach (var association in Model.ExternalAssociation)
+                                    {
+                                        <option value="@association.Id">@association.Name</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label id="js-assign-client-additionnal-notes-label"
+                                       data-therapist-notes-text="@Resource.AppointmentRequest_AssignModal_NoteForTherapist"
+                                       data-association-notes-text="@Resource.AppointmentRequest_AssignModal_NoteForAssociation">
+                                    @Resource.AppointmentRequest_AssignModal_NoteForTherapist
+                                </label>
+                                <textarea id="js-assign-modal-additional-notes" class="form-control" rows="4" cols="50"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button id="js-close-assign-modal" type="button" class="btn btn-secondary">@Global.Cancel</button>
+                    <button id="js-assign-client-button" type="button" class="btn btn-primary">@Global.Assign</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal restore client -->
+    <div id="RestoreClientModal" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+
+
+                <div class="modal-header">
+                    <h5 class="modal-title">@Resource.AppointmentRequest_RestoreModal_Title</h5>
+                    <button type="button" class="btn-close js-assign-delete-modal-header" data-bs-dismiss="modal">
+                        <i class="far fa-times-circle"></i>
+                    </button>
+                </div>
+
+
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <div>@Resource.AppointmentRequest_RestoreModal_Text</div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label>@Resource.AppointmentRequest_RestoreModal_Reason</label>
+                                <div id="js-restore-client-modal-delete-reason"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="js-appointment-request-deleted-notes" class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label>@Global.AdditionnalNotes</label>
+                                <div id="js-restore-client-modal-additional-notes"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button id="js-close-restore-client-modal" type="button" class="btn btn-secondary">@Global.Cancel</button>
+                    <button id="js-restore-client-modal-restore-button" type="button" class="btn btn-primary">@Global.Restore</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal remove client request from therapist -->
+    <div id="RetrieveClientRequestModal" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">@Resource.AppointmentRequest_RetreiveModal_Title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal">
+                        <i class="far fa-times-circle"></i>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="alert alert-danger">
+                        <div><strong>Demande en attente</strong></div>
+                        @Resource.AppointmentRequest_RetreiveModal_Text
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="js-close-retrieve-client-modal" type="button" class="btn btn-secondary">@Global.Cancel</button>
+                    <button id="js-retrieve-client-modal-retrieve-button" type="button" class="btn btn-primary">@Global.Retreive</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+@section scripts
+{
+    <script>
+
+        // ----------------------------------------------- Filters ----------------------------------
+
+        //Function to hide/show the date filter and call the apply filter function
+        $("#js-ddl-status").on("change", function () {
+            var isRequestToDo = $(this).val();
+
+            //if we filter by Assigned, we want to have the date filtrer
+            if (isRequestToDo == "false") {
+                $("#js-start-date-text").removeAttr("disabled")
+                $("#js-end-date-text").removeAttr("disabled")
+
+                $("#js-start-date-text").val($("#js-appointment-request-start-date-hidden").val())
+                $("#js-end-date-text").val($("#js-appointment-request-end-date-hidden").val())
+
+            }
+
+            else {
+                $("#js-start-date-text").prop("disabled", true)
+                $("#js-end-date-text").prop("disabled", true)
+                $("#js-start-date-text").val("")
+                $("#js-end-date-text").val("")
+                $("#js-start-date-text").removeClass("input-validation-error")
+                $("#js-end-date-text").removeClass("input-validation-error")
+            }
+        });
+
+        //Click on apply button
+        $("#js-apply-button").on("click", function () {
+
+            $("#js-start-date-text").removeClass("input-validation-error")
+            $("#js-end-date-text").removeClass("input-validation-error")
+
+            if (!isStartDateValid($("#js-start-date-text"))) {
+                $("#js-start-date-text").addClass("input-validation-error")
+                return false
+            }
+            if (!isEndDateValid($("#js-start-date-text"), $("#js-end-date-text"))) {
+                $("#js-end-date-text").addClass("input-validation-error")
+                return false
+            }
+
+
+
+            var startDate = $("#js-start-date-text").val()
+            var endDate = $("#js-end-date-text").val()
+
+            $("#js-appointment-request-start-date-hidden").val(startDate)
+            $("#js-appointment-request-end-date-hidden").val(endDate)
+            $("#js-appointment-request-status-hidden").val($("#js-ddl-status").val())
+
+
+            ApplyFilter(1);
+        })
+
+        //On pager click
+        $(document).on("click", ".js-association-pager", function () {
+            var page = $(this).data("page-number");
+            ApplyFilter(page);
+        })
+
+        //Function to call the clients table in ajax
+        function ApplyFilter(pageNumber) {
+            var tableBody = $("#js-client-table-body");
+            var isRequestToDo = $("#js-appointment-request-status-hidden").val();
+            var thReturnedCount = $("#js-th-returned-count");
+            var thAction = $("#js-th-actions");
+            var startDate;
+            var endDate;
+
+            //Remove the column returned count by default
+            thReturnedCount.remove();
+
+            if (isRequestToDo == "false") {
+                var startDateNotFormatter = $("#js-appointment-request-start-date-hidden").val();
+                var endDateNotFormatter = $("#js-appointment-request-end-date-hidden").val();
+
+                startDate = (startDateNotFormatter == "") ?
+                    null :
+                    `${startDateNotFormatter.split('-')[2]}-${startDateNotFormatter.split('-')[1]}-${startDateNotFormatter.split('-')[0]}`
+
+                endDate = (endDateNotFormatter == "") ?
+                    null :
+                    `${endDateNotFormatter.split('-')[2]}-${endDateNotFormatter.split('-')[1]}-${endDateNotFormatter.split('-')[0]}`
+            }
+            else {
+                markup = `<th id="js-th-returned-count" style="width:25px;" class="text-end">@Global.Returned</th>`
+                //Insert column returned count when filter by todo
+                $(markup).insertBefore(thAction);
+            }
+
+            var isFrench = ("@CultureInfo.CurrentCulture.Name" == "fr-CA")
+
+
+            $.ajax({
+                type: "POST",
+                url: "/fr/admin/AppointmentClientTable/",
+                data: `{"isRequestToDo":"${isRequestToDo}",
+                        "startDate":"${startDate}",
+                        "endDate":"${endDate}",
+                        "pageNumber":"${pageNumber}",
+                        "isFrench":"${isFrench}"}`,
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+
+                    var cellsStyle = rebuildTableWithStyle(tableBody);
+                    tableBody.empty();
+
+                    var clientConsultations = @Html.Raw(Json.Encode(Model.ClientConsultationTypes));
+                    var currentCulture = "@CultureInfo.CurrentCulture.Name";
+                    var clientAvailabilities = @Html.Raw(Json.Encode(Model.ClientAvailabilities));
+
+                    var table = $("#js-appointment-request-table")
+                    var noResult = $("#js-appointment-request-no-result")
+
+                    if (data.clients.length < 1) {
+                        table.addClass("d-none")
+                        noResult.removeClass("d-none")
+                    }
+                    else {
+
+                        table.removeClass("d-none")
+                        noResult.addClass("d-none")
+
+                        for (var i = 0; i < data.clients.length; i++) {
+                            var clientConsultationType = "";
+                            var clientAvailabilitiesString = "";
+                            var consultationTypeIds = "";
+
+                            //Loop through the consultation types
+                            for (var j = 0; j < clientConsultations.length; j++) {
+
+                                if (data.clients[i]["Id"] == clientConsultations[j]["ClientId"]) {
+                                    clientConsultationType += ((currentCulture == "fr-CA") ?
+                                        clientConsultations[j]["ConsultationTypeFR"] :
+                                        clientConsultations[j]["ConsultationTypeEN"]) + ",";
+
+                                    consultationTypeIds += clientConsultations[j]["ConsultationTypeId"] + ","
+                                }
+                            }
+
+                            // set the availabilities
+                            for (var j = 0; j < clientAvailabilities.length; j++) {
+                                if (data.clients[i]["Id"] == clientAvailabilities[j]["ClientId"]) {
+                                    clientAvailabilitiesString += clientAvailabilities[j]["DayOfTheWeek_PeriodOfTheDay_Id"] + ",";
+                                }
+                            }
+
+                            //Remove the last comma
+                            clientConsultationType = clientConsultationType.substring(0, clientConsultationType.length - 1);
+
+                            template = ""
+
+                            var rowClass = "";
+
+                            if (isRequestToDo == "true") {
+                                template =
+                                `<td style="max-width:25px;" class="text-end">${data.clients[i]["RefusedCount"]}</td>
+                                <td style="max-width:190px;" class="text-end">
+                                    <div class="js-open-assign-modal btn btn-primary"
+                                        data-client-id="${data.clients[i]["Id"]}"
+                                        data-client-name="${data.clients[i]["FirstName"]} ${data.clients[i]["LastName"]}"
+                                        data-client-email="${data.clients[i]["Email"]}"
+                                        data-client-phone="${data.clients[i]["PhoneNumber"]}"
+                                        data-client-consultation-type-ids="${consultationTypeIds}"
+                                        data-client-consultationtype="${clientConsultationType}"
+                                        data-client-region="${data.clients[i]["Region"]}"
+                                        data-client-city="${data.clients[i]["City"]}"
+                                        data-client-postalcode="${data.clients[i]["PostalCode"]}"
+                                        data-client-consultationreason="${data.clients[i]["ConsultationReason"]}"
+                                        data-client-message="${data.clients[i]["Message"]}"
+                                        data-therapist-message="${data.clients[i]["LastTherapistMessage"]}"
+                                        data-client-availabilities="${clientAvailabilitiesString}"
+                                        data-client-regionId="${data.clients[i]["RegionId"]}">
+                                        @Global.Assign
+                                    </div>
+                                    <div class="js-delete-client-request btn btn-danger"
+                                        data-client-id="${data.clients[i]["Id"]}">
+                                        <i class='fas fa-trash-alt'></i>
+                                    </div>
+                                </td>`
+
+
+                                var dateToChecl = moment(data.clients[i]["RequestDate"])
+                                var currentDate = moment();
+                                var diff = moment.duration(currentDate.diff(dateToChecl)).asDays();
+
+                                if (diff > 7) {
+                                    rowClass = "appointment-late"
+                                }
+                            }
+                            else {
+                                template =`<td class="text-end">`
+
+                                //Only add the button if reactivate is allowed
+                                if (data.clients[i]["IsAllowReactivate"]) {
+
+                                    console.log("test")
+                                    console.log(data.clients[i]["IsAllowReactivate"])
+                                    template +=
+                                        `<div class="btn btn-primary js-restore-client-request-button"
+                                        data-is-deleted-client="${data.clients[i]["IsDeletedClient"]}"
+                                        data-delete-reason="${data.clients[i]["DeleteReason"]}"
+                                        data-delete-notes="${data.clients[i]["DeleteNote"]}"
+                                        data-client-id="${data.clients[i]["Id"]}">
+                                            @Global.Reactivate
+                                        </div>`
+                                }
+
+                                template += `</td>`
+                            }
+
+                            markup =
+                                `<tr class="${rowClass}">
+                                    <td style="max-width:140px;">${data.clients[i]["FirstName"]} ${data.clients[i]["LastName"]}</td>
+                                    <td class="js-client-request-date" style="max-width:120px;">${moment(data.clients[i]["RequestDate"]).locale('@CultureInfo.CurrentCulture.Name').format('DD MMM yyyy')}</td>
+                                    <td style="max-width:120px;">${data.clients[i]["RequestStatus"]}</td>
+                                    <td style="max-width:200px;">${data.clients[i]["Region"]}</td>
+                                    ${template}
+                                </tr>`
+
+                            tableBody.append(markup)
+
+                            //Apply the alert class if older than a week only if request to do
+                            if (isRequestToDo == "true") {
+                                ApplyAlertClassToOldRequest();
+                            }
+                        }
+                    }
+
+                    //Change pager class
+                    var pagerElement = $("#js-appointment-request-pager")
+                    pagerElement.removeClass("d-none")
+
+                    if (isRequestToDo == "true") {
+                        pagerElement.addClass("d-none")
+                    }
+                    pager($("#js-pager-ul"), data.nbPage, pageNumber, @Model.NbPagerPageShown, true, true)
+                },
+                error: function () {
+                    toastr["error"]
+                        ("@Global.GenericError",
+                            "@Global.Error");
+                }
+            })
+        }
+
+
+        // --------------------------------------------- Date picker ------------------------
+
+        //Change the language of the datepicker
+        if ("@(CultureInfo.CurrentCulture.Name)" != "fr-CA") {
+            $.datepicker.setDefaults($.datepicker.regional[""]);
+        }
+
+        // ----------------------- Delete Client request Modal -------------------
+        function InitDeleteModal() {
+            var clientId;
+            var tableRow;
+
+            //Open Delete Modal
+            $(document).on("click", ".js-delete-client-request", function () {
+
+                tableRow = $(this).closest("tr")
+                clientId = $(this).data("client-id");
+                OpenModal($("#deleteClientRequestModal"))
+            })
+
+            // Close Delete Modal
+            $(document).on("click", "#js-close-delete-modal, .js-close-delete-modal-header", function () {
+                $("#js-delete-reason").val("null");
+                $("#js-delete-notes").val("");
+                closeModal($("#deleteClientRequestModal"));
+            });
+
+
+
+            //Delete Client Request
+            $(document).on("click", "#js-delete-request-modal-button", function () {
+
+                var deleteReasonId = $("#js-delete-reason").val();
+                var deleteNotes = EscapeHtmlEntities($("#js-delete-notes").val());
+
+
+
+                if (deleteReasonId == "null") {
+                    //We block and add error class
+                    $("#js-delete-reason").addClass("input-validation-error")
+                    return false;
+                }
+
+
+                $.ajax({
+                    type: "POST",
+                    url: "/fr/admin/DeleteClientRequest/",
+                    data: `{"clientId":"${clientId}", "deleteReasonId":"${deleteReasonId}", "notes":"${deleteNotes}"}`,
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        tableRow.remove();
+                        $("#js-delete-reason").val("null");
+                        $("#js-delete-notes").val("");
+                        closeModal($("#deleteClientRequestModal"));
+
+                        ApplyFilter(1);
+                    },
+                    error: function () {
+                        toastr["error"]
+                            ("@Global.GenericError",
+                                "@Global.Error");
+                    }
+                })
+            })
+        }
+
+        //--------------------------------- Assign client request Modal -----------------------------
+        function InitAssignModal() {
+            var clientId;
+            var tableRow;
+
+
+            //Open the modal and set the information
+            $(document).on("click", ".js-open-assign-modal", function () {
+                tableRow = $(this).closest("tr")
+                clientId = $(this).data("client-id");
+                $("#js-assign-modal-client-name").html($(this).data("client-name"))
+                $("#js-assign-modal-client-email").html($(this).data("client-email"))
+                $("#js-assign-modal-client-phone").html($(this).data("client-phone"))
+                $("#js-assign-modal-client-consultation-type").html($(this).data("client-consultationtype"))
+                $("#js-assign-modal-client-region").html($(this).data("client-region"))
+                $("#js-assign-modal-client-city").html($(this).data("client-city"))
+                $("#js-assign-modal-client-postalcode").html($(this).data("client-postalcode"))
+                $("#js-assign-modal-client-consultation-reason").html($(this).data("client-consultationreason"))
+                $("#js-assign-modal-client-language").html($(this).data("client-languages"))
+                $("#js-assign-modal-client-message").html($(this).data("client-message"))
+                $("#js-assign-modal-therapist-message").html($(this).data("therapist-message"))
+
+                $("#js-appointment-request-therapist-message").removeClass("d-none")
+                if ($(this).data("therapist-message") == "" || $(this).data("therapist-message") == null) {
+                    $("#js-appointment-request-therapist-message").addClass("d-none")
+                }
+
+                //------set the therapist DDL-----//
+                var therapistDdl = $("#js-assing-modal-therapistddl")
+
+                var ddlSeparatorLineBestMatch =
+                    `<option disabled value="null">───────── @Global.BestMatch ───────────</option>`
+
+                var ddlSeparatorLineOtherMatch =
+                    `<option disabled value="null">───────── @Global.OtherMatch ───────────</option>`
+
+                var noTherapistMatch =
+                    `<option disabled value="null">@Global.NoMatch</option>`
+                therapistDdl.empty();
+
+                therapistDdl.append($('<option>', {
+                    value: "null",
+                    text: "@Global.Choose"
+                }));
+
+                therapistDdl.append($('<option>', {
+                    value: "externalAssociation",
+                    text: "@Global.ExternalAssociation"
+                }));
+
+                therapistDdl.append(ddlSeparatorLineBestMatch)
+
+
+
+                //set the association to choose and hide it
+                $("#js-assign-modal-associationddl").val("null")
+                $("#js-assign-modal-associationddl").parent().parent().addClass("d-none")
+
+                //Remove the text in the text area
+                $("#js-assign-modal-additional-notes").val("")
+
+                //check the availabilities check box
+                var clientAvailabilitiesString = $(this).data("client-availabilities")
+                var clientAvailabilities = []
+                if (clientAvailabilitiesString.length > 1) {
+                    clientAvailabilities = (clientAvailabilitiesString).split(",")
+                }
+                $(".js-assign-modal-client-availability").each(function () {
+                    //First we unchecked
+                    $(this).prop("checked", false)
+
+                    //We also remove the highlight class
+                    $(this).parent().removeClass("bg-success")
+
+                    //Then we check if we need to check
+                    if (clientAvailabilities.indexOf($(this).val()) != -1)
+                        $(this).prop("checked", true)
+                });
+
+                //Set the therapistDDL
+                var clientRegionId = $(this).data("client-regionid")
+                var clientConsultationTypeIds = $(this).data("client-consultation-type-ids");
+
+                $.ajax({
+                    type: "POST",
+                    url: "/fr/admin/SetAssignationTherapistSelect/",
+                    data: `{"clientRegionId":"${clientRegionId}", "clientConsultationTypeIds":"${clientConsultationTypeIds}"}`,
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+
+                        var isAddLine = false;
+                        var isLineAlreadyAdded = false;
+
+                        if (data.therapists[0]["IsMatch"] == 0) {
+                            therapistDdl.append(noTherapistMatch)
+                            therapistDdl.append(ddlSeparatorLineOtherMatch)
+                            isLineAlreadyAdded = true;
+                        }
+
+                        for (var i = 0; i < data.therapists.length; i++) {
+
+                            if (data.therapists[i]["IsMatch"] == 0) {
+                                isAddLine = true;
+                            }
+
+                            if (isAddLine && !isLineAlreadyAdded) {
+                                isLineAlreadyAdded = true;
+                                therapistDdl.append(ddlSeparatorLineOtherMatch)
+                            }
+
+                            markup =
+                                `<option value="${data.therapists[i]["Id"]}" data-therapist-availabilities="${data.therapists[i]["TherapistAvailabilities"]}">
+                                    ${data.therapists[i]["Name"]} (${data.therapists[i]["NbRequest"]})
+                                </option>`
+
+                            therapistDdl.append(markup)
+                        }
+
+
+
+
+                    },
+                    error: function () {
+                        toastr["error"]
+                            ("@Global.GenericError",
+                                "@Global.Error");
+                    }
+                })
+
+
+                //Open the modal
+                OpenModal($("#assignClientRequestModal"));
+            });
+
+
+
+
+            // Close Modal
+            $(document).on("click", "#js-close-assign-modal, #js-assign-delete-modal-header", function () {
+                closeModal($("#assignClientRequestModal"));
+            });
+
+
+
+
+            //Assign button
+            $("#js-assign-client-button").on("click", function () {
+
+                var isSendTherapist = true;
+                var therapistOrAssociationId;
+                var notes = EscapeHtmlEntities($("#js-assign-modal-additional-notes").val());
+
+                var assignToDdl = $("#js-assing-modal-therapistddl")
+                var associationDdl = $("#js-assign-modal-external-association").find("select")
+                //Check for the assign to is valid
+                if (assignToDdl.val() == "null") {
+                    assignToDdl.addClass("input-validation-error")
+                    return false
+                }
+
+                //By default, we set the therapistOrAssociationId to the assign to value
+                therapistOrAssociationId = assignToDdl.val()
+
+                //Check if external and external ddl is valid
+                if (assignToDdl.val() == "externalAssociation") {
+                    //We send to an association
+                    isSendTherapist = false;
+                    therapistOrAssociationId = associationDdl.val();
+
+                    if (associationDdl.val() == "null") {
+                        associationDdl.addClass("input-validation-error")
+                        return false
+                    }
+                }
+
+
+
+                 //Send the client request to the therapist/External association
+                 $.ajax({
+                    type: "POST",
+                    url: "/fr/admin/SendClientRequestToTherapistOrAssociation/",
+                    data: `{"isSendTherapist":"${isSendTherapist}","therapistOrAssociationId":"${therapistOrAssociationId}","clientId":"${clientId}", "notes": "${notes}"}`,
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        tableRow.remove();
+                        ApplyFilter(1);
+                        closeModal($("#assignClientRequestModal"));
+                    },
+                    error: function () {
+                        toastr["error"]
+                            ("@Global.GenericError",
+                                "@Global.Error");
+                    }
+                })
+
+
+            })
+        }
+
+        //Function for the therapist ddl on change
+        $("#js-assing-modal-therapistddl").on("change", function () {
+            var selected = $(this).find(":selected")
+
+            // ---------------- Error class if at choose ---------------------
+
+            //Remove the class by default
+            $(this).removeClass("input-validation-error")
+
+            if ($(this).val() == "null") {
+                $(this).addClass("input-validation-error")
+            }
+
+
+            //---------------- Change text area label ----------------
+            var textAreaLabel = $("#js-assign-client-additionnal-notes-label")
+            var noteForTherapist = textAreaLabel.data("therapist-notes-text")
+            var noteForAssociation = textAreaLabel.data("association-notes-text")
+
+            //Set the label to note for therapist by default
+            textAreaLabel.html(noteForTherapist)
+
+            //----------------- show external association ddl ----------
+            var externalAssociationDdl = $("#js-assign-modal-external-association")
+            externalAssociationDdl.addClass("d-none")
+
+            //set the external association to choose
+            externalAssociationDdl.find("select").val("null")
+            externalAssociationDdl.find("select").removeClass("input-validation-error");
+
+            if (selected.val() == "externalAssociation") {
+                externalAssociationDdl.removeClass("d-none");
+                textAreaLabel.html(noteForAssociation);
+
+            }
+
+            //----------------- Highlight availabilities part -------------
+            var therapistAvailabilitiesstring = selected.data("therapist-availabilities");
+
+            var therapistAvailabilities;
+            if (therapistAvailabilitiesstring != undefined)
+                therapistAvailabilities = (therapistAvailabilitiesstring).split(",")
+
+
+            $(".js-assign-modal-client-availability:checked").each(function () {
+                $(this).parent().removeClass("bg-success")
+
+                if (therapistAvailabilities != undefined && therapistAvailabilities.indexOf($(this).val()) != -1) {
+                    $(this).parent().addClass("bg-success")
+                }
+            })
+        })
+
+        //External association ddl on change
+        $("#js-assign-modal-external-association").find("select").on("change", function () {
+
+            //remove the error class by default
+            $(this).removeClass("input-validation-error");
+
+            //add it if it is at choose
+            if ($(this).val() == "null") {
+                $(this).addClass("input-validation-error");
+            }
+        })
+
+
+
+        //--------------------------- Reactivate modal ------------------------
+        function InitRestoreClientModal() {
+
+            var clientId;
+            var tableRow;
+
+            //Open the modal
+            $(document).on("click", ".js-restore-client-request-button", function () {
+                var isClientDeleted = $(this).data("is-deleted-client")
+
+                //Block the treatment for this modal since the client is not deleted
+                if (!isClientDeleted)
+                    return false;
+
+                clientId = $(this).data("client-id");
+                tableRow = $(this).closest("tr");
+
+                var deleteReason = $(this).data("delete-reason")
+                var deleteNotes = $(this).data("delete-notes")
+                var additionalNotesDiv = $("#js-restore-client-modal-additional-notes").parent();
+
+                //Put it d-none by default
+                additionalNotesDiv.addClass("d-none")
+
+                if (deleteNotes != null)
+                    additionalNotesDiv.removeClass("d-none")
+
+                $("#js-restore-client-modal-delete-reason").text(deleteReason)
+                $("#js-restore-client-modal-additional-notes").text(deleteNotes)
+
+                $("#js-appointment-request-deleted-notes").removeClass("d-none")
+                if (deleteNotes == "") {
+                    $("#js-appointment-request-deleted-notes").addClass("d-none")
+                }
+
+                OpenModal($("#RestoreClientModal"))
+            });
+
+            //Close modal
+            $("#js-close-restore-client-modal").on("click", function () {
+                closeModal($("#RestoreClientModal"));
+            });
+
+            //Restore client
+            $("#js-restore-client-modal-restore-button").on("click", function () {
+                $.ajax({
+                    type: "POST",
+                    url: "/fr/admin/RestoreClient/",
+                    data: `{"clientId":"${clientId}"}`,
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        tableRow.remove();
+                        ApplyFilter(1);
+                        closeModal($("#RestoreClientModal"));
+                    },
+                    error: function () {
+                        toastr["error"]
+                            ("@Global.GenericError",
+                                "@Global.Error");
+                    }
+                })
+            });
+        }
+
+
+        //----------------------------------------- Retrieve modal -----------------------------------------
+        function InitRetrieveModal() {
+            var clientId;
+            var tableRow;
+
+            //Open modal
+            $(document).on("click", ".js-restore-client-request-button", function () {
+                var isClientDeleted = $(this).data("is-deleted-client")
+
+                //Block the treatment for this modal since the client is deleted instead of in therapist side
+                if (isClientDeleted)
+                    return false;
+
+                clientId = $(this).data("client-id");
+                tableRow = $(this).closest("tr");
+
+                OpenModal($("#RetrieveClientRequestModal"))
+            })
+
+            //Close modal
+            $("#js-close-retrieve-client-modal").on("click", function () {
+                closeModal($("#RetrieveClientRequestModal"));
+            });
+
+            //Retrieve client
+            $("#js-retrieve-client-modal-retrieve-button").on("click", function () {
+                $.ajax({
+                    type: "POST",
+                    url: "/fr/admin/RetrieveClientRequest/",
+                    data: `{"clientId":"${clientId}"}`,
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        tableRow.remove();
+                        ApplyFilter(1);
+                        closeModal($("#RetrieveClientRequestModal"));
+                    },
+                    error: function () {
+                        toastr["error"]
+                            ("@Global.GenericError",
+                                "@Global.Error");
+                    }
+                })
+            })
+        }
+
+
+
+        InitDeleteModal();
+        InitAssignModal();
+        InitRestoreClientModal();
+        InitRetrieveModal();
+
+        // ------------------------------------------- Other --------------------------------
+
+        //Apply the error class if the date is not valid
+        $(".js-date-txt").on("change", function () {
+            var date = $(this).val()
+
+            var momentDate = moment(`${date.split('-')[2]}-${date.split('-')[1]}-${date.split('-')[0]}`)
+
+            //Remove the error class by default
+            $(this).removeClass("input-validation-error")
+
+            if (!momentDate.isValid() && date != "") {
+                $(this).addClass("input-validation-error")
+            }
+        });
+
+        //Apply/remove error class for the delete reason
+        $("#js-delete-reason").on("change", function () {
+            var deleteReasonId = $(this).val();
+
+            //Remvoe the class by default
+            $(this).removeClass("input-validation-error")
+
+            //Add the error class if choose is selected
+            if (deleteReasonId == "null") {
+                $(this).addClass("input-validation-error")
+            }
+        })
+
+        //Apply alert class for request older than 1 week
+        function ApplyAlertClassToOldRequest() {
+            $(".js-client-request-date").each(function () {
+                var tableRow = $(this).closest("tr");
+                var requestDateSplit = $(this).text().split('-');
+                var requestDate = new Date(requestDateSplit[0], parseInt(requestDateSplit[1], 10) - 1, requestDateSplit[2]).getTime();
+                var dateSevenDaysAgo = new Date().getTime() - (7 * 24 * 60 * 60 * 1000)
+
+                if (requestDate < dateSevenDaysAgo) {
+                    tableRow.addClass("bg-danger")
+                }
+            })
+        }
+
+        ApplyAlertClassToOldRequest();
+
+        //Mask
+        $("#js-start-date-text").mask("00-00-0000", { placeholder: 'DD-MM-YYYY' })
+        $("#js-end-date-text").mask("00-00-0000", { placeholder: 'DD-MM-YYYY' })
+
+    </script>
+}

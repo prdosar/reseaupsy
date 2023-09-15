@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+	<configSections>
+		<!-- For more information on Entity Framework configuration, visit http://go.microsoft.com/fwlink/?LinkID=237468 -->
+		<section name="entityFramework" type="System.Data.Entity.Internal.ConfigFile.EntityFrameworkSection, EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" requirePermission="false" />
+	</configSections>
+	<startup>
+		<supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.8" />
+	</startup>
+
+	<connectionStrings>
+		<!--Live-->
+		<!--<add name="ReseauPsyEntities" connectionString="metadata=res://*/ReseauPsyEntities.csdl|res://*/ReseauPsyEntities.ssdl|res://*/ReseauPsyEntities.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=172.16.10.12\SQLEXPRESS;initial catalog=ReseauPsy;user id=user_ReseauPsy;password=JpkqKzb7uzFZrFnDzN3yG93vz;multipleactiveresultsets=True;application name=EntityFramework&quot;" providerName="System.Data.EntityClient" />-->
+
+		<!--Devlp-->
+		<add name="ReseauPsyEntities" connectionString="metadata=res://*/ReseauPsyEntities.csdl|res://*/ReseauPsyEntities.ssdl|res://*/ReseauPsyEntities.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=172.16.10.12\SQLEXPRESS;initial catalog=ReseauPsy_Devlp;user id=user_ReseauPsy;password=JpkqKzb7uzFZrFnDzN3yG93vz;multipleactiveresultsets=True;application name=EntityFramework&quot;" providerName="System.Data.EntityClient" />
+
+	</connectionStrings>
+
+	<appSettings>
+
+		<!-- Configuration pour le Courriel -->
+		<add key="EmailSmtpHost" value="mail.3wmail.ca" />
+		<add key="EmailHostPort" value="587" />
+		<add key="EmailLogin" value="notification@3wmail.ca" />
+		<add key="EmailPassword" value="O.qnj=F@{O%KUx^!4a" />
+		<add key="UseSSL" value="false" />
+		<add key="USETLS12" value="false" />
+		<add key="EmailFromName" value="Réseau Psy" />
+		<!-- Nom utiliser pour le emailFrom des courriels -->
+		<add key="SyncBeginEndEmail" value="true" />
+		<!-- Indique si la job de syncronisation de webflow, envoie (true) ou n'envoie pas (false) de courriel au début et fin de la tâche -->
+		<add key="JobEmails" value="false" />
+		<add key="SleepTime" value="60000" />
+		<!-- Adresse couriel utilisée par l'application -->
+		<add key="EmailTo" value="sebastien@3wdesign.ca" />
+		<!-- Adresse courriel à qui envoyée le courriel en live -->
+
+		<!--l'adresse du site web-->
+		<add key="websiteUrl" value="https://monacces.reseaupsy.ca" />
+
+    <add key="BaseURL" value="https://monacces.reseaupsy.ca" />
+    
+    
+		
+		
+		
+		<!-- Pour le mode debug -->
+		<!-- 1 -> Utiliser l'adresse de debugEmail ci-bas, 0 -> Utiliser l'adresse de destination désiré (emailTo) -->
+		<add key="EmailDebugMode" value="0" />
+		<add key="EmailDebugTo" value="rspy@3wdesign.ca" />
+
+
+	</appSettings>
+	<entityFramework>
+		<providers>
+			<provider invariantName="System.Data.SqlClient" type="System.Data.Entity.SqlServer.SqlProviderServices, EntityFramework.SqlServer" />
+		</providers>
+	</entityFramework>
+</configuration>

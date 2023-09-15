@@ -1,0 +1,848 @@
+﻿@model ReseauPsy.ViewModel.Therapist.MyProfileViewModel
+@using ReseauPsy.Resources
+@using System.Globalization
+@{
+    ViewBag.Title = Resource.MyProfile_Title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<section id="page-therapist-profil">
+
+
+    <div class="container">
+        <h1>@Resource.MyProfile_H1</h1>
+
+
+
+        <div id="js-therapist-profile-inscription-incompleted" class="row @(Model.IsInscriptionCompleted ? "d-none" : "")">
+            <div class="col-sm-12">
+                <div class="alert alert-info">
+                    @Resource.MyProfile_Incomplete
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="row">
+            @* Last name *@
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>@Global.Lastname</label>
+                    <input type="text" id="js-therapist-profile-last-name" class="form-control" value="@Model.TherapistLastName" />
+                </div>
+            </div>
+
+            @* First name *@
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>@Global.Firstname</label>
+                    <input type="text" id="js-therapist-profile-first-name" class="form-control" value="@Model.TherapistFirstName" />
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            @* Email *@
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>@Global.Email</label>
+                    <input type="text" id="js-therapist-profile-email" class="form-control" value="@Model.TherapistEmail" />
+                </div>
+            </div>
+            @* Phone *@
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>@Global.Phone</label>
+                    <input type="text" id="js-therapist-profile-phone" class="form-control" value="@Model.TherapistPhoneNumber" />
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            @* Gender *@
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>@Global.Gender</label>
+                    <select id="js-therapist-profile-gender" class="form-select">
+                        <option value="null">@Global.Choose</option>
+                        @foreach (var gender in Model.Genders)
+                        {
+                            <option value="@gender.Value"
+                                    @(Model.TherapistGenderId.ToString() == gender.Value ? "selected='selected'" : "")>
+                                @gender.Text
+                            </option>
+                        }
+                    </select>
+                </div>
+            </div>
+            @* Hiring date *@
+            <div class="col-sm-6">
+                <div class="row">
+
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>@Resource.MyProfil_MaxRequest</label>
+                            <input type="text" id="js-therapist-profile-max-request" class="form-control" value="@Model.TherapistMaxWeeklyRequest" />
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>@Global.HiringDate</label>
+                            <div>@Model.TherapistHiringDate.Value.ToString("dd MMM yyyy")</div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+
+
+        <div class="row">
+            @* Adress *@
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>@Global.Address</label>
+                    <input type="text" id="js-therapist-profile-adress" class="form-control" value="@Model.TherapistAdress" />
+                </div>
+            </div>
+            @* City *@
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>@Global.City</label>
+                    <input type="text" id="js-therapist-city" class="form-control" value="@Model.TherapistCity" />
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="row">
+            @* Postal Code *@
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>@Global.PostalCode</label>
+                    <input type="text" id="js-therapist-profile-postal-code" class="form-control" value="@Model.TherapistPostalCode" />
+                </div>
+            </div>
+            @* Region *@
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>@Global.Region</label>
+                    <select id="js-therapist-profile-region" class="form-select">
+                        <option value="null">Choisir...</option>
+                        @foreach (var region in Model.Regions)
+                        {
+                            <option value="@region.Value"
+                                    @(Model.TherapistRegionId.ToString() == region.Value ? "selected='selected'" : "")>
+                                @region.Text
+                            </option>
+                        }
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <input type="hidden" id="js-therapist-profile-is-apply-tax" value="@Model.IsApplyTaxes.ToString()" />
+
+        <div class="row @(Model.IsApplyTaxes == true ? "" : "d-none")">
+            <div class="col-sm-6">
+                <label>@Global.TPSNumber</label>
+                <input type="text" id="js-therapist-profile-tps" class="form-control" value="@Model.TherapistTpsNumber" />
+            </div>
+            <div class="col-sm-6">
+                <label>@Global.TVQNumber</label>
+                <input type="text" id="js-therapist-profile-tvq" class="form-control" value="@Model.TherapistTvqNumber" />
+            </div>
+        </div>
+
+        <div class="row">
+            @* Accreditation *@
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>@Global.Accreditation</label>
+                    <select id="js-therapist-profile-accreditation" class="form-select">
+                        <option value="null">@Global.Choose</option>
+                        @foreach (var acc in Model.Accreditations)
+                        {
+                            <option value="@acc.Value"
+                                    @(Model.TherapistAccreditationId.ToString() == acc.Value ? "selected='selected'" : "")>
+                                @acc.Text
+                            </option>
+                        }
+                    </select>
+                </div>
+            </div>
+
+            @* OPQ *@
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>@Global.OPQNumber</label>
+                    <input type="text" id="js-therapist-profile-opq" class="form-control" value="@Model.TherapistOpqNumber" />
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+        <div class="checkbox-section">
+
+            <div class="row justify-content-between">
+                <div class="col-md-6 col-xl">
+                    <div class="form-group">
+                        <label>@Global.ProfessionnalTitle</label>
+                        <div class="row">
+
+                            @foreach (var profTitle in Model.ProfessionalTitles)
+                            {
+                                <div class="col-12">
+                                    <input type="checkbox"
+                                           class="js-therapist-profile-prof-title"
+                                           value="@profTitle.Id"
+                                           @(Model.TherapistProfessionalTitleIds.Contains(profTitle.Id) == true ? "checked='true'" : "") />
+                                    <span class="js-therapist-profile-prof-title-name">@(CultureInfo.CurrentCulture.Name == "fr-CA" ? profTitle.ProfessionalTitle1 : profTitle.ProfessionalTitleEN)</span>
+                                </div>
+                            }
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-xl">
+                    <div class="form-group">
+                        <label>@Global.ClientType</label>
+                        <div class="row">
+                            @foreach (var clientType in Model.ClientTypes)
+                            {
+                                <div class="col-12">
+                                    <input type="checkbox"
+                                           class="js-therapist-profile-client-type"
+                                           value="@clientType.Id"
+                                           @(Model.TherapistClientTypeIds.Contains(clientType.Id) == true ? "checked='true'" : "") />
+                                    <span>@(CultureInfo.CurrentCulture.Name == "fr-CA" ? clientType.ClientType1 : clientType.ClientTypeEN)</span>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-md-6 col-xl">
+                    <div class="form-group">
+                        <label>@Global.Language</label>
+                        <div class="row">
+                            @foreach (var language in Model.Languages)
+                            {
+                                <div class="col-12">
+                                    <input type="checkbox"
+                                           class="js-therpaist-profile-language"
+                                           value="@language.Id"
+                                           @(Model.TherapistLanguageIds.Contains(language.Id) == true ? "checked='true'" : "") />
+                                    <span>@(CultureInfo.CurrentCulture.Name == "fr-CA" ? language.Language1 : language.LanguageEN)</span>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-xl">
+                    <div class="form-group">
+                        <label>@Global.ClientAge</label>
+                        <div class="row">
+                            @foreach (var clientAge in Model.ClientsAgeRanges)
+                            {
+                                <div class="col-12">
+                                    <input type="checkbox"
+                                           class="js-therapist-profile-client-age"
+                                           value="@clientAge.Id"
+                                           @(Model.TherapistClientsAgeRangeIds.Contains(clientAge.Id) == true ? "checked='true'" : "") />
+                                    <span>@(CultureInfo.CurrentCulture.Name == "fr-CA" ? clientAge.ClientAgeRange : clientAge.ClientAgeRangeEN)</span>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-xl">
+                    <div class="form-group">
+                        <label>@Global.ConsultationType</label>
+                        <div class="row">
+                            @foreach (var conferenceType in Model.ConsultationTypes)
+                            {
+                                <div class="col-12">
+                                    <input type="checkbox"
+                                           class="js-therapist-profile-consultation-type"
+                                           value="@conferenceType.Id"
+                                           @(Model.TherapistConsultationTypeIds.Contains(conferenceType.Id) == true ? "checked='true'" : "") />
+                                    <span>@(CultureInfo.CurrentCulture.Name == "fr-CA" ? conferenceType.ConsultationType1 : conferenceType.ConsultationTypeEN)</span>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <label>@Global.Certification</label>
+                <textarea id="js-therapist-profile-certification" class="form-control" rows="5">@Model.TherapistCertification</textarea>
+            </div>
+        </div>
+
+
+
+        <div class="row">
+            <div class="col-xl-6">
+                <div class="row">
+
+
+                    <div class="col-12">
+                        <div class="form-group">
+
+                            <label>@Resource.MyProfil_ClientFromInsurance</label>
+
+                            <select class="form-select" id="js-therapist-profile-assurance">
+                                <option value="null" @(Model.TherapistTakeClientFromAssuranceCompany == null ? "selected='true'" : "")>@Global.Choose</option>
+                                <option value="true" @(Model.TherapistTakeClientFromAssuranceCompany == true ? "selected='true'" : "")>@Global.Yes</option>
+                                <option value="false" @(Model.TherapistTakeClientFromAssuranceCompany == false ? "selected='true'" : "")>@Global.No</option>
+                            </select>
+
+                        </div>
+                    </div>
+
+
+                    <div class="col-12">
+                        <div class="form-group">
+
+                            <label>@Resource.MyProfil_ClientFromThirdParty</label>
+
+                            <select id="js-therapist-profile-third-party" class="form-select">
+                                <option value="null" @(Model.TherapistTakeClientFromThirdPayer == null ? "selected='true'" : "")>@Global.Choose</option>
+                                <option value="true" @(Model.TherapistTakeClientFromThirdPayer == true ? "selected='true'" : "")>@Global.Yes</option>
+                                <option value="false" @(Model.TherapistTakeClientFromThirdPayer == false ? "selected='true'" : "")>@Global.No</option>
+                            </select>
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="col-12">
+                        <div class="form-group">
+
+                            <label>@Resource.MyProfil_InterestedInFormation</label>
+
+                            <select id="js-therapist-profile-interested-formation" class="form-control">
+                                <option value="null" @(Model.TherapistIsInterestedForFormation == null ? "selected='true'" : "")>@Global.Choose</option>
+                                <option value="true" @(Model.TherapistIsInterestedForFormation == true ? "selected='true'" : "")>@Global.Yes</option>
+                                <option value="false" @(Model.TherapistIsInterestedForFormation == false ? "selected='true'" : "")>@Global.No</option>
+                            </select>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+        </div>
+
+
+
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group availability">
+                    <label>@Global.Avaibility</label>
+                    @foreach (var day in Model.Days)
+                    {
+                        <div class="row">
+                            <div class="col-sm-3">
+                                @(CultureInfo.CurrentCulture.Name == "fr-CA" ? day.DayOfTheWeek : day.DayOfTheWeekEN)
+                            </div>
+                            @foreach (var period in day.DayOfTheWeek_PeriodOfTheDay)
+                            {
+                                <div class="col-4 col-sm-3">
+                                    <input type="checkbox"
+                                           class="js-therapist-profile-availability"
+                                           value="@period.Id"
+                                           @(Model.TherapistAvailabilities.Contains(period.Id) == true ? "checked='true'" : "") />
+                                    @(CultureInfo.CurrentCulture.Name == "fr-CA" ? period.PeriodsOfTheDay.PeriodOfTheDay : period.PeriodsOfTheDay.PeriodOfTheDayEN)
+                                </div>
+                            }
+                        </div>
+                    }
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="row">
+            <div class="col-12 text-center mt-4">
+                <a href="@Url.Action("Dashboard","Therapist")" class="btn btn-secondary">@Global.Cancel</a>
+                <button id="js-therapist-profile-send-button" class="btn btn-primary">@Global.Edit</button>
+            </div>
+        </div>
+
+
+
+
+
+    </div>
+
+</section>
+
+
+@section scripts
+{
+    <script>
+        //---------------------Remove error class ---------------------
+
+        //Last Name
+        $("#js-therapist-profile-last-name").on("change", function () {
+            GenericCheckDefaultFieldError($(this), $(this).val(), "")
+        })
+
+        //First Name
+        $("#js-therapist-profile-first-name").on("change", function () {
+            GenericCheckDefaultFieldError($(this), $(this).val(), "")
+        })
+
+        //Email
+        $("#js-therapist-profile-email").on("change", function () {
+            GenericCheckDefaultFieldError($(this), $(this).val(), "")
+            VerifyFieldWithRegex($(this), $(this).val(), /^(([^<>()[\]\\.,;:\s@@"]+(\.[^<>()[\]\\.,;:\s@@"]+)*)|(".+"))@@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
+        })
+
+        //Phone
+        $("#js-therapist-profile-phone").on("change", function () {
+            GenericCheckDefaultFieldError($(this), $(this).val(), "")
+        })
+
+        //Gender
+        $("#js-therapist-profile-gender").on("change", function () {
+            GenericCheckDefaultFieldError($(this), $(this).val(), "null")
+        })
+
+        //Max weekly request
+        $("#js-therapist-profile-max-request").on("change", function () {
+            GenericCheckDefaultFieldError($(this), $(this).val(), "")
+        })
+
+        //Adress
+        $("#js-therapist-profile-adress").on("change", function () {
+            GenericCheckDefaultFieldError($(this), $(this).val(), "")
+        })
+
+        //City
+        $("#js-therapist-city").on("change", function () {
+            GenericCheckDefaultFieldError($(this), $(this).val(), "")
+        })
+
+        //Postal code
+        $("#js-therapist-profile-postal-code").on("change", function () {
+            GenericCheckDefaultFieldError($(this), $(this).val(), "")
+        })
+
+        //Region
+        $("#js-therapist-profile-region").on("change", function () {
+            GenericCheckDefaultFieldError($(this), $(this).val(), "null")
+        })
+
+        //Accreditation
+        $("#js-therapist-profile-accreditation").on("change", function () {
+            GenericCheckDefaultFieldError($(this), $(this).val(), "null")
+        })
+
+        //Accreditation
+        $("#js-therapist-profile-accreditation").on("change", function () {
+            GenericCheckDefaultFieldError($(this), $(this).val(), "null")
+        })
+
+        //Opq
+        $("#js-therapist-profile-opq").on("change", function () {
+            GenericCheckDefaultFieldError($(this), $(this).val(), "")
+        })
+
+        //TPS
+        $("#js-therapist-profile-tps").on("change", function () {
+            GenericCheckDefaultFieldError($(this), $(this).val(), "")
+        })
+
+        //TVQ
+        $("#js-therapist-profile-tvq").on("change", function () {
+            GenericCheckDefaultFieldError($(this), $(this).val(), "")
+        })
+
+        //Assurance
+        $("#js-therapist-profile-assurance").on("change", function () {
+            GenericCheckDefaultFieldError($(this), $(this).val(), "null")
+        })
+
+        //Third party
+        $("#js-therapist-profile-third-party").on("change", function () {
+            GenericCheckDefaultFieldError($(this), $(this).val(), "null")
+        })
+
+        //Foramtion
+        $("#js-therapist-profile-interested-formation").on("change", function () {
+            GenericCheckDefaultFieldError($(this), $(this).val(), "null")
+        })
+
+
+
+        //--------------------------- Envoie les données ----------------------
+
+        $("#js-therapist-profile-send-button").on("click", function () {
+            SendDatas()
+        })
+
+        function SendDatas() {
+
+            var isPageValid = true;
+
+            //Last Name
+            var lastNameInput = $("#js-therapist-profile-last-name")
+            var lastName = EscapeHtmlEntities(lastNameInput.val())
+
+            if (lastName.trim() == "") {
+                lastNameInput.addClass("input-validation-error")
+                isPageValid = false
+            }
+
+            //First Name
+            var firstNameInput = $("#js-therapist-profile-first-name")
+            var firstName = EscapeHtmlEntities(firstNameInput.val());
+
+            if (firstName.trim() == "") {
+                firstNameInput.addClass("input-validation-error")
+                isPageValid = false
+            }
+
+            //Email
+            var emailInput = $("#js-therapist-profile-email")
+            var email = EscapeHtmlEntities(emailInput.val());
+
+            if (email.trim() == "" || !VerifyFieldWithRegex(emailInput, email, /^(([^<>()[\]\\.,;:\s@@"]+(\.[^<>()[\]\\.,;:\s@@"]+)*)|(".+"))@@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)) {
+                emailInput.addClass("input-validation-error")
+                isPageValid = false
+            }
+
+            //Phone
+            var phoneInput = $("#js-therapist-profile-phone")
+            var phone = EscapeHtmlEntities(phoneInput.val());
+
+            if (phone.trim() == "") {
+                phoneInput.addClass("input-validation-error")
+                isPageValid = false
+            }
+
+            //Gender
+            var genderInput = $("#js-therapist-profile-gender")
+            var genderId = genderInput.val();
+
+            if (genderId == "null") {
+                genderInput.addClass("input-validation-error")
+                isPageValid = false
+            }
+
+            //Max weekly request
+            var maxWeeklyRequestInput = $("#js-therapist-profile-max-request")
+            var maxWeeklyRequest = EscapeHtmlEntities(maxWeeklyRequestInput.val());
+
+            if (maxWeeklyRequest.trim() == "" || !Number.isInteger(parseInt(maxWeeklyRequest))) {
+                maxWeeklyRequestInput.addClass("input-validation-error")
+                isPageValid = false
+            }
+
+            //Adress
+            var adressInput = $("#js-therapist-profile-adress")
+            var adress = EscapeHtmlEntities(adressInput.val());
+
+            if (adress.trim() == "") {
+                adressInput.addClass("input-validation-error")
+                isPageValid = false
+            }
+
+            //City
+            var cityInput = $("#js-therapist-city")
+            var city = EscapeHtmlEntities(cityInput.val());
+
+            if (city.trim() == "") {
+                cityInput.addClass("input-validation-error")
+                isPageValid = false
+            }
+
+            //Postal code
+            var postalCodeInput = $("#js-therapist-profile-postal-code")
+            var postalCode = EscapeHtmlEntities(postalCodeInput.val());
+
+            if (postalCode.trim() == "") {
+                postalCodeInput.addClass("input-validation-error")
+                isPageValid = false
+            }
+
+            //Region
+            var regionInput = $("#js-therapist-profile-region");
+            var regionId = regionInput.val();
+
+            if (regionId == "null") {
+                regionInput.addClass("input-validation-error")
+                isPageValid = false
+            }
+
+            //Accreditation
+            var accreditionInput = $("#js-therapist-profile-accreditation")
+            var accreditionId = accreditionInput.val();
+
+            if (accreditionId == "null") {
+                accreditionInput.addClass("input-validation-error")
+                isPageValid = false
+            }
+
+            //Opq
+            var opqNumberInput = $("#js-therapist-profile-opq")
+            var opqNumber = EscapeHtmlEntities(opqNumberInput.val());
+
+            if ((accreditionId == "1" || accreditionId == "2") && opqNumber.trim() == "") {
+                opqNumberInput.addClass("input-validation-error")
+                isPageValid = false
+            }
+
+            if (accreditionId != "1" && accreditionId != "2") {
+                opqNumber = "";
+            }
+
+            //Titre professionnel
+            if ($(".js-therapist-profile-prof-title:checked").length == 0) {
+                $(".js-therapist-profile-prof-title").addClass("checkbox-validation-error")
+                $(".js-therapist-profile-prof-title-name").addClass("field-validation-error")
+                isPageValid = false
+            }
+
+
+            var isApplyTax = $("#js-therapist-profile-is-apply-tax").val()
+
+            //Tps
+            var tpsNumberInput = $("#js-therapist-profile-tps")
+            var tpsNumber = EscapeHtmlEntities(tpsNumberInput.val());
+
+            if (isApplyTax == "True" && tpsNumber.trim() == "") {
+                tpsNumberInput.addClass("input-validation-error")
+                isPageValid = false
+            }
+
+            //Tvq
+            var tvqNumberInput = $("#js-therapist-profile-tvq")
+            var tvqNumber = EscapeHtmlEntities(tvqNumberInput.val());
+
+            if (isApplyTax == "True" && tvqNumber.trim() == "") {
+                tvqNumberInput.addClass("input-validation-error")
+                isPageValid = false
+            }
+
+
+            if (isApplyTax != "True") {
+                tpsNumber = ""
+                tvqNumber = ""
+            }
+
+            //Assurance
+            var takeAssuranceClientInput = $("#js-therapist-profile-assurance")
+            var takeAssuranceClient = takeAssuranceClientInput.val();
+
+            if (takeAssuranceClient == "null") {
+                takeAssuranceClientInput.addClass("input-validation-error")
+                isPageValid = false
+            }
+
+            //Third party
+            var takeThirdPayerClientInput = $("#js-therapist-profile-third-party")
+            var takeThirdPayerClient = takeThirdPayerClientInput.val();
+
+            if (takeThirdPayerClient == "null") {
+                takeThirdPayerClientInput.addClass("input-validation-error")
+                isPageValid = false
+            }
+
+            //Interested Foramtion
+            var interestedFormationInput = $("#js-therapist-profile-interested-formation");
+            var interestedFormation = interestedFormationInput.val();
+
+            if (interestedFormation == "null") {
+                interestedFormationInput.addClass("input-validation-error")
+                isPageValid = false
+            }
+
+
+            //Professional title
+            var profTitlesIds = [];
+            $(".js-therapist-profile-prof-title:checked").each(function () {
+                profTitlesIds.push($(this).val())
+            })
+
+            //Client type
+            var clientTypeIds = []
+            $(".js-therapist-profile-client-type:checked").each(function () {
+                clientTypeIds.push($(this).val())
+            })
+
+            //Client age
+            var clientAgeIds = []
+            $(".js-therapist-profile-client-age:checked").each(function () {
+                clientAgeIds.push($(this).val())
+            })
+
+            //Consultation type
+            var consultationTypeIds = []
+            $(".js-therapist-profile-consultation-type:checked").each(function () {
+                consultationTypeIds.push($(this).val())
+            })
+
+            //Language
+            var languageIds = []
+            $(".js-therpaist-profile-language:checked").each(function () {
+                languageIds.push($(this).val())
+            })
+
+            //Availabilities
+            var availabilityIds = []
+            $(".js-therapist-profile-availability:checked").each(function () {
+                availabilityIds.push($(this).val())
+            })
+
+            var certification = EscapeHtmlEntities($("#js-therapist-profile-certification").val());
+
+            if (!isPageValid) {
+                toastr["error"]
+                    ("@Global.InvalidFieldError",
+                            "@Global.Error");
+
+                return false;
+            }
+
+
+
+
+            datas = {
+                LastName: lastName,
+                FirstName: firstName,
+                Email: email,
+                PhoneNumber: phone,
+                GenderId: genderId,
+                MaxWeeklyRequest: maxWeeklyRequest,
+                Adress: adress,
+                City: city,
+                PostalCode: postalCode,
+                RegionId: regionId,
+                AccreditationId: accreditionId,
+                OpqNumber: opqNumber,
+                TpsNumber: tpsNumber,
+                TvqNumber: tvqNumber,
+                ProfessionalTitlesIds: profTitlesIds,
+                ClientTypeIds: clientTypeIds,
+                ClientAgeIds: clientAgeIds,
+                ConsultationTypesIds: consultationTypeIds,
+                LanguageIds: languageIds,
+                Certification: certification,
+                AvailabilityIds: availabilityIds,
+                TakeAssuaranceClient: (takeAssuranceClient == "true"),
+                TakeThirdPartyClient: (takeThirdPayerClient == "true"),
+                IsInterestedFormation: (interestedFormation == "true")
+            }
+
+
+
+
+            $.ajax({
+                type: "POST",
+                url: "/fr/therapist/ModifyProfile/",
+                data: JSON.stringify(datas),
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+
+                    console.log("result", data.result)
+                    console.log("success", data.success)
+
+                    if (data.result == 'Redirect')
+                        window.location = data.url;
+
+                    if (data.success == true) {
+                        toastr["success"]
+                            (`<div>@Resource.MyProfil_SuccessMessage</div>
+                                <a href="@Url.Action("Dashboard","Therapist")">@Resource.MyProfil_GoTODashboard</a>`,
+                                "@Global.Success"
+                                )
+
+                        $("#js-therapist-profile-inscription-incompleted").addClass("d-none")
+                    }
+                    else if (data.error == "EmailUsed") {
+                        toastr["error"]
+                            ("@Global.Email_AlreadyUsed",
+                                "@Global.Error");
+                    }
+                    else {
+                        toastr["error"]
+                            ("@Global.GenericError",
+                                "@Global.Error");
+                    }
+                },
+                error: function () {
+                    toastr["error"]
+                        ("@Global.GenericError",
+                            "@Global.Error");
+                }
+            });
+
+
+
+        }
+
+        function showOpqInput() {
+            var selectedVal = $("#js-therapist-profile-accreditation").val();
+            var opqNumberDiv = $("#js-therapist-profile-opq").closest("div")
+
+            opqNumberDiv.removeClass("invisible"); //On enleve le invisible par defaut
+
+            if (selectedVal != "1" && selectedVal != "2") {
+                //Le choix n'est pas mis a Psychologue ou psychothérapeute
+                opqNumberDiv.addClass("invisible");
+            }
+        }
+        showOpqInput()
+
+        //Numero de l'opq
+        $("#js-therapist-profile-accreditation").on("change", function () {
+            showOpqInput()
+        });
+
+        // ------------------------ Other -------------------
+
+        $("#js-therapist-profile-max-request").mask("9999")
+        $("#js-therapist-profile-postal-code").mask("S0S 0S0")
+
+        $(".js-therapist-profile-prof-title").on("change", function () {
+
+            $(".js-therapist-profile-prof-title").removeClass("checkbox-validation-error")
+            $(".js-therapist-profile-prof-title-name").removeClass("field-validation-error")
+
+            if ($(".js-therapist-profile-prof-title:checked").length == 0) {
+                $(".js-therapist-profile-prof-title").addClass("checkbox-validation-error")
+                $(".js-therapist-profile-prof-title-name").addClass("field-validation-error")
+                isPageValid = false
+            }
+        })
+
+
+    </script>
+}

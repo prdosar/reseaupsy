@@ -1,0 +1,78 @@
+﻿$xxl: 1499px;
+$xl: 1199px;
+$lg: 991px;
+$md: 767px;
+$sm: 575px;
+$xs: 450px;
+
+@mixin med-1499 {
+    @media screen and (max-width: $xxl) {
+        @content;
+    }
+}
+
+@mixin med-1199 {
+    @media screen and (max-width: $xl) {
+        @content;
+    }
+}
+
+@mixin med-991 {
+    @media screen and (max-width: $lg) {
+        @content;
+    }
+}
+
+@mixin med-767 {
+    @media screen and (max-width: $md) {
+        @content;
+    }
+}
+
+@mixin med-575 {
+    @media screen and (max-width: $sm) {
+        @content;
+    }
+}
+
+@mixin med-450 {
+    @media screen and (max-width: $xs) {
+        @content;
+    }
+}
+
+@mixin noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently supported by Chrome, Opera and Firefox */
+}
+
+.container {
+    max-width: 1500px;
+
+    @include med-1499 {
+        max-width: 1150px;
+    }
+
+    @include med-1199 {
+        max-width: 950px;
+    }
+
+    @include med-991 {
+        max-width: 100%;
+        padding: 0px 20px;
+    }
+
+    @include med-575 {
+        max-width: 100%;
+
+    }
+}
+
+.container-fluid {
+    padding-left: 20px;
+    padding-right: 20px;
+}

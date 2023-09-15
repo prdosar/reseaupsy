@@ -1,0 +1,209 @@
+﻿@model ReseauPsy.ViewModel.Admin.ClientListViewModel
+@using ReseauPsy.Resources
+@{
+    ViewBag.Title = "ClientList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<section id="page-client-list-admin">
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-8">
+                <h1>@Resource.ClientListAdmin_H1</h1>
+            </div>
+            <div class="col-md-4 text-end">
+                @Html.ActionLink(Global.New, "DetailClient", "admin", new object { }, new { @class = "btn btn-primary btn-excel" })
+            </div>
+        </div>
+
+        <div class="row">
+
+            @* Therapist *@
+            <div class="col-md-6 col-lg-4 col-xl-2">
+                <div>@Global.Therapist</div>
+                <select id="js-client-list-admin-therapist-ddl" class="form-select">
+                    <option value="null">@Global.All</option>
+                    @foreach (var therapist in Model.Therapists)
+                    {
+                        <option value="@therapist.Id">@therapist.Name</option>
+                    }
+                </select>
+            </div>
+
+            @* Apply button *@
+            <div class="col-md-6 col-lg-4 col-xl-2">
+                <br />
+                <div id="js-client-list-admin-apply-filter" class="btn btn-primary btn-filter">
+                    @Global.Apply
+                </div>
+            </div>
+
+        </div>
+
+
+        @* No result alert *@
+        <div id="js-client-list-admin-no-result" class="row @(Model.Clients.Count < 1 ? "" : "d-none")">
+            <div class="col-12">
+                <div class="alert alert-info">
+                    @Global.NoResult
+                </div>
+            </div>
+        </div>
+
+
+        @* Table *@
+        <div id="js-client-list-admin-table" class="table-responsive mt-4 @(Model.Clients.Count > 1 ? "" : "d-none")">
+
+
+            <table style="min-width:400px;">
+                <thead>
+                    <tr>
+                        <th style="width:140px;">@Global.Client</th>
+                        <th style="width:140px;">@Global.Therapist</th>
+                        <th style="width:120px;" class="text-end">@Global.Action</th>
+                    </tr>
+                </thead>
+
+                <tbody id="js-client-list-admin-table-body">
+                    @foreach (var client in Model.Clients)
+                    {
+                        <tr>
+                            <td style="max-width: 140px;">@client.ClientName</td>
+                            <td style="max-width: 140px;">@client.TherapistName</td>
+                            <td style="max-width: 190px;" class="text-end">
+                                @Html.ActionLink(Global.Edit,
+                                    "DetailClient",
+                                    "Admin",
+                                    new { clientId = client.ClientId },
+                                    new { @class = "btn btn-primary" })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+
+        </div>
+
+        @* Pager *@
+        <div class="row">
+            <div class="col-sm-12">
+                <ul id="js-pager-ul" class="pager">
+                    @for (int i = 1; i < Model.NbPage + 1 && i < 4; i++)
+                    {
+                        <li>
+                            <span class="js-association-pager @(i == 1 ? " active" : "" )" data-page-number="@i">
+                                @i
+                            </span>
+                        </li>
+                    }
+                    @if (Model.NbPage > 1)
+                    {
+                        <li>
+                            <i class="fas fa-angle-right js-association-pager" data-page-number="2"></i>
+                        </li>
+                    }
+                    @if (Model.NbPage > 3)
+                    {
+                        <li>
+                            <i class="fas fa-angle-double-right js-association-pager" data-page-number="@Model.NbPage"></i>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+@section scripts
+{
+    <script>
+
+        $(document).ready(function () {
+
+            if ('@TempData["Message"]' != "") {
+                toastr["success"]
+                    ('@TempData["Message"]',
+                        "@Global.Success");
+            }
+        })
+
+
+        $("#js-client-list-admin-apply-filter").on("click", function () {
+            ClientListApplyFilter(1)
+        })
+
+        $(document).on("click", ".js-association-pager", function () {
+            var page = $(this).data("page-number");
+            ClientListApplyFilter(page);
+        })
+
+        function ClientListApplyFilter(pageNumber) {
+            var therapistId = $("#js-client-list-admin-therapist-ddl").val();
+
+            $.ajax({
+                type: "POST",
+                url: "/fr/admin/ClientListApplyFilter/",
+                data: `{"therapistId":"${therapistId}",
+                        "pageNumber":"${pageNumber}"}`,
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+
+                    var table = $("#js-client-list-admin-table")
+                    var noResult = $("#js-client-list-admin-no-result")
+
+
+                    if (data.clients.length < 1) {
+                        table.addClass("d-none")
+                        noResult.removeClass("d-none")
+                    }
+                    else {
+                        table.removeClass("d-none")
+                        noResult.addClass("d-none")
+
+                        var tableBody = $("#js-client-list-admin-table-body")
+                        var cellsStyle = rebuildTableWithStyle(tableBody);
+                        tableBody.empty();
+
+                        var modifyHref = window.location.pathname.replace("clientlist", "detailclient?clientid=");
+
+                        console.log(data)
+                        for (var i = 0; i < data.clients.length; i++) {
+
+                            markup =
+                                `<tr>
+                                    <td ${cellsStyle[0]}>
+                                        ${data.clients[i]["ClientName"]}
+                                    </td>
+                                    <td ${cellsStyle[1]}>
+                                        ${data.clients[i]["TherapistName"]}
+                                    </td>
+                                    <td ${cellsStyle[2]}>
+                                        <a href='${modifyHref}${data.clients[i]["ClientId"]}' class='btn btn-primary'>@Global.Edit</a>
+                                    </td>
+                                </tr>`;
+
+                            tableBody.append(markup);
+                        }
+                    }
+
+                    //Change pager class
+                    pager($("#js-pager-ul"), data.nbPage, pageNumber, @Model.NbPagerPageShown, true, true)
+                },
+                error: function () {
+                    toastr["error"]
+                        ("@Global.GenericError",
+                            "@Global.Error");
+                }
+            });
+
+        }
+
+    </script>
+}
+

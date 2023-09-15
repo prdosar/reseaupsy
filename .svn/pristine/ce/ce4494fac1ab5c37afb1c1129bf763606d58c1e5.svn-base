@@ -1,0 +1,404 @@
+﻿@model ReseauPsy.ViewModel.Admin.AppointmentListViewModel
+@using ReseauPsy.Resources
+@using System.Globalization
+@using System.Resources
+@{
+    ViewBag.Title = Resource.AppointmentList_Title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var resourceManager = new ResourceManager(typeof(Resource));
+}
+
+
+<section id="page-admin-Appointment-list">
+    <div class="container">
+
+        @* Title *@
+        <h1>@Resource.AppointmentList_H1</h1>
+
+        <form id="js-appointment-list-excel-export-form" action="/@CultureInfo.CurrentCulture.TwoLetterISOLanguageName/admin/DownloadExcelAssociationList/" method="post">
+
+
+
+            @* Filtre *@
+            <div class="row">
+
+                @* Start date *@
+                <div class="col-md-6 col-lg-4 col-xl-2">
+                    <div>@Global.StartDate</div>
+                    <input id="js-appointment-list-start-date" autocomplete="off" type="text" class="form-control js-date-picker" />
+                    <input type="hidden" name="startDate" id="js-appointment-list-start-date-hidden" />
+                </div>
+
+                @* End date *@
+                <div class="col-md-6 col-lg-4 col-xl-2">
+                    <div>@Global.EndDate</div>
+                    <input id="js-appointment-list-end-date" autocomplete="off" type="text" class="form-control js-date-picker" />
+                    <input type="hidden" name="endDate" id="js-appointment-list-end-date-hidden" />
+                </div>
+
+                @* Appointment status *@
+                <div class="col-md-6 col-lg-4 col-xl-2">
+                    <div>@Global.Status</div>
+                    <select id="js-appointment-list-status" class="form-select">
+                        <option value="null">@Global.All</option>
+                        @foreach (var option in Model.AppointmentStatus)
+                        {
+                            <option value="@option.Id">@option.Name</option>
+                        }
+                    </select>
+
+                    <input type="hidden" id="js-appointment-list-excel-status" name="appointmentStatusId" value="null" />
+                </div>
+
+                @* Therapist *@
+                <div class="col-md-6 col-lg-4 col-xl-2">
+                    <div>@Global.Therapist</div>
+                    <select id="js-appointment-list-therapist" class="form-select">
+                        <option value="null">@Global.All</option>
+                        @foreach (var option in Model.Therapists)
+                        {
+                            <option value="@option.Id">@option.Name</option>
+                        }
+                    </select>
+                    <input type="hidden" id="js-appointment-list-excel-therapist" name="therapistId" value="null"/>
+                </div>
+
+
+                @* Appointment reclamation status *@
+                <div class="col-md-6 col-lg-4 col-xl-2">
+                    <div>@Global.Claim</div>
+                    <select id="js-appointment-list-reclamation-status" class="form-select">
+                        <option value="null">@Global.All</option>
+                        <option value="notClaimed">@Global.NotClaimed</option>
+                        <option value="claimed">@Global.Claimed</option>
+                        <option value="payed">@Global.Paid</option>
+                    </select>
+                    <input type="hidden" id="js-appointment-list-excel-reclamation-status" name="reclamationStatus" value="null" />
+                </div>
+
+
+                @* Button apply *@
+                <div class="col-md-6 col-lg-4 col-xl-2">
+                    <br />
+                    <div id="js-appointment-list-apply-filter-button" class="btn btn-primary btn-filter">@Global.Apply</div>
+                </div>
+            </div>
+
+        </form>
+
+        <div class="row">
+            <div class="col-12">
+                @* No result alert *@
+                <div id="js-admin-appointmnet-list-no-result" class="@(Model.Appointments.Count < 1 ? "" : "d-none")">
+                    <div class="alert alert-info">
+                        @Global.NoResult
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="js-admin-appointment-list-table" class="table-responsive mt-4 @(Model.Appointments.Count < 1 ? "d-none" : "")">
+            @* Table *@
+            <table style="min-width:680px;">
+                <thead>
+                    <tr>
+                        <th style="width:140px;">@Global.Therapist</th>
+                        <th style="width:120px;">@Global.Date</th>
+                        <th style="width:140px;">@Global.Client</th>
+                        <th style="width:140px;">@Global.Status</th>
+                        <th style="width:140px;">@Global.Claim</th>
+                    </tr>
+                </thead>
+                <tbody id="js-appointment-list-appointment-table-body">
+                    @foreach (var appointment in Model.Appointments)
+                    {
+                        <tr>
+                            <td style="max-width: 140px;">@appointment.TherapistName</td>
+                            <td style="max-width: 120px;">@appointment.StartDateTime.ToString("dd MMM yyyy HH:mm")</td>
+                            <td style="max-width: 140px;">@appointment.ClientName</td>
+                            <td style="max-width: 140px;">@appointment.AppointmentStatus</td>
+                            <td style="max-width: 140px;">@resourceManager.GetString(appointment.AppointmentReclamationStatus)</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                @* Pager *@
+                <div id="js-admin-appointment-list-pager" class="@(Model.Appointments.Count < 1 ? "d-none" : "")">
+                    <ul id="js-pager-ul" class="pager">
+                        @for (int i = 1; i < Model.NbPage + 1 && i < 4; i++)
+                        {
+                            <li>
+                                <span class="js-association-pager @(i == 1 ? "active" : "")" data-page-number="@i">
+                                    @i
+                                </span>
+                            </li>
+                        }
+                        @if (Model.NbPage > 1)
+                        {
+                            <li>
+                                <i class="fas fa-angle-right js-association-pager" data-page-number="2"></i>
+                            </li>
+                        }
+                        @if (Model.NbPage > 3)
+                        {
+                            <li>
+                                <i class="fas fa-angle-double-right js-association-pager" data-page-number="@Model.NbPage"></i>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 text-center text-sm-end mb-4 mb-sm-0 mt-2 mt-sm-3">
+                @* Export to excel button *@
+                <div id="js-admin-appointment-list-excel-export" class="btn btn-primary btn-excel">
+                    @Global.ExportToExcel
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+        @* Total table *@
+        <div class="row">
+            <div class="col-12 col-sm-8 col-md-6 col-xl-4">
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>Status</th>
+                            <th class="text-end">Totaux</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td>@Global.NotClaimed</td>
+                            <td id="js-admin-appointment-list-not-claimed-count" class="text-end">@Model.AppointmentCount[0].TotalNotClaimed</td>
+                        </tr>
+                        <tr>
+                            <td>@Global.Claimed</td>
+                            <td id="js-admin-appointment-list-claimed-count" class="text-end">@Model.AppointmentCount[0].TotalClaimed</td>
+                        </tr>
+                        <tr>
+                            <td>@Global.Paid</td>
+                            <td id="js-admin-appointment-list-payed-count" class="text-end">@Model.AppointmentCount[0].TotalPayed</td>
+                        </tr>
+                        <tr>
+                            <td>@Global.Forthcoming</td>
+                            <td id="js-admin-appointment-list-forthcoming-count" class="text-end">@Model.AppointmentCount[0].TotalForthcoming</td>
+                        </tr>
+                        <tr>
+                            <td>@Global.Completed</td>
+                            <td id="js-admin-appointment-list-completed-count" class="text-end">@Model.AppointmentCount[0].TotalCompleted</td>
+                        </tr>
+                        <tr>
+                            <td>@Global.CancelledWithCharge</td>
+                            <td id="js-admin-appointment-list-canceled-charge-count" class="text-end">@Model.AppointmentCount[0].TotalCanceledWithCharge</td>
+                        </tr>
+                        <tr>
+                            <td>@Global.CancelledWithoutCharge</td>
+                            <td id="js-admin-appointment-list-canceled-no-charge-count" class="text-end">@Model.AppointmentCount[0].TotalCanceledWithoutCharge</td>
+                        </tr>
+                        <tr>
+                            <td>@Global.PresenceToConfirm</td>
+                            <td id="js-admin-appointment-list-to-confirm-count" class="text-end">@Model.AppointmentCount[0].TotalPresenceToConfirm</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+
+
+    </div>
+</section>
+
+
+
+
+@section scripts
+{
+    <script>
+
+        //--------------- Apply filter --------------------
+
+        $("#js-appointment-list-apply-filter-button").on("click", function () {
+            LoadAppointment(1)
+        })
+
+        $(document).on("click", ".js-association-pager", function () {
+            var page = $(this).data("page-number");
+            LoadAppointment(page);
+        })
+
+        function LoadAppointment(page) {
+            var startDateInput = $("#js-appointment-list-start-date")
+            var endDateInput = $("#js-appointment-list-end-date")
+
+            var statusId = $("#js-appointment-list-status").val()
+            var therapistId = $("#js-appointment-list-therapist").val()
+            var reclamationStatusValue = $("#js-appointment-list-reclamation-status").val()
+            var isFrench = "@CultureInfo.CurrentCulture.Name" == "fr-CA"
+
+            //Remove the error class
+            startDateInput.removeClass("input-validation-error")
+            endDateInput.removeClass("input-validation-error")
+
+            if (!isStartDateValid(startDateInput)) {
+                startDateInput.addClass("input-validation-error")
+                return false;
+            }
+            if (!isEndDateValid(startDateInput, endDateInput)) {
+                endDateInput.addClass("input-validation-error")
+                return false;
+            }
+
+
+            //Transform the datas
+            statusId = (statusId == "null") ? null : statusId
+            therapistId = (therapistId == "null") ? null : therapistId
+
+            var startDateInternationnalFormat = moment(startDateInput.val(), "DD-MM-YYYY").format("YYYY-MM-DD")
+            var endDateInternationnalFormat = moment(endDateInput.val(), "DD-MM-YYYY").format("YYYY-MM-DD")
+
+            $.ajax({
+                type: "POST",
+                url: "/fr/admin/LoadAppointmentList/",
+                data: `{"isFrench":"${isFrench}",
+                        "startDate":"${startDateInternationnalFormat}",
+                        "endDate":"${endDateInternationnalFormat}",
+                        "statusId":"${statusId}",
+                        "therapistId":"${therapistId}",
+                        "reclamationStatusValue":"${reclamationStatusValue}",
+                        "page": "${page}"}`,
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+
+                    var tableBody = $("#js-appointment-list-appointment-table-body")
+
+                    var cellsStyle = rebuildTableWithStyle(tableBody);
+
+                    tableBody.empty()
+
+                    //Default visibility for elements
+                    $("#js-admin-appointmnet-list-no-result").addClass("d-none")
+                    $("#js-admin-appointment-list-table").removeClass("d-none")
+                    $("#js-admin-appointment-list-pager").removeClass("d-none")
+
+                    if (data.appointments.length < 1) {
+                        $("#js-admin-appointmnet-list-no-result").removeClass("d-none")
+                        $("#js-admin-appointment-list-table").addClass("d-none")
+                        $("#js-admin-appointment-list-pager").addClass("d-none")
+                    }
+
+
+                    for (var i = 0; i < data.appointments.length; i++) {
+                        markup =
+                            `<tr>
+                                <td ${cellsStyle[0]}>
+                                    ${data.appointments[i].TherapistName}
+                                </td>
+                                <td ${cellsStyle[1]}>
+                                    ${moment(data.appointments[i].StartDateTime).locale("@CultureInfo.CurrentCulture.Name").format("DD MMM yyyy HH:mm")}
+                                </td>
+                                <td ${cellsStyle[2]}>
+                                    ${data.appointments[i].ClientName}
+                                </td>
+                                <td ${cellsStyle[3]}>
+                                    ${data.appointments[i].AppointmentStatus}
+                                </td>
+                                <td ${cellsStyle[4]}>
+                                    ${data.appointments[i].AppointmentReclamationStatus}
+                                </td>
+                            </tr>`
+
+                        tableBody.append(markup)
+                    }
+
+                    //Total table
+                    $("#js-admin-appointment-list-not-claimed-count").text(data.appointmentCount["TotalNotClaimed"])
+                    $("#js-admin-appointment-list-claimed-count").text(data.appointmentCount["TotalClaimed"])
+                    $("#js-admin-appointment-list-payed-count").text(data.appointmentCount["TotalPayed"])
+                    $("#js-admin-appointment-list-forthcoming-count").text(data.appointmentCount["TotalForthcoming"])
+                    $("#js-admin-appointment-list-completed-count").text(data.appointmentCount["TotalCompleted"])
+                    $("#js-admin-appointment-list-canceled-charge-count").text(data.appointmentCount["TotalCanceledWithCharge"])
+                    $("#js-admin-appointment-list-canceled-no-charge-count").text(data.appointmentCount["TotalCanceledWithoutCharge"])
+                    $("#js-admin-appointment-list-to-confirm-count").text(data.appointmentCount["TotalPresenceToConfirm"])
+
+                    //Change pager class
+                    pager($("#js-pager-ul"), data.nbPage, page, @Model.NbPagerPageShown, true, true)
+
+
+                    //Met les données dans les hidden fields pour le excel
+                    $("#js-appointment-list-start-date-hidden").val(startDateInternationnalFormat)
+                    $("#js-appointment-list-end-date-hidden").val(endDateInternationnalFormat)
+                    $("#js-appointment-list-excel-status").val(statusId)
+                    $("#js-appointment-list-excel-therapist").val(therapistId)
+                    $("#js-appointment-list-excel-reclamation-status").val(reclamationStatusValue)
+
+                },
+                error: function () {
+                    toastr["error"]
+                        ("@Global.GenericError",
+                            "@Global.Error");
+                }
+            })
+        }
+
+        // -------------- Error class ---------------
+        $("#js-appointment-list-start-date").on("change", function () {
+            $(this).removeClass("input-validation-error")
+            if (!isFrenchDateValidOrEmpty($(this).val())) {
+                $(this).addClass("input-validation-error")
+            }
+        })
+
+        $("#js-appointment-list-end-date").on("change", function () {
+            $(this).removeClass("input-validation-error")
+            if (!isFrenchDateValidOrEmpty($(this).val())) {
+                $(this).addClass("input-validation-error")
+            }
+        })
+
+
+        //----------------------- Other ---------------------------
+
+        $("#js-admin-appointment-list-excel-export").on("click", function () {
+
+            var startDate = toInternationnalDate($("#js-appointment-list-start-date").val())
+            var endDate = toInternationnalDate($("#js-appointment-list-end-date").val())
+
+            var isAllFieldFilled = true;
+
+            //Verify the dates
+            if (!isDatePickerDateValid(endDate) && endDate != "") {
+                endDateInput.addClass("input-validation-error")
+                isAllFieldFilled = false;
+            }
+
+
+            if (!isDatePickerDateValid(startDate) && startDate != "") {
+                startDateInput.addClass("input-validation-error")
+                isAllFieldFilled = false;
+            }
+
+            if (!isAllFieldFilled) {
+                return false
+            }
+
+            $("#js-appointment-list-excel-export-form").submit();
+        })
+    </script>
+}

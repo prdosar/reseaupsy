@@ -1,0 +1,242 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AppointmentModified_Content_InPerson" xml:space="preserve">
+    <value>Hi,&lt;br/&gt;
+Your appointment on the {0} at {1} has been modified for the {2} at {3}.&lt;br/&gt;
+Your appointment will be held at {4}.&lt;br/&gt;
+You can pay for your consultation at the following address{3}&lt;br/&gt;
+Thank you and looking forward to seeing you soon!</value>
+  </data>
+  <data name="AppointmentModified_Content_Online" xml:space="preserve">
+    <value>Hi,&lt;br/&gt;
+Your appointment on the {0} at {1} has been modified for the {2} at {3}.&lt;br/&gt;
+Please note that your appointment will be held online. Your therapist will send you the connection information.&lt;br/&gt;
+You can pay for your consultation at the following address: {4}&lt;br/&gt;
+We look forward to seeing you soon for this virtual consultation!</value>
+  </data>
+  <data name="AppointmentModified_Subject" xml:space="preserve">
+    <value>Your RéseauPsy appointment has been modified</value>
+  </data>
+  <data name="AppointmentNeedPayment_Content" xml:space="preserve">
+    <value>Hi,&lt;br /&gt;You can pay for your consultation at the following address: {0}&lt;br /&gt; Looking forward to seeing you soon!</value>
+    <comment>Le {0} sera remplacé par le lien cliquable</comment>
+  </data>
+  <data name="AppointmentNeedPayment_Manual_Subject" xml:space="preserve">
+    <value>Your appointment reservation. </value>
+    <comment>Ce courriel est envoyé par le thérapeute lorsqu'il clique manuellement sur le bouton pour renvoyer une demande de paiement</comment>
+  </data>
+  <data name="AppointmentNeedPayment_Manuel_Content" xml:space="preserve">
+    <value>Hi,&lt;br /&gt;Our appointment system shows that the payment for your consultation scheduled for {0} has not been made.&lt;br/&gt;You can easily make your payment by clicking on the following link: {1}.&lt;br/&gt;Your therapist message: {2}</value>
+    <comment>Le {0} sera remplacé par la date
+Le {1} sera remplacé par le lien pour effectuer le paiement
+Le {2} sera remplacé par le message que le thérapeute à ajouté</comment>
+  </data>
+  <data name="AppointmentNeedPayment_Subject" xml:space="preserve">
+    <value>Your appointment reservation. </value>
+    <comment>Ce courriel est envoyé au client lorsque le thérapeute confirme la présence d'un rendez-vous qui n,est toujours pas payé. Ce courriel doit demander au client d'effectuer le paiement</comment>
+  </data>
+  <data name="AppointmentRequestDeleted_Content" xml:space="preserve">
+    <value>Hi,&lt;br /&gt;Upon your request, your consultation appointment has been deleted. We thereby invite you to contact us again if need be.&lt;br /&gt;Thank You!</value>
+  </data>
+  <data name="AppointmentRequestDeleted_Subject" xml:space="preserve">
+    <value>Your RéseauPsy consultation request.</value>
+    <comment>Courriel envoyé au client lorsque sa demande de consultation à été supprimé</comment>
+  </data>
+  <data name="ChargeCancelled_Content" xml:space="preserve">
+    <value>Hi,&lt;br /&gt;Your pre-paid RéseauPsy appointment has been cancelled. Our system has then proceeded to the necessary reimbursement of your payment.&lt;br /&gt;Thank You!</value>
+    <comment>Ce courriel est envoyé lorsque qu'un rendez-vous à été pré-payé (pré-authorisé) et que finalement on annule le rendez-vous sans charge</comment>
+  </data>
+  <data name="ChargeCancelled_Subject" xml:space="preserve">
+    <value>Your pre-paid RéseauPsy appointment.</value>
+    <comment>Ce courriel est envoyé lorsque qu'un rendez-vous à été pré-payé (pré-authorisé) et que finalement on annule le rendez-vous sans charge</comment>
+  </data>
+  <data name="CreateTherapist_Content" xml:space="preserve">
+    <value>Hello,&lt;br/&gt;Please find your login details in relation with your RéseauPsy Therapist Account:&lt;br/&gt; URL : {0}&lt;br/&gt;User name: {1}&lt;br/&gt;Password: {2}&lt;br/&gt;Thanks!</value>
+    <comment>{0} -&gt; L'adresse web URL
+{1} - &gt; Le nom d'utilisateur
+{2} - &gt; Le mot de passe </comment>
+  </data>
+  <data name="CreateTherapist_Subject" xml:space="preserve">
+    <value>Creating your RéseauPsy Therapist Account</value>
+  </data>
+  <data name="ExternalAssociationSend_Content" xml:space="preserve">
+    <value>Name of Client : {0}&lt;br/&gt;
+Email : {1}&lt;br /&gt;
+Phone number : {2}&lt;br /&gt;
+City : {3}&lt;br /&gt;
+Region : {4}&lt;br /&gt;
+Postal Code : {5}&lt;br /&gt;
+Reason for consultation : {6}&lt;br /&gt;
+Age of Client : {7}&lt;br /&gt;
+{8}
+Date of Client's request : {9}&lt;br/&gt;
+{10}
+{11}</value>
+    <comment>{0} -&gt; Nom du client
+{1} -&gt; Courriel du client
+{2} -&gt; Téléphone du client
+{3} -&gt; Ville du client
+{4} -&gt; Région du client
+{5} -&gt; Code postal du client
+{6} -&gt; Raison de consultation
+{7} -&gt; Groupe d'âge du client
+{8} -&gt;Sera remplacé par la ressource "ExternalAssociationSend_PartialClientMessage" uniquement si le client à laissé un message
+{9} -&gt; Date de la demande
+{10} -&gt; Sera remplacé par les disponibilité du client
+{11} -&gt; Sera remplacé par la ressource "ExternalAssociationSend_PartialAdminNote" uniquement si l'admin à laissé une note</comment>
+  </data>
+  <data name="ExternalAssociationSend_PartialAdminNote" xml:space="preserve">
+    <value>RéseauPsy additional note : {0}&lt;br /&gt;</value>
+    <comment>Cette portion remplacera la braquette {11} de ExternalAssociationSend_Content Uniquement si l'administrateur à ajouté une note</comment>
+  </data>
+  <data name="ExternalAssociationSend_PartialClientMessage" xml:space="preserve">
+    <value>Client additional message : {0}&lt;br /&gt;</value>
+    <comment>Cette portion remplacera la braquette {8} de ExternalAssociationSend_Content Uniquement si le client à écrit un message</comment>
+  </data>
+  <data name="ExternalAssociationSend_Subject" xml:space="preserve">
+    <value>Your RéseauPsy reference.</value>
+    <comment>Courriel envoyé à une association externe lorsque RéseauPsy réfère un client</comment>
+  </data>
+  <data name="ReceiptReady_Content" xml:space="preserve">
+    <value>Hello,&lt;br /&gt;You may download your digital receipt here: {0}&lt;br /&gt;Thanks!</value>
+    <comment>Le {0} sera remplacé par le lien cliquable</comment>
+  </data>
+  <data name="ReceiptReady_Subject" xml:space="preserve">
+    <value>Your RéseauPsy receipt.</value>
+    <comment>Courriel envoyé pour informer que le reçu peut être téléchargé</comment>
+  </data>
+  <data name="ResendReceipt_Content" xml:space="preserve">
+    <value>Hello,&lt;br /&gt;You may download your RéseauPsy receipt at the following address: {0}&lt;br /&gt;Thank You!</value>
+  </data>
+  <data name="ResendReceipt_Subject" xml:space="preserve">
+    <value>Your receipt related to your RéseauPsy appointment.</value>
+    <comment>Ce courriel est envoyé lorsqu'un admin clic sur le lien renvoyer le reçu a un client</comment>
+  </data>
+  <data name="ResetPassword_Content" xml:space="preserve">
+    <value>Hello,&lt;br /&gt;Your link is valid for a period of {0} hours.
+You can reset your password at the following address: {1}&lt;br /&gt;Thank You!</value>
+    <comment>Le {0} sera remplacé par le nombre d'heure de validité
+Le {1} sera remplacé par l'adresse cliquable pour réinitialiser le mot de passe</comment>
+  </data>
+  <data name="ResetPassword_Subject" xml:space="preserve">
+    <value>You wish to reset your password? </value>
+    <comment>Ce courriel est envoyé lorsque quelqu'un clic sur le lien réinitialiser mon mot de passe</comment>
+  </data>
+</root>

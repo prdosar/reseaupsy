@@ -1,0 +1,389 @@
+﻿@model ReseauPsy.ViewModel.Admin.ListAdminViewModel
+@using ReseauPsy.Resources
+@{
+    ViewBag.Title = Resource.AdminList_Title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<section id="page-admin-list">
+    <div class="container">
+
+
+        <div class="row">
+            <div class="col-md-8">
+                <h1>@Resource.AdminList_H1</h1>
+            </div>
+            <div class="col-md-4 text-end">
+                @Html.ActionLink(Global.New, "DetailAdmin", "admin", new object { }, new { @class = "btn btn-primary btn-excel" })
+            </div>
+        </div>
+
+
+
+        <div class="row">
+
+            @*Statut*@
+            <div class="col-md-6 col-lg-4 col-xl-2">
+                <div>@Global.Status</div>
+                <select id="ddlStatus" class="form-select">
+                    @foreach (var item in Model.Status)
+                    {
+                        <option value="@item.Value" selected="@item.Selected">@item.Text</option>
+                    }
+                </select>
+            </div>
+
+            @*Button apply*@
+            <div class="col-md-6 col-lg-4 col-xl-2">
+                <br />
+                <div id="js-admin-list-apply-filter" class="btn btn-primary btn-filter">@Global.Apply</div>
+            </div>
+        </div>
+
+        @* No result alert *@
+        <div id="js-admin-list-no-result" class="row d-none">
+            <div class="col-12">
+                <div class="alert alert-info">
+                    @Global.NoResult
+                </div>
+            </div>
+        </div>
+
+        @* Table *@
+        <div id="js-admin-list-table" class="table-responsive mt-4">
+            <table style="min-width:600px;">
+                <thead>
+                    <tr>
+                        <th style="width:140px;">@Global.Name</th>
+                        <th style="width:170px;">@Global.Email</th>
+                        <th style="width:120px;">@Global.Role</th>
+                        <th style="width:170px;" class="text-end">@Global.Action</th>
+                    </tr>
+                </thead>
+                <tbody id="js-admin-table-body">
+                    @foreach (var admin in Model.Admins)
+                    {
+                        <tr>
+                            <td style="max-width: 140px;">@admin.AdminName</td>
+                            <td style="max-width: 170px;">@admin.AdminEmail</td>
+                            <td style="max-width: 120px;">Admin</td>
+                            <td style="max-width: 170px;" class="text-end">
+                                @Html.ActionLink(@Global.Edit, "DetailAdmin", "Admin", new { adminId = admin.AdminId }, new { @class = "btn btn-primary" })
+                                @if (Model.AdminId != admin.AdminId)
+                                {
+                                    <div class="btn btn-danger js-admin-list-delete" data-admin-name="@admin.AdminName" data-admin-id="@admin.AdminId"><i class='fas fa-trash-alt'></i></div>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        @* Pager *@
+        <div class="row">
+            <div class="col-sm-6">
+                <ul id="js-pager-ul" class="pager">
+                    @for (int i = 1; i < Model.NbPage + 1 && i < 4; i++)
+                    {
+                        <li>
+                            <span class="js-association-pager @(i == 1 ? "active" : "")" data-page-number="@i">
+                                @i
+                            </span>
+                        </li>
+                    }
+                    @if (Model.NbPage > 1)
+                    {
+                        <li>
+                            <i class="fas fa-angle-right js-association-pager" data-page-number="2"></i>
+                        </li>
+                    }
+                    @if (Model.NbPage > 3)
+                    {
+                        <li>
+                            <i class="fas fa-angle-double-right js-association-pager" data-page-number="@Model.NbPage"></i>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+
+
+        <!-- Modal Delete -->
+        <div id="deleteModal" class="modal fade" role="dialog">
+            <div class="modal-dialog modal-lg">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">@Resource.AdminList_DeleteModal_Title</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal">
+                            <i class="far fa-times-circle"></i>
+                        </button>
+                    </div>
+
+
+
+
+
+
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="js-admin-list-delete-confimation-text" data-last-admin-name="">@string.Format(Resource.AdminList_DeleteModal_Text, "adminName")</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="btnCancel" type="button" class="btn btn-secondary">@Global.Cancel</button>
+                        <button id="btnDelete" type="button" class="btn btn-primary">@Global.Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Restore -->
+        <div id="restoreModal" class="modal fade" role="dialog">
+            <div class="modal-dialog modal-lg">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">@Resource.AdminList_RestaureModal_Title</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal">
+                            <i class="far fa-times-circle"></i>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="js-admin-list-restore-confimation-text" data-last-admin-name="">@string.Format(Resource.AdminList_RestaureModal_Text, "adminName")</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="btnCancel" type="button" class="btn btn-secondary">@Global.Cancel</button>
+                        <button id="btnRestore" type="button" class="btn btn-primary">@Global.Restore</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+@section scripts
+{
+    <script>
+
+        $(document).ready(function () {
+
+            if ('@TempData["Message"]' != "") {
+                toastr["success"]
+                    ('@TempData["Message"]',
+                        "@Global.Success");
+            }
+        })
+
+        // Ouvre le popup pour effacer
+        function initOpenModalDelete() {
+            var adminId;
+            var tableRow;
+            var modalHtml = $("#deleteModal");
+
+            $(document).on("click", ".js-admin-list-delete", function () {
+                adminId = $(this).data("admin-id");
+                tableRow = $(this).parent().parent();
+
+                //On met le nom de l'admin dans le modal
+                var deleteTextDiv = $(".js-admin-list-delete-confimation-text");
+                var lastAdminName = deleteTextDiv.data("last-admin-name");
+                var adminName = $(this).data("admin-name");
+                var deleteText = deleteTextDiv.html();
+
+                deleteText = deleteText.replace((lastAdminName == "") ? "adminName" : lastAdminName, adminName);
+                deleteTextDiv.html(deleteText);
+                deleteTextDiv.data('last-admin-name', adminName);
+
+
+                OpenModal(modalHtml)
+            });
+
+            // Ferme le popup pour effacer
+            $("#deleteModal #btnCancel").on("click", function () {
+                closeModal(modalHtml);
+            });
+
+            //Delete l'utilisateur
+            $("#deleteModal #btnDelete").on("click", function () {
+
+                $.ajax({
+                    type: "POST",
+                    url: "/fr/admin/DeleteAdmin/",
+                    data: "{\"adminId\": \"" + adminId + "\"}", //JSON.stringify(Student),
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        ApplyAdminListFilter(1)
+                    },
+                    error: function () {
+                        alert("Error occured!!")
+                    }
+                });
+                closeModal(modalHtml);
+            });
+        }
+
+        //Fonctions pour le restore
+        function initOpenModalRestore() {
+            var adminId;
+            var tableRow;
+            var modalHtml = $("#restoreModal");
+
+            $(document).on("click", ".js-admin-list-restore", function () {
+                adminId = $(this).data("admin-id");
+                tableRow = $(this).parent().parent();
+
+                //On met le nom de l'admin dans le modal
+                var deleteTextDiv = $(".js-admin-list-restore-confimation-text");
+                var lastAdminName = deleteTextDiv.data("last-admin-name");
+                var adminName = $(this).data("admin-name");
+                var deleteText = deleteTextDiv.html();
+                deleteText = deleteText.replace((lastAdminName == "") ? "adminName" : lastAdminName, adminName);
+                deleteTextDiv.html(deleteText);
+                deleteTextDiv.data('last-admin-name', adminName);
+
+
+                OpenModal(modalHtml)
+            });
+
+            // Ferme le popup pour effacer
+            $("#restoreModal #btnCancel").on("click", function () {
+                closeModal(modalHtml);
+            });
+
+            //Restaurer l'utilisateur
+            $("#restoreModal #btnRestore").on("click", function () {
+
+                $.ajax({
+                    type: "POST",
+                    url: "/fr/admin/RestoreAdmin/",
+                    data: `{"adminId":"${adminId}"}`,
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        //On enleve la row
+                        ApplyAdminListFilter(1)
+                    },
+                    error: function () {
+                        alert("Error occured!!")
+                    }
+                });
+                closeModal(modalHtml);
+            });
+        }
+
+
+        //Fonction pour appliquer le filtre
+        $("#js-admin-list-apply-filter").on("click", function () {
+            ApplyAdminListFilter(1)
+        });
+
+        $(document).on("click", ".js-association-pager", function () {
+            var page = $(this).data("page-number")
+            ApplyAdminListFilter(page);
+        })
+
+        function ApplyAdminListFilter(pageNumber) {
+            var isActive = ($("#ddlStatus").val()) == "active" ? true : false;
+
+            var editUrl = window.location.href.split("adminlist")[0] + "detailadmin?adminId=";
+
+
+            $.ajax({
+                type: "POST",
+                url: "/fr/admin/TableAdminList/",
+                data: `{"isActive":"${isActive}",
+                        "pageNumber":"${pageNumber}"}`,
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    var tableBody = $("#js-admin-table-body")
+
+                    //On efface le contenue du body
+                    tableBody.empty();
+
+                    var table = $("#js-admin-list-table")
+                    var emptyMessage = $("#js-admin-list-no-result")
+
+                    if (data.admins.length < 1) {
+                        table.addClass("d-none")
+                        emptyMessage.removeClass("d-none")
+                    }
+                    else {
+                        table.removeClass("d-none")
+                        emptyMessage.addClass("d-none")
+
+                        //On rebuild le tableau avec les données ajax
+                        for (var i = 0; i < data.admins.length; i++) {
+
+                            var buttonsHtml = "";
+
+                            if (isActive) {
+                                buttonsHtml =
+                                    `<a href="${editUrl + data.admins[i].AdminId}" class="btn btn-primary">@Global.Edit</a>&nbsp;`
+
+                                if (data.admins[i].AdminId != '@Model.AdminId') {
+                                    buttonsHtml +=
+                                        `<div class="btn btn-danger js-admin-list-delete"
+                                            data-admin-name="${data.admins[i].AdminName}"
+                                            data-admin-id="${data.admins[i].AdminId}"><i class='fas fa-trash-alt'></i>
+                                        </div>`
+                                }
+                            }
+                            else {
+                                buttonsHtml =
+                                    `<div class="btn btn-primary js-admin-list-restore"
+                                        data-admin-id="${data.admins[i].AdminId}"
+                                        data-admin-name="${data.admins[i].AdminName}">
+                                        @Global.Restore
+                                    </div>`
+                            }
+
+                            markup =
+                                `<tr>
+                                    <td>
+                                        ${data.admins[i].AdminName}
+                                    </td>
+                                    <td>
+                                        ${data.admins[i].AdminEmail}
+                                    </td>
+                                    <td>
+                                        Admin
+                                    </td>
+                                    <td class="text-end">
+                                        ${buttonsHtml}
+                                    </td>
+                                </tr>`;
+
+                            tableBody.append(markup);
+                        }
+                    }
+
+                    //Change pager class
+                    pager($("#js-pager-ul"), data.nbPage, pageNumber, @Model.NbPagerPageShown, true, true)
+                },
+                error: function () {
+                    toastr["error"]
+                        ("@Global.GenericError",
+                            "@Global.Error");
+                }
+            });
+        }
+
+
+        initOpenModalDelete();
+        initOpenModalRestore();
+    </script>
+}
+
+
